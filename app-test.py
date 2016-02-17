@@ -2,7 +2,7 @@
 import unittest
 import os
 from flask import json
-from nemoApp import app
+from app import app
 
 class BasicTestCase(unittest.TestCase):
 	# DB Connection Test Cases will go here
