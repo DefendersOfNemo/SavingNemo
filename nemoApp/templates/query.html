@@ -1,0 +1,23 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="query-box">
+    <form action="" method="post" name="query">
+         {{ form.hidden_tag() }}
+         <h1>Welcome to Saving Nemo Query Tool!</h1>
+         <h2>Please enter your Query in the below field</h2>
+         <p>*{{ form.logger_type }}</p>
+         <p>*{{ form.country_name }}</p>
+         <p>{{ form.state_name }}</p>
+         <p>{{ form.location_name }}</p>
+         <p>{{ form.zone_name }}</p>
+         <p>{{ form.sub_zone_name }}</p>
+         <p>{{ form.measurement_interval }}</p>
+         <p>{{ form.analysis_type }}</p>
+         <br>
+         <p>Fields marked with * are compulsory</p>
+         <p> <input type="submit" value="View Results" name="Submit"></p>
+    </form>
+</div>
+{% endblock %}
