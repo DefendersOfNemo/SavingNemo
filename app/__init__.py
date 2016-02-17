@@ -6,4 +6,3 @@ app.config.from_object('config')
 
 # avoiding circular reference error, placing import below.
 from app import views
-
