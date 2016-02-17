@@ -67,7 +67,6 @@ def query():
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.
 if __name__ == '__main__':
-    import os  
-    port = int(os.environ.get('PORT', 33507)) 
+    import os
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-    #app.run(debug=True)
