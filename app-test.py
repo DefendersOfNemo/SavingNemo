@@ -1,7 +1,6 @@
 # imports
-import unittest
-import os
-from flask import json
+import unittest, os, datetime
+from flask import json, request, Response
 from app import app
 
 class BasicTestCase(unittest.TestCase):
@@ -59,14 +58,27 @@ class SavingNemoTestCase(unittest.TestCase):
 		self.assertIn(b'Invalid password', rv.data)
 
 	def test_query(self):
-		"""Test the QueryForm in the HomePage"""
+		"""Test the QueryForm"""
+		with app.test_client() as c:			
+			rv = c.post('/query', data=dict(
+				logger_type='Mussel',
+				country_name='USA',
+				state_name='Massachusetts',
+				date_pick_from=datetime.date(1989, 1, 1).strftime('%m/%d/%Y'),
+				date_pick_to=datetime.date(2001, 4, 1).strftime('%m/%d/%Y')), \
+			follow_redirects=False)
+			self.assertIn(b'Mussel', rv.data)
+			self.assertIn(b'USA', rv.data)
+			self.assertIn(b'Massachusetts', rv.data)
+			self.assertIn(b'01/01/1989', rv.data)
+			self.assertIn(b'04/01/2001', rv.data)
+	
+	def test_compulsory_query(self):
+		"""Test the Compulsore fields in QueryForm"""
 		rv = self.app.post('/query', data=dict(
-			logger_type='Mussel',
 			country_name='USA',
 			state_name='Massachusetts'), follow_redirects=True)
-		self.assertIn(b'Mussel', rv.data)
-		self.assertIn(b'USA', rv.data)
-		self.assertIn(b'Massachusetts', rv.data)
+		self.assertIn(b'Invalid Submission. All fields marked with * are compulsory', rv.data)
 
 if __name__ == '__main__':
 	unittest.main()

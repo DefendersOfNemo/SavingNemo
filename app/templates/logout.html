@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+      <meta charset="UTF-8">
+      <!-- IE Edge Meta Tag -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- Viewport : This is for the display on smaller devices such as mobile, tab etc.-->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Minified CSS through CDN-->
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>SavingNemo</title>    
+  </head>
+  <body>
+    <!--  Nav-bar -->
+    <div>Navigation: 
+      <a href="/">Home</a>
+      {% if not session.logged_in %}
+      <a href="{{ url_for('login') }}">Log in</a>
+      {% else %}
+      <a href="{{ url_for('logout') }}">Log out</a>
+      {% endif %}
+    </div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages%}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+  </body>
+</html>
