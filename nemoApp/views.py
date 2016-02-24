@@ -1,8 +1,8 @@
 # imports
-from app import app
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 from .forms import QueryForm
+from nemoApp import app
 
 @app.route('/')
 @app.route('/home')
@@ -13,16 +13,16 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """User login/authentication/session management."""
+    error = None
     if request.method == 'POST':
         if request.form['username'] != app.config['USERNAME']:
-            flash('Invalid username')
+            error = "Invalid Username. Please try again."
         elif request.form['password'] != app.config['PASSWORD']:
-            flash('Invalid password')
+            error = 'Invalid Password. Please try again.'
         else:
             session['logged_in'] = True
-            flash('You are logged in')
             return redirect(url_for('query'))
-    return render_template('login.html')
+    return render_template('login.html', error=error)
 
 @app.route('/logout')
 def logout():
@@ -33,6 +33,7 @@ def logout():
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
+    error = None
     ########### These would be replaced by DB entries ###############
     logger_type_choices = [('Mussel', 'Mussel'), \
                       ('Coral', 'Coral'), \
@@ -56,7 +57,6 @@ def query():
 
     if request.method == 'GET':
         form.process()
-        return render_template('query.html', title='Query', form=form)
     else:        
         if form.validate_on_submit():
             print("Query form submitted")
@@ -68,8 +68,8 @@ def query():
                             form.date_pick_from.data.strftime('%m/%d/%Y'), 
                             form.date_pick_to.data.strftime('%m/%d/%Y')))
         else:
-            flash('Invalid Submission. All fields marked with * are compulsory')
-    return render_template('query.html', title='Query', form=form)
+            error = 'Invalid Submission. All fields marked with * are compulsory'
+    return render_template('query.html', title='Query', form=form, error=error)
 
 @app.errorhandler(404)
 def not_found_error(error):

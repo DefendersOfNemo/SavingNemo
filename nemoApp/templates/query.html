@@ -11,7 +11,6 @@
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
       <script src="//code.jquery.com/jquery-1.10.2.js"></script>
       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>       
-      <link rel="stylesheet" href="/resources/demos/style.css">
       <title>SavingNemo</title> 
     <script>
       $(function() {
@@ -52,6 +51,7 @@
             <ul>
             {% for message in messages%}
                 <li>{{ message }}</li>
+                console.log({message})
             {% endfor %}
             </ul>
         {% endif %}
@@ -75,6 +75,11 @@
            <p>Fields marked with * are compulsory</p>
            <p> <input type="submit" value="View Results" name="Submit"></p>
       </form>
+
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+
     </div>
   </body>
 </html>
