@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <!-- IE Edge Meta Tag -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Viewport : This is for the display on smaller devices such as mobile, tab etc.-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Minified CSS through CDN-->
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css ">
+        <link rel = "stylesheet" href = "../css/project_style.css">
+        <link rel = "stylesheet" href = "../css/animate.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        
+        <title>SavingNemo</title>
+    </head>
+    <body>
+
+    <!-- Navbar code -->
+    
+    <nav class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Saving Nemo</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <div>Navigation: 
+      <a href="/">Home</a>
+      {% if not session.logged_in %}
+      <a href="{{ url_for('login') }}">Log in</a>
+      {% else %}
+      <a href="{{ url_for('logout') }}">Log out</a>
+      {% endif %}
+    </div>
+    <hr>
+
+    <div class="container">
+    {% block content %} {% endblock %}
+    </div>
+    {% if message %}<p class="message">{{ message }}</p>{% endif %}
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
+</html>
