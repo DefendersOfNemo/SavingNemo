@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- select language english -->
+<html lang="en">
+  <head>
+		<!-- how your browser interpretes characters -->
+		<meta charset="utf-8" />
+    	<!-- This tag enables your website to be resposive to mobile devices-->
+		<meta name="viewport" content="width=device-widt, initial-scale=1">
+		<!-- reference to style sheet, jquery library and javascript imported from maxCDN (Content Delivery Network) -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://bsdp-assets.blackcherry.us/1.3.0/datepicker.min.css">
+    <script src="http://bsdp-assets.blackcherry.us/1.3.0/bootstrap-datepicker.min.js"></script>
+		<style>
+		</style>
+		<title>
+		  Database
+		</title>
+	</head>
+  <body>
+    <div>
+      <a href="http://www.northeastern.edu/"><img class="img-responsive" src="University.jpg" width="400" height="49"></a>
+      <img class="img-responsive" src="Lab-banner.jpg" width="960" height="46">
+    </div>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="##link to login page##"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	  <div class="container text-danger panel panel-default">
+		  <h1>DATABASE<h1>
+	  </div>
+	  <div class="container">
+		  <form class="form-horizontal" role="form">
+  			<div class="form-group">
+  				<label for="opt1">Logger Type:</label>
+      		<select class="form-control" id="opt1">
+        		<option>Mussel</option>
+        		<option>Coral</option>
+        		<option>Sea-Star</option>
+        		<option>Barnacle</option>
+      		</select>
+      	</div >
+        <div class="form-group">
+          <label for="opt2">Location</label>
+          <select class="form-control" id="opt2">
+            <option>Update from database</option>
+          </select>
+        </div>
+
+         <div class="form-group">
+          <label for="revision_date">Date Range:</label>
+          <div class="input-group col-xs-4" >
+            <input type="text" class="form-control" name="daterange" value="" id="start_date" placeholder="MM/DD/YYYY">
+            <span class="input-group-addon">to</span>
+            <input type="text" class="form-control" name="daterange" value="" id="end_date" placeholder="MM/DD/YYYY">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <script type="text/javascript">
+          $(function() {
+          $('input[name="daterange"]').datepicker();
+          });
+        </script> 
+        <div class="container text-center">
+  		    <button type="submit" class="btn btn-default btn-lg">Submit</button>
+        </div>
+  		</form>
+  	</div>	
+  </body>
+</html>
