@@ -61,13 +61,13 @@ def query():
             query["wave_exp"] = form.wave_exp_name.data,        
         query["start_date"] = form.date_pick_from.data.strftime('%m/%d/%Y'), 
         query["end_date"] = form.date_pick_to.data.strftime('%m/%d/%Y')
-        print("query: ", query)    
-        print("Query form submitted")
+        # print("query: ", query)    
+        # print("Query form submitted")
 
         db = DbConnect(app.config)
         query_results = db.getQueryResults(query) 
         db.close()
-        print("results: ", query_results)
+        # print("results: ", query_results)
         flash(query_results)
         # if form.validate_on_submit():
         
@@ -87,6 +87,7 @@ def parse_data():
     return jsonify(result)
 
 def queryDb(query_type, query_value):
+    result = None
     db = DbConnect(app.config)
     if query_type == "logger_type": 
         result = db.getCountry(query_value)
@@ -100,9 +101,7 @@ def queryDb(query_type, query_value):
         result = db.getSubZone(query_value)
     elif query_type == "lt_for_wave_exp":
         result = db.getWaveExp(query_value)
-    return result
-        
-
+    return result       
 
 @app.errorhandler(404)
 def not_found_error(error):
