@@ -118,9 +118,7 @@ class DbConnect(object):
             if row[0] is None:
                 final_result.add(("None", "None"))
             else:
-                final_result.add((row[0], row[0]))
-            
-        
+                final_result.add((row[0], row[0]))        
         cursor.close()
         return final_result
 
@@ -151,7 +149,7 @@ class DbConnect(object):
                 inner join cnx_logger_properties p 
                 on p.lpropId = l.prop_id
                 inner join cnx_logger_temp t on t.logger_id = l.lid''' + where_condition
-        print("query: ", query)
+        #print("query: ", query)
         cursor.execute(query)
         result = cursor.fetchall()
         result = list(result)
