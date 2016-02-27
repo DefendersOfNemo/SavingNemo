@@ -15,12 +15,10 @@ class DbConnect(object):
         """Fetches Distinct Logger Types"""
         cursor = self.connection.cursor()
         query = '''select lt.type from cnx_logger_type lt'''
-        print(query)
         cursor.execute(query)
         result = cursor.fetchall()
         result = list(result)
         final_result = [[row[0], row[0]] for row in result]
-        print(result)
         cursor.close()
         return final_result
 

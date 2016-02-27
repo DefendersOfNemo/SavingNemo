@@ -2,8 +2,8 @@
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 from .forms import QueryForm
-from nemoApp import app
-from nemoApp.dbconnect import DbConnect
+from app import app
+from app.dbconnect import DbConnect
 
 @app.route('/')
 @app.route('/home')
@@ -61,13 +61,13 @@ def query():
             query["wave_exp"] = form.wave_exp_name.data,        
         query["start_date"] = form.date_pick_from.data.strftime('%m/%d/%Y'), 
         query["end_date"] = form.date_pick_to.data.strftime('%m/%d/%Y')
-        print(query)    
+        print("query: ", query)    
         print("Query form submitted")
 
         db = DbConnect(app.config)
         query_results = db.getQueryResults(query) 
         db.close()
-        print(query_results)
+        print("results: ", query_results)
         flash(query_results)
         # if form.validate_on_submit():
         
