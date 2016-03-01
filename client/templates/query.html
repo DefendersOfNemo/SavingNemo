@@ -59,22 +59,35 @@
           });
         });
 
+        $('#dropdown_menu_logger_type').change( function () {
+          logger_type = $("#dropdown_menu_logger_type option:selected").text();
+          alert(logger_type)
+          $.getJSON('/_parse_data', {
+                    select_type: "logger_type",
+                    select_value: logger_type
+                  })
+            .done(function(data){              
+              $('#dropdown_menu_country_name').empty();
+              $("#dropdown_menu_country_name").append('<option value="-1">Please select Country Name</option>')
+              $.each(data, function(country){ 
+                $("#dropdown_menu_country_name").append('<option value=\"'+country+'\">'+country+'</option>')
+              });
+            });
+          });
 
-        /*$('.dd_country_name li a').click( function () {
-          alert("clicked")
-          country_name = $(this).text();
-          alert(country_name);
-          $('.db_country_name').text(country_name).append(' <span class="caret"/>');    
+        $('#dropdown_menu_country_name').change( function () {
+          country_name = $("#dropdown_menu_country_name option:selected").text();
+          alert(country_name)
           $.getJSON('/_parse_data', {
             select_type: "country_name",
             select_value: country_name
             }, function(data) {
-            var options = $("#state_name");
-            $.each(data, function() {
-              options.append($("<option />").val(this).text(this));
+            $('#dropdown_menu_state_name').empty()
+            $.each(data, function(state) {
+              $("#dropdown_menu_state_name").append('<option value=\"'+state+'\">'+state+'</option>')
             });
           });
-        });*/
+        });
         
         $('#country_name').click( function () {
           /*country_name = $(this).text();*/
@@ -85,16 +98,15 @@
             select_value: country_name
             }, function(data) {
             var options = $("#state_name");
-            $('#state_name').empty()
             $.each(data, function() {
               options.append($("<option />").val(this).text(this));
             });
           });
         });
 
-        /*$('.dd_logger_type li a').click( function () {
-          logger_type = $(this).text();
-          $('.db_logger_type').text(logger_type).append(' <span class="caret"/>');*/
+
+
+
         $('#logger_type').click( function () {
           logger_type = $("#logger_type option:selected").text();
             $.getJSON('/_parse_data', {
@@ -174,26 +186,58 @@
 
 <div class="query-box">
   <form action="{{ url_for('query') }}" method="post" name="query">
-    <!-- LoggerType(required): 
-      <div class="btn-group">
-        <button id="dropdown_btn_logger_type" class="btn btn-default dropdown-toggle db_logger_type" type="button" name="LoggerType" data-toggle="dropdown" aria-expanded="true">Select a Logger Type&nbsp;<span class="caret"></span>
+    <div class="row">
+      <div class="col-md-4">
+      <select id ="dropdown_menu_logger_type" class="form-control">
+        <option value="-1">PLease select Logger Type</option>
+        {% for type in form.logger_type %}
+            <option value="{{ type }}">{{ type[1] }}</option>
+        {% endfor %}
+      </select>
+        </div>
+        <div class="col-md-4">
+      <select id ="dropdown_menu_country_name" class="form-control" >
+        <option value="-1">Please select Country Name</option>
+      </select>
+    </div>
+      <div class="col-md-4">
+      <select id ="dropdown_menu_state_name" class="form-control" >
+        <option value="-1">Please select State Name</option>
+      </select>
+    </div>
+  </div>
+
+      <!--   <button id="dropdown_btn_logger_type" class="btn btn-default dropdown-toggle db_logger_type" type="button" name="LoggerType" data-toggle="dropdown" aria-expanded="true">Select a Logger Type&nbsp;<span class="caret"></span>
         </button>
         <ul id="dropdown_menu_logger_type" class="dropdown-menu dd_logger_type" role="menu" aria-labelledby="dropdown_btn_logger_type">
-          {% for type in form.logger_type %}
+          
+        </ul>
+      </div> -->
+
+      <!-- <div class="btn-group">
+        <button id="dropdown_btn_country_name" class="btn btn-default dropdown-toggle db_country_name" type="button" data-toggle="dropdown">Select Country&nbsp;<span class="caret"></span>
+        </button>
+        <ul id="dropdown_menu_country_name" class="dropdown-menu dd_country_name" role="menu">
+          {% for country in form.country_name %}
             <li>
-              <a href="#">{{ type }}</a>
+              <a href="#">{{ country }}</a>
             </li>
           {% endfor %}
         </ul>
       </div> -->
 
       <!-- <div class="btn-group">
-        <button id="dd_btn_country_name" class="btn btn-default dropdown-toggle db_country_name" type="button" data-toggle="dropdown">Select Country&nbsp;<span class="caret"></span>
+        <button id="dropdown_btn_state_name" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select State&nbsp;<span class="caret"></span>
         </button>
-        <ul id="dmenu_country_name" class="dropdown-menu dd_country_name" role="menu">
-          <li><a href="#">USA</a></li>
+        <ul id="dropdown_menu_state_name" class="dropdown-menu" role="menu">
+          {% for state in form.state_name %}
+            <li>
+              <a href="#">{{ state }}</a>
+            </li>
+          {% endfor %}
         </ul>
-      </div> -->
+      </div>
+ -->
    <p>Logger Type(required): {{ form.logger_type }}</p>
    <p>Country(required): {{ form.country_name }}</p>
    <p>State: {{ form.state_name }}</p>
