@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Saving Nemo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 400 15px/1.8 Lato, sans-serif;
+    color: #777;
+  }
+
+    /* Overwrite default styles of h3 and h4 */
+  h3, h4 {
+    margin: 10px 0 30px 0;
+    letter-spacing: 10px; 
+    font-size: 20px;
+    color: #111;
+  }
+
+  .navbar {
+    font-family: Montserrat, sans-serif;
+   }
+  
+  /* Remove rounded borders on input fields */
+  .form-control {
+      border-radius: 0;
+  }
+
+  /* Disable the ability to resize textareas */
+  textarea {
+      resize: none;
+  }
+
+  .container {
+      padding: 80px 120px;
+  }
+  .robomussel {
+    border: 10px solid transparent;
+    margin-bottom: 25px;
+    width: 80%;
+    height: 80%;
+    opacity: 0.7;
+  }
+  .robomussel:hover {
+      border-color: #f1f1f1;
+  }
+
+  .carousel-inner img {
+    /*-webkit-filter: grayscale(90%);*/
+    /*filter: grayscale(90%);  make all photos black and white  */
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+  }
+
+  .carousel-caption h3 {
+      color: #fff !important;
+  }
+
+  @media (max-width: 600px) {
+      .carousel-caption {
+          display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+      }
+  }
+
+  /* Add a dark background color with a little bit see-through */ 
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity:0.9;
+  }
+
+  /* Add a gray color to all navbar links */
+  .navbar li a, .navbar .navbar-brand { 
+      color: #d5d5d5 !important;
+  }
+
+  /* On hover, the links will turn white */
+  .navbar-nav li a:hover {
+      color: #fff !important;
+  }
+
+  /* The active link */
+  .navbar-nav li.active a {
+      color: #fff !important;
+      background-color:#29292c !important;
+  }
+
+  /* Remove border color from the collapsible button */
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+  }
+
+  
+  /* Add a dark background color to the footer */
+  footer {
+      background-color: #2d2d30;
+      color: #f5f5f5;
+      padding: 32px;
+  }
+
+  footer a {
+      color: #f5f5f5;
+  }
+
+  footer a:hover {
+      color: #777;
+      text-decoration: none;
+  }
+  </style>
+</head>
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="#">Saving Nemo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#query">QUERY</a></li>
+<!--         <li><a href="#login">LOGIN</a></li> -->
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+  </nav>
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="../static/robomussel3.jpg" alt="RoboMussel" width="1200" height="300">
+      <div class="carousel-caption">
+        <h3>Robo Mussel</h3>
+        <p>This Robo Mussel is Awesome</p>
+      </div> 
+    </div>
+
+    <div class="item">
+      <img src="../static/boston.jpg" alt="Boston" width="1200" height="300">
+      <div class="carousel-caption">
+        <h3>Did You Know?</h3>
+        <p>Robomussel is Found in Water.</p>
+      </div> 
+    </div>
+
+    <div class="item">
+      <img src="../static/developer.jpg" alt="Developer" width="1200" height="300">
+      <div class="carousel-caption">
+        <h3>Seeking Internship</h3>
+        <p>Shameless plug.</p>
+      </div> 
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+  <div id="query" class = "container text-center">
+    <h3>Welcome to Saving Nemo Query Tool</h3>
+    {% if not session.logged_in %}
+      <p><em><a href="{{ url_for('query') }}">Enter Query Page as Guest</a></em></p>
+      <p><em><a href="{{ url_for('login') }}">Log In as Admin</a></em></p>
+    {% else %}
+      <p><em><a href="{{ url_for('query') }}">Enter Query Page as Admin</a></em></p>
+    {% endif %}
+    <br>
+    <div class="row">
+      <div class="col-sm-4">
+        <a href="#mussel1" data-toggle="collapse">
+          <img src="../static/robomussel.jpg" class="img-circle robomussel" alt="RoboMussel">
+        </a>
+        <div id="mussel1" class="collapse">
+          <p> RoboMussel</p>
+          <p> Biomimic...since 1999</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <a href="#mussel2" data-toggle="collapse">
+          <img src="../static/robomussel2.jpg" class="img-circle robomussel" alt="RoboMussel">
+        </a>
+        <div id="mussel2" class="collapse">
+          <p> RoboMussel</p>
+          <p> Biomimic...since 2004</p>
+        </div>
+      </div>
+     <div class="col-sm-4">
+        <a href="#mussel3" data-toggle="collapse">
+          <img src="../static/robomussel.jpg" class="img-circle robomussel" alt="RoboMussel">
+        </a>
+        <div id="mussel3" class="collapse">
+          <p> RoboMussel</p>
+          <p> Biomimic...since 1999</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact" class="container">
+  <h3 class="text-center">Contact</h3>
+  <p class="text-center"><em>We would love to hear your feedback!</em></p>
+  <div class="row test">
+    <div class="col-md-4">
+      <p><span class="glyphicon glyphicon-map-marker"></span> Boston, US</p>
+      <p><span class="glyphicon glyphicon-phone"></span> Phone: +1 617000000</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> Email: dummy@gmail.com</p> 
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <button class="btn pull-right" type="submit">Send</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+
+  <footer class="text-center">
+    <a class="up-arrow" href="#home" data-toggle="tooltip" title="TO TOP">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <p>Powered by Abhi, Ola, Sammer, Jiayi and Tarun</p> 
+  </footer>
+
+  <script>
+  $(document).ready(function(){
+    // Initialize Tooltip
+    $('[data-toggle="tooltip"]').tooltip(); 
+    // Add smooth scrolling to all links in navbar + footer link
+    $(".navbar a, footer a[href='#home']").on('click', function(event) {
+
+    // Prevent default anchor click behavior
+    event.preventDefault();
+
+    // Store hash
+    var hash = this.hash;
+
+    // Using jQuery's animate() method to add smooth page scroll
+    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+    $('html, body').animate({
+      scrollTop: $(hash).offset().top
+    }, 900, function(){
+
+      // Add hash (#) to URL when done scrolling (default click behavior)
+      window.location.hash = hash;
+      });
+    });
+  })
+</script>
+</body>
+</html>
