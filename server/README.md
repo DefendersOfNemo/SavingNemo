@@ -4,6 +4,8 @@ All Tests are divided into Test Files
 - Each Test case tests a particular test :P
 
 To Run all Tests:
+ nosetests
+ or
  python -m unittest discover (better implementation)
  or
  python -m unittest discover tests "*.py"
