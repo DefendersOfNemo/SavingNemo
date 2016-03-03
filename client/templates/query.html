@@ -14,18 +14,100 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
 
-      <!-- jQuery -->
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+  <body>
+
+
+    <!--  Nav-bar -->
+    <div>Navigation: 
+      <a href="/">Home</a>
+      {% if not session.logged_in %}
+      <a href="{{ url_for('login') }}">Log in</a>
+      {% else %}
+      <a href="{{ url_for('logout') }}">Log out</a>
+      {% endif %}
+    </div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages%}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+<div class="query-box">
+  <form action="" method="post" id="query" name="query">
+  <!-- <form action="{{ url_for('query') }}" method="post" name="query"> -->
+    <div class="row">
+      <div class="col-md-4">
+      <select id ="dropdown_menu_logger_type" class="form-control">
+        <option value="-1">PLease select Logger Type</option>
+        {% for type in form.logger_type %}
+            <option value="{{ type }}">{{ type[1] }}</option>
+        {% endfor %}
+      </select>
+        </div>
+        <div class="col-md-4">
+      <select id ="dropdown_menu_country_name" class="form-control" >
+        <option value="-1">Please select Country Name</option>
+      </select>
+    </div>
+      <div class="col-md-4">
+      <select id ="dropdown_menu_state_name" class="form-control" >
+        <option value="-1">Please select State Name</option>
+      </select>
+    </div>
+  </div>
+
+
+   Logger Type(required): {{ form.logger_type }}
+   <p>Country(required): {{ form.country_name }}</p>
+   <p>State: {{ form.state_name }}</p>
+   <p>Location: {{ form.location_name }}</p>
+   <p>Zone: {{ form.zone_name }}</p>
+   <p>Sub Zone: {{ form.sub_zone_name }}</p>
+   <p>Wave Exposure: {{ form.wave_exp_name }}</p>
+   <p>Date Range(required): from (mm/dd/yyyy) {{ form.date_pick_from(class='date_pick_from') }} to (mm/dd/yyyy) {{ form.date_pick_to(class='date_pick_to') }}</p>
+   <p>{{ form.measurement_interval }}</p>
+   <p>{{ form.analysis_type }}</p>
+   <br>
+   <p>Fields marked with * are compulsory</p>
+   <p> 
+    <button type="button" id="button_submit_query" class="btn btn-success">Submit</button>
+    <!-- <input type="submit" value="View Results" name="Submit"></p> -->
+  </form>
+
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    <table class="table hidden" id="query-results-table">
+      <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Temperature</th>
+      </tr>
+      </thead>
+
+    </div>
+          <!-- jQuery -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      
       <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
       
       <!-- Bootstrap -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
-  <script type=text/javascript>
-      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
       
-      $(function() {
+      
+  </body>
+    
+</html>
+<script>
+$(function() {
         $( "#date_pick_from" ).datepicker({
           defaultDate: "+1w",
           changeMonth: true,
@@ -153,110 +235,30 @@
             });
 
         });
+
+        $('#button_submit_query').click(function () {                   
+          $.getJSON('/_submit_query', {
+            logger_type: $("#logger_type option:selected").text(),
+            country_name: $("#country_name option:selected").text(),
+            state_name: $("#state_name option:selected").text(),
+            location_name: $("#location_name option:selected").text(),
+            zone_name: $("#zone_name option:selected").text(),
+            sub_zone_name: $("#sub_zone_name option:selected").text(),
+            wave_exp: $("#wave_exp_name option:selected").text(),
+            start_date: $("#date_pick_from").val(),
+            end_date: $("#date_pick_to").val()
+          })
+          .done(function(data){
+            console.log(data.list_of_results)
+            var options = $("#query-results-table");
+            /*options.show();*/
+            options.toggleClass('hidden');
+            options.append("<tbody>")
+            $.each(data.list_of_results, function(key, value) {
+              options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
+            });
+            options.append("</tbody>")
+          });
+        });
     });
 </script>
-</head>
-  <body>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-
-  
-
-
-    <!--  Nav-bar -->
-    <div>Navigation: 
-      <a href="/">Home</a>
-      {% if not session.logged_in %}
-      <a href="{{ url_for('login') }}">Log in</a>
-      {% else %}
-      <a href="{{ url_for('logout') }}">Log out</a>
-      {% endif %}
-    </div>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages%}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-<div class="query-box">
-  <form action="{{ url_for('query') }}" method="post" name="query">
-    <div class="row">
-      <div class="col-md-4">
-      <select id ="dropdown_menu_logger_type" class="form-control">
-        <option value="-1">PLease select Logger Type</option>
-        {% for type in form.logger_type %}
-            <option value="{{ type }}">{{ type[1] }}</option>
-        {% endfor %}
-      </select>
-        </div>
-        <div class="col-md-4">
-      <select id ="dropdown_menu_country_name" class="form-control" >
-        <option value="-1">Please select Country Name</option>
-      </select>
-    </div>
-      <div class="col-md-4">
-      <select id ="dropdown_menu_state_name" class="form-control" >
-        <option value="-1">Please select State Name</option>
-      </select>
-    </div>
-  </div>
-
-      <!--   <button id="dropdown_btn_logger_type" class="btn btn-default dropdown-toggle db_logger_type" type="button" name="LoggerType" data-toggle="dropdown" aria-expanded="true">Select a Logger Type&nbsp;<span class="caret"></span>
-        </button>
-        <ul id="dropdown_menu_logger_type" class="dropdown-menu dd_logger_type" role="menu" aria-labelledby="dropdown_btn_logger_type">
-          
-        </ul>
-      </div> -->
-
-      <!-- <div class="btn-group">
-        <button id="dropdown_btn_country_name" class="btn btn-default dropdown-toggle db_country_name" type="button" data-toggle="dropdown">Select Country&nbsp;<span class="caret"></span>
-        </button>
-        <ul id="dropdown_menu_country_name" class="dropdown-menu dd_country_name" role="menu">
-          {% for country in form.country_name %}
-            <li>
-              <a href="#">{{ country }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div> -->
-
-      <!-- <div class="btn-group">
-        <button id="dropdown_btn_state_name" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select State&nbsp;<span class="caret"></span>
-        </button>
-        <ul id="dropdown_menu_state_name" class="dropdown-menu" role="menu">
-          {% for state in form.state_name %}
-            <li>
-              <a href="#">{{ state }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
- -->
-   <p>Logger Type(required): {{ form.logger_type }}</p>
-   <p>Country(required): {{ form.country_name }}</p>
-   <p>State: {{ form.state_name }}</p>
-   <p>Location: {{ form.location_name }}</p>
-   <p>Zone: {{ form.zone_name }}</p>
-   <p>Sub Zone: {{ form.sub_zone_name }}</p>
-   <p>Wave Exposure: {{ form.wave_exp_name }}</p>
-   <p>Date Range(required): from (mm/dd/yyyy) {{ form.date_pick_from(class='date_pick_from') }} to (mm/dd/yyyy) {{ form.date_pick_to(class='date_pick_to') }}</p>
-   <p>{{ form.measurement_interval }}</p>
-   <p>{{ form.analysis_type }}</p>
-   <br>
-   <p>Fields marked with * are compulsory</p>
-   <p> <input type="submit" value="View Results" name="Submit"></p>
-</form>
-
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-
-    </div>
-  </body>
-</html>

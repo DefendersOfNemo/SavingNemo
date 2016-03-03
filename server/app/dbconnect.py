@@ -125,22 +125,22 @@ class DbConnect(object):
     def getQueryResults(self, queryDict):
         """Fetches records form tables based on user query"""
         cursor = self.connection.cursor()
-        where_condition = " where lt.type=\'"+queryDict.get('logger_type')[0]+\
-                          "\' and lg.country=\'"+queryDict.get('country_name')[0]+"\'"# and t.date_time BETWEEN \'"+queryDict.get('start_date')[0]+"\' AND \'"+queryDict.get('end_date')+"\'"
-        if queryDict.get('state_name')[0] != 'None':
-            where_condition += " and lg.state=\'"+queryDict.get('state_name')[0]+"\'"
-        if queryDict.get('location_name')[0] != 'None':
-            where_condition += " and lg.location=\'"+queryDict.get('location_name')[0]+"\'"
-        if queryDict.get('zone_name')[0] != 'None':
-            where_condition += " and p.zone=\'"+queryDict.get('zone_name')[0]+"\'"
-        if queryDict.get('sub_zone_name')[0] != 'None':
-            where_condition += " and p.subzone=\'"+queryDict.get('sub_zone_name')[0]+"\'"
-        if (queryDict.get('wave_exp')[0] is not None):
-            if (queryDict.get('wave_exp')[0] == 'None'): 
+        where_condition = " where lt.type=\'"+queryDict.get('logger_type')+\
+                          "\' and lg.country=\'"+queryDict.get('country_name')+"\'"# and t.date_time BETWEEN \'"+queryDict.get('start_date')+"\' AND \'"+queryDict.get('end_date')+"\'"
+        if queryDict.get('state_name') != 'None':
+            where_condition += " and lg.state=\'"+queryDict.get('state_name')+"\'"
+        if queryDict.get('location_name') != 'None':
+            where_condition += " and lg.location=\'"+queryDict.get('location_name')+"\'"
+        if queryDict.get('zone_name') != 'None':
+            where_condition += " and p.zone=\'"+queryDict.get('zone_name')+"\'"
+        if queryDict.get('sub_zone_name') != 'None':
+            where_condition += " and p.subzone=\'"+queryDict.get('sub_zone_name')+"\'"
+        if (queryDict.get('wave_exp') is not None):
+            if (queryDict.get('wave_exp') == 'None'): 
                 where_condition += " and p.wave_exp is Null"
             else:
-                where_condition += " and p.wave_exp=\'"+queryDict.get('wave_exp')[0]+"\'"
-        query = '''select lt.type,t.temperature 
+                where_condition += " and p.wave_exp=\'"+queryDict.get('wave_exp')+"\'"
+        query = '''select t.date_time,t.temperature 
                 from cnx_logger_type lt
                 inner join cnx_logger l 
                 on l.biomimic_id=lt.bioid
@@ -149,11 +149,11 @@ class DbConnect(object):
                 inner join cnx_logger_properties p 
                 on p.lpropId = l.prop_id
                 inner join cnx_logger_temp t on t.logger_id = l.lid''' + where_condition
-        #print("query: ", query)
+
         cursor.execute(query)
-        result = cursor.fetchall()
-        result = list(result)
-        final_result = result
+        results = cursor.fetchall()
+        results = list(results)
+        final_result = [[result[0].strftime("%m/%d/%Y %H:%M"), result[1]] for result in results]
         cursor.close()
         return final_result
 
