@@ -4,6 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from .forms import QueryForm
 from app import app
 from app.dbconnect import DbConnect
+from flask.ext import excel
 
 @app.route('/')
 @app.route('/home')
@@ -35,8 +36,9 @@ def logout():
 @app.route('/query', methods=['GET', 'POST'])
 def query():
     error = None
+    results = None
     db = DbConnect(app.config)
-    logger_type_choices = db.getLoggerTypes() 
+    logger_type_choices = db.getLoggerTypes()
     db.close()
 
     form = QueryForm(request.form)
@@ -46,29 +48,7 @@ def query():
     if request.method == 'GET':
         form.process()
     else:   
-        query = {}
-        query["logger_type"] = form.logger_type.data,
-        query["country_name"] = form.country_name.data,
-        if form.state_name.data is not None:
-            query["state_name"] = form.state_name.data, 
-        if form.location_name.data is not None:
-            query["location_name"] = form.location_name.data,
-        if form.zone_name.data is not None:
-            query["zone_name"] = form.zone_name.data,
-        if form.sub_zone_name.data is not None:
-            query["sub_zone_name"] = form.sub_zone_name.data,
-        if form.wave_exp_name.data is not None:
-            query["wave_exp"] = form.wave_exp_name.data,        
-        query["start_date"] = form.date_pick_from.data.strftime('%m/%d/%Y'), 
-        query["end_date"] = form.date_pick_to.data.strftime('%m/%d/%Y')
-        # print("query: ", query)    
-        # print("Query form submitted")
-
-        db = DbConnect(app.config)
-        query_results = db.getQueryResults(query) 
-        db.close()
-        # print("results: ", query_results)
-        flash(query_results)
+        pass
         # if form.validate_on_submit():
         
             # flash("Query details. logger_type: '%s', country_name: '%s', \
@@ -78,6 +58,44 @@ def query():
         # else:
         #     error = 'Invalid Submission. All fields marked with * are compulsory'
     return render_template('query.html', title='Query', form=form, error=error)
+
+@app.route('/_submit_query', methods=['GET'])
+def submit_query():
+    print("inside submit")
+    form  = dict(request.args)
+    print("form")
+    print(form)
+    query = {}
+    query["logger_type"] = form.get("logger_type")[0]
+    query["country_name"] = form.get("country_name")[0]
+    if form['state_name'][0] is not None:
+        query["state_name"] = form['state_name'][0]
+    if form['location_name'][0] is not None:
+        query["location_name"] = form['location_name'][0]
+    if form['zone_name'][0] is not None:
+        query["zone_name"] = form['zone_name'][0]
+    if form['sub_zone_name'][0] is not None:
+        query["sub_zone_name"] = form['sub_zone_name'][0]
+    if form["wave_exp"][0] is not '':
+        query["wave_exp"] = form['wave_exp'][0]        
+    query["start_date"] = form['start_date'][0] 
+    query["end_date"] = form['end_date'][0]
+    print("query")
+    print(query)
+    db = DbConnect(app.config)
+    query_results = db.getQueryResults(query)
+    session['query_raw_results'] = db.getQueryRawResults(query)
+    db.close()
+    session['query_info'] = query;
+
+    results = query_results
+    return jsonify(list_of_results=results)
+
+@app.route('/download',methods=['GET'])
+def download():
+    #download raw data
+    return excel.make_response_from_array(session['query_raw_results'], "csv", file_name="export_data")
+
 
 @app.route('/_parse_data', methods=['GET'])
 def parse_data():
