@@ -4,6 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from .forms import QueryForm
 from app import app
 from app.dbconnect import DbConnect
+from flask.ext import excel
 
 @app.route('/')
 @app.route('/home')
@@ -81,11 +82,18 @@ def submit_query():
     query["end_date"] = form['end_date'][0]
     print("query")
     print(query)
+    session['query'] = query
     db = DbConnect(app.config)
-    query_results = db.getQueryResults(query) 
+    preview_results = db.getQueryResults(query)
     db.close()
-    results = query_results
-    return jsonify(list_of_results=results)
+    return jsonify(list_of_results=preview_results)
+
+@app.route('/download',methods=['GET'])
+def download():    
+    db = DbConnect(app.config)
+    query_results = db.getQueryRawResults(session['query'])
+    db.close()
+    return excel.make_response_from_array(query_results, "csv", file_name="export_data")
 
 @app.route('/_parse_data', methods=['GET'])
 def parse_data():

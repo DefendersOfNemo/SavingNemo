@@ -8,7 +8,7 @@ class BasicConnectionTestCase(unittest.TestCase):
     """Checks for app and db connectivity"""
     
     def test_index(self):
-        """inital Test. Ensure flask was setup correctly"""
+        """inital Test. Ensure flask is setup correctly"""
         tester = app.test_client(self)
         response = tester.get('/', content_type='html/text')
         self.assertEqual(response.status_code, 200)

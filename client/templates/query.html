@@ -85,14 +85,16 @@
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
       {% endif %}
-    <table class="table hidden" id="query-results-table">
-      <thead>
-      <tr>
-        <th>Timestamp</th>
-        <th>Temperature</th>
-      </tr>
-      </thead>
-
+    <div class="panel-collapse collapse" id="collapse1">
+      <table class="table" id="query-results-table">
+        <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Temperature</th>
+        </tr>
+        </thead>
+        
+      <a href="/download" class="btn btn-info" role="button">Download</a>
     </div>
           <!-- jQuery -->
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -252,7 +254,8 @@ $(function() {
             console.log(data.list_of_results)
             var options = $("#query-results-table");
             /*options.show();*/
-            options.toggleClass('hidden');
+            $("#collapse1").toggleClass('collapse');
+            options.empty()
             options.append("<tbody>")
             $.each(data.list_of_results, function(key, value) {
               options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
