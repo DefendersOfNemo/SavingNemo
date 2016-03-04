@@ -25,9 +25,17 @@
     </div>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+          </button>
+      </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span>Back to Helmuth lab Home</a></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="##link to login page##"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           </ul>
@@ -54,7 +62,19 @@
             <option>Update from database</option>
           </select>
         </div>
-
+        <div class="form-group">
+          <label for="opt3">Intertidal Zone</label>
+          <select class="form-control" id="opt3">
+            <option>Update from database</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="opt4">Temperature Time Interval</label>
+          <select class="form-control" id="opt4">
+            <option>Hourly average</option>
+            <option>Daily average</option>
+          </select>
+        </div>
          <div class="form-group">
           <label for="revision_date">Date Range:</label>
           <div class="input-group col-xs-4" >
