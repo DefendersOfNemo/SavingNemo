@@ -70,34 +70,20 @@ class QueryFormTestCase(unittest.TestCase):
     def test_query_results(self):
         """Test the query results functionality"""
         with app.test_client() as client:
-            response = client.post('/query', 
-                data=dict(
-                    logger_type="robomussel",
-                    country_name="Canada",
-                    state_name="British Columbia",
-                    location_name="Seppings Island",
-                    zone_name="High",
-                    sub_zone_name="High",
-                    wave_exp_name="exposed",
-                    date_pick_from=datetime.date(1995, 4, 15).strftime('%m/%d/%Y'),
-                    date_pick_to=datetime.date(2016, 4, 30).strftime('%m/%d/%Y')),
+            response = client.get('/_submit_query', 
+                query_string={
+                'sub_zone_name': ['High'], 
+                'end_date': ['04/12/2016'], 
+                'state_name': ['British Columbia'], 
+                'wave_exp': ['exposed'], 
+                'location_name': ['Seppings Island'], 
+                'zone_name': ['High'], 
+                'logger_type': ['robomussel'], 
+                'start_date': ['03/01/2016'], 
+                'country_name': ['Canada']},
                     follow_redirects=True)
-            self.assertIn(b"[(&#39;robomussel&#39;, 13.98), (&#39;robomussel&#39;, 12.87)]", response.data)
-
-            # self.assertIn((robomussel, 13.98), (&#39;robomussel&#39;, 12.87)
-
-    # def test_query_submit_missing_compulsory_values(self):
-    #     """Test the QueryForm with compulsory fields missing"""
-    #     with app.test_client() as c:
-    #         rv = c.post('/query', 
-    #             data=dict( 
-    #                 country_name='USA',
-    #                 state_name='Massachusetts'), 
-    #             follow_redirects=True)
-    #         # Check Query Submission fails
-    #         self.assertEqual(request.path, '/query')
-    #         # Check if error message is displayed for invalid query
-    #         self.assertIn(b'Invalid Submission. All fields marked with * are compulsory', rv.data)
+            self.assertIn(b"13.98", response.data)
+            self.assertIn(b"12.87", response.data)
 
 if __name__ == '__main__':
     unittest.main()

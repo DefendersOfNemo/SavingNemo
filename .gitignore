@@ -65,3 +65,5 @@ target/
 .ipynb_checkpoints
 
 *.DS_Store
+client/templates/dynamicselection.js
+*.Rhistory
