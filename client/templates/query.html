@@ -41,11 +41,9 @@
         </div>
       </div>
     </nav>
-    
     <div class="container text-danger">
       <h1>DATABASE<h1>
     </div>
-
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
@@ -113,6 +111,7 @@
             </select>
         </div>
     </div>
+  </br>
     <label for="date_pick_from">Start date:</label> {{ form.date_pick_from(class='date_pick_from') }} 
     <label for="date_pick_to"> to End date:</label> {{ form.date_pick_to(class='date_pick_to') }} 
     <span class="glyphicon glyphicon-calendar"></span>
@@ -254,9 +253,6 @@ $(function() {
         });
     });
 
-    // $('#dropdown_menu_wave_exp_name').change( function () {
-    //     wave_exp = $("#dropdown_menu_wave_exp_name option:selected").text();
-    // });
     $('#button_submit_query').click(function () {                   
         $.getJSON('/_submit_query', {
             logger_type: $("#dropdown_menu_logger_type option:selected").text(),
