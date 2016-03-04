@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <head lang="en">
+    <meta charset="UTF-8">
+    <title>SavingNemo</title>
+  </head>
+  <body>
+    <div>Navigation: 
+      <a href="/">Home</a>
+      {% if not session.logged_in %}
+      <a href="{{ url_for('login') }}">Log in</a>
+      {% else %}
+      <a href="{{ url_for('logout') }}">Log out</a>
+      {% endif %}
+    </div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages%}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+    {% block content %} {% endblock %}
+  </div>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
+  </script>
+  </body>
+</html>

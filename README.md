@@ -1,0 +1,4 @@
+# SavingNemo
+Web Application for interaction with Biomimic loggers
+
+The	Helmuth	lab	at	Northeastern	University	Marine	Science	Center	is	a	marine	biology	lab	that	focuses	on	forecasting	marine	ecosystems	under	the	immediate	pressure	of	climate	change.	The	lab	uses	different	metrics	such	as	satellites,	in	field	measurements,	lab	experiments,	and	computer	modeling	to	understand	how	species	distribution	will	evolve	with	environmental	change.A	unique	equipment	used	in	this	lab	is	the	robomussel.	This	is	a	modified	temperature	logger	that	is	designed	to	capture	and	mimic	the	body	temperature	of	a	mussel	in	the	field.	The	use	of	the	biophysical	properties	of	this	logger	can	mimic	up	to	+/-2⁰	C	of	an	actual	mussel,	which	can	be	+/-14⁰	C	different	than	the	air	temperature.	These	loggers	are	dispersed	around	the	world	by	collaborators.	There	are	over	2000	files	in	the	database.	Some	locations	have	collected	data	for	close	to	15	years	and	data	is	still	continuou
