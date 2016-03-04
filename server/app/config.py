@@ -6,5 +6,5 @@ PASSWORD = 'admin'
 MYSQL_HOST = 'localhost'
 MYSQL_PORT = 3306
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'helmuth'
+MYSQL_PASSWORD = 'root'
 MYSQL_DB = 'logger'
