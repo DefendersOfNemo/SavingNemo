@@ -1,281 +1,151 @@
 <!DOCTYPE html>
 <html>
-  <head lang="en">
-      <meta charset="UTF-8">
-      <!-- IE Edge Meta Tag -->
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- Viewport : This is for the display on smaller devices such as mobile, tab etc.-->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Database</title> 
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
-  </head>
-  <body>
-    <!--  Nav-bar -->
-    <div>
-      <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
-      <img class="img-responsive" src="../static/Lab-banner.jpg" width="960" height="46">
-    </div>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-            </button>
+    <head lang="en">
+        <!-- IE Edge Meta Tag -->
+        <meta charset="UTF-8">
+        <!-- Viewport : enables combatibility with display on smaller devices -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Database</title> 
+        <!-- links to style sheet -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Links to header images-->
+        <div>
+            <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
+            <img class="img-responsive" src="../static/Lab-banner.jpg" width="960" height="46">
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span>Back to Helmuth lab Home</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul>
+        <!--  Nav-bar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Back to Helmuth lab Home</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if not session.logged_in %}
+                            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container text-danger">
+            <h1>DATABASE<h1>
         </div>
-      </div>
-    </nav>
-    <div class="container text-danger">
-      <h1>DATABASE<h1>
-    </div>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages%}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-<div class="query-box container">
-  <form action="" method="post" id="query" name="query">
-  <!-- <form action="{{ url_for('query') }}" method="post" name="query"> -->
-    <div class="row">
-        <div class="col-md-4">
-            <label for="dropdown_menu_logger_type">Logger Type:</label>
-            <select id ="dropdown_menu_logger_type" class="form-control">
-                <option value="-1">PLease select Logger Type</option>
-                {% for type in form.logger_type %}
-                <option value="{{ type }}">{{ type[1] }}</option>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages%}
+                    <li>{{ message }}</li>
                 {% endfor %}
-            </select>
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <!-- query form -->
+        <div class="query-box container">
+            <form action="" method="post" id="query" name="query">
+                <!-- first row in query form -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="dropdown_menu_logger_type">Logger Type:</label>
+                        <!-- dropdown menu of logger types gotten from database-->
+                        <select id ="dropdown_menu_logger_type" class="form-control">
+                            <option value="-1">PLease select Logger Type</option>
+                            {% for type in form.logger_type %}
+                                <option value="{{ type }}">{{ type[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>   
+                    <div class="col-md-4">
+                        <!-- dropdown menu of Countries related to selected logger type -->
+                        <label for="dropdown_menu_country_name">Country Name:</label>
+                        <select id ="dropdown_menu_country_name" class="form-control" >
+                            <option value="-1">Please select Country Name</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="dropdown_menu_state_name">State Name:</label>
+                        <!-- dropdown menu of states related to selected Country -->
+                        <select id ="dropdown_menu_state_name" class="form-control" >
+                            <option value="-1">Please select State Name</option>
+                        </select>
+                    </div>
+                </div>
+                </br>
+                <!-- Second row in query form -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="dropdown_menu_location_name">Location Name:</label>
+                        <select id ="dropdown_menu_location_name" class="form-control">
+                            <option value="-1">PLease select Location Name</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dropdown_menu_zone_name">Zone Name:</label>
+                        <select id ="dropdown_menu_zone_name" class="form-control" >
+                            <option value="-1">Please select Zone Name</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dropdown_menu_sub_zone_name">Sub Zone:</label>
+                        <select id ="dropdown_menu_sub_zone_name" class="form-control" >
+                            <option value="-1">Please select Sub Zone</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dropdown_menu_wave_exp_name">Wave Exposure:</label>
+                        <select id ="dropdown_menu_wave_exp_name" class="form-control" >
+                            <option value="-1">Please select Wave exposure</option>
+                        </select>
+                    </div>
+                </div>
+                </br>
+                <label for="date_pick_from">Start date:</label> {{ form.date_pick_from(class='date_pick_from') }} 
+                <label for="date_pick_to"> to End date:</label> {{ form.date_pick_to(class='date_pick_to') }} 
+                <span class="glyphicon glyphicon-calendar"></span>
+                <div class="container text-center" > 
+                    <button type="button" id="button_submit_query" class="btn btn-success btn-lg">Submit</button>
+                </div>
+            </form>
         </div>
-        
-        <div class="col-md-4">
-            <label for="dropdown_menu_country_name">Country Name:</label>
-            <select id ="dropdown_menu_country_name" class="form-control" >
-                <option value="-1">Please select Country Name</option>
-            </select>
-        </div>
-        
-        <div class="col-md-4">
-            <label for="dropdown_menu_state_name">State Name:</label>
-            <select id ="dropdown_menu_state_name" class="form-control" >
-                <option value="-1">Please select State Name</option>
-            </select>
-        </div>
-    </div>
-
-    </br>
-
-    <div class="row">
-        <div class="col-md-3">
-            <label for="dropdown_menu_location_name">Location Name:</label>
-            <select id ="dropdown_menu_location_name" class="form-control">
-                <option value="-1">PLease select Location Name</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="dropdown_menu_zone_name">Zone Name:</label>
-            <select id ="dropdown_menu_zone_name" class="form-control" >
-                <option value="-1">Please select Zone Name</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="dropdown_menu_sub_zone_name">Sub Zone:</label>
-            <select id ="dropdown_menu_sub_zone_name" class="form-control" >
-                <option value="-1">Please select Sub Zone</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="dropdown_menu_wave_exp_name">Wave Exposure:</label>
-            <select id ="dropdown_menu_wave_exp_name" class="form-control" >
-                <option value="-1">Please select Wave exposure</option>
-            </select>
-        </div>
-    </div>
-  </br>
-    <label for="date_pick_from">Start date:</label> {{ form.date_pick_from(class='date_pick_from') }} 
-    <label for="date_pick_to"> to End date:</label> {{ form.date_pick_to(class='date_pick_to') }} 
-    <span class="glyphicon glyphicon-calendar"></span>
-    <div class="container text-center" > 
-        <button type="button" id="button_submit_query" class="btn btn-success btn-lg">Submit</button>
-    </div>
-</form>
-
-    {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-    {% endif %}
-
-    <div class="panel-collapse collapse" id="collapse1">
-        <table class="table" id="query-results-table">
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Temperature</th>
-                </tr>
-            </thead>
-        </table>
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{ error }}
+            {% endif %}
+        <div class="panel-collapse collapse" id="collapse1">
+            <table class="table" id="query-results-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Temperature</th>
+                    </tr>
+                </thead>
+            </table>
         </br>
-        <div class="container text-center" > 
-            <a href="/download" class="btn btn-info" role="button">Download</a>
+            <div class="container text-center" > 
+                <a href="/download" class="btn btn-info btn-lg" role="button">Download</a>
+            </div>
         </div>
-    </div>
     
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</body>    
+    </body>    
 </html>
-<script>
-$(function() {
-    $( "#date_pick_from" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        changeYear: true,
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-            $( "#date_pick_to" ).datepicker( "option", "minDate", selectedDate );
-        }
-    });
-    
-    $( "#date_pick_to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        changeYear: true,
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-            $( "#date_pick_from" ).datepicker( "option", "maxDate", selectedDate );
-        }
-        });
-
-    $('#dropdown_menu_logger_type').change( function () {
-        logger_type = $("#dropdown_menu_logger_type option:selected").text();
-        $.getJSON('/_parse_data', {
-            select_type: "logger_type",
-            select_value: logger_type
-        })
-        .done(function(data){              
-            $('#dropdown_menu_country_name').empty();
-            $("#dropdown_menu_country_name").append('<option value="-1">Please select Country Name</option>')
-            $.each(data, function(country){ 
-                $("#dropdown_menu_country_name").append('<option value=\"'+country+'\">'+country+'</option>')
-            });
-        });
-    });
-    
-    $('#dropdown_menu_country_name').change( function () {
-        country_name = $("#dropdown_menu_country_name option:selected").text();
-        $.getJSON('/_parse_data', {
-            select_type: "country_name",
-            select_value: country_name
-        }).done(function(data) {
-            $('#dropdown_menu_state_name').empty()
-            $("#dropdown_menu_state_name").append('<option value="-1">Please select State Name</option>')
-            $.each(data, function(state) {
-                $("#dropdown_menu_state_name").append('<option value=\"'+state+'\">'+state+'</option>')
-            });
-        });
-    });
-    
-    $('#dropdown_menu_state_name').change( function () {
-        state_name = $("#dropdown_menu_state_name option:selected").text();
-        $.getJSON('/_parse_data', {
-            select_type: "state_name",
-            select_value: state_name
-            }).done(function(data) {
-            $('#dropdown_menu_location_name').empty()
-            $("#dropdown_menu_location_name").append('<option value="-1">Please select Location Name</option>')
-            $.each(data, function(location) {
-                $("#dropdown_menu_location_name").append('<option value=\"'+location+'\">'+location+'</option>')
-            });
-        });
-    });
-    
-    $('#dropdown_menu_location_name').change( function () {
-        location_name = $("#dropdown_menu_location_name option:selected").text();
-        $.getJSON('/_parse_data', {
-            select_type: "lt_for_zone",
-            select_value: logger_type
-        }).done(function(data) {
-            $('#dropdown_menu_zone_name').empty()
-            $("#dropdown_menu_zone_name").append('<option value="-1">Please select Zone Name</option>')
-            $.each(data, function(zone) {
-                $("#dropdown_menu_zone_name").append('<option value=\"'+zone+'\">'+zone+'</option>')
-            });
-        });
-    });
-    
-    $('#dropdown_menu_zone_name').change( function () {
-        zone_name = $("#dropdown_menu_zone_name option:selected").text();
-        $.getJSON('/_parse_data', {
-            select_type: "lt_for_subzone",
-            select_value: logger_type
-            }).done(function(data) {
-            $('#dropdown_menu_sub_zone_name').empty()
-            $("#dropdown_menu_sub_zone_name").append('<option value="-1">Please select Sub zone</option>')
-            $.each(data, function(sub_zone) {
-                $("#dropdown_menu_sub_zone_name").append('<option value=\"'+sub_zone+'\">'+sub_zone+'</option>')
-            });
-        });
-    });
-        
-    $('#dropdown_menu_sub_zone_name').change( function () {
-        sub_zone_name = $("#dropdown_menu_sub_zone_name option:selected").text();
-        $.getJSON('/_parse_data', {
-            select_type: "lt_for_wave_exp",
-            select_value: logger_type
-            }).done(function(data) {
-            $('#dropdown_menu_wave_exp_name').empty()
-            $("#dropdown_menu_wave_exp_name").append('<option value="-1">Please select wave exposure </option>')
-            $.each(data, function(wave_exp) {
-                $("#dropdown_menu_wave_exp_name").append('<option value=\"'+wave_exp+'\">'+wave_exp+'</option>')
-            });
-        });
-    });
-
-    $('#button_submit_query').click(function () {                   
-        $.getJSON('/_submit_query', {
-            logger_type: $("#dropdown_menu_logger_type option:selected").text(),
-            country_name: $("#dropdown_menu_country_name option:selected").text(),
-            state_name: $("#dropdown_menu_state_name option:selected").text(),
-            location_name: $("#dropdown_menu_location_name option:selected").text(),
-            zone_name: $("#dropdown_menu_zone_name option:selected").text(),
-            sub_zone_name: $("#dropdown_menu_sub_zone_name option:selected").text(),
-            wave_exp: $("#dropdown_menu_wave_exp_name option:selected").text(),
-            start_date: $("#date_pick_from").val(),
-            end_date: $("#date_pick_to").val(),
-        })
-        .done(function(data){
-            console.log(data.list_of_results)
-            var options = $("#query-results-table");
-            $("#collapse1").toggleClass('collapse');
-            options.empty()
-            options.append("<tbody>")
-            $.each(data.list_of_results, function(key, value) {
-                options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
-            });
-            options.append("</tbody>")
-        });
-    });
-});
-</script>
+<!-- scripts used by form -->
+<script src="../static/script.js"></script> 
