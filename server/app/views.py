@@ -91,7 +91,9 @@ def submit_query():
 @app.route('/download',methods=['GET'])
 def download():    
     db = DbConnect(app.config)
-    query_results = db.getQueryRawResults(session['query'])
+    query = session['query']
+    header = [("logger_type:"+query["logger_type"],"country_name:"+query["country_name"],"state_name:"+query["state_name"],"location_name:"+query["location_name"],"zone_name:"+query["zone_name"],"sub_zone_name:"+query["sub_zone_name"],"wave_exp:"+query["wave_exp"]),("Timestamp","Temperature")]
+    query_results =header  + db.getQueryRawResults(session['query'])
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
 

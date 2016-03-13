@@ -4,6 +4,8 @@ from flask import Flask, json, request, Response, session
 import MySQLdb
 from app import app
 from app.dbconnect import DbConnect
+from flask.ext import excel
+
 
 class QueryFormTestCase(unittest.TestCase):
     """Query Form Feature specific Test Cases will go here"""
@@ -84,6 +86,13 @@ class QueryFormTestCase(unittest.TestCase):
                     follow_redirects=True)
             self.assertIn(b"13.98", response.data)
             self.assertIn(b"12.87", response.data)
+
+            """Test the download functionality"""
+            response_download = client.get('/download')
+            self.assertIn(b"13.98", response_download.data)
+            self.assertIn(b"12.87", response_download.data)
+            self.assertIn(b"logger_type:robomussel", response_download.data)
+
 
 if __name__ == '__main__':
     unittest.main()
