@@ -1,5 +1,10 @@
 # Backup Files
 *~
+#
+server/app/*.py[cod]
+server/app/__pycache__/
+server/tests/*.py[cod]
+server/tests/__pycache__/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -12,6 +17,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
