@@ -139,7 +139,7 @@ class BasicConnectionTestCase(unittest.TestCase):
                 res = c.execute('SELECT * from dummy')
                 data = c.fetchone()
                 c.close()
-        except MySQLdb.OperationalError as e:# 
+        except MySQLdb.OperationalError as e:#
             data = None
         self.assertEqual(data, None)
 

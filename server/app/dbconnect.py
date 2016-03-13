@@ -188,8 +188,7 @@ class DbConnect(object):
         cursor.execute(query)
         results = cursor.fetchall()
         results = list(results)
-        header = [("logger_type:"+queryDict.get('logger_type')[0],"country_name:"+queryDict.get('country_name')[0],"state_name:"+queryDict.get('state_name')[0],"location_name:"+queryDict.get('location_name')[0],"zone_name:"+queryDict.get('zone_name')[0],"sub_zone_name:"+queryDict.get('sub_zone_name')[0],"wave_exp:"+queryDict.get('wave_exp')[0]),("Timestamp","Temperature")]
-        final_result = header + [[result[0].strftime("%m/%d/%Y %H:%M"), result[1]] for result in results]
+        final_result = [[result[0].strftime("%m/%d/%Y %H:%M"), result[1]] for result in results]
         cursor.close()
         return final_result
 
