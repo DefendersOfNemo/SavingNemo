@@ -5,6 +5,9 @@ from .forms import QueryForm
 from app import app
 from app.dbconnect import DbConnect
 from flask.ext import excel
+from werkzeug import secure_filename
+from werkzeug.datastructures import FileStorage
+
 
 @app.route('/')
 @app.route('/home')
@@ -49,14 +52,6 @@ def query():
         form.process()
     else:   
         pass
-        # if form.validate_on_submit():
-        
-            # flash("Query details. logger_type: '%s', country_name: '%s', \
-            #              state_name: '%s', location_name: '%s', \
-            #              Date From: '%s', Date To: '%s' " % \
-
-        # else:
-        #     error = 'Invalid Submission. All fields marked with * are compulsory'
     return render_template('query.html', title='Query', form=form, error=error)
 
 @app.route('/_submit_query', methods=['GET'])
@@ -128,6 +123,75 @@ def not_found_error(error):
 @app.errorhandler(500)
 def internal_error(error):
     return render_template('500.html'), 500
+
+
+
+ALLOWED_EXTENSIONS_LOGGER_TYPE = set(['csv'])
+ALLOWED_EXTENSIONS_LOGGER_TEMP = set(['csv', 'txt'])
+
+def allowed_file(filetype, filename):
+    if filetype == "loggerTypeFile":
+        return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS_LOGGER_TYPE
+    elif filetype == "loggerTempFile":
+        return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS_LOGGER_TEMP
+    else:
+        return False
+
+@app.route('/upload', methods=['GET','POST'])
+def upload():   
+    result = None;
+    error=None;
+    if request.method == 'POST':
+        #print("request.files ",request.files)
+        if 'loggerTypeFile' in request.files:
+            file = request.files['loggerTypeFile']
+            #print(file)
+            if file:
+                if allowed_file("loggerTypeFile", file.filename):
+                    pass
+                    #print("contents", list(file.stream))
+                    #result = AddLoggerType(file.stream)
+                else:
+                    #print('File should be in "csv" format')
+                    error = "File should be in csv format"
+            else:
+                #print("Error! File not selected")
+                error = "Please choose a File first"
+                #flash ('please choose a file first')
+            file.close()        
+        elif 'loggerTempFile' in request.files:
+            files = request.files.getlist('loggerTempFile')
+            #print(files)
+            if len(files) > 0:
+                for file in files:
+                    if allowed_file("loggerTempFile", file.filename):
+                        pass
+                        #print("contents", list(file.stream))
+                        #result = AddLoggerTemp(file.stream)                        
+                    else:
+                        #print('File {0} should be in "csv" or "txt" format'.format(file.filename))
+                        error = "File " + file.filename + " should be in csv or txt format"
+                    file.close()
+            else:
+                print("Error! File not selected")
+                error = "Please choose a File first"
+        else:
+            error = "Something went wrong!"
+    return render_template('upload.html', result=result, error=error)
+
+def AddLoggerType(file):
+    for record in file:
+        parsedRecord = parseLoggerType(str(record))
+        res = insertIntoDB(parsedRecord)
+    return  res
+    #{"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
+
+def AddLoggerTemp(file):
+    for record in file:
+        parsedRecord = parseLoggerTemp(str(record))
+        res = insertIntoDB(parsedRecord)
+    return  res
+    #return  {"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.

@@ -1,0 +1,69 @@
+<html>
+   <head lang="en">
+       <!-- IE Edge Meta Tag -->
+       <meta charset="UTF-8">
+       <!-- Viewport : enables combatibility with display on smaller devices -->
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <title>Upload</title> 
+       <!-- links to style sheet -->
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+
+<body>
+       <!-- Links to header images-->
+       <div>
+           <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
+           <img class="img-responsive" src="../static/Lab-banner.jpg" width="960" height="46">
+       </div>
+       <!--  Nav-bar -->
+       <nav class="navbar navbar-inverse">
+           <div class="container-fluid">
+               <div class="navbar-header">
+                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>                        
+                   </button>
+               </div>
+               <div class="collapse navbar-collapse" id="myNavbar">
+                   <ul class="nav navbar-nav">
+                       <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Back to Helmuth lab Home</a></li>
+                   </ul>
+                   <ul class="nav navbar-nav navbar-right">
+                       {% if not session.logged_in %}
+                           <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                           </li>
+                       {% else %}
+                           <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                           </li>
+                       {% endif %}
+                   </ul>
+               </div>
+           </div>
+       </nav>
+       <div class="container text-danger">
+           <h1>Upload Files</h1>
+       </div>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+
+
+<title>Upload new File</title>
+<h1>Upload Logger Type File</h1>
+<form action="/upload" method=post enctype=multipart/form-data>
+  <p><input type=file name=loggerTypeFile value="loggerTypeFile">
+    <input type=submit value=Upload>
+</form>
+<h1>Upload Logger Temperature File</h1>
+
+<form action="/upload" method=post enctype=multipart/form-data>
+       <p><input type=file name=loggerTempFile value="loggerTempFile" multiple>
+        <input type=submit value=Upload>
+
+</form>
+
+</body>
+</html>
