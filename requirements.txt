@@ -3,6 +3,7 @@ Flask==0.10.1
 Flask-Excel==0.0.4
 Flask-MySQLdb==0.2.0
 Flask-Testing==0.4.2
+Flask-Uploads==0.2.0
 Flask-WTF==0.12
 itsdangerous==0.24
 Jinja2==2.8
@@ -15,5 +16,4 @@ pyexcel-io==0.1.0
 pyexcel-webio==0.0.6
 texttable==0.8.4
 Werkzeug==0.11.4
-wheel==0.29.0
 WTForms==2.1
