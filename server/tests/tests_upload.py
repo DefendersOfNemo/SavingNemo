@@ -81,7 +81,7 @@ class UploadFormTestCase(unittest.TestCase):
             self.assertIn(b'Please choose a File first', response.data)
 
     def test_uploaded_logger_temp_file_missing(self):
-        """Test that uploaded logger type file is not missing"""
+        """Test that uploaded logger temp file is not missing"""
         with app.test_client() as client:
             response = client.post('/upload', 
                 data={
