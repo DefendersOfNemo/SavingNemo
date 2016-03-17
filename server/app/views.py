@@ -161,8 +161,8 @@ def upload():
             file.close()        
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
-            #print(files)
-            if len(files) > 0:
+            #print(files[0])
+            if files[0]:
                 for file in files:
                     if allowed_file("loggerTempFile", file.filename):
                         pass
