@@ -34,8 +34,8 @@
                 display: block;
             }
             input[readonly] {
-            background-color: white !important;
-            cursor: text !important;
+            background-color: white !important ;
+            cursor: text !important ;
             }
     </style>
 
@@ -90,7 +90,7 @@
                 <div class= "input-group col-md-6">
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file">
-                        Choose file to upload&hellip; <input type="file" multiple >
+                        Choose file to upload&hellip; <input type="file">
                         </span>
                     </span>
                 <input type="text" class="form-control" readonly>
@@ -102,7 +102,7 @@
 
         <h2>Upload Logger Temperature</h2>
         <form action="/upload" method="post" enctype= "multipart/form-data">
-            <div class= "input-group col-md-6">
+            <div class= "input-group col-md-6 ">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
                     Choose file to upload<input type="file" name=file2 value="file2" multiple>

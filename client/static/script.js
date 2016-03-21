@@ -132,35 +132,38 @@ $(function() {
         var button = $("#download-button");
         button.empty()
         options.empty()
-        if ( query_field1 != "Please select Logger Type"){
-            if ( query_field2 != "Please select Country Name"){
-                if ( query_field3 != "Please select State Name"){
-                    if ( query_field4 != "Please select Location Name"){
-                        if ( query_field5 != "Please select Zone Name"){
-                            if ( query_field6 != "Please select Sub zone"){
-                                if ( query_field7 != "Please select Wave Exposure"){
-                                    if (values == ''){
-                                        button.empty()
-                                        options.empty()
-                                        options.append("<h3 class=text-danger>Search was unsucessfull, please try again with different select options<h3>")
-                                            } else {
-                                                options.empty()
-                                                options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
-                                                $.each(data.list_of_results, function(key, value) {
-                                                    options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
-                                                });
-                                                options.append("</tbody>")
-                                                options.append("</table>")
-                                                button.empty()
-                                                button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span>Download</a>")
-                                    }
-                                }                      
-                            }                        
+            if ( query_field1 != "Please select Logger Type"){
+                if ( query_field2 != "Please select Country Name"){
+                    if ( query_field3 != "Please select State Name"){
+                        if ( query_field4 != "Please select Location Name"){
+                            if ( query_field5 != "Please select Zone Name"){
+                                if ( query_field6 != "Please select Sub zone"){
+                                    if ( query_field7 != "Please select Wave Exposure"){
+                                        if (values == ''){
+                                            button.empty()
+                                            options.empty()
+                                            options.append("<h3 class=text-danger>  Search was unsucessfull, please try again with different select options<h3>")
+                                        } else {
+                                            options.empty()
+                                            options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
+                                            $.each(data.list_of_results, function(key, value) {
+                                                options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
+                                            });
+                                            options.append("</tbody>")
+                                            options.append("</table>")
+                                            button.empty()
+                                            button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span>Download</a>")
+                                            }
+                                    }                      
+                                }                        
+                            }                       
                         }                       
                     }                       
-                }                       
-            }                 
-        }  
+                }                 
+            }  
         });
     });
+});
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
 });
