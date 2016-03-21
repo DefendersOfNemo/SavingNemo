@@ -85,6 +85,11 @@ def submit_query():
     session['query'] = query
     db = DbConnect(app.config)
     preview_results = db.getQueryResults(query)
+    print("preview_results")
+    print(preview_results)
+    # if not preview_results:
+    #     print ("Your query was unsuccessful")
+    #     return jsonify(list_of_results=preview_results) 
     db.close()
     return jsonify(list_of_results=preview_results)
 
