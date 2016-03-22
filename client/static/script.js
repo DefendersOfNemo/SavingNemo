@@ -70,6 +70,7 @@ $(function() {
         }).done(function(data) {
             $('#dropdown_menu_zone_name').empty()
             $("#dropdown_menu_zone_name").append('<option value="">Please select Zone Name</option>')
+            $("#dropdown_menu_zone_name").append('<option value="1">All</option>')
             $.each(data, function(zone) {
                 $("#dropdown_menu_zone_name").append('<option value=\"'+zone+'\">'+zone+'</option>')
             });
@@ -84,6 +85,7 @@ $(function() {
             }).done(function(data) {
             $('#dropdown_menu_sub_zone_name').empty()
             $("#dropdown_menu_sub_zone_name").append('<option value="">Please select Sub zone</option>')
+            $("#dropdown_menu_sub_zone_name").append('<option value="1">All</option>')
             $.each(data, function(sub_zone) {
                 $("#dropdown_menu_sub_zone_name").append('<option value=\"'+sub_zone+'\">'+sub_zone+'</option>')
             });
@@ -98,6 +100,7 @@ $(function() {
             }).done(function(data) {
             $('#dropdown_menu_wave_exp_name').empty()
             $("#dropdown_menu_wave_exp_name").append('<option value="">Please select Wave Exposure</option>')
+            $("#dropdown_menu_wave_exp_name").append('<option value="1">All</option>')
             $.each(data, function(wave_exp) {
                 $("#dropdown_menu_wave_exp_name").append('<option value=\"'+wave_exp+'\">'+wave_exp+'</option>')
             });

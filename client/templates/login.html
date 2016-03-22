@@ -44,7 +44,7 @@
                 <input type="name" name="username" class="form-control" placeholder="Username" required autofocus value="{{ request.form.username }}">
                 <label for="password" class="sr-only">Password</label>
                 <input type="password" name="password" class="form-control" placeholder="Password" required value="{{ request.form.password }}">
-                <input id="btnLogin" class="btn btn-lg btn-primary btn-block" type="submit" value="Log In">
+                <input id="btnLogin" class="btn btn-lg btn-success btn-block" type="submit" value="Log In">
             </form>
         {% if error %}
             <p class="error"><strong>Error:</strong> {{ error }}
