@@ -106,12 +106,12 @@ $(function() {
 
     $('#button_submit_query').click(function () {                   
         $.getJSON('/_submit_query', {
-            logger_type: $("#dropdown_menu_logger_type option:selected").text(),
-            country_name: $("#dropdown_menu_country_name option:selected").text(),
-            state_name: $("#dropdown_menu_state_name option:selected").text(),
-            location_name: $("#dropdown_menu_location_name option:selected").text(),
-            zone_name: $("#dropdown_menu_zone_name option:selected").text(),
-            sub_zone_name: $("#dropdown_menu_sub_zone_name option:selected").text(),
+            biomimic_type: $("#dropdown_menu_logger_type option:selected").text(),
+            country: $("#dropdown_menu_country_name option:selected").text(),
+            state_province: $("#dropdown_menu_state_name option:selected").text(),
+            location: $("#dropdown_menu_location_name option:selected").text(),
+            zone: $("#dropdown_menu_zone_name option:selected").text(),
+            sub_zone: $("#dropdown_menu_sub_zone_name option:selected").text(),
             wave_exp: $("#dropdown_menu_wave_exp_name option:selected").text(),
             start_date: $("#date_pick_from").val(),
             end_date: $("#date_pick_to").val(),

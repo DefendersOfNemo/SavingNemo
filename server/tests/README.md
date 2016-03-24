@@ -6,6 +6,8 @@ All Tests are divided into Test Files
 To Run all Tests:
  nosetests
  or
+ nosetests --with-xunit server --with-xcoverage
+ or
  python -m unittest discover (better implementation)
  or
  python -m unittest discover tests "*.py"
@@ -21,6 +23,3 @@ To Run Individual testcases:
 
  (By Test Case)
  python -m unittest tests.tests_connection.BasicConnectionTestCase.test_index 
-
-
- python -m unittest tests.tests_upload.UploadFormTestCase.test_uploaded_file_extension_correct 

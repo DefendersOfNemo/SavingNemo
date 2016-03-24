@@ -13,6 +13,7 @@ class QueryFormTestCase(unittest.TestCase):
     def setUp(self):
         """Setup test app"""
         app.config['TESTING'] = True     
+        app.config['MYSQL_DB'] = 'logger'
         self.db = DbConnect(app.config)
 
     def tearDown(self):
@@ -27,9 +28,9 @@ class QueryFormTestCase(unittest.TestCase):
         """Test the logger_type field is filled automatically on page load"""
         with app.test_client() as client:
             response = client.get('/query')
-            logger_type_choices = self.db.getLoggerTypes() 
-            for logger_type in logger_type_choices:
-                self.assertIn(self.stringToBytes(logger_type[0]), response.data)        
+            biomimic_type_choices = self.db.getBiomimicTypes() 
+            for biomimic_type in biomimic_type_choices:
+                self.assertIn(self.stringToBytes(biomimic_type[0]), response.data)        
     
     def check_ajax(self, selected_type, selected_value, dbFunction):
         """Helper Function to test the ajax call functionality when
@@ -47,11 +48,11 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_form_logger_type_select(self):
         """Test the ajax call functionality if logger_type field is selected"""
-        self.check_ajax("logger_type", "robomussel", self.db.getCountry)
+        self.check_ajax("logger_type", "Robomussel", self.db.getCountry)
 
     def test_form_country_name_select(self):
         """Test the ajax call functionality if country_name field is selected"""
-        self.check_ajax("country_name", "USA", self.db.getState)
+        self.check_ajax("country_name", "Usa", self.db.getState)
 
     def test_form_state_name_select(self):
         """Test the ajax call functionality if state_name field is selected"""
@@ -59,39 +60,40 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_form_location_name_select(self):
         """Test the ajax call functionality if location_name field is selected"""
-        self.check_ajax("lt_for_zone", "robomussel", self.db.getZone)
+        self.check_ajax("lt_for_zone", "Robomussel", self.db.getZone)
 
     def test_form_Zone_name_select(self):
         """Test the ajax call functionality if zone_name field is selected"""
-        self.check_ajax("lt_for_subzone", "robomussel", self.db.getSubZone)    
+        self.check_ajax("lt_for_subzone", "Robomussel", self.db.getSubZone)    
 
     def test_form_SubZone_name_select(self):
         """Test the ajax call functionality if subZone_name field is selected"""
-        self.check_ajax("lt_for_wave_exp", "robomussel", self.db.getWaveExp)    
+        self.check_ajax("lt_for_wave_exp", "Robomussel", self.db.getWaveExp)    
 
     def test_query_results(self):
         """Test the query results functionality"""
         with app.test_client() as client:
             response = client.get('/_submit_query', 
                 query_string={
-                'sub_zone_name': ['High'], 
-                'end_date': ['04/12/2016'], 
-                'state_name': ['British Columbia'], 
-                'wave_exp': ['exposed'], 
-                'location_name': ['Seppings Island'], 
-                'zone_name': ['High'], 
-                'logger_type': ['robomussel'], 
-                'start_date': ['03/01/2016'], 
-                'country_name': ['Canada']},
+                'biomimic_type': ['Robobarnacle'], 
+                'country': ['Usa'],
+                'state_province': ['California'], 
+                'location': ['Hopkins'],
+                'zone': ['Mid'], 
+                'sub_zone': ['Mid'],
+                'wave_exp': ['Exposed'], 
+                'start_date': ['07/01/2000'], 
+                'end_date': ['07/02/2000']
+                },
                     follow_redirects=True)
-            self.assertIn(b"13.98", response.data)
-            self.assertIn(b"12.87", response.data)
+            self.assertIn(b"14", response.data)
+            self.assertIn(b"13.5", response.data)
 
             """Test the download functionality"""
             response_download = client.get('/download')
-            self.assertIn(b"13.98", response_download.data)
-            self.assertIn(b"12.87", response_download.data)
-            self.assertIn(b"logger_type:robomussel", response_download.data)
+            self.assertIn(b"14", response_download.data)
+            self.assertIn(b"13.5", response_download.data)
+            self.assertIn(b"biomimic_type:Robobarnacle", response_download.data)
 
 
 if __name__ == '__main__':

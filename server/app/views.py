@@ -7,7 +7,7 @@ from app.dbconnect import DbConnect
 from flask.ext import excel
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
-
+import io, csv
 
 @app.route('/')
 @app.route('/home')
@@ -41,7 +41,7 @@ def query():
     error = None
     results = None
     db = DbConnect(app.config)
-    logger_type_choices = db.getLoggerTypes()
+    logger_type_choices = db.getBiomimicTypes()
     db.close()
 
     form = QueryForm(request.form)
@@ -61,25 +61,20 @@ def submit_query():
     print("form")
     print(form)
     query = {}
-    query["logger_type"] = form.get("logger_type")[0]
-    query["country_name"] = form.get("country_name")[0]
-    if form['state_name'][0] is not None:
-        query["state_name"] = form['state_name'][0]
-    if form['location_name'][0] is not None:
-        query["location_name"] = form['location_name'][0]
-    if form['zone_name'][0] is not None:
-        query["zone_name"] = form['zone_name'][0]
-    if form['sub_zone_name'][0] is not None:
-        query["sub_zone_name"] = form['sub_zone_name'][0]
-    if form["wave_exp"][0] is not '':
-        query["wave_exp"] = form['wave_exp'][0]        
+    query["biomimic_type"] = form.get("biomimic_type")[0]
+    query["country"] = form.get("country")[0]
+    query["state_province"] = form['state_province'][0]
+    query["location"] = form['location'][0]
+    query["zone"] = form['zone'][0]
+    query["sub_zone"] = form['sub_zone'][0]
+    query["wave_exp"] = form['wave_exp'][0]        
     query["start_date"] = form['start_date'][0] 
     query["end_date"] = form['end_date'][0]
     print("query")
     print(query)
     session['query'] = query
     db = DbConnect(app.config)
-    preview_results = db.getQueryResults(query)
+    preview_results = db.getQueryResultsPreview(query)
     db.close()
     return jsonify(list_of_results=preview_results)
 
@@ -87,8 +82,8 @@ def submit_query():
 def download():    
     db = DbConnect(app.config)
     query = session['query']
-    header = [("logger_type:"+query["logger_type"],"country_name:"+query["country_name"],"state_name:"+query["state_name"],"location_name:"+query["location_name"],"zone_name:"+query["zone_name"],"sub_zone_name:"+query["sub_zone_name"],"wave_exp:"+query["wave_exp"]),("Timestamp","Temperature")]
-    query_results =header  + db.getQueryRawResults(session['query'])
+    header = [("biomimic_type:"+query["biomimic_type"],"country:"+query["country"],"state_province:"+query["state_province"],"location:"+query["location"],"zone:"+query["zone"],"sub_zone:"+query["sub_zone"],"wave_exp:"+query["wave_exp"]),("Timestamp","Temperature")]
+    query_results = header  + db.getQueryRawResults(session['query'])
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
 
@@ -142,34 +137,28 @@ def upload():
     result = None;
     error=None;
     if request.method == 'POST':
-        #print("request.files ",request.files)
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']
-            #print(file)
             if file:
                 if allowed_file("loggerTypeFile", file.filename):
-                    pass
-                    #print("contents", list(file.stream))
-                    #result = AddLoggerType(file.stream)
+                    stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
+                    csv_input = csv.reader(stream)
+                    result = AddLoggerType(csv_input)
                 else:
-                    #print('File should be in "csv" format')
                     error = "File should be in csv format"
             else:
-                #print("Error! File not selected")
                 error = "Please choose a File first"
-                #flash ('please choose a file first')
             file.close()        
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
-            #print(files[0])
             if files[0]:
                 for file in files:
                     if allowed_file("loggerTempFile", file.filename):
-                        pass
-                        #print("contents", list(file.stream))
-                        #result = AddLoggerTemp(file.stream)                        
+                        stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
+                        csv_input = csv.reader(stream, delimiter = '\t')
+                        print(csv_input)
+                        result = AddLoggerTemp(csv_input,file.filename)                  
                     else:
-                        #print('File {0} should be in "csv" or "txt" format'.format(file.filename))
                         error = "File " + file.filename + " should be in csv or txt format"
                     file.close()
             else:
@@ -179,23 +168,73 @@ def upload():
             error = "Something went wrong!"
     return render_template('upload.html', result=result, error=error)
 
-def AddLoggerType(file):
-    for record in file:
-        parsedRecord = parseLoggerType(str(record))
-        res = insertIntoDB(parsedRecord)
-    return  res
+def AddLoggerType(reader):
+    db = DbConnect(app.config)
+    properRecords = list();
+    corruptRecords = list();
+    insertCorruptRecords = list();
+    properCounter = 0;
+    corruptCounter = 0;
+    insertCorruptCounter = 0;
+    for record in reader:
+        parsedRecordDict, error = db.parseLoggerType(record)
+        if (not error):
+            properRecords.append(parsedRecordDict)
+            properCounter += 1
+        else:
+            corruptRecords.append(record)
+            corruptCounter += 1
+    print(len(properRecords))
+    if len(properRecords) > 0:
+        print("going to insert")
+        ProperCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerType(properRecords)
+    corruptCounter += insertCorruptCounter
+    corruptRecords += insertCorruptRecords
+    db.close()
+    print("pc: ", properCounter)
+    print("cc: ", corruptCounter)
+    print("cr: ", corruptRecords)    
     #{"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
 
-def AddLoggerTemp(file):
-    for record in file:
-        parsedRecord = parseLoggerTemp(str(record))
-        res = insertIntoDB(parsedRecord)
-    return  res
+def AddLoggerTemp(reader,filename):
+    db = DbConnect(app.config)
+    properRecords = list();
+    corruptRecords = list();
+    insertCorruptRecords = list();
+    properCounter = 0;
+    corruptCounter = 0;
+    insertCorruptCounter = 0;
+  
+    microsite_id = filename.rsplit('_', 5)[0].upper()
+    print(microsite_id)
+    logger_id = db.FindMicrositeId(microsite_id)
+    if logger_id == None:
+        print("This microsite id does not exist")
+        return
+
+    for record in reader:
+        parsedRecordDict,error = db.parseLoggerTemp(record)
+        if (not error):
+            properRecords.append(parsedRecordDict)
+            properCounter += 1
+        else:
+            corruptRecords.append(record)
+            corruptCounter += 1
+    if len(properRecords) > 0:
+        print("going to insert")
+        ProperCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
+    corruptCounter += insertCorruptCounter
+    corruptRecords += insertCorruptRecords
+    db.close()
+    print("in file:", filename)
+    print("pc: ", properCounter)
+    print("cc: ", corruptCounter)
+    print("cr: ", corruptRecords)    
+    return 
     #return  {"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
+
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
