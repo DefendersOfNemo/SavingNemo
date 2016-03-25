@@ -31,7 +31,7 @@ def logout():
     """User logout/authentication/session management."""
     session.pop('logged_in', None)
     flash('You are logged out')
-    return render_template('logout.html')
+    return redirect(url_for('query'))
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():

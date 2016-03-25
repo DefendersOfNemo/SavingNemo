@@ -1,5 +1,5 @@
 $(function() {
-    $( "#date_pick_from" ).datepicker({
+    $( 'input[name="date_pick_from"]' ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
         changeYear: true,
@@ -9,7 +9,7 @@ $(function() {
         }
     });
     
-    $( "#date_pick_to" ).datepicker({
+    $( 'input[name="date_pick_to"]' ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
         changeYear: true,
@@ -127,8 +127,9 @@ $(function() {
         var query_field5 = $("#dropdown_menu_zone_name option:selected").text()
         var query_field6 = $("#dropdown_menu_zone_name option:selected")
         var query_field7 = $("#dropdown_menu_wave_exp_name option:selected").text()
-        var query_field8 = $("#date_pick_from").text()
-        var query_field9 = $("#date_pick_from").text()
+        var query_field8 = $("#date_pick_from").val()
+        var query_field9 = $("#date_pick_to").val()
+
         console.log(data.list_of_results)
         var values = (data.list_of_results)
         var options = $("#hidden-table");
@@ -142,21 +143,25 @@ $(function() {
                             if ( query_field5 != "Please select Zone Name"){
                                 if ( query_field6 != "Please select Sub zone"){
                                     if ( query_field7 != "Please select Wave Exposure"){
-                                        if (values == ''){
-                                            button.empty()
-                                            options.empty()
-                                            options.append("<h3 class=text-danger>  Search was unsucessfull, please try again with different select options<h3>")
-                                        } else {
-                                            options.empty()
-                                            options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
-                                            $.each(data.list_of_results, function(key, value) {
-                                                options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
-                                            });
-                                            options.append("</tbody>")
-                                            options.append("</table>")
-                                            button.empty()
-                                            button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span>Download</a>")
+                                        if ( query_field8 != ''){
+                                            if ( query_field9 != ''){
+                                                if (values == ''){
+                                                    button.empty()
+                                                    options.empty()
+                                                    options.append("<h3 class=text-danger>  Search was unsucessfull, please try again with different select options<h3>")
+                                                } else {
+                                                    options.empty()
+                                                    options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
+                                                    $.each(data.list_of_results, function(key, value) {
+                                                        options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
+                                                    });
+                                                    options.append("</tbody>")
+                                                    options.append("</table>")
+                                                    button.empty()
+                                                    button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span>Download</a>")
+                                                    }
                                             }
+                                        }
                                     }                      
                                 }                        
                             }                       

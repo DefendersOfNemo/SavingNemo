@@ -38,6 +38,8 @@
                         {% else %}
                             <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
                             </li>
+                            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -117,10 +119,16 @@
                 </div>
                 </br>
                 </br>
-                <div class="container text-center">
-                    <label for="date_pick_from">Start date:</label> {{ form.date_pick_from(class='date_pick_from') }} 
-                    <label for="date_pick_to"> to End date:</label> {{ form.date_pick_to(class='date_pick_to') }} 
-                    <span class="glyphicon glyphicon-calendar"></span>
+                <div class="container row">
+                    <label for="revision_date">Date Range:</label>
+                    <div class="input-group col-md-4" >
+                        <input type="text" class="form-control" name="date_pick_from" value="" id="date_pick_from" placeholder="MM/DD/YYYY" required required pattern="\d{2}\/\d{2}\/\d{4}">
+                        <span class="input-group-addon">to</span>
+                        <input type="text" class="form-control" name="date_pick_to" value="" id="date_pick_to" placeholder="MM/DD/YYYY" required required pattern="\d{2}\/\d{2}\/\d{4}">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
                 <br><br>
                 <div class="container text-center form-group" > 
