@@ -140,6 +140,7 @@ $(function() {
                 var values = (data.list_of_results)
                 var options = $("#hidden-table");
                 var button = $("#download-button");
+                var title = $("#title")
                 button.empty()
                 options.empty()
                 if (values == ''){
@@ -149,6 +150,7 @@ $(function() {
                 } 
                 else {
                     options.empty()
+                    title.append("<h4>Data preview</h4>")
                     options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
                     $.each(data.list_of_results, function(key, value) {
                         options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
@@ -156,7 +158,7 @@ $(function() {
                     options.append("</tbody>")
                     options.append("</table>")
                     button.empty()
-                    button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span>Download</a>")
+                    button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span> Download All Data</a>")
                 }
             });
         }
