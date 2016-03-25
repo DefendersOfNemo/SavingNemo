@@ -115,6 +115,7 @@ class DbConnect(object):
 
     def getQueryResultsPreview(self, queryDict):
         """Fetches records form tables based on user query"""
+        print("inside preview")
         cursor = self.connection.cursor()
         where_condition = self.buildWhereCondition(queryDict)
         query = ("SELECT temp.Time_GMT, temp.Temp_C "
@@ -123,6 +124,7 @@ class DbConnect(object):
                  "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
                  "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
                  "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ")
+        print(query + where_condition + " LIMIT 10 ")
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)

@@ -15,7 +15,7 @@ class BasicConnectionTestCase(unittest.TestCase):
 
     def test_db_connection_positive(self):
         """"Test MySQL connection for connection"""        
-        data = None
+        data = True
         try:
             with app.app_context():
                 app.config['TESTING'] = True     
@@ -27,7 +27,6 @@ class BasicConnectionTestCase(unittest.TestCase):
                 res = cursor.execute('SELECT * from cnx_logger_geographics')
                 res = cursor.execute('SELECT * from cnx_logger')
                 res = cursor.execute('SELECT * from cnx_logger_temperature')                
-                data = cursor.fetchone()            
         except (MySQLdb.OperationalError, MySQLdb.ProgrammingError) as e:
             data = None       
         finally:
@@ -122,96 +121,6 @@ class BasicConnectionTestCase(unittest.TestCase):
         except MySQLdb.OperationalError as e:
             data = None            
         self.assertEqual(data, None)
-
-    def test_db_logger_type_nonempty(self):
-        """"Test table cnx_logger_biomimic_type positive"""
-        try:
-            with app.app_context():
-                connection=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'], \
-                    db=app.config['MYSQL_DB'])
-                c = connection.cursor()
-                c.execute('SELECT * from cnx_logger_biomimic_type')
-                data = c.fetchone()
-                c.close()
-        except MySQLdb.OperationalError as e:# 
-            data = None
-        self.assertNotEqual(data, None)
-
-    def test_db_logger_properties_nonempty(self):
-        """"Test table logger_properties positive"""
-        try:
-            with app.app_context():
-                connection=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'], \
-                    db=app.config['MYSQL_DB'])
-                c = connection.cursor()
-                c.execute('SELECT * from cnx_logger_properties')
-                data = c.fetchone()
-                c.close()
-        except MySQLdb.OperationalError as e:# 
-            data = None
-        self.assertNotEqual(data, None)
-
-    def test_db_logger_geographiscs_nonempty(self):
-        """"Test table logger_geographics positive"""
-        try:
-            with app.app_context():
-                connection=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'], \
-                    db=app.config['MYSQL_DB'])
-                c = connection.cursor()
-                res = c.execute('SELECT * from cnx_logger_geographics')
-                data = c.fetchone()
-                c.close()
-        except MySQLdb.OperationalError as e:# 
-            data = None
-        self.assertNotEqual(data, None)
-
-    def test_db_logger_positive_nonempty(self):
-        """"Test table logger positive"""
-        try:
-            with app.app_context():
-                connection=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'], \
-                    db=app.config['MYSQL_DB'])
-                c = connection.cursor()
-                res = c.execute('SELECT * from cnx_logger')
-                data = c.fetchone()
-                c.close()
-        except MySQLdb.OperationalError as e:# 
-            data = None
-        self.assertNotEqual(data, None)
-
-    def test_db_logger_temp_nonempty(self):
-        """"Test table logger positive"""
-        try:
-            with app.app_context():
-                connection=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'], \
-                    db=app.config['MYSQL_DB'])
-                c = connection.cursor()
-                res = c.execute('SELECT * from cnx_logger_temperature')
-                data = c.fetchone()
-                c.close()
-        except MySQLdb.OperationalError as e:# 
-            data = None
-        self.assertNotEqual(data, None)
 
 if __name__ == '__main__':
     unittest.main()

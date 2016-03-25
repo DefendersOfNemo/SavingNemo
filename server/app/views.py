@@ -131,7 +131,8 @@ def upload():
                 if allowed_file("loggerTypeFile", file.filename):
                     stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
                     csv_input = csv.reader(stream)
-                    result = AddLoggerType(csv_input)
+                    next(csv_input, None)  # skip the headers
+                    result, corruptRecords = AddLoggerType(csv_input)
                 else:
                     error = "File should be in csv format"
             else:
@@ -140,21 +141,29 @@ def upload():
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
             if files[0]:
+                result = {'total':0, 'success':0, 'failure':0};
                 for file in files:
+                    individual_result = None;
                     if allowed_file("loggerTempFile", file.filename):
                         stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
                         if file.filename.rsplit('.', 1)[1] == 'txt':
                             csv_input = csv.reader(stream, delimiter = '\t')
                         else:
-                            csv_input = csv.reader(stream)                        
-                        result = AddLoggerTemp(csv_input,file.filename)                  
+                            csv_input = csv.reader(stream)
+                        next(csv_input, None)  # skip the headers                            
+                        individual_result, corruptRecords = AddLoggerTemp(csv_input,file.filename)
+                        if individual_result is not None:
+                            result['total'] += individual_result['total']
+                            result['success'] += individual_result['success']
+                            result['failure'] += individual_result['failure']
                     else:
                         error = "File " + file.filename + " should be in csv or txt format"
                     file.close()
             else:
                 error = "Please choose a File first"
-        else:
-            error = "Something went wrong!"
+    if result is not None:
+        if result.get('total') == 0:
+            result = None
     return render_template('upload.html', result=result, error=error)
 
 def AddLoggerType(reader):
@@ -178,7 +187,7 @@ def AddLoggerType(reader):
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
     db.close()   
-    return  {"total": properCounter+corruptCounter, "success": properCounter, "failure": corruptCounter, "corruptRecords": corruptRecords}
+    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
 
 def AddLoggerTemp(reader,filename):
     '''Insert logger temperatures in uploaded file'''
@@ -192,7 +201,8 @@ def AddLoggerTemp(reader,filename):
     microsite_id = filename.rsplit('_', 5)[0].upper()
     logger_id = db.FindMicrositeId(microsite_id)
     if logger_id == None:
-        return {"This microsite id does not exist"}
+        print("This microsite id does not exist")
+        return None, None
     for record in reader:
         parsedRecordDict,error = db.parseLoggerTemp(record)
         if (not error):
@@ -205,9 +215,8 @@ def AddLoggerTemp(reader,filename):
         properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
-    db.close()   
-    return  {"total": properCounter+corruptCounter, "success": properCounter, "failure": corruptCounter, "corruptRecords": corruptRecords}
-
+    db.close()
+    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.

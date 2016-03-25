@@ -13,16 +13,67 @@ class QueryFormTestCase(unittest.TestCase):
     def setUp(self):
         """Setup test app"""
         app.config['TESTING'] = True     
-        app.config['MYSQL_DB'] = 'logger'
+        app.config['MYSQL_DB'] = 'test'
         self.db = DbConnect(app.config)
-
+        test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
+        test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql.txt'
+        with app.test_client() as client:
+            response = client.post('/upload', 
+                data={
+                    'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
+                    }, follow_redirects=True)
+            response = client.post('/upload', 
+                data={
+                    'loggerTempFile':  (open(test_temp_filename, 'rb'), 'DUMMYID_2000_pgsql.txt')
+                    }, follow_redirects=True)
+            self.record_type = {
+                        "microsite_id" : "DUMMYID",
+                        "site" : "DUMMYSITE",
+                        "biomimic_type" : "Dummybiomimictype",
+                        "country" : "Dummycountry",
+                        "state_province" : "Dummystate",
+                        "location" : "Dummylocation",
+                        "field_lat" : "36.621933330000",
+                        "field_lon" : "-121.905316700000",
+                        "zone" : "Dummy",
+                        "sub_zone" : "Dummy",
+                        "wave_exp" : "Dummy"}
     def tearDown(self):
         """Close test database"""        
+        cursor = self.db.connection.cursor()
+        self.cleanUpLoggerTemp(cursor)
+        self.cleanUpLoggerType(cursor, self.record_type)
+        cursor.close()
         self.db.close()
+
 
     def stringToBytes(self, stringValue):
         """Convert Strings to their Bytes representation"""
         return bytes(stringValue, 'UTF-8')
+
+    def cleanUpLoggerTemp(self, cursor):
+        cursor.execute("SELECT logger_temp_id FROM `cnx_logger_temperature`")
+        results = cursor.fetchall()
+        if results is not None:
+            results = list(results)        
+        logger_temp_ids = [result[0] for result in results]        
+        for logger_temp_id in logger_temp_ids:
+            res = cursor.execute("DELETE FROM `cnx_logger_temperature` WHERE logger_temp_id=\'%s\'" % (logger_temp_id))
+            self.db.connection.commit()
+
+    def cleanUpLoggerType(self, cursor, rec):
+        biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
+        geo_id = self.db.fetchExistingGeoId(cursor, rec)
+        prop_id = self.db.fetchExistingPropId(cursor, rec)
+        logger_id = self.db.FindMicrositeId(rec.get('microsite_id'))
+        res = cursor.execute("DELETE FROM `cnx_logger` WHERE logger_id=%s", logger_id)
+        self.db.connection.commit()
+        res = cursor.execute("DELETE FROM `cnx_logger_biomimic_type` WHERE biomimic_id=%s", biomimic_id)
+        self.db.connection.commit()
+        res = cursor.execute("DELETE FROM `cnx_logger_geographics` WHERE geo_id=%s", geo_id)
+        self.db.connection.commit()
+        res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
+        self.db.connection.commit()
 
     def test_form_logger_type_automatic_fill(self):
         """Test the logger_type field is filled automatically on page load"""
@@ -74,27 +125,30 @@ class QueryFormTestCase(unittest.TestCase):
         """Test the query results functionality"""
         with app.test_client() as client:
             response = client.get('/_submit_query', 
-                query_string={
-                'biomimic_type': ['Robobarnacle'], 
-                'country': ['Usa'],
-                'state_province': ['California'], 
-                'location': ['Hopkins'],
-                'zone': ['Mid'], 
-                'sub_zone': ['Mid'],
-                'wave_exp': ['Exposed'], 
-                'start_date': ['07/01/2000'], 
-                'end_date': ['07/02/2000']
-                },
-                    follow_redirects=True)
+                        query_string={
+                        "microsite_id" : "DUMMYID",
+                        "site" : "DUMMYSITE",
+                        "biomimic_type" : "Dummybiomimictype",
+                        "country" : "Dummycountry",
+                        "state_province" : "Dummystate",
+                        "location" : "Dummylocation",
+                        "field_lat" : "36.621933330000",
+                        "field_lon" : "-121.905316700000",
+                        "zone" : "Dummy",
+                        "sub_zone" : "Dummy",
+                        "wave_exp" : "Dummy",
+                        "start_date": datetime.datetime.strptime("7/1/2000 2:21", '%m/%d/%Y %H:%M'),
+                        "end_date": datetime.datetime.strptime("7/1/2000 2:21", '%m/%d/%Y %H:%M')},
+                            follow_redirects=False)            
             self.assertIn(b"14", response.data)
             self.assertIn(b"13.5", response.data)
-
+            
+            # Merging with the above test case, since we are storing the query in the sessin variable
             """Test the download functionality"""
-            response_download = client.get('/download')
-            self.assertIn(b"14", response_download.data)
-            self.assertIn(b"13.5", response_download.data)
-            self.assertIn(b"biomimic_type:Robobarnacle", response_download.data)
-
+            response = client.get('/download')
+            self.assertIn(b"14", response.data)
+            self.assertIn(b"13.5", response.data)
+            self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
 
 if __name__ == '__main__':
     unittest.main()
