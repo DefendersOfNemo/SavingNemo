@@ -99,27 +99,27 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_form_logger_type_select(self):
         """Test the ajax call functionality if logger_type field is selected"""
-        self.check_ajax("biomimic_type", "Robomussel", self.db.getCountry)
+        self.check_ajax("biomimic_type", "DummyBiomimicType", self.db.getCountry)
 
     def test_form_country_name_select(self):
         """Test the ajax call functionality if country_name field is selected"""
-        self.check_ajax("country_name", "Usa", self.db.getState)
+        self.check_ajax("country_name", "DummyCountry", self.db.getState)
 
     def test_form_state_name_select(self):
         """Test the ajax call functionality if state_name field is selected"""
-        self.check_ajax("state_name", "California", self.db.getLocation)
+        self.check_ajax("state_name", "DummyState", self.db.getLocation)
 
     def test_form_location_name_select(self):
         """Test the ajax call functionality if location_name field is selected"""
-        self.check_ajax("lt_for_zone", "Robomussel", self.db.getZone)
+        self.check_ajax("lt_for_zone", "DummyBiomimicType", self.db.getZone)
 
     def test_form_Zone_name_select(self):
         """Test the ajax call functionality if zone_name field is selected"""
-        self.check_ajax("lt_for_subzone", "Robomussel", self.db.getSubZone)    
+        self.check_ajax("lt_for_subzone", "DummyBiomimicType", self.db.getSubZone)    
 
     def test_form_SubZone_name_select(self):
         """Test the ajax call functionality if subZone_name field is selected"""
-        self.check_ajax("lt_for_wave_exp", "Robomussel", self.db.getWaveExp)    
+        self.check_ajax("lt_for_wave_exp", "DummyBiomimicType", self.db.getWaveExp)    
 
     def test_query_results(self):
         """Test the query results functionality"""
