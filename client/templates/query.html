@@ -49,7 +49,7 @@
             <h1>DATABASE<h1>
         </div>
         <div class="container text-right">
-            <a href="#" data-toggle="popover" data-placement="left" class= "btn btn-info" data-trigger="hover" data-content="Please click and choose an option from each select field in the following order: Logger type, Country , State, Location, Zone, Sub Zone and Wave exposure">
+            <a href="#" data-toggle="popover" data-placement="left" class= "btn btn-info" data-trigger="hover" data-content="Please click and choose an option from each select field in the following order: Biomimic type, Country , State, Location, Zone, Sub Zone and Wave exposure">
                 <span class="glyphicon glyphicon-question-sign"></span> Help
             </a>
         </div>
@@ -59,13 +59,11 @@
                 <!-- first row in query form -->
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label for="dropdown_menu_logger_type">Logger Type:<w class = "text-danger"> * <w> </label>
-                        <!-- dropdown menu of logger types gotten from database-->
-                        <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="click and select a logger type from the provided options"> -->
-                            <select id ="dropdown_menu_logger_type" class="form-control" required>
-                                <option value="">Please select Logger Type</option>
-                                {% for type in form.logger_type %}
-                                <option value="{{ type }}">{{ type[1] }}</option>
+                        <label for="dropdown_menu_biomimic_type">Biomimic Type:<w class = "text-danger"> * <w> </label>
+                            <select id ="dropdown_menu_biomimic_type" class="form-control" required>
+                                <option value="">Please select Biomimic Type</option>
+                                {% for type in form.biomimic_type %}
+                                    <option value="{{ type }}">{{ type[1] }}</option>
                                 {% endfor %}
                             </select>
                         <!-- </a> -->

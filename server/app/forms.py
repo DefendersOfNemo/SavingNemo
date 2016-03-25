@@ -4,7 +4,7 @@ from wtforms import validators
 from wtforms import DateField
 # Query Form class
 class QueryForm(Form):
-    logger_type = SelectField(u'logger_type', choices=[])
+    biomimic_type = SelectField(u'biomimic_type', choices=[])
     country_name = SelectField(u'country_name', choices=[])
     state_name = SelectField(u'state_name', choices=[])
     location_name = SelectField(u'location_name', choices=[]) 

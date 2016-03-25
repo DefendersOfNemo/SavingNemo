@@ -39,7 +39,7 @@ class LoginTestCase(unittest.TestCase):
 
             rv = self.logout(c)
             # Check log out successful
-            self.assertEqual(request.path, '/logout')
+            self.assertEqual(request.path, '/query')
             # Check logged in session variable is set to None
             self.assertEqual(session.get('logged_in'), None)
 

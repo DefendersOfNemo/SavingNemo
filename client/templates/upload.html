@@ -9,6 +9,7 @@
        <!-- links to style sheet -->
        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+
        <!-- putting script after does not allow upload feedback -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
@@ -40,6 +41,7 @@
     </style>
 
     <body>
+
        <!-- Links to header images-->
        <div>
            <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
@@ -74,7 +76,8 @@
        <div class="container text-danger">
            <h1>Upload Files</h1>
        </div>
-<!--        {% with messages = get_flashed_messages() %}
+
+       {% with messages = get_flashed_messages() %}
            {% if messages %}
                <ul>
                {% for message in messages%}
@@ -82,7 +85,7 @@
                {% endfor %}
                </ul>
            {% endif %}
-       {% endwith %} -->
+       {% endwith %}
     <div class= container>
         <h2>Upload Logger Type</h2>
 
@@ -90,7 +93,7 @@
                 <div class= "input-group col-md-6">
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file">
-                        Choose file to upload&hellip; <input type="file">
+                        Choose file to upload&hellip; <input type="file" name="loggerTypeFile" value="loggerTypeFile">
                         </span>
                     </span>
                 <input type="text" class="form-control" readonly>
@@ -105,7 +108,7 @@
             <div class= "input-group col-md-6 ">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
-                    Choose file to upload<input type="file" name=file2 value="file2" multiple>
+                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple>
                     </span>
                 </span>
             <input type="text" class="form-control" readonly>
@@ -113,6 +116,9 @@
              <br><br>
             <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
         </form>
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
     </div>
 </body>
 </html>
