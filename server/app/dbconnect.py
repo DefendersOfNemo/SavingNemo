@@ -123,7 +123,6 @@ class DbConnect(object):
                  "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
                  "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
                  "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ")
-        print(query + where_condition + " LIMIT 10 ")
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)
@@ -199,7 +198,6 @@ class DbConnect(object):
 
     def insertLoggerType(self, records):
         """Inserts new Logger Type in DB"""
-        print("inside db connect logger type")
         cursor = self.connection.cursor()
         corruptRecords = list()
         properCounter = 0
@@ -344,9 +342,7 @@ class DbConnect(object):
         """Parse new Logger Temperature Data"""
         parsedRecord = dict()
         cursor = self.connection.cursor()
-
         if (len(dataList) != 2):
-            print(dataList[0])      # invalid data
             return None, True
         else:
             if (self.isNotFloat(dataList[1])):
@@ -360,20 +356,20 @@ class DbConnect(object):
         return parsedRecord, False
 
 
-    def insertLoggerTemp(self, records, logger_id):
+    def insertLoggerTemp(self, records,logger_id):
         """Inserts new Logger Type in DB"""
-        print("inside db connect logger temperature")
         cursor = self.connection.cursor()
         corruptRecords = list()
         properCounter = 0
         corruptCounter = 0
-        corruptIndicator = False
-        
+        corruptIndicator = False        
         query = ("INSERT INTO `cnx_logger_temperature` (`logger_id`, `Time_GMT`, `Temp_C`) VALUES (%s, %s, %s)")
-
         for record in records:
-            print (logger_id)
-            res = cursor.execute(query,(logger_id, record.get("Time_GMT"),record.get("Temp_C")))
+            try:
+                res = cursor.execute(query,(logger_id, record.get("Time_GMT"),record.get("Temp_C")))
+            except MySQLdb.DatabaseError as err:
+                print("This logger temperature record is duplicate:", record)
+                res = 0
             if res == 1:
                 self.connection.commit()
                 properCounter+=1
@@ -383,6 +379,7 @@ class DbConnect(object):
                 corruptRecords.append(record)
         cursor.close()
         return properCounter, corruptCounter, corruptRecords
+
 
 
 

@@ -111,26 +111,14 @@ def queryDb(query_type, query_value):
         result = db.getWaveExp(query_value)
     return result       
 
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('404.html'), 404
-
-@app.errorhandler(500)
-def internal_error(error):
-    return render_template('500.html'), 500
-
-
-
 ALLOWED_EXTENSIONS_LOGGER_TYPE = set(['csv'])
 ALLOWED_EXTENSIONS_LOGGER_TEMP = set(['csv', 'txt'])
 
 def allowed_file(filetype, filename):
     if filetype == "loggerTypeFile":
         return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS_LOGGER_TYPE
-    elif filetype == "loggerTempFile":
-        return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS_LOGGER_TEMP
     else:
-        return False
+        return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS_LOGGER_TEMP
 
 @app.route('/upload', methods=['GET','POST'])
 def upload():   
@@ -155,8 +143,10 @@ def upload():
                 for file in files:
                     if allowed_file("loggerTempFile", file.filename):
                         stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
-                        csv_input = csv.reader(stream, delimiter = '\t')
-                        print(csv_input)
+                        if file.filename.rsplit('.', 1)[1] == 'txt':
+                            csv_input = csv.reader(stream, delimiter = '\t')
+                        else:
+                            csv_input = csv.reader(stream)                        
                         result = AddLoggerTemp(csv_input,file.filename)                  
                     else:
                         error = "File " + file.filename + " should be in csv or txt format"
@@ -180,14 +170,12 @@ def AddLoggerType(reader):
         parsedRecordDict, error = db.parseLoggerType(record)
         if (not error):
             properRecords.append(parsedRecordDict)
-            properCounter += 1
+            #properCounter += 1
         else:
             corruptRecords.append(record)
             corruptCounter += 1
-    print(len(properRecords))
     if len(properRecords) > 0:
-        print("going to insert")
-        ProperCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerType(properRecords)
+        properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerType(properRecords)
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
     db.close()
@@ -222,7 +210,7 @@ def AddLoggerTemp(reader,filename):
             corruptCounter += 1
     if len(properRecords) > 0:
         print("going to insert")
-        ProperCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
+        properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
     db.close()
