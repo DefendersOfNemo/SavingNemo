@@ -48,7 +48,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_form_logger_type_select(self):
         """Test the ajax call functionality if logger_type field is selected"""
-        self.check_ajax("logger_type", "Robomussel", self.db.getCountry)
+        self.check_ajax("biomimic_type", "Robomussel", self.db.getCountry)
 
     def test_form_country_name_select(self):
         """Test the ajax call functionality if country_name field is selected"""

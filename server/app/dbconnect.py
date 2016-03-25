@@ -152,11 +152,11 @@ class DbConnect(object):
         where = (" WHERE biotype.`biomimic_type`=\'%s\' AND geo.`country`=\'%s\' AND geo.`state_province`= \'%s\' AND geo.`location`=\'%s\'") % \
                 (queryDict.get('biomimic_type'), queryDict.get('country'), \
                     queryDict.get('state_province'), queryDict.get('location'))
-        if queryDict.get('zone') is not None:
+        if queryDict.get('zone') != "All":
             where += " AND prop.`zone`=\'%s\'" % (queryDict.get('zone'))
-        if queryDict.get('sub_zone') is not None:
+        if queryDict.get('sub_zone') != "All" :
             where += " AND prop.`sub_zone`=\'%s\'" % (queryDict.get('sub_zone'))
-        if queryDict.get('wave_exp') is not None:
+        if queryDict.get('wave_exp') != "All":
             if (queryDict.get('wave_exp') == 'None'): 
                 where += " and prop.wave_exp is Null"
             else:

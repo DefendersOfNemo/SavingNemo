@@ -9,9 +9,39 @@
        <!-- links to style sheet -->
        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
-    </head>
 
-<body>
+       <!-- putting script after does not allow upload feedback -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    </head>
+    <style>
+            .btn-file {
+                position: relative;
+                overflow: hidden;
+            }
+            .btn-file input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
+            input[readonly] {
+            background-color: white !important ;
+            cursor: text !important ;
+            }
+    </style>
+
+    <body>
+
        <!-- Links to header images-->
        <div>
            <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
@@ -46,24 +76,73 @@
        <div class="container text-danger">
            <h1>Upload Files</h1>
        </div>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
 
+       {% with messages = get_flashed_messages() %}
+           {% if messages %}
+               <ul>
+               {% for message in messages%}
+                   <li>{{ message }}</li>
+               {% endfor %}
+               </ul>
+           {% endif %}
+       {% endwith %}
+    <div class= container>
+        <h2>Upload Logger Type</h2>
 
-<title>Upload new File</title>
-<h1>Upload Logger Type File</h1>
-<form action="/upload" method=post enctype=multipart/form-data>
-  <p><input type=file name=loggerTypeFile value="loggerTypeFile">
-    <input type=submit value=Upload>
-</form>
-<h1>Upload Logger Temperature File</h1>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class= "input-group col-md-6">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                        Choose file to upload&hellip; <input type="file" name="loggerTypeFile" value="loggerTypeFile">
+                        </span>
+                    </span>
+                <input type="text" class="form-control" readonly>
+                </div>
+                <br><br>
+                <button type="submit" value="Upload" class="btn-default btn-lg">Upload <span class="glyphicon glyphicon-upload"></span></button> 
+            </form>
+            <br>
 
-<form action="/upload" method=post enctype=multipart/form-data>
-       <p><input type=file name=loggerTempFile value="loggerTempFile" multiple>
-        <input type=submit value=Upload>
-
-</form>
-
+        <h2>Upload Logger Temperature</h2>
+        <form action="/upload" method="post" enctype= "multipart/form-data">
+            <div class= "input-group col-md-6 ">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple>
+                    </span>
+                </span>
+            <input type="text" class="form-control" readonly>
+            </div>
+             <br><br>
+            <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
+        </form>
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+    </div>
 </body>
 </html>
+<script>
+$(document).on('change', '.btn-file :file', function() {
+  var input = $(this),
+      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready( function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+        
+        if( input.length ) {
+            input.val(log);
+        } else {
+            if( log ) alert(log);
+        }
+        
+    });
+});
+</script>
+<script src="../static/script.js"></script>

@@ -34,18 +34,18 @@ def logout():
     """User logout/authentication/session management."""
     session.pop('logged_in', None)
     flash('You are logged out')
-    return render_template('logout.html')
+    return redirect(url_for('query'))
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
     error = None
     results = None
     db = DbConnect(app.config)
-    logger_type_choices = db.getBiomimicTypes()
+    biomimic_type_choices = db.getBiomimicTypes()
     db.close()
 
     form = QueryForm(request.form)
-    form.logger_type.choices = logger_type_choices
+    form.biomimic_type.choices = biomimic_type_choices
 
 
     if request.method == 'GET':
@@ -91,13 +91,15 @@ def download():
 def parse_data():
     select_type = request.args.get('select_type', 'default')
     select_value = request.args.get('select_value', 'default')
+    print(select_type, select_value)
     result = queryDb(select_type, select_value)
+    print(result)
     return jsonify(result)
 
 def queryDb(query_type, query_value):
     result = None
     db = DbConnect(app.config)
-    if query_type == "logger_type": 
+    if query_type == "biomimic_type": 
         result = db.getCountry(query_value)
     elif query_type == "country_name":
         result = db.getState(query_value)
