@@ -141,15 +141,15 @@ $(function() {
                 var options = $("#hidden-table");
                 var button = $("#download-button");
                 var title = $("#title")
-                button.empty()
-                options.empty()
                 if (values == ''){
                     button.empty()
+                    title.empty()
                     options.empty()
                     options.append("<h3 class=text-danger>  Search was unsucessfull, please try again with different select options<h3>")
                 } 
                 else {
                     options.empty()
+                    title.empty()
                     title.append("<h4>Data preview</h4>")
                     options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
                     $.each(data.list_of_results, function(key, value) {
