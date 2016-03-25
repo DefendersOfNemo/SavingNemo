@@ -1,33 +1,30 @@
-# imports
 import unittest, os, datetime
 from flask import Flask, json, request, Response, session
 import MySQLdb
 from app import app
 from app.dbconnect import DbConnect
 from flask.ext import excel
-
-
 class QueryFormTestCase(unittest.TestCase):
-    """Query Form Feature specific Test Cases will go here"""
+    """Test for query functionality while wave_exp is none"""
     
     def setUp(self):
         """Setup test app"""
         app.config['TESTING'] = True     
         app.config['MYSQL_DB'] = 'test'
         self.db = DbConnect(app.config)
-        test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
-        test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql.txt'
+        test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_WaveExp_None.csv'
+        test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYIDWAVENA_2000_pgsql.txt'
         with app.test_client() as client:
             response = client.post('/upload', 
                 data={
-                    'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
+                    'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_WaveExp_None.csv')
                     }, follow_redirects=True)
             response = client.post('/upload', 
                 data={
-                    'loggerTempFile':  (open(test_temp_filename, 'rb'), 'DUMMYID_2000_pgsql.txt')
+                    'loggerTempFile':  (open(test_temp_filename, 'rb'), 'DUMMYIDWAVENA_2000_pgsql.txt')
                     }, follow_redirects=True)
             self.record_type = {
-                        "microsite_id" : "DUMMYID",
+                        "microsite_id" : "DUMMYIDWAVENA",
                         "site" : "DUMMYSITE",
                         "biomimic_type" : "Dummybiomimictype",
                         "country" : "Dummycountry",
@@ -37,7 +34,7 @@ class QueryFormTestCase(unittest.TestCase):
                         "field_lon" : "-121.905316700000",
                         "zone" : "Dummy",
                         "sub_zone" : "Dummy",
-                        "wave_exp" : "Dummy"}
+                        "wave_exp" : None}
     def tearDown(self):
         """Close test database"""        
         cursor = self.db.connection.cursor()
@@ -74,7 +71,6 @@ class QueryFormTestCase(unittest.TestCase):
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
-
     def test_form_logger_type_automatic_fill(self):
         """Test the logger_type field is filled automatically on page load"""
         with app.test_client() as client:
@@ -121,12 +117,12 @@ class QueryFormTestCase(unittest.TestCase):
         """Test the ajax call functionality if subZone_name field is selected"""
         self.check_ajax("lt_for_wave_exp", "DummyBiomimicType", self.db.getWaveExp)    
 
-    def test_query_results(self):
+    def test_query_results_WaveExp_None(self):
         """Test the query results functionality"""
         with app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
-                        "microsite_id" : "DUMMYID",
+                        "microsite_id" : "DUMMYIDWAVENA",
                         "site" : "DUMMYSITE",
                         "biomimic_type" : "Dummybiomimictype",
                         "country" : "Dummycountry",
@@ -136,19 +132,12 @@ class QueryFormTestCase(unittest.TestCase):
                         "field_lon" : "-121.905316700000",
                         "zone" : "Dummy",
                         "sub_zone" : "Dummy",
-                        "wave_exp" : "Dummy",
-                        "start_date": datetime.datetime.strptime("7/1/2000 2:21", '%m/%d/%Y %H:%M'),
-                        "end_date": datetime.datetime.strptime("7/1/2000 2:21", '%m/%d/%Y %H:%M')},
+                        "wave_exp" : "None",
+                        "start_date": datetime.datetime.strptime("6/1/2000 2:21", '%m/%d/%Y %H:%M'),
+                        "end_date": datetime.datetime.strptime("8/1/2000 2:21", '%m/%d/%Y %H:%M')},
                             follow_redirects=False)            
             self.assertIn(b"14", response.data)
             self.assertIn(b"13.5", response.data)
-            
-            # Merging with the above test case, since we are storing the query in the sessin variable
-            """Test the download functionality"""
-            response = client.get('/download')
-            self.assertIn(b"14", response.data)
-            self.assertIn(b"13.5", response.data)
-            self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
 
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()
