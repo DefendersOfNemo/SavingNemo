@@ -36,9 +36,9 @@
                             <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
                             </li>
                         {% else %}
-                            <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                            <li><a href="{{ url_for('upload') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
                             </li>
-                            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
+                            <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -141,6 +141,8 @@
             <p class="error"><strong>Error:</strong> {{ error }}
         {% endif %}
         <div class="container" id="query-results-table" >
+            <div id="title">
+            </div>
             <table class="table table-bordered" id="hidden-table">
             <!-- Table appended by user query result -->
             </table>
