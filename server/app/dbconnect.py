@@ -268,7 +268,10 @@ class DbConnect(object):
         """Insert new Biomimic Type Data in DB"""
         corrupt = False
         query = ("INSERT INTO `cnx_logger_biomimic_type` (`biomimic_type`) VALUES (\'%s\')") % biomimic_type
-        res = cursor.execute(query)
+        try:
+            res = cursor.execute(query)
+        except mysql.s.Error:
+            res = 0
         if res == 1:
             pass
         else:
@@ -286,7 +289,10 @@ class DbConnect(object):
         """Insert new Geolocation Data in DB"""
         corrupt = False
         query = ("INSERT INTO `cnx_logger_geographics` (`site`, `field_lat`, `field_long`, `location`, `state_province`, `country`) VALUES (%s, %s, %s, %s, %s, %s)")
-        res = cursor.execute(query, (record.get("site"), record.get("field_lat"), record.get("field_lon"), record.get("location"), record.get("state_province"), record.get("country")))
+        try:
+            res = cursor.execute(query, (record.get("site"), record.get("field_lat"), record.get("field_lon"), record.get("location"), record.get("state_province"), record.get("country")))
+        except mysql.connector.Error:
+            res = 0
         if res == 1:
             pass
         else:            
@@ -308,11 +314,17 @@ class DbConnect(object):
         """Insert new Properties Data in DB"""
         corrupt = False
         if record.get('wave_exp') is None:
-            query = ("INSERT INTO `cnx_logger_properties` (`zone`, `sub_zone`, `wave_exp`) VALUES (%s, %s, NULL)")    
-            res = cursor.execute(query, (record.get("zone"), record.get("sub_zone")))
+            query = ("INSERT INTO `cnx_logger_properties` (`zone`, `sub_zone`, `wave_exp`) VALUES (%s, %s, NULL)")
+            try:    
+                res = cursor.execute(query, (record.get("zone"), record.get("sub_zone")))
+            except mysql.connector.Error:
+                res = 0
         else:
-            query = ("INSERT INTO `cnx_logger_properties` (`zone`, `sub_zone`, `wave_exp`) VALUES (%s, %s, %s)")    
-            res = cursor.execute(query, (record.get("zone"), record.get("sub_zone"), record.get("wave_exp")))
+            query = ("INSERT INTO `cnx_logger_properties` (`zone`, `sub_zone`, `wave_exp`) VALUES (%s, %s, %s)")  
+            try:  
+                res = cursor.execute(query, (record.get("zone"), record.get("sub_zone"), record.get("wave_exp")))
+            except mysql.connector.Error:
+                res = 0
         
         if res == 1:
             pass
@@ -324,7 +336,10 @@ class DbConnect(object):
         """Insert new Microsite Id Data in DB"""
         corrupt = False
         query = ("INSERT INTO `cnx_logger` (`microsite_id`, `biomimic_id`, `geo_id`, `prop_id`) VALUES (%s, %s, %s, %s)")
-        res = cursor.execute(query, (microsite_id, biomimic_id, geo_id, prop_id))
+        try:
+            res = cursor.execute(query, (microsite_id, biomimic_id, geo_id, prop_id))
+        except mysql.connector.Error:
+                res = 0
         if res == 1:
             pass
         else:

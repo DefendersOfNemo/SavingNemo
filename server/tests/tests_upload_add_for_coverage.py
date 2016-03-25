@@ -68,7 +68,7 @@ class UploadTestCase(unittest.TestCase):
             self.assertEqual(len(results), 0)
 
     def test_logger_temperature_upload_duplicate(self):
-        """Test that Logger Temperature file with missing Microsite Id cannot be uploaded"""
+        """Test that Logger Temperature file with duplicate entry cannot be uploaded"""
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql_Duplicate.txt'
         with app.test_client() as client:
