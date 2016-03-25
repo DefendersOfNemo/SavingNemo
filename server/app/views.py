@@ -58,8 +58,6 @@ def query():
 def submit_query():
     print("inside submit")
     form  = dict(request.args)
-    print("form")
-    print(form)
     query = {}
     query["biomimic_type"] = form.get("biomimic_type")[0]
     query["country"] = form.get("country")[0]
@@ -124,7 +122,7 @@ def allowed_file(filetype, filename):
 
 @app.route('/upload', methods=['GET','POST'])
 def upload():   
-    result = None;
+    result = None
     error=None;
     if request.method == 'POST':
         if 'loggerTypeFile' in request.files:
@@ -133,7 +131,8 @@ def upload():
                 if allowed_file("loggerTypeFile", file.filename):
                     stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
                     csv_input = csv.reader(stream)
-                    result = AddLoggerType(csv_input)
+                    next(csv_input, None)  # skip the headers
+                    result, corruptRecords = AddLoggerType(csv_input)
                 else:
                     error = "File should be in csv format"
             else:
@@ -142,22 +141,30 @@ def upload():
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
             if files[0]:
+                result = {'total':0, 'success':0, 'failure':0};
                 for file in files:
+                    individual_result = None;
                     if allowed_file("loggerTempFile", file.filename):
                         stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
                         if file.filename.rsplit('.', 1)[1] == 'txt':
                             csv_input = csv.reader(stream, delimiter = '\t')
                         else:
-                            csv_input = csv.reader(stream)                        
-                        result = AddLoggerTemp(csv_input,file.filename)                  
+                            csv_input = csv.reader(stream)
+                        next(csv_input, None)  # skip the headers                            
+                        individual_result, corruptRecords = AddLoggerTemp(csv_input,file.filename)
+                        if individual_result is not None:
+                            result['total'] += individual_result['total']
+                            result['success'] += individual_result['success']
+                            result['failure'] += individual_result['failure']
                     else:
                         error = "File " + file.filename + " should be in csv or txt format"
                     file.close()
             else:
                 print("Error! File not selected")
                 error = "Please choose a File first"
-        else:
-            error = "Something went wrong!"
+    if result is not None:
+        if result.get('total') == 0:
+            result = None
     return render_template('upload.html', result=result, error=error)
 
 def AddLoggerType(reader):
@@ -183,8 +190,8 @@ def AddLoggerType(reader):
     db.close()
     print("pc: ", properCounter)
     print("cc: ", corruptCounter)
-    print("cr: ", corruptRecords)    
-    #{"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
+    print("cr: ", corruptRecords)        
+    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
 
 def AddLoggerTemp(reader,filename):
     db = DbConnect(app.config)
@@ -200,8 +207,7 @@ def AddLoggerTemp(reader,filename):
     logger_id = db.FindMicrositeId(microsite_id)
     if logger_id == None:
         print("This microsite id does not exist")
-        return
-
+        return None, None
     for record in reader:
         parsedRecordDict,error = db.parseLoggerTemp(record)
         if (not error):
@@ -220,9 +226,7 @@ def AddLoggerTemp(reader,filename):
     print("pc: ", properCounter)
     print("cc: ", corruptCounter)
     print("cr: ", corruptRecords)    
-    return 
-    #return  {"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
-
+    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.

@@ -142,6 +142,8 @@ class UploadTestCase(unittest.TestCase):
             self.cleanUpLoggerType(cursor, record)
             cursor.close()
             self.assertEqual(record['microsite_id'], results)
+            self.assertIn(b"<td># Proper Records</td>\n                  <td>1</td>", response.data)
+            self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
 
     def test_logger_type_upload_corrupt(self):
         """Test that Logger Type file with corrupt records cannot be uploaded"""
@@ -245,6 +247,7 @@ class UploadTestCase(unittest.TestCase):
                 data={
                     'loggerTempFile':  (open(test_temp_filename, 'rb'), 'DUMMYID_2000_pgsql.txt')
                     }, follow_redirects=True)
+            
             record_type = {
                     "microsite_id" : "DUMMYID",
                     "site" : "DUMMYSITE",
@@ -284,6 +287,8 @@ class UploadTestCase(unittest.TestCase):
             self.assertEqual(record_temp[0]['Temp_C'], results[0][1])
             self.assertEqual(record_temp[1]['Time_GMT'], results[1][0])
             self.assertEqual(record_temp[1]['Temp_C'], results[1][1])
+            self.assertIn(b"<td># Proper Records</td>\n                  <td>2</td>", response.data)
+            self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
 
     def test_logger_temperature_upload_corrupt(self):
         """Test that Logger Temperature file with corrupt records cannot be uploaded"""
