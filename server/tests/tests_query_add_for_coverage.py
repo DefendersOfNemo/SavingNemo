@@ -133,8 +133,8 @@ class QueryFormTestCase(unittest.TestCase):
                         "zone" : "Dummy",
                         "sub_zone" : "Dummy",
                         "wave_exp" : "None",
-                        "start_date": datetime.datetime.strptime("6/1/2000 2:21", '%m/%d/%Y %H:%M'),
-                        "end_date": datetime.datetime.strptime("8/1/2000 2:21", '%m/%d/%Y %H:%M')},
+                        "start_date": "6/1/2000",
+                        "end_date": "8/1/2000"},
                             follow_redirects=False)            
             self.assertIn(b"14", response.data)
             self.assertIn(b"13.5", response.data)

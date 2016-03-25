@@ -91,7 +91,9 @@ class UploadTestCase(unittest.TestCase):
                     "field_lon" : "-121.905316700000",
                     "zone" : "Dummy",
                     "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy"}        
+                    "wave_exp" : "Dummy",
+                    "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
+                    "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}     
             where_condition = self.db.buildWhereCondition(record_type)
             query = ("SELECT temp.Time_GMT, temp.Temp_C  "
                     "FROM `cnx_logger` logger "

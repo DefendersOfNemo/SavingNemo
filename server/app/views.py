@@ -7,7 +7,7 @@ from app.dbconnect import DbConnect
 from flask.ext import excel
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
-import io, csv
+import io, csv, datetime
 
 @app.route('/')
 @app.route('/home')
@@ -66,8 +66,8 @@ def submit_query():
     query["zone"] = form['zone'][0]
     query["sub_zone"] = form['sub_zone'][0]
     query["wave_exp"] = form['wave_exp'][0]        
-    query["start_date"] = form['start_date'][0] 
-    query["end_date"] = form['end_date'][0]
+    query["start_date"] = str(datetime.datetime.strptime(form['start_date'][0],'%m/%d/%Y').date())
+    query["end_date"] = str(datetime.datetime.strptime(form['end_date'][0],'%m/%d/%Y').date())
     session['query'] = query
     db = DbConnect(app.config)
     preview_results = db.getQueryResultsPreview(query)
@@ -201,7 +201,6 @@ def AddLoggerTemp(reader,filename):
     microsite_id = filename.rsplit('_', 5)[0].upper()
     logger_id = db.FindMicrositeId(microsite_id)
     if logger_id == None:
-        print("This microsite id does not exist")
         return None, None
     for record in reader:
         parsedRecordDict,error = db.parseLoggerTemp(record)
