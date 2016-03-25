@@ -1,0 +1,3 @@
+"microsite_id","site","field_lat","field_lon","location","state_province","country","biomimic","zone","sub_zone","wave_exp"
+"DUMMYSITE",36.62193333,-121.9053167,"DummyLocation","DummyState","DummyCountry","DummyBiomimicType","Dummy","Dummy","Dummy"
+"DUMMYID2","DUMMYSITE2",A36.62193333,-121.9053167,"DummyLocation2","DummyState2","DummyCountry2","DummyBiomimicType2","Dummy2","Dummy2","Dummy2"

@@ -1,0 +1,139 @@
+<html>
+   <head lang="en">
+       <!-- IE Edge Meta Tag -->
+       <meta charset="UTF-8">
+       <!-- Viewport : enables combatibility with display on smaller devices -->
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <title>Upload</title> 
+       <!-- links to style sheet -->
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+
+       <!-- putting script after does not allow upload feedback -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    </head>
+    <style>
+            .btn-file {
+                position: relative;
+                overflow: hidden;
+            }
+            .btn-file input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
+            input[readonly] {
+            background-color: white !important ;
+            cursor: text !important ;
+            }
+    </style>
+
+    <body>
+
+       <!-- Links to header images-->
+       <div>
+           <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
+           <img class="img-responsive" src="../static/Lab-banner.jpg" width="960" height="46">
+       </div>
+       <!--  Nav-bar -->
+       <nav class="navbar navbar-inverse">
+           <div class="container-fluid">
+               <div class="navbar-header">
+                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>                        
+                   </button>
+               </div>
+               <div class="collapse navbar-collapse" id="myNavbar">
+                   <ul class="nav navbar-nav">
+                       <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Back to Helmuth lab Home</a></li>
+                   </ul>
+                   <ul class="nav navbar-nav navbar-right">
+                          <li role="presentation"><a href="query">Query</a></li>
+                       {% if not session.logged_in %}
+                           <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                           </li>
+                       {% else %}
+                           <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                           </li>
+                       {% endif %}
+                   </ul>
+               </div>
+           </div>
+       </nav>
+       <div class="container text-danger">
+           <h1>Upload Files</h1>
+       </div>
+    <div class= container>
+        <h2>Upload Logger Type</h2>
+
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class= "input-group col-md-6">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                        Choose file to upload&hellip; <input type="file" name="loggerTypeFile" value="loggerTypeFile">
+                        </span>
+                    </span>
+                <input type="text" class="form-control" readonly>
+                </div>
+                <br><br>
+                <button type="submit" value="Upload" class="btn-default btn-lg">Upload <span class="glyphicon glyphicon-upload"></span></button> 
+            </form>
+            <br>
+
+        <h2>Upload Logger Temperature</h2>
+        <form action="/upload" method="post" enctype= "multipart/form-data">
+            <div class= "input-group col-md-6 ">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple>
+                    </span>
+                </span>
+            <input type="text" class="form-control" readonly>
+            </div>
+             <br><br>
+            <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
+        </form>
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+    </div>
+</body>
+</html>
+<script>
+$(document).on('change', '.btn-file :file', function() {
+  var input = $(this),
+      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready( function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+        
+        if( input.length ) {
+            input.val(log);
+        } else {
+            if( log ) alert(log);
+        }
+        
+    });
+});
+</script>
+<script src="../static/script.js"></script>

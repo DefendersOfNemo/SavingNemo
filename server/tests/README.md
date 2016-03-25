@@ -6,6 +6,8 @@ All Tests are divided into Test Files
 To Run all Tests:
  nosetests
  or
+ nosetests --with-xunit server --with-xcoverage
+ or
  python -m unittest discover (better implementation)
  or
  python -m unittest discover tests "*.py"
