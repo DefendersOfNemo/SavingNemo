@@ -23,6 +23,7 @@ class UploadTestCase(unittest.TestCase):
         self.db.close()
     
     def cleanUpLoggerTemp(self, cursor):
+        ''' clean up table cnx_logger_temperature'''
         cursor.execute("SELECT logger_temp_id FROM `cnx_logger_temperature`")
         results = cursor.fetchall()
         if results is not None:
@@ -33,6 +34,7 @@ class UploadTestCase(unittest.TestCase):
             self.db.connection.commit()
 
     def cleanUpLoggerType(self, cursor, rec):
+        ''' clean up logger type tables'''
         biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
         geo_id = self.db.fetchExistingGeoId(cursor, rec)
         prop_id = self.db.fetchExistingPropId(cursor, rec)

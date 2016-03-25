@@ -190,6 +190,7 @@ class DbConnect(object):
         return parsedRecord, False        
 
     def isNotFloat(self, value):
+        '''check whether value is float'''
         try:
             float(value)
             return False
@@ -351,7 +352,11 @@ class DbConnect(object):
                 if (dataList[0] == "None" or dataList[0] == ""):
                     return None, True
                 else:
-                    parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%Y %H:%M')
+                    #handle datetime error
+                    try:
+                        parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%Y %H:%M')
+                    except ValueError:
+                       return None, True
                     parsedRecord['Temp_C'] = dataList[1]                    
         return parsedRecord, False
 
@@ -365,10 +370,10 @@ class DbConnect(object):
         corruptIndicator = False        
         query = ("INSERT INTO `cnx_logger_temperature` (`logger_id`, `Time_GMT`, `Temp_C`) VALUES (%s, %s, %s)")
         for record in records:
+            #handle duplicate entry problem while inserting data
             try:
                 res = cursor.execute(query,(logger_id, record.get("Time_GMT"),record.get("Temp_C")))
             except MySQLdb.DatabaseError as err:
-                print("This logger temperature record is duplicate:", record)
                 res = 0
             if res == 1:
                 self.connection.commit()
@@ -380,10 +385,8 @@ class DbConnect(object):
         cursor.close()
         return properCounter, corruptCounter, corruptRecords
 
-
-
-
     def FindMicrositeId(self, id):
+        '''Fecth logger_id according to microsite_id'''
         cursor = self.connection.cursor()
         query = '''SELECT `logger_id` as 'logger_id' FROM `cnx_logger` WHERE microsite_id=''' + "\'"+ id +"\'"
         cursor.execute(query)

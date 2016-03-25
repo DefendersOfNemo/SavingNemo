@@ -7,7 +7,6 @@ from app.dbconnect import DbConnect
 
 class BasicConnectionTestCase(unittest.TestCase):
     """Checks for app and db connectivity"""
-    
     def test_index(self):
         """inital Test. Ensure flask is setup correctly"""
         tester = app.test_client(self)

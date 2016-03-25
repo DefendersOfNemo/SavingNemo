@@ -56,10 +56,8 @@ def query():
 
 @app.route('/_submit_query', methods=['GET'])
 def submit_query():
-    print("inside submit")
+    '''get values of form and query Database to get preview results'''
     form  = dict(request.args)
-    print("form")
-    print(form)
     query = {}
     query["biomimic_type"] = form.get("biomimic_type")[0]
     query["country"] = form.get("country")[0]
@@ -70,8 +68,6 @@ def submit_query():
     query["wave_exp"] = form['wave_exp'][0]        
     query["start_date"] = form['start_date'][0] 
     query["end_date"] = form['end_date'][0]
-    print("query")
-    print(query)
     session['query'] = query
     db = DbConnect(app.config)
     preview_results = db.getQueryResultsPreview(query)
@@ -79,7 +75,8 @@ def submit_query():
     return jsonify(list_of_results=preview_results)
 
 @app.route('/download',methods=['GET'])
-def download():    
+def download():
+    '''Create download file in csv format, then file be downloaded to user's computer'''    
     db = DbConnect(app.config)
     query = session['query']
     header = [("biomimic_type:"+query["biomimic_type"],"country:"+query["country"],"state_province:"+query["state_province"],"location:"+query["location"],"zone:"+query["zone"],"sub_zone:"+query["sub_zone"],"wave_exp:"+query["wave_exp"]),("Timestamp","Temperature")]
@@ -91,12 +88,11 @@ def download():
 def parse_data():
     select_type = request.args.get('select_type', 'default')
     select_value = request.args.get('select_value', 'default')
-    print(select_type, select_value)
     result = queryDb(select_type, select_value)
-    print(result)
     return jsonify(result)
 
 def queryDb(query_type, query_value):
+    '''Query Database to get options for each drop-down menu'''
     result = None
     db = DbConnect(app.config)
     if query_type == "biomimic_type": 
@@ -117,6 +113,7 @@ ALLOWED_EXTENSIONS_LOGGER_TYPE = set(['csv'])
 ALLOWED_EXTENSIONS_LOGGER_TEMP = set(['csv', 'txt'])
 
 def allowed_file(filetype, filename):
+    '''check whether uploaded file is in correct format'''
     if filetype == "loggerTypeFile":
         return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS_LOGGER_TYPE
     else:
@@ -124,6 +121,7 @@ def allowed_file(filetype, filename):
 
 @app.route('/upload', methods=['GET','POST'])
 def upload():   
+    '''Handle user upload functions, including logger type and logger temperature file'''
     result = None;
     error=None;
     if request.method == 'POST':
@@ -154,13 +152,13 @@ def upload():
                         error = "File " + file.filename + " should be in csv or txt format"
                     file.close()
             else:
-                print("Error! File not selected")
                 error = "Please choose a File first"
         else:
             error = "Something went wrong!"
     return render_template('upload.html', result=result, error=error)
 
 def AddLoggerType(reader):
+    '''Insert logger type in file'''
     db = DbConnect(app.config)
     properRecords = list();
     corruptRecords = list();
@@ -172,7 +170,6 @@ def AddLoggerType(reader):
         parsedRecordDict, error = db.parseLoggerType(record)
         if (not error):
             properRecords.append(parsedRecordDict)
-            #properCounter += 1
         else:
             corruptRecords.append(record)
             corruptCounter += 1
@@ -180,13 +177,11 @@ def AddLoggerType(reader):
         properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerType(properRecords)
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
-    db.close()
-    print("pc: ", properCounter)
-    print("cc: ", corruptCounter)
-    print("cr: ", corruptRecords)    
-    #{"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
+    db.close()   
+    return  {"total": properCounter+corruptCounter, "success": properCounter, "failure": corruptCounter, "corruptRecords": corruptRecords}
 
 def AddLoggerTemp(reader,filename):
+    '''Insert logger temperatures in uploaded file'''
     db = DbConnect(app.config)
     properRecords = list();
     corruptRecords = list();
@@ -194,14 +189,10 @@ def AddLoggerTemp(reader,filename):
     properCounter = 0;
     corruptCounter = 0;
     insertCorruptCounter = 0;
-  
     microsite_id = filename.rsplit('_', 5)[0].upper()
-    print(microsite_id)
     logger_id = db.FindMicrositeId(microsite_id)
     if logger_id == None:
-        print("This microsite id does not exist")
-        return
-
+        return {"This microsite id does not exist"}
     for record in reader:
         parsedRecordDict,error = db.parseLoggerTemp(record)
         if (not error):
@@ -211,17 +202,11 @@ def AddLoggerTemp(reader,filename):
             corruptRecords.append(record)
             corruptCounter += 1
     if len(properRecords) > 0:
-        print("going to insert")
         properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
-    db.close()
-    print("in file:", filename)
-    print("pc: ", properCounter)
-    print("cc: ", corruptCounter)
-    print("cr: ", corruptRecords)    
-    return 
-    #return  {"total": 0, "success": 0, "failure": 0, "corruptRecordIds": [], "corruptRecords": []}
+    db.close()   
+    return  {"total": properCounter+corruptCounter, "success": properCounter, "failure": corruptCounter, "corruptRecords": corruptRecords}
 
 
 # This function makes sure the server only runs if the script is executed directly
