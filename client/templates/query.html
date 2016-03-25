@@ -6,10 +6,10 @@
         <!-- Viewport : enables combatibility with display on smaller devices -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Database</title> 
         <!-- links to style sheet -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+        <title>Database</title> 
     </head>
     <body>
         <!-- Links to header images-->
@@ -36,6 +36,8 @@
                             <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
                             </li>
                         {% else %}
+                            <li><a href="{{ url_for('upload') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
+                            </li>
                             <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
                             </li>
                         {% endif %}
@@ -46,106 +48,117 @@
         <div class="container text-danger">
             <h1>DATABASE<h1>
         </div>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                {% for message in messages%}
-                    <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        <!-- query form -->
+        <div class="container text-right">
+            <a href="#" data-toggle="popover" data-placement="left" class= "btn btn-info" data-trigger="hover" data-content="Please click and choose an option from each select field in the following order: Biomimic type, Country , State, Location, Zone, Sub Zone and Wave exposure">
+                <span class="glyphicon glyphicon-question-sign"></span> Help
+            </a>
+        </div>
+        <br>
         <div class="query-box container">
-            <form action="" method="post" id="query" name="query">
+            <form action="" method="get" id="query" data-toggle="validator" onsubmit="return false;" name="query" role="form" type="">
                 <!-- first row in query form -->
                 <div class="row">
-                    <div class="col-md-4">
-                        <label for="dropdown_menu_logger_type">Logger Type:</label>
-                        <!-- dropdown menu of logger types gotten from database-->
-                        <select id ="dropdown_menu_logger_type" class="form-control">
-                            <option value="-1">PLease select Logger Type</option>
-                            {% for type in form.logger_type %}
-                                <option value="{{ type }}">{{ type[1] }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="col-md-4 form-group">
+                        <label for="dropdown_menu_biomimic_type">Biomimic Type:<w class = "text-danger"> * <w> </label>
+                            <select id ="dropdown_menu_biomimic_type" class="form-control" required>
+                                <option value="">Please select Biomimic Type</option>
+                                {% for type in form.biomimic_type %}
+                                    <option value="{{ type }}">{{ type[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        <!-- </a> -->
                     </div>   
-                    <div class="col-md-4">
+                    <div class="col-md-4 form-group">
                         <!-- dropdown menu of Countries related to selected logger type -->
-                        <label for="dropdown_menu_country_name">Country Name:</label>
-                        <select id ="dropdown_menu_country_name" class="form-control" >
-                            <option value="-1">Please select Country Name</option>
-                        </select>
+                        <label for="dropdown_menu_country_name">Country Name:<w class = "text-danger"> * <w> </label>
+                        <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="click and select a country from the provided options"> -->
+                            <select id ="dropdown_menu_country_name" class="form-control" required>
+                                <option value="">Please select Country Name</option>
+                            </select>
+                        <!-- </a> -->
                     </div>
-                    <div class="col-md-4">
-                        <label for="dropdown_menu_state_name">State Name:</label>
+                    <div class="col-md-4 form-group">
                         <!-- dropdown menu of states related to selected Country -->
-                        <select id ="dropdown_menu_state_name" class="form-control" >
-                            <option value="-1">Please select State Name</option>
-                        </select>
+                        <label for="dropdown_menu_state_name">State Name:<w class = "text-danger"> * <w> </label>
+                        <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="click and select a state from the provided options"> -->
+                            <select id ="dropdown_menu_state_name" class="form-control" required >
+                                <option value="">Please select State Name</option>
+                            </select>
+                        <!-- </a> -->
                     </div>
                 </div>
-                </br>
+                <br><br>
                 <!-- Second row in query form -->
                 <div class="row">
-                    <div class="col-md-3">
-                        <label for="dropdown_menu_location_name">Location Name:</label>
-                        <select id ="dropdown_menu_location_name" class="form-control">
-                            <option value="-1">PLease select Location Name</option>
+                    <div class="col-md-3 form-group">
+                        <label for="dropdown_menu_location_name">Location Name:<w class = "text-danger"><strong> *</strong> <w> </label>
+                        <select id ="dropdown_menu_location_name" class="form-control" required>
+                            <option value="">Please select Location Name</option>
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 form-group">
                         <label for="dropdown_menu_zone_name">Zone Name:</label>
-                        <select id ="dropdown_menu_zone_name" class="form-control" >
-                            <option value="-1">Please select Zone Name</option>
+                        <select id ="dropdown_menu_zone_name" class="form-control" required>
+                            <option value="">Please select Zone Name</option>
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 form-group">
                         <label for="dropdown_menu_sub_zone_name">Sub Zone:</label>
-                        <select id ="dropdown_menu_sub_zone_name" class="form-control" >
-                            <option value="-1">Please select Sub Zone</option>
+                        <select id ="dropdown_menu_sub_zone_name" class="form-control" required>
+                            <option value="">Please select Sub Zone</option>
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 form-group">
                         <label for="dropdown_menu_wave_exp_name">Wave Exposure:</label>
-                        <select id ="dropdown_menu_wave_exp_name" class="form-control" >
-                            <option value="-1">Please select Wave exposure</option>
+                        <select id ="dropdown_menu_wave_exp_name" class="form-control" required>
+                            <option value="">Please select Wave Exposure</option>
                         </select>
                     </div>
                 </div>
                 </br>
-                <label for="date_pick_from">Start date:</label> {{ form.date_pick_from(class='date_pick_from') }} 
-                <label for="date_pick_to"> to End date:</label> {{ form.date_pick_to(class='date_pick_to') }} 
-                <span class="glyphicon glyphicon-calendar"></span>
-                <div class="container text-center" > 
-                    <button type="button" id="button_submit_query" class="btn btn-success btn-lg">Submit</button>
+                </br>
+                <div class="container row">
+                    <label for="revision_date">Date Range:</label>
+                    <div class="input-group col-md-4" >
+                        <input type="text" class="form-control" name="date_pick_from" value="" id="date_pick_from" placeholder="MM/DD/YYYY" required required pattern="\d{2}\/\d{2}\/\d{4}">
+                        <span class="input-group-addon">to</span>
+                        <input type="text" class="form-control" name="date_pick_to" value="" id="date_pick_to" placeholder="MM/DD/YYYY" required required pattern="\d{2}\/\d{2}\/\d{4}">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <br><br>
+                <div class="container text-center form-group" > 
+                    <button type="submit" id="button_submit_query" class="btn-success btn-lg" >Submit</button>
+                    <br><br>
+                    <strong class="text-danger"><em>fields marked with * are compulsory</em></strong>
                 </div>
             </form>
         </div>
-            {% if error %}
-                <p class="error"><strong>Error:</strong> {{ error }}
-            {% endif %}
-        <div class="panel-collapse collapse" id="collapse1">
-            <table class="table" id="query-results-table">
-                <thead>
-                    <tr>
-                        <th>Timestamp</th>
-                        <th>Temperature</th>
-                    </tr>
-                </thead>
+        <br><br>
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <div class="container" id="query-results-table" >
+            <div id="title">
+            </div>
+            <table class="table table-bordered" id="hidden-table">
+            <!-- Table appended by user query result -->
             </table>
-        </br>
-            <div class="container text-center" > 
-                <a href="/download" class="btn btn-info btn-lg" role="button">Download</a>
+            <br>
+            <div class="container text-center" id= "download-button"> 
+             <!-- Dowload button created after successful query-->
             </div>
         </div>
-    
-    <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <!-- <a href="{{ url_for('login') }}"> Upload link temp </a> -->
     </body>    
 </html>
+  <!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- scripts used by form -->
-<script src="../static/script.js"></script> 
+<script src="../static/script.js"></script>
+<script>src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
