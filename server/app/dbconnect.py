@@ -123,6 +123,7 @@ class DbConnect(object):
                  "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
                  "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
                  "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ")
+        print(query + where_condition)
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)
@@ -140,6 +141,7 @@ class DbConnect(object):
                  "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
                  "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
                  "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ")
+
         cursor.execute(query  + where_condition)
         results = cursor.fetchall()
         results = list(results)
@@ -161,7 +163,7 @@ class DbConnect(object):
                 where += " and prop.wave_exp is Null"
             else:
                 where += " AND prop.`wave_exp`=\'%s\' " % (queryDict.get('wave_exp'))
-        where += " AND temp.Time_GMT BETWEEN \'"+queryDict.get('start_date')+"\' AND \'"+queryDict.get('end_date')+"\'"
+        where += " AND cast(temp.Time_GMT as date) >= \'"+queryDict.get('start_date')+"\' AND cast(temp.Time_GMT as date) <= \'"+queryDict.get('end_date')+"\'"
         return where
 
     def parseLoggerType(self, dataList):
