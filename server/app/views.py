@@ -137,7 +137,7 @@ def upload():
                 else:
                     error = "File should be in csv format"
             else:
-                error = "Please choose a File first"
+                error = "Please choose a file first"
             file.close()        
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
@@ -155,7 +155,7 @@ def upload():
                     file.close()
             else:
                 print("Error! File not selected")
-                error = "Please choose a File first"
+                error = "Please choose a file first"
         else:
             error = "Something went wrong!"
     return render_template('upload.html', result=result, error=error)
