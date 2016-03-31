@@ -134,7 +134,9 @@ class QueryFormTestCase(unittest.TestCase):
                         "sub_zone" : "Dummy",
                         "wave_exp" : "None",
                         "start_date": "6/1/2000",
-                        "end_date": "8/1/2000"},
+                        "end_date": "8/1/2000",
+                        "output_type" : "Raw",
+                        "analysis_type" : ""},
                             follow_redirects=False)            
             self.assertIn(b"14", response.data)
             self.assertIn(b"13.5", response.data)

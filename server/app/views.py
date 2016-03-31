@@ -68,9 +68,13 @@ def submit_query():
     query["wave_exp"] = form['wave_exp'][0]        
     query["start_date"] = str(datetime.datetime.strptime(form['start_date'][0],'%m/%d/%Y').date())
     query["end_date"] = str(datetime.datetime.strptime(form['end_date'][0],'%m/%d/%Y').date())
+    query["output_type"] = form['output_type'][0]
+    if form['analysis_type'][0] != "":
+        query["analysis_type"] = form['analysis_type'][0]        
     session['query'] = query
     db = DbConnect(app.config)
-    preview_results = db.getQueryResultsPreview(query)
+    preview_results, db_query = db.getQueryResultsPreview(query)
+    session['db_query'] = db_query
     db.close()
     return jsonify(list_of_results=preview_results)
 
@@ -79,8 +83,9 @@ def download():
     '''Create download file in csv format, then file be downloaded to user's computer'''    
     db = DbConnect(app.config)
     query = session['query']
-    header = [("biomimic_type:"+query["biomimic_type"],"country:"+query["country"],"state_province:"+query["state_province"],"location:"+query["location"],"zone:"+query["zone"],"sub_zone:"+query["sub_zone"],"wave_exp:"+query["wave_exp"]),("Timestamp","Temperature")]
-    query_results = header  + db.getQueryRawResults(session['query'])
+    db_query = session['db_query']
+    header = [[key + ":" + str(value) for key, value in query.items()], ("Timestamp","Temperature")]
+    query_results = header  + db.getQueryRawResults(session['db_query'])
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
 
@@ -136,7 +141,7 @@ def upload():
                 else:
                     error = "File should be in csv format"
             else:
-                error = "Please choose a File first"
+                error = "Please choose a file first"
             file.close()        
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
@@ -160,7 +165,7 @@ def upload():
                         error = "File " + file.filename + " should be in csv or txt format"
                     file.close()
             else:
-                error = "Please choose a File first"
+                error = "Please choose a file first"
     if result is not None:
         if result.get('total') == 0:
             result = None

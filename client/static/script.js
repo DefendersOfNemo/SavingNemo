@@ -63,7 +63,6 @@ $(function() {
     });
     
     $('#dropdown_menu_location_name').change( function () {
-        //location_name = $("#dropdown_menu_location_name option:selected").text();
         $.getJSON('/_parse_data', {
             select_type: "lt_for_zone",
             select_value: biomimic_type
@@ -104,6 +103,22 @@ $(function() {
             });
         });
     });
+
+    $('#dropdown_menu_output_type_name').change( function () {
+    var query_field10 = $("#dropdown_menu_output_type_name option:selected").text();
+    var select2 = $("#dropdown_menu_analysis_type_name")
+    var select = $("#frequency-select")
+    select.empty();
+    if (query_field10 == "All"){
+        select.empty()         
+    } else {
+        select.empty()
+        select.append('<label for="dropdown_menu_analysis_type_name">Temperature Frequecy:</label>')
+        select.append('<select id ="dropdown_menu_analysis_type_name" class="form-control"><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Yearly">Yearly</option>')
+        select.append('</select>')
+    }
+    });
+
     function fieldValidation(){
         var query_field1 = $("#dropdown_menu_biomimic_type option:selected").text()
         var query_field2 = $("#dropdown_menu_country_name option:selected").text()
@@ -134,6 +149,8 @@ $(function() {
                 wave_exp: $("#dropdown_menu_wave_exp_name option:selected").text(),
                 start_date: $("#date_pick_from").val(),
                 end_date: $("#date_pick_to").val(),
+                output_type: $("#dropdown_menu_output_type_name option:selected").text(),
+                analysis_type: $("#dropdown_menu_analysis_type_name option:selected").text(),
             }) 
             .done(function(data){
                 console.log(data.list_of_results)
@@ -145,7 +162,7 @@ $(function() {
                     button.empty()
                     title.empty()
                     options.empty()
-                    options.append("<h3 class=text-danger>  Search was unsucessfull, please try again with different select options<h3>")
+                    options.append("<h3 class=text-danger>  Search was unsucessful, please try again with different select options<h3>")
                 } 
                 else {
                     options.empty()
@@ -166,5 +183,17 @@ $(function() {
 
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover(); 
+    });
+
+    $("form").submit(function(e) {
+    var validate = $(this).find("[required]");
+        $(validate).each(function(){
+            if ( $(this).val() == '' ){
+                alert("Please fill all required fields");
+                $(this).focus();
+                e.preventDefault();
+                return false;
+            }
+        });     return true;
     });
 });
