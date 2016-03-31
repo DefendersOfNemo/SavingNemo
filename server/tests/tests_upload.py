@@ -111,7 +111,7 @@ class UploadTestCase(unittest.TestCase):
                 data={
                     'loggerTypeFile':  (BytesIO(b'logger Type File'), '')
                     }, follow_redirects=True)
-            self.assertIn(b'Please choose a File first', response.data)
+            self.assertIn(b'Please choose a file first', response.data)
 
     def test_uploaded_logger_temp_file_missing(self):
         """Test that uploaded logger temp file is not missing"""
@@ -120,7 +120,7 @@ class UploadTestCase(unittest.TestCase):
                 data={
                     'loggerTempFile':  (BytesIO(b'logger Temp File'), '')
                     }, follow_redirects=True)
-            self.assertIn(b'Please choose a File first', response.data)
+            self.assertIn(b'Please choose a file first', response.data)
 
     def test_logger_type_upload(self):
         """Test that file with valid Type uploads is inserted in DB."""
@@ -303,7 +303,7 @@ class UploadTestCase(unittest.TestCase):
             self.assertEqual(record_temp[0]['Temp_C'], results[0][1])
             self.assertEqual(datetime.datetime.strptime(record_temp[1]['Time_GMT'],'%m/%d/%Y %H:%M'), datetime.datetime.strptime(results[1][0], '%m/%d/%Y %H:%M'))
             self.assertEqual(record_temp[1]['Temp_C'], results[1][1])
-            self.assertIn(b"<td># Proper Records</td>\n                  <td>2</td>", response.data)
+            self.assertIn(b"<td># Proper Records</td>\n                  <td>6</td>", response.data)
             self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
 
     def test_logger_temperature_upload_corrupt(self):

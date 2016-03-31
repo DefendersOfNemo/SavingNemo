@@ -84,7 +84,7 @@
                 <div class= "input-group col-md-6">
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file">
-                        Choose file to upload&hellip; <input type="file" name="loggerTypeFile" value="loggerTypeFile">
+                        Choose file to upload<input type="file" name="loggerTypeFile" value="loggerTypeFile">
                         </span>
                     </span>
                 <input type="text" class="form-control" readonly>
@@ -107,8 +107,9 @@
              <br><br>
             <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
         </form>
+        <br>
         {% if error %}
-            <p class="error"><strong>Error:</strong> {{ error }}
+            <p class="error"><h2 class= "container text-danger"><strong>Error:</strong> {{ error }}<h2></p>
         {% endif %}
         {% if result %}
           <div class="container" id="query-results-table" >

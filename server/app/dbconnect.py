@@ -116,41 +116,57 @@ class DbConnect(object):
     def getQueryResultsPreview(self, queryDict):
         """Fetches records form tables based on user query"""
         cursor = self.connection.cursor()
+        output_type = queryDict.get("output_type")
+        analysis_type = queryDict.get("analysis_type")
+        temp_field = ""
+
+        if output_type == "Min":                            # Min
+            temp_field = "MIN(temp.Temp_C)"
+        elif output_type == "Max":                          # Max
+            temp_field = "MAX(temp.Temp_C)"
+        elif output_type == "Average":                      # Average
+            temp_field = "AVG(temp.Temp_C)"
+        else:                                               # Raw
+            temp_field = "temp.Temp_C"
+
+        if analysis_type == "Daily":                        # Daily
+            date_field = "DATE_FORMAT(temp.Time_GMT, '%m/%d/%Y')"
+        elif analysis_type == "Weekly":                     # Weekly
+            date_field = "WEEK(temp.Time_GMT)"
+        elif analysis_type == "Monthly":                    # Monthly
+            date_field = "MONTHNAME(temp.Time_GMT)"
+        elif analysis_type == "Yearly":                     # Yearly
+            date_field = "YEAR(temp.Time_GMT)"
+        else:                                               # Raw, no change
+            date_field = "temp.Time_GMT"
+        query = ("SELECT %s, %s "
+                    "FROM `cnx_logger` logger "
+                    "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
+                    "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
+                    "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
+                    "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ") % (date_field, temp_field)
         where_condition = self.buildWhereCondition(queryDict)
-        query = ("SELECT temp.Time_GMT, temp.Temp_C "
-                 "FROM `cnx_logger` logger "
-                 "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
-                 "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
-                 "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
-                 "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ")
         print(query + where_condition)
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)
-        final_result = [[result[0].strftime("%m/%d/%Y %H:%M"), result[1]] for result in results]
+        final_result = [[result[0], round(result[1], 4)] for result in results]
         cursor.close()
-        return final_result
+        return final_result, query + where_condition
 
-    def getQueryRawResults(self, queryDict):
+    def getQueryRawResults(self, db_query):
         """Fetches records form tables based on user query"""
         cursor = self.connection.cursor()
-        where_condition = self.buildWhereCondition(queryDict)
-        query = ("SELECT temp.Time_GMT, temp.Temp_C "
-                 "FROM `cnx_logger` logger "
-                 "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
-                 "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
-                 "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
-                 "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ")
-
-        cursor.execute(query  + where_condition)
+        cursor.execute(db_query)
         results = cursor.fetchall()
         results = list(results)
-        final_result = [[result[0].strftime("%m/%d/%Y %H:%M"), result[1]] for result in results]
+        final_result = [[result[0], result[1]] for result in results]
         cursor.close()
         return final_result
     
     def buildWhereCondition(self, queryDict):
         """Builds the where_condition for the Select Query"""
+        analysis_type = queryDict.get("analysis_type")
         where = (" WHERE biotype.`biomimic_type`=\'%s\' AND geo.`country`=\'%s\' AND geo.`state_province`= \'%s\' AND geo.`location`=\'%s\'") % \
                 (queryDict.get('biomimic_type'), queryDict.get('country'), \
                     queryDict.get('state_province'), queryDict.get('location'))
@@ -164,6 +180,16 @@ class DbConnect(object):
             else:
                 where += " AND prop.`wave_exp`=\'%s\' " % (queryDict.get('wave_exp'))
         where += " AND cast(temp.Time_GMT as date) >= \'"+queryDict.get('start_date')+"\' AND cast(temp.Time_GMT as date) <= \'"+queryDict.get('end_date')+"\'"
+        if analysis_type == "Daily":
+            where += " GROUP BY cast(temp.Time_GMT as date)"
+        elif analysis_type == "Weekly":
+            where += " GROUP BY WEEK(temp.Time_GMT)"
+        elif analysis_type == "Monthly":
+            where += " GROUP BY MONTHNAME(temp.Time_GMT)"
+        elif analysis_type == "Yearly":
+            where += " GROUP BY YEAR(temp.Time_GMT)"
+        else:
+            pass
         return where
 
     def parseLoggerType(self, dataList):
