@@ -114,7 +114,7 @@ $(function() {
         } else {
             select.empty()
             select.append('<label for="dropdown_menu_analysis_type_name">Temperature Frequecy:</label>')
-            select.append('<select id ="dropdown_menu_analysis_type_name" class="form-control"><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Yearly">Yearly</option>')
+            select.append('<select id ="dropdown_menu_analysis_type_name" class="form-control"><option value="Daily">per Day</option><option value="Monthly">per Month and Year</option><option value="Yearly">per Year</option>')
             select.append('</select>')
         }
     });
@@ -130,7 +130,8 @@ $(function() {
         var query_field8 = $("#date_pick_from").val()
         var query_field9 = $("#date_pick_to").val()
         var query_field10 = $("#dropdown_menu_output_type_name option:selected").text()
-        var query_field11 = $("#dropdown_menu_analysis_type_name option:selected").text()
+        var query_field11 = $("#dropdown_menu_analysis_type_name option:selected").val()
+        alert(query_field11)
         var date_format = new RegExp (/\d{2}\/\d{2}\/\d{4}/)
         var date1 = date_format.test(query_field8)
         var date2 = date_format.test(query_field9)
@@ -142,21 +143,19 @@ $(function() {
     }
 
     function tableheader(){
-        frequency = $("#dropdown_menu_analysis_type_name option:selected").text()
+        frequency = $("#dropdown_menu_analysis_type_name option:selected").val()
+        var title = ""
         if (frequency == "Daily") {
-            var title = ("Date")
+            title = ("Date")
         } 
-        else if (frequency == "Weekly") {
-            var title = ("Week No")
-        }
         else if (frequency == "Monthly") {
-            var title = ("Month")
+            title = ("Month, Year")
         }
         else if (frequency == "Yearly") {
-            var title = ("Year")
+            title = ("Year")
         }
-        else if (frequency == '') {
-            var title = ("Timestamp")
+        else {
+            title = ("Timestamp")
         }
         return title        
     }
@@ -174,7 +173,7 @@ $(function() {
                 start_date: $("#date_pick_from").val(),
                 end_date: $("#date_pick_to").val(),
                 output_type: $("#dropdown_menu_output_type_name option:selected").text(),
-                analysis_type: $("#dropdown_menu_analysis_type_name option:selected").text(),
+                analysis_type: $("#dropdown_menu_analysis_type_name option:selected").val()
             }) 
             .done(function(data){
                 console.log(data.list_of_results)
@@ -192,9 +191,9 @@ $(function() {
                     options.empty()
                     title.empty()
                     title.append("<h4>Data preview</h4>")
-                    options.append("<thead><tr><th>"+tableheader()+"</th><th>Temperature</th></tr></thead><tbody>")
+                    options.append("<thead><tr><th>" + tableheader() + "</th><th>Temperature</th></tr></thead><tbody>")
                     $.each(data.list_of_results, function(key, value) {
-                        options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
+                        options.append("<tr><td>" + value[0] + "</td><td>" + value[1] + "</td></tr>")
                     });
                     options.append("</tbody>")
                     options.append("</table>")

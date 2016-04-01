@@ -16,8 +16,5 @@ class QueryForm(Form):
     # Static Choices. These wouldn't change.
     output_type_choices = [('Raw', 'Raw'), ('Min', 'Min'), ('Max', 'Max'), ('Average', 'Average')]
     output_type = SelectField(u'output_type', choices=output_type_choices)
-    analysis_type_choices = [("","None"), ('Daily', 'Daily'), ('Weekly', 'Weekly'), ('Monthly', 'Monthly'), \
-                                    ('Yearly', 'Yearly')]
-    analysis_type = SelectField(u'analysis_type', \
-                            choices=analysis_type_choices)
+    analysis_type = SelectField(u'analysis_type', choices=[])
     
