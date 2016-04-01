@@ -20,4 +20,3 @@ class QueryForm(Form):
                                     ('Yearly', 'Yearly')]
     analysis_type = SelectField(u'analysis_type', \
                             choices=analysis_type_choices)
-    

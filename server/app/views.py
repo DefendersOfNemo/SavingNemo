@@ -7,7 +7,10 @@ from app.dbconnect import DbConnect
 from flask.ext import excel
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
-import io, csv, datetime
+import io, csv, datetime, os, sys
+
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../upload/")
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 @app.route('/home')
@@ -58,6 +61,7 @@ def query():
 def submit_query():
     '''get values of form and query Database to get preview results'''
     form  = dict(request.args)
+    print("form: ", form)
     query = {}
     query["biomimic_type"] = form.get("biomimic_type")[0]
     query["country"] = form.get("country")[0]
@@ -84,7 +88,29 @@ def download():
     db = DbConnect(app.config)
     query = session['query']
     db_query = session['db_query']
-    header = [[key + ":" + str(value) for key, value in query.items()], ("Timestamp","Temperature")]
+
+    time_title = ''
+    if query.get("analysis_type") == "Daily":
+        time_title = "Date"
+    elif query.get("analysis_type") == "Weekly":
+        time_title = "Week No"
+    elif query.get("analysis_type") == "Monthly":
+        time_title = "Month"
+    elif query.get("analysis_type") == "Yearly":
+        time_title = "Year" 
+    elif query.get("analysis_type") == '':
+        time_title = "Timestamp"
+
+    header = [("biomimic_type:" + query["biomimic_type"], \
+                "country:" + query["country"], \
+                "state_province:" + query["state_province"], \
+                "location:" + query["location"], \
+                "zone:" + query["zone"], \
+                "sub_zone:" + query["sub_zone"], \
+                "wave_exp:" + query["wave_exp"], \
+                "output_type:" + query["output_type"], \
+                "analysis_type:" + query.get("analysis_type")), \
+            (time_title,"Temperature")]
     query_results = header  + db.getQueryRawResults(session['db_query'])
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
@@ -130,6 +156,7 @@ def upload():
     result = None;
     error=None;
     if request.method == 'POST':
+        print(request.form)
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']
             if file:
@@ -156,7 +183,7 @@ def upload():
                         else:
                             csv_input = csv.reader(stream)
                         next(csv_input, None)  # skip the headers                            
-                        individual_result, corruptRecords = AddLoggerTemp(csv_input,file.filename)
+                        individual_result, corruptRecords, error = AddLoggerTemp(csv_input,file.filename)
                         if individual_result is not None:
                             result['total'] += individual_result['total']
                             result['success'] += individual_result['success']
@@ -169,6 +196,24 @@ def upload():
     if result is not None:
         if result.get('total') == 0:
             result = None
+        else:
+            with open(os.path.join(app.config['UPLOAD_FOLDER']+"upload_result.csv"),"w") as csvfile:
+                fieldnames = ['total', 'success','failure','corruptRecords']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerow({'total': result['total'], 'success':result['success'],'failure':result['failure']})
+                if corruptRecords is not None:
+                    for record in corruptRecords:
+                        writer.writerow({'corruptRecords':record})
+
+    if 'download' in request.form:
+        result=[]
+        with open(os.path.join(app.config['UPLOAD_FOLDER']+"upload_result.csv"),"r") as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                result.append(row)
+        return excel.make_response_from_array(result, "csv", file_name="upload_temperature_file_results")
+
     return render_template('upload.html', result=result, error=error)
 
 def AddLoggerType(reader):
@@ -203,10 +248,12 @@ def AddLoggerTemp(reader,filename):
     properCounter = 0;
     corruptCounter = 0;
     insertCorruptCounter = 0;
+    error = None
     microsite_id = filename.rsplit('_', 5)[0].upper()
     logger_id = db.FindMicrositeId(microsite_id)
     if logger_id == None:
-        return None, None
+        error = "The microsite_id dose not exist. Please upload logger data file first"
+        return None, None, error
     for record in reader:
         parsedRecordDict,error = db.parseLoggerTemp(record)
         if (not error):
@@ -219,8 +266,9 @@ def AddLoggerTemp(reader,filename):
         properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
+
     db.close()
-    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
+    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords, error
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.
