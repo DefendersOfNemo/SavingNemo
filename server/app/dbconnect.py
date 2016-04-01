@@ -131,10 +131,8 @@ class DbConnect(object):
 
         if analysis_type == "Daily":                        # Daily
             date_field = "DATE_FORMAT(temp.Time_GMT, '%m/%d/%Y')"
-        elif analysis_type == "Weekly":                     # Weekly
-            date_field = "WEEK(temp.Time_GMT)"
         elif analysis_type == "Monthly":                    # Monthly
-            date_field = "MONTHNAME(temp.Time_GMT)"
+            date_field = "CONCAT_WS(', ', MONTHNAME(temp.Time_GMT), YEAR(temp.Time_GMT))"
         elif analysis_type == "Yearly":                     # Yearly
             date_field = "YEAR(temp.Time_GMT)"
         else:                                               # Raw, no change
@@ -150,7 +148,7 @@ class DbConnect(object):
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)
-        final_result = [[result[0], round(result[1], 4)] for result in results]
+        final_result = [[result[0], round(result[1], 3)] for result in results]
         cursor.close()
         return final_result, query + where_condition
 
@@ -182,10 +180,8 @@ class DbConnect(object):
         where += " AND cast(temp.Time_GMT as date) >= \'"+queryDict.get('start_date')+"\' AND cast(temp.Time_GMT as date) <= \'"+queryDict.get('end_date')+"\'"
         if analysis_type == "Daily":
             where += " GROUP BY cast(temp.Time_GMT as date)"
-        elif analysis_type == "Weekly":
-            where += " GROUP BY WEEK(temp.Time_GMT)"
         elif analysis_type == "Monthly":
-            where += " GROUP BY MONTHNAME(temp.Time_GMT)"
+            where += " GROUP BY YEAR(temp.Time_GMT), MONTHNAME(temp.Time_GMT)"
         elif analysis_type == "Yearly":
             where += " GROUP BY YEAR(temp.Time_GMT)"
         else:

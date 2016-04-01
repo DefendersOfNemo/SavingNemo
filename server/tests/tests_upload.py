@@ -149,7 +149,7 @@ class UploadTestCase(unittest.TestCase):
                     "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
                     "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` ")
             cursor = self.db.connection.cursor()
-            cursor.execute(query  + where_condition)
+            cursor.execute(query + where_condition)
             results = cursor.fetchone()
             if results is not None:
                 results = results[0]     

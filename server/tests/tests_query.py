@@ -139,8 +139,7 @@ class QueryFormTestCase(unittest.TestCase):
                         "wave_exp" : "Dummy",
                         "start_date": "7/1/2000",
                         "end_date": "7/2/2000",
-                        "output_type" : "Raw",
-                        "analysis_type" : ""},
+                        "output_type" : "Raw"},
                             follow_redirects=False)            
             self.assertIn(b"14", response.data)
             self.assertIn(b"13.5", response.data)
@@ -244,113 +243,6 @@ class QueryFormTestCase(unittest.TestCase):
             self.assertNotIn(b"13.5", response.data)
             self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
 
-    def test_query_results_min_weekly(self):
-            """Test the query results functionality for Min Weekly"""
-            with app.test_client() as client:
-                response = client.get('/_submit_query', 
-                            query_string={
-                            "microsite_id" : "DUMMYID",
-                            "site" : "DUMMYSITE",
-                            "biomimic_type" : "Dummybiomimictype",
-                            "country" : "Dummycountry",
-                            "state_province" : "Dummystate",
-                            "location" : "Dummylocation",
-                            "field_lat" : "36.621933330000",
-                            "field_lon" : "-121.905316700000",
-                            "zone" : "Dummy",
-                            "sub_zone" : "Dummy",
-                            "wave_exp" : "Dummy",
-                            "start_date": "1/1/2000",
-                            "end_date": "1/1/2003",
-                            "output_type" : "Min",
-                            "analysis_type" : "Weekly"},
-                                follow_redirects=False)            
-                self.assertIn(b"13.5", response.data)
-                self.assertNotIn(b"14", response.data)
-                self.assertIn(b"10", response.data)
-                self.assertIn(b"7", response.data)
-                self.assertIn(b"20.0", response.data)
-                #Test the download functionality
-                response = client.get('/download')
-                self.assertIn(b"13.5", response.data)
-                self.assertNotIn(b"14", response.data)
-                self.assertIn(b"20.0", response.data)
-                self.assertIn(b"10", response.data)
-                self.assertIn(b"7", response.data)
-                self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
-
-    def test_query_results_max_weekly(self):
-        """Test the query results functionality for Max Weekly"""
-        with app.test_client() as client:
-            response = client.get('/_submit_query', 
-                        query_string={
-                        "microsite_id" : "DUMMYID",
-                        "site" : "DUMMYSITE",
-                        "biomimic_type" : "Dummybiomimictype",
-                        "country" : "Dummycountry",
-                        "state_province" : "Dummystate",
-                        "location" : "Dummylocation",
-                        "field_lat" : "36.621933330000",
-                        "field_lon" : "-121.905316700000",
-                        "zone" : "Dummy",
-                        "sub_zone" : "Dummy",
-                        "wave_exp" : "Dummy",
-                        "start_date": "1/1/2000",
-                        "end_date": "1/1/2003",
-                        "output_type" : "Max",
-                        "analysis_type" : "Weekly"},
-                            follow_redirects=False)            
-            self.assertIn(b"14", response.data)
-            self.assertNotIn(b"13.5", response.data)
-            self.assertIn(b"10", response.data)
-            self.assertIn(b"20.0", response.data)
-            
-            #Test the download functionality
-            response = client.get('/download')
-            self.assertIn(b"14", response.data)
-            self.assertNotIn(b"13.5", response.data)
-            self.assertIn(b"10", response.data)
-            self.assertIn(b"20.0", response.data)
-            self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
-
-    def test_query_results_average_weekly(self):
-        """Test the query results functionality for Average Weekly"""
-        with app.test_client() as client:
-            response = client.get('/_submit_query', 
-                        query_string={
-                        "microsite_id" : "DUMMYID",
-                        "site" : "DUMMYSITE",
-                        "biomimic_type" : "Dummybiomimictype",
-                        "country" : "Dummycountry",
-                        "state_province" : "Dummystate",
-                        "location" : "Dummylocation",
-                        "field_lat" : "36.621933330000",
-                        "field_lon" : "-121.905316700000",
-                        "zone" : "Dummy",
-                        "sub_zone" : "Dummy",
-                        "wave_exp" : "Dummy",
-                        "start_date": "1/1/2000",
-                        "end_date": "1/1/2003",
-                        "output_type" : "Average",
-                        "analysis_type" : "Weekly"},
-                            follow_redirects=False)            
-            self.assertIn(b"13.75", response.data)
-            self.assertNotIn(b"14", response.data)
-            self.assertNotIn(b"13.5", response.data)
-            self.assertIn(b"10", response.data)
-            self.assertIn(b"11", response.data)
-            self.assertIn(b"20.0", response.data)
-            
-            #Test the download functionality
-            response = client.get('/download')
-            self.assertIn(b"13.75", response.data)
-            self.assertNotIn(b"14", response.data)
-            self.assertNotIn(b"13.5", response.data)
-            self.assertIn(b"10", response.data)
-            self.assertIn(b"11", response.data)
-            self.assertIn(b"20.0", response.data)
-            self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
-
     def test_query_results_min_monthly(self):
             """Test the query results functionality for Min Monthly"""
             with app.test_client() as client:
@@ -374,18 +266,18 @@ class QueryFormTestCase(unittest.TestCase):
                                 follow_redirects=False)            
                 self.assertIn(b"13.5", response.data)
                 self.assertNotIn(b"14", response.data)
-                self.assertNotIn(b"10", response.data)
+                self.assertIn(b"10", response.data)
                 self.assertNotIn(b"20.0", response.data)
-                self.assertNotIn(b"15", response.data)
+                self.assertIn(b"15", response.data)
                 self.assertIn(b"7", response.data)
                 
                 #Test the download functionality
                 response = client.get('/download')
                 self.assertIn(b"13.5", response.data)
                 self.assertNotIn(b"14", response.data)
-                self.assertNotIn(b"10", response.data)
+                self.assertIn(b"10", response.data)
                 self.assertNotIn(b"20.0", response.data)
-                self.assertNotIn(b"15", response.data)
+                self.assertIn(b"15", response.data)
                 self.assertIn(b"7", response.data)
                 self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
 
@@ -414,7 +306,8 @@ class QueryFormTestCase(unittest.TestCase):
             self.assertNotIn(b"13.5", response.data)
             self.assertIn(b"20.0", response.data)
             self.assertNotIn(b"10", response.data)
-            self.assertNotIn(b"15", response.data)
+            self.assertIn(b"15.0", response.data)
+            self.assertIn(b"7", response.data)
             
             #Test the download functionality
             response = client.get('/download')
@@ -422,7 +315,8 @@ class QueryFormTestCase(unittest.TestCase):
             self.assertNotIn(b"13.5", response.data)
             self.assertIn(b"20.0", response.data)
             self.assertNotIn(b"10", response.data)
-            self.assertNotIn(b"15", response.data)
+            self.assertIn(b"15.0", response.data)
+            self.assertIn(b"7", response.data)
             self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
 
     def test_query_results_average_monthly(self):
@@ -449,20 +343,20 @@ class QueryFormTestCase(unittest.TestCase):
             self.assertIn(b"13.75", response.data)
             self.assertNotIn(b"14", response.data)
             self.assertNotIn(b"13.5", response.data)
-            self.assertIn(b"13", response.data)
+            self.assertIn(b"15.0", response.data)
+            self.assertIn(b"7.0", response.data)
             self.assertNotIn(b"10", response.data)
             self.assertNotIn(b"20.0", response.data)
-            self.assertNotIn(b"15", response.data)
-            
+                        
             #Test the download functionality
             response = client.get('/download')
             self.assertIn(b"13.75", response.data)
             self.assertNotIn(b"14", response.data)
             self.assertNotIn(b"13.5", response.data)
-            self.assertIn(b"13", response.data)
-            self.assertNotIn(b"20.0", response.data)
+            self.assertIn(b"15.0", response.data)
+            self.assertIn(b"7.0", response.data)
             self.assertNotIn(b"10", response.data)
-            self.assertNotIn(b"15", response.data)
+            self.assertNotIn(b"20.0", response.data)
             self.assertIn(b"biomimic_type:Dummybiomimictype", response.data)
 
     def test_query_results_min_yearly(self):
