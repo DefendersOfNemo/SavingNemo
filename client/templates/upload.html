@@ -106,6 +106,7 @@
             </div>
              <br><br>
             <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
+
         </form>
         {% if error %}
             <p class="error"><strong>Error:</strong> {{ error }}
@@ -130,11 +131,34 @@
               </tbody>
             </table>
           </div>
+          <form action="/upload" method="post" enctype= "multipart/form-data">
+            <button type="submit" name="download" value="download" class="btn-default btn-lg"> Download Detail Message </button> 
+          </form>
+  
         {% endif %}
     </div>
+
+
+  <div class="container" style="min-height:100% width:80%">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      {{message}}
+      </div>
+    {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+  {% block body %}{% endblock %}
+  </div>
+
+
 </body>
 </html>
 <script>
+
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
