@@ -109,7 +109,7 @@ $(function() {
         var select2 = $("#dropdown_menu_analysis_type_name")
         var select = $("#frequency-select")
         select.empty();
-        if (query_field10 == "All"){
+        if (query_field10 == "Raw"){
             select.empty()         
         } else {
             select.empty()
