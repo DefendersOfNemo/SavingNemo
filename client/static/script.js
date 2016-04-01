@@ -105,18 +105,18 @@ $(function() {
     });
 
     $('#dropdown_menu_output_type_name').change( function () {
-    var query_field10 = $("#dropdown_menu_output_type_name option:selected").text();
-    var select2 = $("#dropdown_menu_analysis_type_name")
-    var select = $("#frequency-select")
-    select.empty();
-    if (query_field10 == "All"){
-        select.empty()         
-    } else {
-        select.empty()
-        select.append('<label for="dropdown_menu_analysis_type_name">Temperature Frequecy:</label>')
-        select.append('<select id ="dropdown_menu_analysis_type_name" class="form-control"><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Yearly">Yearly</option>')
-        select.append('</select>')
-    }
+        var query_field10 = $("#dropdown_menu_output_type_name option:selected").text();
+        var select2 = $("#dropdown_menu_analysis_type_name")
+        var select = $("#frequency-select")
+        select.empty();
+        if (query_field10 == "All"){
+            select.empty()         
+        } else {
+            select.empty()
+            select.append('<label for="dropdown_menu_analysis_type_name">Temperature Frequecy:</label>')
+            select.append('<select id ="dropdown_menu_analysis_type_name" class="form-control"><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Yearly">Yearly</option>')
+            select.append('</select>')
+        }
     });
 
     function fieldValidation(){
@@ -129,16 +129,40 @@ $(function() {
         var query_field7 = $("#dropdown_menu_wave_exp_name option:selected").text()
         var query_field8 = $("#date_pick_from").val()
         var query_field9 = $("#date_pick_to").val()
+        var query_field10 = $("#dropdown_menu_output_type_name option:selected").text()
+        var query_field11 = $("#dropdown_menu_analysis_type_name option:selected").text()
+        var date_format = new RegExp (/\d{2}\/\d{2}\/\d{4}/)
+        var date1 = date_format.test(query_field8)
+        var date2 = date_format.test(query_field9)
         var valid = false
-        if ((query_field1 != "Please select Biomimic Type") && (query_field2 != "Please select Country Name") && (query_field3 != "Please select State Name") && (query_field4 != "Please select Location Name") && (query_field5 != "Please select Zone Name") && (query_field6 != "Please select Sub zone") && (query_field7 != "Please select Wave Exposure") && (query_field8 != '') && (query_field9 != '')){
+        if ((query_field1 != "Please select Biomimic Type") && (query_field2 != "Please select Country Name") && (query_field3 != "Please select State Name") && (query_field4 != "Please select Location Name") && (query_field5 != "Please select Zone Name") && (query_field6 != "Please select Sub zone") && (query_field7 != "Please select Wave Exposure") && (query_field8 != '') && (query_field9 != '') && (date1 == true) && (date2 == true)){
             valid = true
         }
         return valid
     }
 
+    function tableheader(){
+        frequency = $("#dropdown_menu_analysis_type_name option:selected").text()
+        if (frequency == "Daily") {
+            var title = ("Date")
+        } 
+        else if (frequency == "Weekly") {
+            var title = ("Week No")
+        }
+        else if (frequency == "Monthly") {
+            var title = ("Month")
+        }
+        else if (frequency == "Yearly") {
+            var title = ("Year")
+        }
+        else if (frequency == '') {
+            var title = ("Timestamp")
+        }
+        return title        
+    }
+
     $('#button_submit_query').click(function () {
-    if (fieldValidation())
-        {
+        if (fieldValidation()){
             $.getJSON('/_submit_query', {
                 biomimic_type: $("#dropdown_menu_biomimic_type option:selected").text(),
                 country: $("#dropdown_menu_country_name option:selected").text(),
@@ -168,7 +192,7 @@ $(function() {
                     options.empty()
                     title.empty()
                     title.append("<h4>Data preview</h4>")
-                    options.append("<thead><tr><th>Timestamp</th><th>Temperature</th></tr></thead><tbody>")
+                    options.append("<thead><tr><th>"+tableheader()+"</th><th>Temperature</th></tr></thead><tbody>")
                     $.each(data.list_of_results, function(key, value) {
                         options.append("<tr><td>"+value[0]+"</td><td>"+value[1]+"</td></tr>")
                     });
