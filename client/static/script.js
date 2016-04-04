@@ -113,7 +113,7 @@ $(function() {
             select.empty()         
         } else {
             select.empty()
-            select.append('<label for="dropdown_menu_analysis_type_name">Temperature Frequecy:</label>')
+            select.append('<label for="dropdown_menu_analysis_type_name">Temperature Frequency:</label>')
             select.append('<select id ="dropdown_menu_analysis_type_name" class="form-control"><option value="Daily">per Day</option><option value="Monthly">per Month and Year</option><option value="Yearly">per Year</option>')
             select.append('</select>')
         }
@@ -131,13 +131,22 @@ $(function() {
         var query_field9 = $("#date_pick_to").val()
         var query_field10 = $("#dropdown_menu_output_type_name option:selected").text()
         var query_field11 = $("#dropdown_menu_analysis_type_name option:selected").val()
-        alert(query_field11)
         var date_format = new RegExp (/\d{2}\/\d{2}\/\d{4}/)
         var date1 = date_format.test(query_field8)
         var date2 = date_format.test(query_field9)
         var valid = false
-        if ((query_field1 != "Please select Biomimic Type") && (query_field2 != "Please select Country Name") && (query_field3 != "Please select State Name") && (query_field4 != "Please select Location Name") && (query_field5 != "Please select Zone Name") && (query_field6 != "Please select Sub zone") && (query_field7 != "Please select Wave Exposure") && (query_field8 != '') && (query_field9 != '') && (date1 == true) && (date2 == true)){
-            valid = true
+        if ((query_field1 != "Please select Biomimic Type") && 
+            (query_field2 != "Please select Country Name") && 
+            (query_field3 != "Please select State Name") && 
+            (query_field4 != "Please select Location Name") && 
+            (query_field5 != "Please select Zone Name") && 
+            (query_field6 != "Please select Sub zone") && 
+            (query_field7 != "Please select Wave Exposure") && 
+            (query_field8 != '') && 
+            (query_field9 != '') && 
+            (date1 == true) && 
+            (date2 == true)){
+                valid = true
         }
         return valid
     }
