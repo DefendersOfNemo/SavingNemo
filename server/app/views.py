@@ -58,7 +58,6 @@ def query():
 def submit_query():
     '''get values of form and query Database to get preview results'''
     form  = dict(request.args)
-    print("form: ", form)
     query = {}
     query["biomimic_type"] = form.get("biomimic_type")[0]
     query["country"] = form.get("country")[0]
@@ -194,7 +193,6 @@ def upload():
             else:
                 error = "Please choose a file first"
     if result is not None:
-        print(corruptRecords)
         if result.get('total') == 0:
             result = None
     return render_template('upload.html', result=result, error=error)
