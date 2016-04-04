@@ -64,7 +64,7 @@ $(function() {
     
     $('#dropdown_menu_location_name').change( function () {
         $.getJSON('/_parse_data', {
-            select_type: "lt_for_zone",
+            select_type: "zone",
             select_value: biomimic_type
         }).done(function(data) {
             $('#dropdown_menu_zone_name').empty()
@@ -77,9 +77,11 @@ $(function() {
     });
     
     $('#dropdown_menu_zone_name').change( function () {
+        zone_type = $("#dropdown_menu_zone_name option:selected").text();
+        alert(biomimic_type.concat("_", zone_type))
         $.getJSON('/_parse_data', {
-            select_type: "lt_for_subzone",
-            select_value: biomimic_type
+            select_type: "subzone",
+            select_value: biomimic_type.concat("_", zone_type)
             }).done(function(data) {
             $('#dropdown_menu_sub_zone_name').empty()
             $("#dropdown_menu_sub_zone_name").append('<option value="">Please select Sub Zone</option>')
@@ -92,7 +94,7 @@ $(function() {
         
     $('#dropdown_menu_sub_zone_name').change( function () {
         $.getJSON('/_parse_data', {
-            select_type: "lt_for_wave_exp",
+            select_type: "wave_exp",
             select_value: biomimic_type
             }).done(function(data) {
             $('#dropdown_menu_wave_exp_name').empty()

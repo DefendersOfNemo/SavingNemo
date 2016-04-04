@@ -111,15 +111,15 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_form_location_name_select(self):
         """Test the ajax call functionality if location_name field is selected"""
-        self.check_ajax("lt_for_zone", "DummyBiomimicType", self.db.getZone)
+        self.check_ajax("zone", "DummyBiomimicType", self.db.getZone)
 
     def test_form_Zone_name_select(self):
         """Test the ajax call functionality if zone_name field is selected"""
-        self.check_ajax("lt_for_subzone", "DummyBiomimicType", self.db.getSubZone)    
+        self.check_ajax("subzone", "DummyBiomimicType_DummyZone", self.db.getSubZone)    
 
     def test_form_SubZone_name_select(self):
         """Test the ajax call functionality if subZone_name field is selected"""
-        self.check_ajax("lt_for_wave_exp", "DummyBiomimicType", self.db.getWaveExp)    
+        self.check_ajax("wave_exp", "DummyBiomimicType", self.db.getWaveExp)    
 
     def test_query_results_raw(self):
         """Test the query results functionality for Raw"""

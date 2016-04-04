@@ -80,13 +80,20 @@ class DbConnect(object):
         cursor.close()
         return final_result
 
-    def getSubZone(self, biomimic_type):
+    def getSubZone(self, value):
         """Fetches Distinct Subzones given logger biomimic type"""
+        biomimic_type, zone_type = value.split("_")
         cursor = self.connection.cursor()
-        query = ("SELECT DISTINCT prop.sub_zone FROM `cnx_logger` logger "
-                 "INNER JOIN `cnx_logger_biomimic_type` bio ON bio.`biomimic_id`=logger.`biomimic_id` "
-                 "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id`=logger.`prop_id` "
-                 "WHERE bio.biomimic_type=\'%s\'") % biomimic_type
+        if zone_type == "All":
+            query = ("SELECT DISTINCT prop.sub_zone FROM `cnx_logger` logger "
+                     "INNER JOIN `cnx_logger_biomimic_type` bio ON bio.`biomimic_id`=logger.`biomimic_id` "
+                     "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id`=logger.`prop_id` "
+                     "WHERE bio.biomimic_type=\'%s\'") % biomimic_type
+        else:
+            query = ("SELECT DISTINCT prop.sub_zone FROM `cnx_logger` logger "
+                     "INNER JOIN `cnx_logger_biomimic_type` bio ON bio.`biomimic_id`=logger.`biomimic_id` "
+                     "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id`=logger.`prop_id` "
+                     "WHERE bio.biomimic_type=\'%s\' AND prop.zone=\'%s\'") % (biomimic_type, zone_type)
         cursor.execute(query)
         result = cursor.fetchall()
         result = set(result)
