@@ -23,6 +23,7 @@ class UploadTestCase(unittest.TestCase):
         self.db.close()
     
     def cleanUpLoggerTemp(self, cursor):
+        ''' clean up table cnx_logger_temperature'''
         cursor.execute("SELECT logger_temp_id FROM `cnx_logger_temperature`")
         results = cursor.fetchall()
         if results is not None:
@@ -33,6 +34,7 @@ class UploadTestCase(unittest.TestCase):
             self.db.connection.commit()
 
     def cleanUpLoggerType(self, cursor, rec):
+        ''' clean up logger type tables'''
         biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
         geo_id = self.db.fetchExistingGeoId(cursor, rec)
         prop_id = self.db.fetchExistingPropId(cursor, rec)
@@ -46,9 +48,21 @@ class UploadTestCase(unittest.TestCase):
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
     
-    def stringToBytes(self, stringValue):
-        """Convert Strings to their Bytes representation"""
-        return bytes(stringValue, 'UTF-8')
+    def buildTypeWhereCondition(self, queryDict):
+        """Builds the where_condition for the Select Query"""
+        where = (" WHERE biotype.`biomimic_type`=\'%s\' AND geo.`country`=\'%s\' AND geo.`state_province`= \'%s\' AND geo.`location`=\'%s\'") % \
+                (queryDict.get('biomimic_type'), queryDict.get('country'), \
+                    queryDict.get('state_province'), queryDict.get('location'))
+        if queryDict.get('zone') != "All":
+            where += " AND prop.`zone`=\'%s\'" % (queryDict.get('zone'))
+        if queryDict.get('sub_zone') != "All" :
+            where += " AND prop.`sub_zone`=\'%s\'" % (queryDict.get('sub_zone'))
+        if queryDict.get('wave_exp') != "All":
+            if (queryDict.get('wave_exp') == 'None'): 
+                where += " and prop.wave_exp is Null"
+            else:
+                where += " AND prop.`wave_exp`=\'%s\' " % (queryDict.get('wave_exp'))
+        return where
 
     def test_uploaded_logger_type_file_extension(self):
         """Test that uploaded logger type file has correct extensions"""
@@ -97,7 +111,7 @@ class UploadTestCase(unittest.TestCase):
                 data={
                     'loggerTypeFile':  (BytesIO(b'logger Type File'), '')
                     }, follow_redirects=True)
-            self.assertIn(b'Please choose a File first', response.data)
+            self.assertIn(b'Please choose a file first', response.data)
 
     def test_uploaded_logger_temp_file_missing(self):
         """Test that uploaded logger temp file is not missing"""
@@ -106,7 +120,7 @@ class UploadTestCase(unittest.TestCase):
                 data={
                     'loggerTempFile':  (BytesIO(b'logger Temp File'), '')
                     }, follow_redirects=True)
-            self.assertIn(b'Please choose a File first', response.data)
+            self.assertIn(b'Please choose a file first', response.data)
 
     def test_logger_type_upload(self):
         """Test that file with valid Type uploads is inserted in DB."""
@@ -128,20 +142,22 @@ class UploadTestCase(unittest.TestCase):
                     "zone" : "Dummy",
                     "sub_zone" : "Dummy",
                     "wave_exp" : "Dummy"}
-            where_condition = self.db.buildWhereCondition(record)
+            where_condition = self.buildTypeWhereCondition(record)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
                     "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` ")
             cursor = self.db.connection.cursor()
-            cursor.execute(query  + where_condition)
+            cursor.execute(query + where_condition)
             results = cursor.fetchone()
             if results is not None:
                 results = results[0]     
             self.cleanUpLoggerType(cursor, record)
             cursor.close()
             self.assertEqual(record['microsite_id'], results)
+            self.assertIn(b"<td># Proper Records</td>\n                  <td>1</td>", response.data)
+            self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
 
     def test_logger_type_upload_corrupt(self):
         """Test that Logger Type file with corrupt records cannot be uploaded"""
@@ -162,7 +178,7 @@ class UploadTestCase(unittest.TestCase):
                                     "zone" : "Dummy",
                                     "sub_zone" : "Dummy",
                                     "wave_exp" : "Dummy"}
-            where_condition = self.db.buildWhereCondition(record_corrupt_ncolumns)
+            where_condition = self.buildTypeWhereCondition(record_corrupt_ncolumns)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
@@ -185,7 +201,7 @@ class UploadTestCase(unittest.TestCase):
                                             "zone" : "Dummy",
                                             "sub_zone" : "Dummy",
                                             "wave_exp" : "Dummy"}
-            where_condition = self.db.buildWhereCondition(record_corrupt_coordinates)
+            where_condition = self.buildTypeWhereCondition(record_corrupt_coordinates)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
@@ -218,7 +234,7 @@ class UploadTestCase(unittest.TestCase):
                     "zone" : "Dummy",
                     "sub_zone" : "Dummy",
                     "wave_exp" : "Dummy"}
-            where_condition = self.db.buildWhereCondition(record)
+            where_condition = self.buildTypeWhereCondition(record)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
@@ -245,6 +261,7 @@ class UploadTestCase(unittest.TestCase):
                 data={
                     'loggerTempFile':  (open(test_temp_filename, 'rb'), 'DUMMYID_2000_pgsql.txt')
                     }, follow_redirects=True)
+            
             record_type = {
                     "microsite_id" : "DUMMYID",
                     "site" : "DUMMYSITE",
@@ -256,17 +273,19 @@ class UploadTestCase(unittest.TestCase):
                     "field_lon" : "-121.905316700000",
                     "zone" : "Dummy",
                     "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy"}
+                    "wave_exp" : "Dummy",
+                    "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
+                    "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}
             record_temp = [{
-                            "Time_GMT" : datetime.datetime.strptime("7/1/2000 2:01", '%m/%d/%Y %H:%M'),
+                            "Time_GMT" : "7/1/2000 2:01",
                             "Temp_C" : 14
                             },
                             {
-                            "Time_GMT" : datetime.datetime.strptime("7/1/2000 2:21", '%m/%d/%Y %H:%M'),
+                            "Time_GMT" : "7/1/2000 2:21",
                             "Temp_C" : 13.5
                             }]            
             where_condition = self.db.buildWhereCondition(record_type)
-            query = ("SELECT temp.Time_GMT, temp.Temp_C  "
+            query = ("SELECT DATE_FORMAT(temp.Time_GMT,'%m/%d/%Y %H:%i'), temp.Temp_C  "
                     "FROM `cnx_logger` logger "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
@@ -280,15 +299,17 @@ class UploadTestCase(unittest.TestCase):
             self.cleanUpLoggerTemp(cursor)
             self.cleanUpLoggerType(cursor, record_type)            
             cursor.close()
-            self.assertEqual(record_temp[0]['Time_GMT'], results[0][0])
+            self.assertEqual(datetime.datetime.strptime(record_temp[0]['Time_GMT'],'%m/%d/%Y %H:%M'), datetime.datetime.strptime(results[0][0], '%m/%d/%Y %H:%M'))
             self.assertEqual(record_temp[0]['Temp_C'], results[0][1])
-            self.assertEqual(record_temp[1]['Time_GMT'], results[1][0])
+            self.assertEqual(datetime.datetime.strptime(record_temp[1]['Time_GMT'],'%m/%d/%Y %H:%M'), datetime.datetime.strptime(results[1][0], '%m/%d/%Y %H:%M'))
             self.assertEqual(record_temp[1]['Temp_C'], results[1][1])
+            self.assertIn(b"<td># Proper Records</td>\n                  <td>6</td>", response.data)
+            self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
 
     def test_logger_temperature_upload_corrupt(self):
         """Test that Logger Temperature file with corrupt records cannot be uploaded"""
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
-        test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_corrupt.txt'
+        test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_corrupt.csv'
         with app.test_client() as client:
             response = client.post('/upload', 
                 data={
@@ -309,7 +330,9 @@ class UploadTestCase(unittest.TestCase):
                     "field_lon" : "-121.905316700000",
                     "zone" : "Dummy",
                     "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy"}        
+                    "wave_exp" : "Dummy",
+                    "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
+                    "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}        
             where_condition = self.db.buildWhereCondition(record_type)
             query = ("SELECT temp.Time_GMT, temp.Temp_C  "
                     "FROM `cnx_logger` logger "
@@ -349,7 +372,9 @@ class UploadTestCase(unittest.TestCase):
                     "field_lon" : "-121.905316700000",
                     "zone" : "Dummy",
                     "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy"}        
+                    "wave_exp" : "Dummy",
+                    "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
+                    "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}        
             where_condition = self.db.buildWhereCondition(record_type)
             query = ("SELECT temp.Time_GMT, temp.Temp_C  "
                     "FROM `cnx_logger` logger "

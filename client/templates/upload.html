@@ -78,7 +78,7 @@
            <h1>Upload Files</h1>
        </div>
     <div class= container>
-        <h2>Upload Logger Type</h2>
+        <h2>Upload new Logger Data</h2>
 
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <div class= "input-group col-md-6">
@@ -96,7 +96,7 @@
             </form>
             <br><br>
 
-        <h2>Upload Logger Temperature</h2>
+        <h2>Upload new Logger Temperature</h2>
         <form action="/upload" method="post" enctype= "multipart/form-data">
             <div class= "input-group col-md-6 ">
                 <span class="input-group-btn">
@@ -114,6 +114,27 @@
         <br>
         {% if error %}
             <p class="error"><h2 class= "container text-danger"><strong>Error:</strong> {{ error }}<h2></p>
+        {% endif %}
+        {% if result %}
+          <div class="container" id="query-results-table" >
+            <table class="table table-bordered" id="statistics-table">
+              <thead><h1>Upload Statistics: </h1></thead>
+              <tbody>
+                <tr>
+                  <td># Total Records</td>
+                  <td>{{ result.total }}</td>
+                </tr>
+                <tr>
+                  <td># Proper Records</td>
+                  <td>{{ result.success }}</td>
+                </tr>
+                <tr>
+                  <td># Corrupt Records</td>
+                  <td>{{ result.failure }}</td>
+                </tr>                
+              </tbody>
+            </table>
+          </div>
         {% endif %}
     </div>
 </body>

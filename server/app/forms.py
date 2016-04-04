@@ -14,11 +14,7 @@ class QueryForm(Form):
     date_pick_from = DateField('date_pick_from', format='%m/%d/%Y')
     date_pick_to = DateField('date_pick_to', format='%m/%d/%Y')
     # Static Choices. These wouldn't change.
-    measurement_interval_choices = [('Daily', 'Daily'), ('Monthly', 'Monthly'), \
-                                    ('Yearly', 'Yearly')]
-    measurement_interval = SelectField(u'measurement_interval', \
-                            choices=measurement_interval_choices)
-    analysis_type_choices = [('Min_Max', 'Max/Min Only'), ('Mean', 'Mean'), \
-                             ('Median', 'Median')]
-    analysis_type = SelectField(u'analysis_type', \
-                    choices=analysis_type_choices)
+    output_type_choices = [('Raw', 'Raw'), ('Min', 'Min'), ('Max', 'Max'), ('Average', 'Average')]
+    output_type = SelectField(u'output_type', choices=output_type_choices)
+    analysis_type = SelectField(u'analysis_type', choices=[])
+    

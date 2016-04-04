@@ -124,25 +124,22 @@
                         <select id ="dropdown_menu_wave_exp_name" class="form-control" required>
                             <option value="">Please select Wave Exposure</option>
                         </select>
-                    </div>
+                    </div>                    
                 </div>
                 <br>
-                   <!-- Third row in query form -->
+                <!-- Third row in query form -->
                 <div class="row">
                     <div class="col-md-3 form-group">
                         <label for="dropdown_menu_output_type_name">Statistic:</label>
-                        <select id ="dropdown_menu_output_type_name" class="form-control">
-                            <!-- <option value="">Please select statistic type</option > -->
-                            <option value="">All</option>
-                            <option value="Max">Max</option>
-                            <option value="Min">Min</option>
-                            <option value="Average">Average</option>
+                        <select id ="dropdown_menu_output_type_name" class="form-control">                            
+                            {% for type in form.output_type %}
+                                {{ type }}
+                            {% endfor%}
                         </select>
                     </div>
-                    <!-- select option added if != All from statistic -->
                     <div class="col-md-3 form-group" id="frequency-select">
                     </div>
-                </div>
+                </div>               
                 </br>
                 </br>
                 <!-- Fourth row in query form -->
@@ -184,10 +181,9 @@
     </body>    
 </html>
   <!-- jQuery -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- scripts used by form -->
 <script src="../static/script.js"></script>
-<script>src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
