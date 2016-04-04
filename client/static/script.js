@@ -206,7 +206,11 @@ $(function() {
     });
 
     $(document).ready(function(){
-        $('[data-toggle="popover"]').popover(); 
+        $('[data-toggle="popover"]').popover();
+        
+        $("#alert").fadeTo(5000, 0).slideUp(500, function(){
+            $(this).alert(); 
+        }); 
     });
 
     $("form").submit(function(e) {

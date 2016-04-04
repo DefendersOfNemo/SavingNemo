@@ -11,6 +11,14 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
         <title>Database</title> 
     </head>
+    <style>
+        .alert {
+               padding-left:0;
+               padding-top:0;
+               padding-right:10;
+               padding-left:0;  
+            }
+    </style>
     <body>
         <!-- Links to header images-->
         <div>
@@ -36,7 +44,7 @@
                             <li><a href="{{ url_for('login') }}" data-toggle="popover" data-placement="top" data-trigger="hover"data-content="Please log in to upload data"><span class="glyphicon glyphicon-log-in" ></span> Log in</a>
                             </li>
                         {% else %}
-                            <li><a href="{{ url_for('upload') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
+                            <li><a href="{{ url_for('upload') }}" data-toggle="popover" data-placement="top" data-trigger="hover"data-content="Please click upload data to access upload page"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
                             </li>
                             <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
                             </li>
@@ -45,9 +53,17 @@
                 </div>
             </div>
         </nav>
+        <p class="alert alert-info text-right" id="alert">
+            <strong>log in successful, please click upload data to access upload page</strong>
+        </p>
         <div class="container text-danger">
             <h1>DATABASE<h1>
         </div>
+            <!-- {% if session.logged_in %}
+                <div class="container alert alert-success col-md-4">
+                    log in successful, please click upload data to access upload page
+                </div>               
+            {% endif %} -->
         <div class="container text-right">
             <a href="#" data-toggle="popover" data-placement="left" class= "btn btn-info" data-trigger="hover" data-content="Please click and choose an option from each select field in the following order: Biomimic type, Country, State, Location, Zone, Sub Zone and Wave exposure">
                 <span class="glyphicon glyphicon-question-sign"></span> Help
