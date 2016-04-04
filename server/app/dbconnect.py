@@ -131,10 +131,8 @@ class DbConnect(object):
 
         if analysis_type == "Daily":                        # Daily
             date_field = "DATE_FORMAT(temp.Time_GMT, '%m/%d/%Y')"
-        elif analysis_type == "Weekly":                     # Weekly
-            date_field = "WEEK(temp.Time_GMT)"
         elif analysis_type == "Monthly":                    # Monthly
-            date_field = "MONTHNAME(temp.Time_GMT)"
+            date_field = "CONCAT_WS(', ', MONTHNAME(temp.Time_GMT), YEAR(temp.Time_GMT))"
         elif analysis_type == "Yearly":                     # Yearly
             date_field = "YEAR(temp.Time_GMT)"
         else:                                               # Raw, no change
@@ -150,7 +148,7 @@ class DbConnect(object):
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)
-        final_result = [[result[0], round(result[1], 4)] for result in results]
+        final_result = [[result[0], round(result[1], 3)] for result in results]
         cursor.close()
         return final_result, query + where_condition
 
@@ -182,27 +180,25 @@ class DbConnect(object):
         where += " AND cast(temp.Time_GMT as date) >= \'"+queryDict.get('start_date')+"\' AND cast(temp.Time_GMT as date) <= \'"+queryDict.get('end_date')+"\'"
         if analysis_type == "Daily":
             where += " GROUP BY cast(temp.Time_GMT as date)"
-        elif analysis_type == "Weekly":
-            where += " GROUP BY WEEK(temp.Time_GMT)"
         elif analysis_type == "Monthly":
-            where += " GROUP BY MONTHNAME(temp.Time_GMT)"
+            where += " GROUP BY YEAR(temp.Time_GMT), MONTHNAME(temp.Time_GMT)"
         elif analysis_type == "Yearly":
             where += " GROUP BY YEAR(temp.Time_GMT)"
         else:
             pass
         return where
 
-    def parseLoggerType(self, dataList):
+    def parseLoggerType(self, dataList, count):
         """Parse new Logger Type"""
         parsedRecord = dict()
         if (len(dataList) != 11):
-            return None, True
+            return None, 'L'
         else:
             if (self.isNotFloat(dataList[2]) or self.isNotFloat(dataList[3])):
-                return None, True
+                return None, 'F'
             else:
                 if (dataList[0] == "None" or dataList[0] == ""):
-                    return None, True
+                    return None, 'B'
                 else:
                     parsedRecord['microsite_id'] = str(dataList[0]).upper()
                     parsedRecord['site'] = (dataList[1]).upper()
@@ -215,7 +211,8 @@ class DbConnect(object):
                     parsedRecord['zone'] = dataList[8].capitalize()
                     parsedRecord['sub_zone'] = dataList[9].capitalize()
                     parsedRecord['wave_exp'] = None if (dataList[10] == "N/A") else dataList[10].capitalize()
-        return parsedRecord, False        
+                    parsedRecord['count'] = count
+        return parsedRecord, ''        
 
     def isNotFloat(self, value):
         '''check whether value is float'''
@@ -228,7 +225,7 @@ class DbConnect(object):
     def insertLoggerType(self, records):
         """Inserts new Logger Type in DB"""
         cursor = self.connection.cursor()
-        corruptRecords = list()
+        corruptRecords = ''
         properCounter = 0
         corruptCounter = 0
         corruptIndicator = False
@@ -244,7 +241,7 @@ class DbConnect(object):
                     geo_id = geo_id[0]
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords.append(record)
+                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
                     corruptCounter += 1
                     continue
                 
@@ -255,7 +252,7 @@ class DbConnect(object):
                     prop_id = prop_id[0]
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords.append(record)
+                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
                     corruptCounter += 1
                     continue
 
@@ -266,22 +263,22 @@ class DbConnect(object):
                     biomimic_id = biomimic_id[0]
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords.append(record)
+                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
                     corruptCounter += 1
                     continue
 
                 logger_id, corruptIndicator = self.insertMicrositeData(cursor, record.get('microsite_id'), biomimic_id, geo_id, prop_id)
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords.append(record)
+                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
                     corruptCounter += 1
                     continue
                 else:
                     self.connection.commit() 
                     properCounter += 1
             else:
-                corruptRecords.append(record)
-                corruptCounter += 1
+                corruptRecords += str(record.get('count')) + ',' + 'D' + ';'
+                corruptCounter += 1 
         cursor.close()
         return properCounter, corruptCounter, corruptRecords
     
@@ -382,32 +379,36 @@ class DbConnect(object):
         results = list(results)
         return len(results) > 0
 
-    def parseLoggerTemp(self, dataList):
+    def parseLoggerTemp(self, dataList, count):
         """Parse new Logger Temperature Data"""
         parsedRecord = dict()
         cursor = self.connection.cursor()
         if (len(dataList) != 2):
-            return None, True
+            return None, 'L'
         else:
             if (self.isNotFloat(dataList[1])):
-                return None, True
+                return None, 'F'
             else:
                 if (dataList[0] == "None" or dataList[0] == ""):
-                    return None, True
+                    return None, 'B'
                 else:
                     #handle datetime error
                     try:
                         parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%Y %H:%M')
                     except ValueError:
-                       return None, True
-                    parsedRecord['Temp_C'] = dataList[1]                    
-        return parsedRecord, False
+                        try:
+                            parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%y %H:%M')
+                        except ValueError:
+                            return None, 'FT'
+                    parsedRecord['Temp_C'] = dataList[1] 
+                    parsedRecord['count'] = count            
+        return parsedRecord, ''
 
 
     def insertLoggerTemp(self, records,logger_id):
         """Inserts new Logger Type in DB"""
         cursor = self.connection.cursor()
-        corruptRecords = list()
+        corruptRecords = ''
         properCounter = 0
         corruptCounter = 0
         corruptIndicator = False        
@@ -424,7 +425,7 @@ class DbConnect(object):
             else:
                 self.connection.rollback()
                 corruptCounter+=1
-                corruptRecords.append(record)
+                corruptRecords = corruptRecords + str(record.get("count")) + ',' + 'D' + ';'
         cursor.close()
         return properCounter, corruptCounter, corruptRecords
 
