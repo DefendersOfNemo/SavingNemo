@@ -78,7 +78,6 @@ $(function() {
     
     $('#dropdown_menu_zone_name').change( function () {
         zone_type = $("#dropdown_menu_zone_name option:selected").text();
-        alert(biomimic_type.concat("_", zone_type))
         $.getJSON('/_parse_data', {
             select_type: "subzone",
             select_value: biomimic_type.concat("_", zone_type)

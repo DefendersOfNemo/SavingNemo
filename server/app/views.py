@@ -9,50 +9,53 @@ from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 import io, csv, datetime, sys
 
+
+# def index():
+#     """Searches the database for entries, then displays them."""
+#     return render_template('index.html')
+
+################### Query ######################
 @app.route('/')
-@app.route('/home')
-def index():
-    """Searches the database for entries, then displays them."""
-    return render_template('index.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    """User login/authentication/session management."""
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
-            error = "Invalid Username. Please try again."
-        elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid Password. Please try again.'
-        else:
-            session['logged_in'] = True
-            return redirect(url_for('query'))
-    return render_template('login.html', error=error)
-
-@app.route('/logout')
-def logout():
-    """User logout/authentication/session management."""
-    session.pop('logged_in', None)
-    flash('You are logged out')
-    return redirect(url_for('query'))
-
 @app.route('/query', methods=['GET', 'POST'])
 def query():
+    """Function for rendering the query form"""
     error = None
     results = None
     db = DbConnect(app.config)
     biomimic_type_choices = db.getBiomimicTypes()
     db.close()
-
     form = QueryForm(request.form)
     form.biomimic_type.choices = biomimic_type_choices
-
-
     if request.method == 'GET':
         form.process()
     else:   
         pass
     return render_template('query.html', title='Query', form=form, error=error)
+
+@app.route('/_parse_data', methods=['GET'])
+def parse_data():
+    select_type = request.args.get('select_type', 'default')
+    select_value = request.args.get('select_value', 'default')
+    result = queryDb(select_type, select_value)
+    return jsonify(result)
+
+def queryDb(query_type, query_value):
+    '''Query Database to get options for each drop-down menu'''
+    result = None
+    db = DbConnect(app.config)
+    if query_type == "biomimic_type": 
+        result = db.getCountry(query_value)
+    elif query_type == "country_name":
+        result = db.getState(query_value)
+    elif query_type == "state_name":
+        result = db.getLocation(query_value)
+    elif query_type == "zone":
+        result = db.getZone(query_value)
+    elif query_type == "subzone":
+        result = db.getSubZone(query_value)
+    elif query_type == "wave_exp":
+        result = db.getWaveExp(query_value)
+    return result       
 
 @app.route('/_submit_query', methods=['GET'])
 def submit_query():
@@ -85,7 +88,6 @@ def download():
     db = DbConnect(app.config)
     query = session['query']
     db_query = session['db_query']
-
     time_title = ''
     if query.get("analysis_type") == "Daily":
         time_title = "Date"
@@ -100,31 +102,8 @@ def download():
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
 
-@app.route('/_parse_data', methods=['GET'])
-def parse_data():
-    select_type = request.args.get('select_type', 'default')
-    select_value = request.args.get('select_value', 'default')
-    result = queryDb(select_type, select_value)
-    return jsonify(result)
 
-def queryDb(query_type, query_value):
-    '''Query Database to get options for each drop-down menu'''
-    result = None
-    db = DbConnect(app.config)
-    if query_type == "biomimic_type": 
-        result = db.getCountry(query_value)
-    elif query_type == "country_name":
-        result = db.getState(query_value)
-    elif query_type == "state_name":
-        result = db.getLocation(query_value)
-    elif query_type == "zone":
-        result = db.getZone(query_value)
-    elif query_type == "subzone":
-        result = db.getSubZone(query_value)
-    elif query_type == "wave_exp":
-        result = db.getWaveExp(query_value)
-    return result       
-
+################### Upload ######################
 ALLOWED_EXTENSIONS_LOGGER_TYPE = set(['csv'])
 ALLOWED_EXTENSIONS_LOGGER_TEMP = set(['csv', 'txt'])
 
@@ -244,6 +223,28 @@ def AddLoggerTemp(reader,filename):
     corruptRecords += insertCorruptRecords
     db.close()
     return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords, None
+
+################### Login ######################
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """User login/authentication/session management."""
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != app.config['USERNAME']:
+            error = "Invalid Username. Please try again."
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid Password. Please try again.'
+        else:
+            session['logged_in'] = True
+            return redirect(url_for('query'))
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    """User logout/authentication/session management."""
+    session.pop('logged_in', None)
+    flash('You are logged out')
+    return redirect(url_for('query'))
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.
