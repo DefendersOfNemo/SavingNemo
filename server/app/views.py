@@ -93,19 +93,9 @@ def download():
         time_title = "Month, Year"
     elif query.get("analysis_type") == "Yearly":
         time_title = "Year" 
-    elif query.get("analysis_type") == '':
+    else:
         time_title = "Timestamp"
-
-    header = [("biomimic_type:" + query["biomimic_type"], \
-                "country:" + query["country"], \
-                "state_province:" + query["state_province"], \
-                "location:" + query["location"], \
-                "zone:" + query["zone"], \
-                "sub_zone:" + query["sub_zone"], \
-                "wave_exp:" + query["wave_exp"], \
-                "output_type:" + query["output_type"], \
-                "analysis_type:" + query.get("analysis_type")), \
-            (time_title,"Temperature")]
+    header = [[key + ":" + str(value) for key, value in query.items()], (time_title,"Temperature")]    
     query_results = header  + db.getQueryRawResults(session['db_query'])
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
