@@ -58,7 +58,7 @@ def query():
 def submit_query():
     '''get values of form and query Database to get preview results'''
     form  = dict(request.args)
-    query = {}
+    query = dict()
     query["biomimic_type"] = form.get("biomimic_type")[0]
     query["country"] = form.get("country")[0]
     query["state_province"] = form['state_province'][0]
@@ -117,11 +117,11 @@ def queryDb(query_type, query_value):
         result = db.getState(query_value)
     elif query_type == "state_name":
         result = db.getLocation(query_value)
-    elif query_type == "lt_for_zone":
+    elif query_type == "zone":
         result = db.getZone(query_value)
-    elif query_type == "lt_for_subzone":
+    elif query_type == "subzone":
         result = db.getSubZone(query_value)
-    elif query_type == "lt_for_wave_exp":
+    elif query_type == "wave_exp":
         result = db.getWaveExp(query_value)
     return result       
 
