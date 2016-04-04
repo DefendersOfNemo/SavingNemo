@@ -150,7 +150,7 @@ def allowed_file(filetype, filename):
 def upload():   
     '''Handle user upload functions, including logger type and logger temperature file'''
     result = None;
-    error=None;
+    error= None;
     if request.method == 'POST':
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']
@@ -178,15 +178,19 @@ def upload():
                         else:
                             csv_input = csv.reader(stream)
                         next(csv_input, None)  # skip the headers                            
-                        individual_result, corruptRecords, error = AddLoggerTemp(csv_input,file.filename)
+                        individual_result, corruptRecords, error_1 = AddLoggerTemp(csv_input,file.filename)
                         if individual_result is not None:
                             result['total'] += individual_result['total']
                             result['success'] += individual_result['success']
                             result['failure'] += individual_result['failure']
                             corruptRecords += file.filename + ':\n' + corruptRecords
                     else:
-                        error = "File " + file.filename + " should be in csv or txt format"
+                        error_1 = "File " + file.filename + " should be in csv or txt format"
                     file.close()
+                    if error == None:
+                        error = error_1
+                    elif error_1 != None:
+                        error += error_1
             else:
                 error = "Please choose a file first"
     if result is not None:
@@ -229,12 +233,13 @@ def AddLoggerTemp(reader,filename):
     properCounter = 0;
     corruptCounter = 0;
     insertCorruptCounter = 0;
+    errorMessage = ''
     error = ''
     microsite_id = filename.rsplit('_', 5)[0].upper()
     logger_id = db.FindMicrositeId(microsite_id)
     if logger_id == None:
-        error = "The microsite_id dose not exist. Please upload logger data file first"
-        return None, None, error
+        errorMessage = filename + ": The microsite_id dose not exist. Please upload logger data file first"+'\n'
+        return None, None, errorMessage
     count = 0
     for record in reader:
         parsedRecordDict,error = db.parseLoggerTemp(record, count)
@@ -250,7 +255,7 @@ def AddLoggerTemp(reader,filename):
     corruptCounter += insertCorruptCounter
     corruptRecords += insertCorruptRecords
     db.close()
-    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords, error
+    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords, None
 
 # This function makes sure the server only runs if the script is executed directly
 # from the Python interpreter and not used as an imported module.
