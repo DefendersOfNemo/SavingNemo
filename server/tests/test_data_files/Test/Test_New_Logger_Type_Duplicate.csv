@@ -1,3 +1,3 @@
 microsite_id,site,field_lat,field_lon,location,state_province,country,biomimic,zone,sub_zone,wave_exp
-DUMMYID,DUMMYSITE,36.62193333,-121.9053167,DummyLocation,DummyState,DummyCountry,DummyBiomimicType,Dummy,Dummy,Dummy
-DUMMYID,DUMMYSITE,36.62193333,-121.9053167,DummyLocation,DummyState,DummyCountry,DummyBiomimicType,Dummy,Dummy,Dummy
+DUMMYID,DUMMYSITE,36.62193333,-121.9053167,DummyLocation,DummyState,DummyCountry,DummyBiomimicType,DummyZone,DummySubZone,DummyWave
+DUMMYID,DUMMYSITE,36.62193333,-121.9053167,DummyLocation,DummyState,DummyCountry,DummyBiomimicType,DummyZone,DummySubZone,DummyWave

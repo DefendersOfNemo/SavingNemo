@@ -59,7 +59,7 @@
             <form action="" method="get" id="query" data-toggle="validator" onsubmit="return false;" name="query" role="form" type="">
                 <!-- first row in query form -->
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="dropdown_menu_biomimic_type">Biomimic Type:<w class = "text-danger"> * <w> </label>
                             <select id ="dropdown_menu_biomimic_type" class="form-control" required>
                                 <option value="">Please select Biomimic Type</option>
@@ -68,42 +68,42 @@
                                 {% endfor %}
                             </select>
                     </div>   
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
                         <!-- dropdown menu of Countries related to selected logger type -->
                         <label for="dropdown_menu_country_name">Country Name:<w class = "text-danger"> * <w> </label>
                             <select id ="dropdown_menu_country_name" class="form-control" required>
                                 <option value="">Please select Country Name</option>
                             </select>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="dropdown_menu_state_name">State Name:<w class = "text-danger"> * <w> </label>
                             <select id ="dropdown_menu_state_name" class="form-control" required >
                                 <option value="">Please select State Name</option>
                             </select>
                     </div>
-                </div>
-                <br><br>
-                <!-- Second row in query form -->
-                <div class="row">
                     <div class="col-md-3 form-group">
                         <label for="dropdown_menu_location_name">Location Name:<w class = "text-danger"><strong> *</strong> <w> </label>
                         <select id ="dropdown_menu_location_name" class="form-control" required>
                             <option value="">Please select Location Name</option>
                         </select>
                     </div>
-                    <div class="col-md-3 form-group">
+                </div>
+                <br><br>
+                <!-- Second row in query form -->
+                <div class="row">                    
+                    <div class="col-md-4 form-group">
                         <label for="dropdown_menu_zone_name">Zone Name:<w class = "text-danger"> * <w> </label>
                         <select id ="dropdown_menu_zone_name" class="form-control" required>
                             <option value="">Please select Zone Name</option>
                         </select>
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="dropdown_menu_sub_zone_name">Sub Zone:<w class = "text-danger"> * <w> </label>
                         <select id ="dropdown_menu_sub_zone_name" class="form-control" required>
                             <option value="">Please select Sub Zone</option>
                         </select>
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="dropdown_menu_wave_exp_name">Wave Exposure:<w class = "text-danger"> * <w> </label>
                         <select id ="dropdown_menu_wave_exp_name" class="form-control" required>
                             <option value="">Please select Wave Exposure</option>
@@ -113,7 +113,7 @@
                 <br>
                 <!-- Third row in query form -->
                 <div class="row">
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="dropdown_menu_output_type_name">Statistic:</label>
                         <select id ="dropdown_menu_output_type_name" class="form-control">                            
                             {% for type in form.output_type %}
@@ -121,12 +121,19 @@
                             {% endfor%}
                         </select>
                     </div>
-                    <div class="col-md-3 form-group" id="frequency-select">
+                    <div class="col-md-4 form-group" id="frequency-select">
+                    </div>
+                    <div class="col-md-4 form-group pull-right alert" id="selected-metadata" role="alert">
                     </div>
                 </div>               
                 </br>
                 </br>
                 <!-- Fourth row in query form -->
+                <div class="container row">
+                    <div class="checkbox">
+                      <label><input type="checkbox" id="date-checkbox" value="">Filter by Date Range</label>
+                    </div>
+                </div>
                 <div class="container row">
                     <label for="revision_date">Date Range:</label>
                     <div class="input-group col-md-4" >

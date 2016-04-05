@@ -22,10 +22,11 @@ def query():
     error = None
     results = None
     db = DbConnect(app.config)
-    biomimic_type_choices = db.getBiomimicTypes()
+    biomimic_type_choices = db.fetch_biomimic_types()
     db.close()
     form = QueryForm(request.form)
     form.biomimic_type.choices = biomimic_type_choices
+    session['query'] = dict()
     if request.method == 'GET':
         form.process()
     else:   
@@ -36,26 +37,35 @@ def query():
 def parse_data():
     select_type = request.args.get('select_type', 'default')
     select_value = request.args.get('select_value', 'default')
-    result = queryDb(select_type, select_value)
-    return jsonify(result)
+    result, countRecords, minDate, maxDate = queryDb(select_type, select_value)
+    print("JSON: ", jsonify(result = result, countRecords = countRecords, minDate = minDate, maxDate = maxDate).data)
+    return jsonify(result = result, countRecords = countRecords, minDate = minDate, maxDate = maxDate)
 
-def queryDb(query_type, query_value):
+def queryDb(value_type, value):
     '''Query Database to get options for each drop-down menu'''
-    result = None
+    result, countRecords, minDate, maxDate = None, None, None, None        
     db = DbConnect(app.config)
-    if query_type == "biomimic_type": 
-        result = db.getCountry(query_value)
-    elif query_type == "country_name":
-        result = db.getState(query_value)
-    elif query_type == "state_name":
-        result = db.getLocation(query_value)
-    elif query_type == "zone":
-        result = db.getZone(query_value)
-    elif query_type == "subzone":
-        result = db.getSubZone(query_value)
-    elif query_type == "wave_exp":
-        result = db.getWaveExp(query_value)
-    return result       
+    keyList = ['biomimic_type', 'country', 'state_province', 'location', 'zone', 'sub_zone', 'wave_exp']
+    print(session['query'])
+    # delete all keys in session variable "query" after the selected field
+    for key in keyList[keyList.index(value_type) + 1:]:
+        session['query'].pop(key, None)
+    session['query'][value_type] = value
+    if value_type == "biomimic_type": 
+        result, countRecords, minDate, maxDate = db.fetch_distinct_countries_and_zones(session['query'])
+    elif value_type == "country":        
+        result, countRecords, minDate, maxDate  = db.fetch_distinct_states(session['query'])
+    elif value_type == "state_province":
+        result, countRecords, minDate, maxDate = db.fetch_distinct_locations(session['query'])
+    elif value_type == "location":
+        # location field doesn't have any associated dynamic behavior except for fetching metadata.
+        countRecords, minDate, maxDate  = db.fetchMetadata(session['query']);
+    elif value_type == "zone":
+        result, countRecords, minDate, maxDate = db.fetch_distinct_sub_zones(session['query'])
+    elif value_type == "sub_zone":
+        result, countRecords, minDate, maxDate  = db.fetch_distinct_wave_exposures(session['query'])
+    print(result, countRecords, minDate, maxDate)
+    return result, countRecords, minDate, maxDate        
 
 @app.route('/_submit_query', methods=['GET'])
 def submit_query():
@@ -101,7 +111,6 @@ def download():
     query_results = header  + db.getQueryRawResults(session['db_query'])
     db.close()
     return excel.make_response_from_array(query_results, "csv", file_name="export_data")
-
 
 ################### Upload ######################
 ALLOWED_EXTENSIONS_LOGGER_TYPE = set(['csv'])
