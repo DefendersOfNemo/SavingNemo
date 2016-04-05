@@ -1,24 +1,4 @@
 $(function() {
-    $( 'input[name="date_pick_from"]' ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        changeYear: true,
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-            $( "#date_pick_to" ).datepicker( "option", "minDate", selectedDate );
-        }
-    });
-    
-    $( 'input[name="date_pick_to"]' ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        changeYear: true,
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-            $( "#date_pick_from" ).datepicker( "option", "maxDate", selectedDate );
-        }
-        });
-
     $('#dropdown_menu_biomimic_type').change( function () {
         biomimic_type = $("#dropdown_menu_biomimic_type option:selected").text();
         $('#dropdown_menu_country_name').empty();
@@ -225,13 +205,13 @@ $(function() {
         var query_field5 = $("#dropdown_menu_zone_name option:selected").text()
         var query_field6 = $("#dropdown_menu_zone_name option:selected")
         var query_field7 = $("#dropdown_menu_wave_exp_name option:selected").text()
-        var query_field8 = $("#date_pick_from").val()
-        var query_field9 = $("#date_pick_to").val()
+        var isChecked = $("#date-checkbox").prop("checked")
+        if (isChecked){
+            var query_field8 = $("#date_pick_from").val()
+            var query_field9 = $("#date_pick_to").val()
+        }
         var query_field10 = $("#dropdown_menu_output_type_name option:selected").text()
         var query_field11 = $("#dropdown_menu_analysis_type_name option:selected").val()
-        var date_format = new RegExp (/\d{2}\/\d{2}\/\d{4}/)
-        var date1 = date_format.test(query_field8)
-        var date2 = date_format.test(query_field9)
         var valid = false
         if ((query_field1 != "Please select Biomimic Type") && 
             (query_field2 != "Please select Country Name") && 
@@ -239,12 +219,13 @@ $(function() {
             (query_field4 != "Please select Location Name") && 
             (query_field5 != "Please select Zone Name") && 
             (query_field6 != "Please select Sub zone") && 
-            (query_field7 != "Please select Wave Exposure") && 
-            (query_field8 != '') && 
-            (query_field9 != '') && 
-            (date1 == true) && 
-            (date2 == true)){
-                valid = true
+            (query_field7 != "Please select Wave Exposure")){
+                if (isChecked){
+                    valid = (query_field8 != '') && (query_field9 != '')
+                }
+                else{
+                    valid = true
+                }
         }
         return valid
     }
@@ -266,6 +247,7 @@ $(function() {
         }
         return title        
     }
+    
 
     $('#button_submit_query').click(function () {
         if (fieldValidation()){
@@ -292,10 +274,14 @@ $(function() {
                     button.empty()
                     title.empty()
                     options.empty()
+                    var targetOffset = $("#hidden-table").offset().top - 50;
+                    $('html,body').animate({scrollTop:targetOffset}, 750);
                     options.append("<h3 class=text-danger>  Search was unsucessful, please try again with different select options<h3>")
                 } 
                 else {
                     options.empty()
+                    var targetOffset = $("#hidden-table").offset().top - 50;
+                    $('html,body').animate({scrollTop:targetOffset}, 750);                    
                     title.empty()
                     title.append("<h4>Data preview</h4>")
                     options.append("<thead><tr><th>" + tableheader() + "</th><th>Temperature</th></tr></thead><tbody>")
@@ -313,27 +299,46 @@ $(function() {
     });
     
     $('#date-checkbox').change(function() {
-        var v = this.checked
-        alert(v)
+        var disableDateRange = !this.checked
+        if (disableDateRange){
+            $("#date_pick_from").datepicker('setDate', null);
+            $("#date_pick_to").datepicker('setDate', null);
+        }
+        $("#date_pick_from").prop('disabled', disableDateRange);
+        $("#date_pick_to").prop('disabled', disableDateRange);
     });
 
     $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();
-        
+        // When the document is ready
+        $('[data-toggle="popover"]').popover(); 
+        $('.input-daterange').datepicker({
+                    todayBtn: "linked"
+                });
         $("#alert").fadeTo(5000, 0).slideUp(500, function(){
-            $(this).alert(); 
-        }); 
+        $(this).alert();
     });
 
     $("form").submit(function(e) {
     var validate = $(this).find("[required]");
         $(validate).each(function(){
             if ( $(this).val() == '' ){
-                alert("Please fill all required fields");
-                $(this).focus();
-                e.preventDefault();
-                return false;
+                if (($(this).prop('id') != "date_pick_from") && ($(this).prop('id') != "date_pick_to")){
+                    alert("Please fill all required fields");
+                    $(this).focus();
+                    e.preventDefault();
+                    return false;
+                }
+                else{
+                    if($("#date-checkbox").prop("checked")){
+                        alert("Please fill all required fields");
+                        $(this).focus();
+                        e.preventDefault();
+                        return false;       
+                    }
+                }
             }
         });     return true;
     });
+
+
 });

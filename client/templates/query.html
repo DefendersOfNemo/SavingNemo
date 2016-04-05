@@ -7,8 +7,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- links to style sheet -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet" />
         <title>Database</title> 
     </head>
     <style>
@@ -25,6 +26,8 @@
             <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
             <img class="img-responsive" src="../static/Lab-banner.jpg" width="960" height="46">
         </div>
+        <!-- The scrollable area -->
+        <body data-spy="scroll" data-target="#hidden-table" data-offset="50">
         <!--  Nav-bar -->
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -151,14 +154,25 @@
                     </div>
                 </div>
                 <div class="container row">
-                    <label for="revision_date">Date Range:</label>
-                    <div class="input-group col-md-4" >
-                        <input type="text" class="form-control" name="date_pick_from" value="" id="date_pick_from" placeholder="MM/DD/YYYY" required required pattern="\d{2}\/\d{2}\/\d{4}">
-                        <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="date_pick_to" value="" id="date_pick_to" placeholder="MM/DD/YYYY" required required pattern="\d{2}\/\d{2}\/\d{4}">
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div class="input-daterange" id="datepicker" >                    
+                        <div class="col-md-4 form-group" >
+                            <label for="revision_date">Start Date Range:</label>
+                            <div class='input-group' >
+                                <input type='text' class="form-control" id='date_pick_from' placeholder="MM/DD/YYYY" required disabled />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 form-group" >
+                            <label for="revision_date">End Date Range:</label>
+                            <div class='input-group' >
+                                <input type='text' class="form-control" id='date_pick_to' placeholder="MM/DD/YYYY" required disabled/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <br><br>
@@ -192,6 +206,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <!-- Bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Bootstrap-DatePicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
 <!-- scripts used by form -->
 <script src="../static/script.js"></script>

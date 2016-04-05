@@ -146,10 +146,8 @@ class DbConnect(object):
                     "INNER JOIN `cnx_logger_temperature` temp "
                     "ON temp.`logger_id` = logger.`logger_id` ")
         where_condition = self.buildWhereCondition(queryDict)
-        print("MetadataQuery: ", query + where_condition)
         cursor.execute(query + where_condition)
         results = cursor.fetchone()
-        print("cursor results: ", results)
         cursor.close()
         return results
 

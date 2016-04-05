@@ -38,7 +38,6 @@ def parse_data():
     select_type = request.args.get('select_type', 'default')
     select_value = request.args.get('select_value', 'default')
     result, countRecords, minDate, maxDate = queryDb(select_type, select_value)
-    print("JSON: ", jsonify(result = result, countRecords = countRecords, minDate = minDate, maxDate = maxDate).data)
     return jsonify(result = result, countRecords = countRecords, minDate = minDate, maxDate = maxDate)
 
 def queryDb(value_type, value):
@@ -46,7 +45,6 @@ def queryDb(value_type, value):
     result, countRecords, minDate, maxDate = None, None, None, None        
     db = DbConnect(app.config)
     keyList = ['biomimic_type', 'country', 'state_province', 'location', 'zone', 'sub_zone', 'wave_exp']
-    print(session['query'])
     # delete all keys in session variable "query" after the selected field
     for key in keyList[keyList.index(value_type) + 1:]:
         session['query'].pop(key, None)
@@ -64,7 +62,6 @@ def queryDb(value_type, value):
         result, countRecords, minDate, maxDate = db.fetch_distinct_sub_zones(session['query'])
     elif value_type == "sub_zone":
         result, countRecords, minDate, maxDate  = db.fetch_distinct_wave_exposures(session['query'])
-    print(result, countRecords, minDate, maxDate)
     return result, countRecords, minDate, maxDate        
 
 @app.route('/_submit_query', methods=['GET'])
@@ -78,12 +75,13 @@ def submit_query():
     query["location"] = form['location'][0]
     query["zone"] = form['zone'][0]
     query["sub_zone"] = form['sub_zone'][0]
-    query["wave_exp"] = form['wave_exp'][0]        
-    query["start_date"] = str(datetime.datetime.strptime(form['start_date'][0],'%m/%d/%Y').date())
-    query["end_date"] = str(datetime.datetime.strptime(form['end_date'][0],'%m/%d/%Y').date())
+    query["wave_exp"] = form['wave_exp'][0]
     query["output_type"] = form['output_type'][0]
     if form.get('analysis_type') is not None:
         query["analysis_type"] = form['analysis_type'][0]        
+    if (form.get('start_date')[0] != '') and (form.get('end_date')[0] != ''):
+        query["start_date"] = str(datetime.datetime.strptime(form['start_date'][0],'%m/%d/%Y').date())
+        query["end_date"] = str(datetime.datetime.strptime(form['end_date'][0],'%m/%d/%Y').date())
     session['query'] = query
     print("query: ", query)
     db = DbConnect(app.config)
