@@ -21,87 +21,183 @@ $(function() {
 
     $('#dropdown_menu_biomimic_type').change( function () {
         biomimic_type = $("#dropdown_menu_biomimic_type option:selected").text();
+        $('#dropdown_menu_country_name').empty();
+        $('#dropdown_menu_state_name').empty();
+        $('#dropdown_menu_location_name').empty();
+        $('#dropdown_menu_zone_name').empty();
+        $('#dropdown_menu_sub_zone_name').empty();
+        $('#dropdown_menu_wave_exp_name').empty();
         $.getJSON('/_parse_data', {
             select_type: "biomimic_type",
             select_value: biomimic_type
         })
-        .done(function(data){              
-            $('#dropdown_menu_country_name').empty();
+        .done(function(data){    
+            var result = data["result"]
+            var country_list = result["country"]
+            var zone_list = result["zone"]
+            // update metadata field
+            $('#selected-metadata').empty();
+            if (data["countRecords"] != 0){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+            // update country field
             $("#dropdown_menu_country_name").append('<option value="">Please select Country Name</option>')
-            $.each(data, function(country){ 
-                $("#dropdown_menu_country_name").append('<option value=\"'+country+'\">'+country+'</option>')
+            $.each(country_list, function(index, country){
+                $("#dropdown_menu_country_name").append('<option value=\"' + country + '\">' + country + '</option>')
+            });
+            // update zone field
+            $("#dropdown_menu_zone_name").append('<option value="">Please select Zone Name</option>')
+            $("#dropdown_menu_zone_name").append('<option value="1">All</option>')
+            $.each(zone_list, function(index, zone){
+                $("#dropdown_menu_zone_name").append('<option value=\"' + zone + '\">' + zone + '</option>')
             });
         });
     });
     
     $('#dropdown_menu_country_name').change( function () {
-        country_name = $("#dropdown_menu_country_name option:selected").text();
+        country = $("#dropdown_menu_country_name option:selected").val();
+        $('#dropdown_menu_state_name').empty();
+        $('#dropdown_menu_location_name').empty();        
         $.getJSON('/_parse_data', {
-            select_type: "country_name",
-            select_value: country_name
+            select_type: "country",
+            select_value: country
         }).done(function(data) {
-            $('#dropdown_menu_state_name').empty()
+            // update metadata field
+            $('#selected-metadata').empty();
+            if (data["countRecords"] != 0){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+            // update state_province field
+            var result = data["result"]
             $("#dropdown_menu_state_name").append('<option value="">Please select State Name</option>')
-            $.each(data, function(state) {
-                $("#dropdown_menu_state_name").append('<option value=\"'+state+'\">'+state+'</option>')
+            $.each(result, function(index, state_province) {
+                $("#dropdown_menu_state_name").append('<option value=\"' + state_province + '\">' + state_province + '</option>')
             });
         });
     });
     
     $('#dropdown_menu_state_name').change( function () {
-        state_name = $("#dropdown_menu_state_name option:selected").text();
+        state_province = $("#dropdown_menu_state_name option:selected").text();
+        $('#dropdown_menu_location_name').empty();        
         $.getJSON('/_parse_data', {
-            select_type: "state_name",
-            select_value: state_name
-            }).done(function(data) {
-            $('#dropdown_menu_location_name').empty()
+            select_type: "state_province",
+            select_value: state_province
+            })
+        .done(function(data) {
+            // update metadata field
+            $('#selected-metadata').empty();
+            if (data["countRecords"] != 0){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+            // update location field
+            var result = data["result"]
             $("#dropdown_menu_location_name").append('<option value="">Please select Location Name</option>')
-            $.each(data, function(location) {
-                $("#dropdown_menu_location_name").append('<option value=\"'+location+'\">'+location+'</option>')
+            $.each(result, function(index, location) {
+                $("#dropdown_menu_location_name").append('<option value=\"' + location + '\">' + location + '</option>')
             });
         });
     });
     
     $('#dropdown_menu_location_name').change( function () {
+        state_province = $("#dropdown_menu_state_name option:selected").text();
+        loc = $("#dropdown_menu_location_name option:selected").text();
         $.getJSON('/_parse_data', {
-            select_type: "zone",
-            select_value: biomimic_type
-        }).done(function(data) {
-            $('#dropdown_menu_zone_name').empty()
-            $("#dropdown_menu_zone_name").append('<option value="">Please select Zone Name</option>')
-            $("#dropdown_menu_zone_name").append('<option value="1">All</option>')
-            $.each(data, function(zone) {
-                $("#dropdown_menu_zone_name").append('<option value=\"'+zone+'\">'+zone+'</option>')
-            });
-        });
+            select_type: "location",
+            select_value: loc
+            })
+        .done(function(data) {
+            // update metadata
+            $('#selected-metadata').empty();
+            if (data["countRecords"] != 0){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+        });        
     });
     
     $('#dropdown_menu_zone_name').change( function () {
         zone_type = $("#dropdown_menu_zone_name option:selected").text();
-        alert(biomimic_type.concat("_", zone_type))
+        $('#dropdown_menu_sub_zone_name').empty()
         $.getJSON('/_parse_data', {
-            select_type: "subzone",
-            select_value: biomimic_type.concat("_", zone_type)
-            }).done(function(data) {
-            $('#dropdown_menu_sub_zone_name').empty()
+            select_type: "zone",
+            select_value: zone_type
+            })
+        .done(function(data) {
+            // update metadata field
+            $('#selected-metadata').empty();
+            if (data["countRecords"] != 0){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+            // update sub_zone field
+            var result = data["result"]
             $("#dropdown_menu_sub_zone_name").append('<option value="">Please select Sub Zone</option>')
             $("#dropdown_menu_sub_zone_name").append('<option value="1">All</option>')
-            $.each(data, function(sub_zone) {
-                $("#dropdown_menu_sub_zone_name").append('<option value=\"'+sub_zone+'\">'+sub_zone+'</option>')
+            $.each(result, function(index, sub_zone) {
+                $("#dropdown_menu_sub_zone_name").append('<option value=\"' + sub_zone + '\">' + sub_zone + '</option>')
             });
         });
     });
         
     $('#dropdown_menu_sub_zone_name').change( function () {
+        sub_zone_type = $("#dropdown_menu_sub_zone_name option:selected").text();
+        $('#dropdown_menu_wave_exp_name').empty()
         $.getJSON('/_parse_data', {
-            select_type: "wave_exp",
-            select_value: biomimic_type
-            }).done(function(data) {
-            $('#dropdown_menu_wave_exp_name').empty()
+            select_type: "sub_zone",
+            select_value: sub_zone_type
+            })
+        .done(function(data) {
+            // update metadata field
+            $('#selected-metadata').empty();
+            if (data["countRecords"] != 0){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+            // update wave_exp field
+            var result = data["result"]
             $("#dropdown_menu_wave_exp_name").append('<option value="">Please select Wave Exposure</option>')
             $("#dropdown_menu_wave_exp_name").append('<option value="1">All</option>')
-            $.each(data, function(wave_exp) {
-                $("#dropdown_menu_wave_exp_name").append('<option value=\"'+wave_exp+'\">'+wave_exp+'</option>')
+            $.each(result, function(index, wave_exp) {
+                $("#dropdown_menu_wave_exp_name").append('<option value=\"' + wave_exp + '\">' + wave_exp + '</option>')
             });
         });
     });
@@ -213,6 +309,11 @@ $(function() {
                 }
             });
         }
+    });
+    
+    $('#date-checkbox').change(function() {
+        var v = this.checked
+        alert(v)
     });
 
     $(document).ready(function(){

@@ -4,7 +4,8 @@ import MySQLdb
 from app import app
 from app.dbconnect import DbConnect
 from flask.ext import excel
-class QueryFormTestCase(unittest.TestCase):
+
+class QueryFormTestEdgeCase(unittest.TestCase):
     """Test for query functionality while wave_exp is none"""
     
     def setUp(self):
@@ -32,8 +33,8 @@ class QueryFormTestCase(unittest.TestCase):
                         "location" : "Dummylocation",
                         "field_lat" : "36.621933330000",
                         "field_lon" : "-121.905316700000",
-                        "zone" : "Dummy",
-                        "sub_zone" : "Dummy",
+                        "zone" : "DummyZone",
+                        "sub_zone" : "DummySubZone",
                         "wave_exp" : None}
     def tearDown(self):
         """Close test database"""        
@@ -42,7 +43,6 @@ class QueryFormTestCase(unittest.TestCase):
         self.cleanUpLoggerType(cursor, self.record_type)
         cursor.close()
         self.db.close()
-
 
     def stringToBytes(self, stringValue):
         """Convert Strings to their Bytes representation"""
@@ -71,11 +71,12 @@ class QueryFormTestCase(unittest.TestCase):
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
+    
     def test_form_logger_type_automatic_fill(self):
         """Test the logger_type field is filled automatically on page load"""
         with app.test_client() as client:
             response = client.get('/query')
-            biomimic_type_choices = self.db.getBiomimicTypes() 
+            biomimic_type_choices = self.db.fetch_biomimic_types() 
             for biomimic_type in biomimic_type_choices:
                 self.assertIn(self.stringToBytes(biomimic_type[0]), response.data)        
     
@@ -83,39 +84,54 @@ class QueryFormTestCase(unittest.TestCase):
         """Helper Function to test the ajax call functionality when
            given selected type field is selected with given value"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['query'] = self.record_type
             response = client.get('/_parse_data', 
                                 query_string=dict(
                                     select_type=selected_type,
                                     select_value=selected_value))
             self.assertEqual(selected_type, request.args.get('select_type'))
             self.assertEqual(selected_value, request.args.get('select_value'))
-            choices = dbFunction(request.args.get('select_value'))
-            for choice in choices:
+            choices = dbFunction(session['query'])
+            for choice in choices[0]:
                 self.assertIn(self.stringToBytes(choice[0]), response.data)
 
     def test_form_logger_type_select(self):
         """Test the ajax call functionality if logger_type field is selected"""
-        self.check_ajax("biomimic_type", "DummyBiomimicType", self.db.getCountry)
+        selected_type = "biomimic_type"
+        selected_value = "DummyBiomimicType"
+        with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['query'] = self.record_type
+            response = client.get('/_parse_data', 
+                                query_string=dict(
+                                    select_type=selected_type,
+                                    select_value=selected_value))
+            self.assertEqual(selected_type, request.args.get('select_type'))
+            self.assertEqual(selected_value, request.args.get('select_value'))            
+            choices = self.db.fetch_distinct_countries_and_zones(self.record_type)
+            country_list = choices[0]["country"]
+            zone_list = choices[0]["zone"]
+            for country in country_list:
+                self.assertIn(self.stringToBytes(country), response.data)
+            for zone in zone_list:
+                self.assertIn(self.stringToBytes(zone), response.data)
 
     def test_form_country_name_select(self):
-        """Test the ajax call functionality if country_name field is selected"""
-        self.check_ajax("country_name", "DummyCountry", self.db.getState)
+        """Test the ajax call functionality if country field is selected"""
+        self.check_ajax("country", "DummyCountry", self.db.fetch_distinct_states)
 
     def test_form_state_name_select(self):
-        """Test the ajax call functionality if state_name field is selected"""
-        self.check_ajax("state_name", "DummyState", self.db.getLocation)
-
-    def test_form_location_name_select(self):
-        """Test the ajax call functionality if location_name field is selected"""
-        self.check_ajax("zone", "DummyBiomimicType", self.db.getZone)
+        """Test the ajax call functionality if state_province field is selected"""
+        self.check_ajax("state_province", "DummyState", self.db.fetch_distinct_locations)
 
     def test_form_Zone_name_select(self):
-        """Test the ajax call functionality if zone_name field is selected"""
-        self.check_ajax("subzone", "DummyBiomimicType_DummyZoneType", self.db.getSubZone)    
+        """Test the ajax call functionality if zone field is selected"""
+        self.check_ajax("sub_zone", "DummyZoneType", self.db.fetch_distinct_sub_zones)    
 
     def test_form_SubZone_name_select(self):
-        """Test the ajax call functionality if subZone_name field is selected"""
-        self.check_ajax("wave_exp", "DummyBiomimicType", self.db.getWaveExp)    
+        """Test the ajax call functionality if sub_zone_name field is selected"""
+        self.check_ajax("wave_exp", "DummySubZone", self.db.fetch_distinct_wave_exposures)    
 
     def test_query_results_WaveExp_None(self):
         """Test the query results functionality"""
@@ -130,9 +146,9 @@ class QueryFormTestCase(unittest.TestCase):
                         "location" : "Dummylocation",
                         "field_lat" : "36.621933330000",
                         "field_lon" : "-121.905316700000",
-                        "zone" : "Dummy",
-                        "sub_zone" : "Dummy",
-                        "wave_exp" : "None",
+                        "zone" : "DummyZone",
+                        "sub_zone" : "DummySubZone",
+                        "wave_exp" : "N/A",
                         "start_date": "6/1/2000",
                         "end_date": "8/1/2000",
                         "output_type" : "Raw",

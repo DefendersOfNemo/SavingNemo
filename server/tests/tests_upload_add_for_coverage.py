@@ -9,7 +9,7 @@ from app import app
 from app.dbconnect import DbConnect
 import datetime
 
-class UploadTestCase(unittest.TestCase):
+class UploadTestEdgeCase(unittest.TestCase):
     """Upload Feature specific Test Cases will go here"""
     
     def setUp(self):
@@ -89,9 +89,9 @@ class UploadTestCase(unittest.TestCase):
                     "location" : "Dummylocation",
                     "field_lat" : "36.621933330000",
                     "field_lon" : "-121.905316700000",
-                    "zone" : "Dummy",
-                    "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy",
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave",
                     "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
                     "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}     
             where_condition = self.db.buildWhereCondition(record_type)

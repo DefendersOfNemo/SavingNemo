@@ -35,6 +35,7 @@ class UploadTestCase(unittest.TestCase):
 
     def cleanUpLoggerType(self, cursor, rec):
         ''' clean up logger type tables'''
+        print("Inside Cleanup: ", rec)
         biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
         geo_id = self.db.fetchExistingGeoId(cursor, rec)
         prop_id = self.db.fetchExistingPropId(cursor, rec)
@@ -139,9 +140,9 @@ class UploadTestCase(unittest.TestCase):
                     "location" : "Dummylocation",
                     "field_lat" : "36.621933330000",
                     "field_lon" : "-121.905316700000",
-                    "zone" : "Dummy",
-                    "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy"}
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave"}
             where_condition = self.buildTypeWhereCondition(record)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
@@ -175,9 +176,9 @@ class UploadTestCase(unittest.TestCase):
                                     "location" : "Dummylocation",
                                     "field_lat" : "36.621933330000",
                                     "field_lon" : "-121.905316700000",
-                                    "zone" : "Dummy",
-                                    "sub_zone" : "Dummy",
-                                    "wave_exp" : "Dummy"}
+                                    "zone" : "DummyZone",
+                                    "sub_zone" : "DummySubZone",
+                                    "wave_exp" : "DummyWave"}
             where_condition = self.buildTypeWhereCondition(record_corrupt_ncolumns)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
@@ -198,9 +199,9 @@ class UploadTestCase(unittest.TestCase):
                                             "location" : "Dummylocation",
                                             "field_lat" : "A36.621933330000",
                                             "field_lon" : "-121.905316700000",
-                                            "zone" : "Dummy",
-                                            "sub_zone" : "Dummy",
-                                            "wave_exp" : "Dummy"}
+                                            "zone" : "DummyZone",
+                                            "sub_zone" : "DummySubZone",
+                                            "wave_exp" : "DummyWave"}
             where_condition = self.buildTypeWhereCondition(record_corrupt_coordinates)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
@@ -231,9 +232,9 @@ class UploadTestCase(unittest.TestCase):
                     "location" : "Dummylocation",
                     "field_lat" : "36.621933330000",
                     "field_lon" : "-121.905316700000",
-                    "zone" : "Dummy",
-                    "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy"}
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave"}
             where_condition = self.buildTypeWhereCondition(record)
             query = ("SELECT logger.microsite_id "
                     "FROM `cnx_logger` logger "
@@ -271,9 +272,9 @@ class UploadTestCase(unittest.TestCase):
                     "location" : "Dummylocation",
                     "field_lat" : "36.621933330000",
                     "field_lon" : "-121.905316700000",
-                    "zone" : "Dummy",
-                    "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy",
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave",
                     "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
                     "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}
             record_temp = [{
@@ -328,9 +329,9 @@ class UploadTestCase(unittest.TestCase):
                     "location" : "Dummylocation",
                     "field_lat" : "36.621933330000",
                     "field_lon" : "-121.905316700000",
-                    "zone" : "Dummy",
-                    "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy",
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave",
                     "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
                     "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}        
             where_condition = self.db.buildWhereCondition(record_type)
@@ -370,9 +371,9 @@ class UploadTestCase(unittest.TestCase):
                     "location" : "Dummylocation",
                     "field_lat" : "36.621933330000",
                     "field_lon" : "-121.905316700000",
-                    "zone" : "Dummy",
-                    "sub_zone" : "Dummy",
-                    "wave_exp" : "Dummy",
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave",
                     "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
                     "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}        
             where_condition = self.db.buildWhereCondition(record_type)
