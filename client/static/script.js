@@ -247,10 +247,10 @@ $(function() {
         }
         return title        
     }
+    
 
     $('#button_submit_query').click(function () {
         if (fieldValidation()){
-            alert("validation successful")
             $.getJSON('/_submit_query', {
                 biomimic_type: $("#dropdown_menu_biomimic_type option:selected").text(),
                 country: $("#dropdown_menu_country_name option:selected").text(),
@@ -274,10 +274,14 @@ $(function() {
                     button.empty()
                     title.empty()
                     options.empty()
+                    var targetOffset = $("#hidden-table").offset().top - 50;
+                    $('html,body').animate({scrollTop:targetOffset}, 750);
                     options.append("<h3 class=text-danger>  Search was unsucessful, please try again with different select options<h3>")
                 } 
                 else {
                     options.empty()
+                    var targetOffset = $("#hidden-table").offset().top - 50;
+                    $('html,body').animate({scrollTop:targetOffset}, 750);                    
                     title.empty()
                     title.append("<h4>Data preview</h4>")
                     options.append("<thead><tr><th>" + tableheader() + "</th><th>Temperature</th></tr></thead><tbody>")
@@ -295,12 +299,9 @@ $(function() {
     
     $('#date-checkbox').change(function() {
         var disableDateRange = !this.checked
-        alert($("#date_pick_from").val())
-        alert("disabled: " + disableDateRange)
         if (disableDateRange){
             $("#date_pick_from").datepicker('setDate', null);
             $("#date_pick_to").datepicker('setDate', null);
-            alert($("#date_pick_from").val())
         }
         $("#date_pick_from").prop('disabled', disableDateRange);
         $("#date_pick_to").prop('disabled', disableDateRange);
@@ -335,4 +336,6 @@ $(function() {
             }
         });     return true;
     });
+
+
 });
