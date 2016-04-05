@@ -72,7 +72,7 @@
         <div class="query-box container">
             <strong class="text-danger"><em>fields marked with * are compulsory</em></strong>
             <br><br>
-            <form action="" method="get" id="query" data-toggle="validator" onsubmit="return false;" name="query" role="form" type="">
+            <form action="" method="get" id="query" data-toggle="validator" onsubmit="return false;" name="query" role="form" type="" onsubmit="">
                 <!-- first row in query form -->
                 <div class="row">
                     <div class="col-md-3 form-group">
@@ -163,7 +163,7 @@
                 </div>
                 <br><br>
                 <!-- Submit button -->
-                <div class="container text-center form-group" > 
+                <div class="container text-center form-group" >
                     <button type="submit" id="button_submit_query" class="btn-success btn-lg" >Submit</button>
                     <br><br>
                     <!-- <strong class="text-danger"><em>fields marked with * are compulsory</em></strong> -->
@@ -174,6 +174,7 @@
         {% if error %}
             <p class="error"><strong>Error:</strong> {{ error }}
         {% endif %}
+        <a name="here"></a>
         <div class="container" id="query-results-table" >
             <div id="title">
             </div>
