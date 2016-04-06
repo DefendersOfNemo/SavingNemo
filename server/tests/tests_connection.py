@@ -2,7 +2,7 @@
 import unittest, os, datetime
 from flask import json, request, Response, session
 import MySQLdb
-from app import app
+from app.views import app
 from app.dbconnect import DbConnect
 
 class BasicConnectionTestCase(unittest.TestCase):

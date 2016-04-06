@@ -1,7 +1,7 @@
 import unittest, os, datetime
 from flask import Flask, json, request, Response, session
 import MySQLdb
-from app import app
+from app.views import app
 from app.dbconnect import DbConnect
 from flask.ext import excel
 

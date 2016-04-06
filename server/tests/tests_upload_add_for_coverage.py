@@ -5,7 +5,7 @@ from flask import Flask, json, request, Response, session, jsonify
 from werkzeug.datastructures import (ImmutableMultiDict, FileStorage)
 from flask.ext.uploads import TestingFileStorage
 import MySQLdb
-from app import app
+from app.views import app
 from app.dbconnect import DbConnect
 import datetime
 

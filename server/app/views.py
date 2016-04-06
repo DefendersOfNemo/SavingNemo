@@ -1,8 +1,7 @@
 # imports
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
-from .forms import QueryForm
-from app import app
+from app.forms import QueryForm
 from app.dbconnect import DbConnect
 from flask.ext import excel
 from werkzeug import secure_filename
@@ -10,9 +9,8 @@ from werkzeug.datastructures import FileStorage
 import io, csv, datetime, sys
 import time
 
-# def index():
-#     """Searches the database for entries, then displays them."""
-#     return render_template('index.html')
+app = Flask(__name__, template_folder="../../client/templates", static_folder="../../client/static")
+app.config.from_object('app.config')
 
 ################### Query ######################
 @app.route('/')
