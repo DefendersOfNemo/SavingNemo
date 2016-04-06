@@ -51,8 +51,8 @@
         <div class="container text-danger">
             <h1>DATABASE<h1>
         </div>
-        <div class="container text-right">
-            <a href="#" data-toggle="popover" data-placement="left" class= "btn btn-info" data-trigger="hover" data-content="Please click and choose an option from each select field in the following order: Biomimic type, Country, State, Location, Zone, Sub Zone and Wave exposure">
+        <div class="container text-right">            
+            <a href="#" data-toggle="popover" data-placement="left" class= "btn btn-info" data-trigger="hover" data-content="Please click and choose an option from each select field in the following order: Biomimic type, Country, State, Location, Zone, Sub Zone, Wave exposure and Statistic">
                 <span class="glyphicon glyphicon-question-sign"></span> Help
             </a>
         </div>
@@ -63,29 +63,41 @@
                 <!-- first row in query form -->
                 <div class="row">
                     <div class="col-md-3 form-group">
-                        <label for="dropdown_menu_biomimic_type">Biomimic Type:<w class = "text-danger"> * <w> </label>
-                            <select id ="dropdown_menu_biomimic_type" class="form-control" required>
-                                <option value="">Please select Biomimic Type</option>
-                                {% for type in form.biomimic_type %}
-                                    <option value="{{ type }}">{{ type[1] }}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="input-group">
+                            <label for="dropdown_menu_biomimic_type">Biomimic Type:<w class = "text-danger"> * <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-biomimic" hidden>
+                        </div>                        
+                        <select id ="dropdown_menu_biomimic_type" class="form-control" required>
+                            <option value="">Please select Biomimic Type</option>
+                            {% for type in form.biomimic_type %}
+                                <option value="{{ type }}">{{ type[1] }}</option>
+                            {% endfor %}
+                        </select>
                     </div>   
                     <div class="col-md-3 form-group">
                         <!-- dropdown menu of Countries related to selected logger type -->
-                        <label for="dropdown_menu_country_name">Country Name:<w class = "text-danger"> * <w> </label>
-                            <select id ="dropdown_menu_country_name" class="form-control" required>
-                                <option value="">Please select Country Name</option>
-                            </select>
+                        <div class="input-group">
+                            <label for="dropdown_menu_country_name">Country Name:<w class = "text-danger"> * <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-country" hidden>
+                        </div>
+                        <select id ="dropdown_menu_country_name" class="form-control" required>
+                            <option value="">Please select Country Name</option>
+                        </select>                        
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="dropdown_menu_state_name">State Name:<w class = "text-danger"> * <w> </label>
-                            <select id ="dropdown_menu_state_name" class="form-control" required >
-                                <option value="">Please select State Name</option>
-                            </select>
+                        <div class="input-group">
+                            <label for="dropdown_menu_state_name">State Name:<w class = "text-danger"> * <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-state" hidden>
+                        </div>
+                        <select id ="dropdown_menu_state_name" class="form-control" required >
+                            <option value="">Please select State Name</option>
+                        </select>                                                   
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="dropdown_menu_location_name">Location Name:<w class = "text-danger"><strong> *</strong> <w> </label>
+                        <div class="input-group">
+                            <label for="dropdown_menu_location_name">Location Name:<w class = "text-danger"><strong> *</strong> <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-location" hidden>
+                        </div>                        
                         <select id ="dropdown_menu_location_name" class="form-control" required>
                             <option value="">Please select Location Name</option>
                         </select>
@@ -95,19 +107,28 @@
                 <!-- Second row in query form -->
                 <div class="row">                    
                     <div class="col-md-4 form-group">
-                        <label for="dropdown_menu_zone_name">Zone Name:<w class = "text-danger"> * <w> </label>
+                        <div class="input-group">
+                            <label for="dropdown_menu_zone_name">Zone Name:<w class = "text-danger"> * <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-zone" hidden>
+                        </div>                                                                        
                         <select id ="dropdown_menu_zone_name" class="form-control" required>
                             <option value="">Please select Zone Name</option>
                         </select>
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="dropdown_menu_sub_zone_name">Sub Zone:<w class = "text-danger"> * <w> </label>
+                        <div class="input-group">
+                            <label for="dropdown_menu_sub_zone_name">Sub Zone:<w class = "text-danger"> * <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-sub-zone" hidden>
+                        </div>                                                                        
                         <select id ="dropdown_menu_sub_zone_name" class="form-control" required>
                             <option value="">Please select Sub Zone</option>
                         </select>
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="dropdown_menu_wave_exp_name">Wave Exposure:<w class = "text-danger"> * <w> </label>
+                        <div class="input-group">
+                            <label for="dropdown_menu_wave_exp_name">Wave Exposure:<w class = "text-danger"> * <w> </label>
+                            <img src="../static/spinner.gif" alt="Loading.." id="spinner-wave-exp" hidden>
+                        </div>                        
                         <select id ="dropdown_menu_wave_exp_name" class="form-control" required>
                             <option value="">Please select Wave Exposure</option>
                         </select>
@@ -162,9 +183,7 @@
                 <br><br>
                 <!-- Submit button -->
                 <div class="container text-center form-group" > 
-                    <button type="submit" id="button_submit_query" class="btn-success btn-lg" >Submit</button>
-                    <br><br>
-                    <!-- <strong class="text-danger"><em>fields marked with * are compulsory</em></strong> -->
+                        <button type="button" id="button_submit_query" data-loading-text="Loading..." class="btn-success btn-lg" autocomplete="off">Submit</button>
                 </div>
             </form>
         </div>

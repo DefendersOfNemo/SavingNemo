@@ -68,6 +68,8 @@ class UploadTestCase(unittest.TestCase):
     def test_uploaded_logger_type_file_extension(self):
         """Test that uploaded logger type file has correct extensions"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (BytesIO(b'logger Type File'), 
@@ -78,6 +80,8 @@ class UploadTestCase(unittest.TestCase):
     def test_uploaded_logger_temp_file_extension(self):
         """Test that uploaded logger temperature file has correct extensions"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTempFile':  (BytesIO(b'logger Temp File'), 
@@ -88,6 +92,8 @@ class UploadTestCase(unittest.TestCase):
     def test_uploaded_logger_type_file_extension_negative(self):
         """Test that uploaded logger type file has correct extensions"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (BytesIO(b'logger Type File'), 
@@ -98,6 +104,8 @@ class UploadTestCase(unittest.TestCase):
     def test_uploaded_logger_temp_file_extension_negative(self):
         """Test that uploaded logger temperature file has correct extensions"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTempFile':  (BytesIO(b'logger Temp File'), 
@@ -108,6 +116,8 @@ class UploadTestCase(unittest.TestCase):
     def test_uploaded_logger_type_file_missing(self):
         """Test that uploaded logger type file is not missing"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (BytesIO(b'logger Type File'), '')
@@ -117,6 +127,8 @@ class UploadTestCase(unittest.TestCase):
     def test_uploaded_logger_temp_file_missing(self):
         """Test that uploaded logger temp file is not missing"""
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTempFile':  (BytesIO(b'logger Temp File'), '')
@@ -127,6 +139,8 @@ class UploadTestCase(unittest.TestCase):
         """Test that file with valid Type uploads is inserted in DB."""
         test_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
@@ -164,6 +178,8 @@ class UploadTestCase(unittest.TestCase):
         """Test that Logger Type file with corrupt records cannot be uploaded"""
         test_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Corrupt.csv'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_filename, 'rb'), 'Test_New_Logger_Type_Corrupt.csv')
@@ -219,6 +235,8 @@ class UploadTestCase(unittest.TestCase):
         """Test that Logger Type file with duplicate Microsite Id cannot be uploaded"""
         test_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Duplicate.csv'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_filename, 'rb'), 'Test_New_Logger_Type_Duplicate.csv')
@@ -254,6 +272,8 @@ class UploadTestCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql.txt'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
@@ -312,6 +332,8 @@ class UploadTestCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_corrupt.csv'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
@@ -354,6 +376,8 @@ class UploadTestCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID2_2000_Missing_Type.txt'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')

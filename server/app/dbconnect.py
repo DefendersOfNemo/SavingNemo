@@ -58,8 +58,8 @@ class DbConnect(object):
         zone_list = [row[0] for row in result]        
         cursor.close()
         final_result = {"country": country_list, "zone": zone_list}
-        countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
-        return final_result, countRecords, minDate, maxDate 
+        #countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
+        return final_result, None, None, None
 
     def fetch_distinct_states(self, queryDict):
         """Fetches Distinct states for selected biomimic type and country""" 

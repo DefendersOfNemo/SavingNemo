@@ -11,6 +11,8 @@ $(function() {
         $("#date_pick_to").datepicker('setDate', null);
         $("#frequency-select").empty()
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        // loading start
+        $("#spinner-biomimic").show();
         $.getJSON('/_parse_data', {
             select_type: "biomimic_type",
             select_value: biomimic_type
@@ -19,18 +21,12 @@ $(function() {
             var result = data["result"]
             var country_list = result["country"]
             var zone_list = result["zone"]
+            // loading end
+            $("#spinner-biomimic").hide();
             // update metadata field
             $('#selected-metadata').empty();
-            if (data["countRecords"] != 0){                
-                $('#selected-metadata').removeClass('alert-danger');
-                $('#selected-metadata').addClass('alert-success');
-                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
-            }
-            else{
-                $('#selected-metadata').removeClass('alert-success');
-                $('#selected-metadata').addClass('alert-danger');
-                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
-            }
+            $('#selected-metadata').removeClass('alert-danger');
+            $('#selected-metadata').removeClass('alert-success');
             // update country field
             $("#dropdown_menu_country_name").append('<option value="">Please select Country Name</option>')
             $.each(country_list, function(index, country){
@@ -53,10 +49,12 @@ $(function() {
         $("#date_pick_to").datepicker('setDate', null);
         $("#frequency-select").empty()
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $("#spinner-country").show();
         $.getJSON('/_parse_data', {
             select_type: "country",
             select_value: country
         }).done(function(data) {
+            $("#spinner-country").hide();            
             // update metadata field
             $('#selected-metadata').empty();
             if (data["countRecords"] != 0){                
@@ -85,11 +83,13 @@ $(function() {
         $("#date_pick_to").datepicker('setDate', null);
         $("#frequency-select").empty()
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $("#spinner-state").show();
         $.getJSON('/_parse_data', {
             select_type: "state_province",
             select_value: state_province
             })
         .done(function(data) {
+            $("#spinner-state").hide();            
             // update metadata field
             $('#selected-metadata').empty();
             if (data["countRecords"] != 0){                
@@ -118,11 +118,13 @@ $(function() {
         $("#frequency-select").empty()
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
         loc = $("#dropdown_menu_location_name option:selected").text();
+        $("#spinner-location").show();
         $.getJSON('/_parse_data', {
             select_type: "location",
             select_value: loc
             })
         .done(function(data) {
+            $("#spinner-location").hide();            
             // update metadata
             $('#selected-metadata').empty();
             if (data["countRecords"] != 0){                
@@ -144,12 +146,14 @@ $(function() {
         $("#date_pick_to").datepicker('setDate', null);
         $('#dropdown_menu_sub_zone_name').empty()
         $("#frequency-select").empty()
-        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $("#spinner-zone").show();        
         $.getJSON('/_parse_data', {
             select_type: "zone",
             select_value: zone_type
             })
         .done(function(data) {
+            $("#spinner-zone").hide();            
             // update metadata field
             $('#selected-metadata').empty();
             if (data["countRecords"] != 0){                
@@ -178,12 +182,14 @@ $(function() {
         $("#date_pick_to").datepicker('setDate', null);
         $('#dropdown_menu_wave_exp_name').empty()
         $("#frequency-select").empty()
-        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $("#spinner-sub-zone").show();        
         $.getJSON('/_parse_data', {
             select_type: "sub_zone",
             select_value: sub_zone_type
             })
         .done(function(data) {
+            $("#spinner-sub-zone").hide();            
             // update metadata field
             $('#selected-metadata').empty();
             if (data["countRecords"] != 0){                
@@ -275,6 +281,8 @@ $(function() {
 
     $('#button_submit_query').click(function () {
         if (fieldValidation()){
+            var $btn = $(this).button('loading')
+            $btn.button('loading')
             $.getJSON('/_submit_query', {
                 biomimic_type: $("#dropdown_menu_biomimic_type option:selected").text(),
                 country: $("#dropdown_menu_country_name option:selected").text(),
@@ -289,7 +297,8 @@ $(function() {
                 analysis_type: $("#dropdown_menu_analysis_type_name option:selected").val()
             }) 
             .done(function(data){
-                console.log(data.list_of_results)
+                $btn.button('reset')
+                /*console.log(data.list_of_results)*/
                 var values = (data.list_of_results)
                 var options = $("#hidden-table");
                 var button = $("#download-button");

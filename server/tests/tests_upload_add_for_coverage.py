@@ -56,6 +56,8 @@ class UploadTestEdgeCase(unittest.TestCase):
         """Test that upload Logger Type file without microsite_id will not be inserted to database"""
         test_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_MicrositeId_None.csv'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_filename, 'rb'), 'Test_New_Logger_Type_MicrositeId_None.csv')
@@ -72,6 +74,8 @@ class UploadTestEdgeCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql_Duplicate.txt'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')

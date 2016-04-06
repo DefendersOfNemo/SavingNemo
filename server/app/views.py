@@ -125,8 +125,13 @@ def allowed_file(filetype, filename):
 @app.route('/upload', methods=['GET','POST'])
 def upload():   
     '''Handle user upload functions, including logger type and logger temperature file'''
+    # Interceptor for Upload
+    print("session: ", session.get('logged_in'))
+    if session.get('logged_in') is None:
+        return redirect(url_for('query'))
+
     all_results = None;
-    error = "";    
+    error = "";
     if request.method == 'POST':
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']

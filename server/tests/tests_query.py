@@ -18,6 +18,8 @@ class QueryFormTestCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql.txt'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
