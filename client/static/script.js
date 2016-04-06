@@ -292,7 +292,7 @@ $(function() {
                     options.append("</table>")
                     button.empty()
                     button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span> Download All Data</a>")
-                    document.location.href = "#here";
+                    // document.location.href = "#here";
                 }
             });
         }
@@ -316,6 +316,7 @@ $(function() {
                 });
         $("#alert").fadeTo(5000, 0).slideUp(500, function(){
         $(this).alert();
+        });
     });
 
     $("form").submit(function(e) {

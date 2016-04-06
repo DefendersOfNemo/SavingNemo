@@ -101,7 +101,7 @@
             <div class= "input-group col-md-6 ">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
-                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple>
+                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple id="loggerTempFile">
                     </span>
                 </span>
             <input type="text" class="form-control" readonly>
@@ -141,7 +141,6 @@
 </body>
 </html>
 <script>
-
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
