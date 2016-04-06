@@ -324,7 +324,7 @@ $(function() {
                     options.append("</tbody>")
                     options.append("</table>")
                     button.empty()
-                    button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\"><span class=\"glyphicon glyphicon-download\"></span> Download All Data</a>")
+                    button.append("<a href=\"/download\" class=\"btn btn-info btn-lg\" role=\"button\" autocomplete=\"off\"><span class=\"glyphicon glyphicon-download\"></span> Download All Data</a>")
                 }
             });
         }
