@@ -8,7 +8,7 @@ from flask.ext import excel
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 import io, csv, datetime, sys
-
+import time
 
 # def index():
 #     """Searches the database for entries, then displays them."""
@@ -44,7 +44,8 @@ def queryDb(value_type, value):
     '''Query Database to get options for each drop-down menu'''
     result, countRecords, minDate, maxDate = None, None, None, None        
     db = DbConnect(app.config)
-    keyList = ['biomimic_type', 'country', 'state_province', 'location', 'zone', 'sub_zone', 'wave_exp']
+    keyList = ['biomimic_type', 'country', 'state_province', 'location', 'zone', 'sub_zone', \
+                'wave_exp', 'start_date', 'end_date', 'output_type', 'analysis_type']
     # delete all keys in session variable "query" after the selected field
     for key in keyList[keyList.index(value_type) + 1:]:
         session['query'].pop(key, None)
@@ -124,17 +125,18 @@ def allowed_file(filetype, filename):
 @app.route('/upload', methods=['GET','POST'])
 def upload():   
     '''Handle user upload functions, including logger type and logger temperature file'''
-    result = None;
-    error= None;
+    all_results = None;
+    error = "";    
     if request.method == 'POST':
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']
             if file:
+                all_results = dict()
                 if allowed_file("loggerTypeFile", file.filename):
                     stream = io.StringIO(file.stream.read().decode("UTF-8"), newline=None)
                     csv_input = csv.reader(stream)
                     next(csv_input, None)  # skip the headers
-                    result, corruptRecords = AddLoggerType(csv_input)
+                    all_results, corruptRecords = AddLoggerType(csv_input)
                 else:
                     error = "File should be in csv format"
             else:
@@ -143,7 +145,10 @@ def upload():
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
             if files[0]:
-                result = {'total':0, 'success':0, 'failure':0};
+                all_results = {'total': 0, 'success': 0, 'failure': 0}
+                print("Starting insertLoggerTemp")
+                st = time.time()
+                print(st)
                 for file in files:
                     individual_result = None;
                     if allowed_file("loggerTempFile", file.filename):
@@ -152,26 +157,27 @@ def upload():
                             csv_input = csv.reader(stream, delimiter = '\t')
                         else:
                             csv_input = csv.reader(stream)
-                        next(csv_input, None)  # skip the headers                            
-                        individual_result, corruptRecords, error_1 = AddLoggerTemp(csv_input,file.filename)
+                        next(csv_input, None)  # skip the headers                                                    
+                        individual_result, errorMessage = AddLoggerTemp(csv_input, file.filename)
                         if individual_result is not None:
-                            result['total'] += individual_result['total']
-                            result['success'] += individual_result['success']
-                            result['failure'] += individual_result['failure']
-                            corruptRecords += file.filename + ':\n' + corruptRecords
+                            all_results['total'] += individual_result['total']
+                            all_results['success'] += individual_result['success']
+                            all_results['failure'] += individual_result['failure']
+                        if errorMessage is not None:
+                            error += errorMessage
                     else:
-                        error_1 = "File " + file.filename + " should be in csv or txt format"
+                        error += "File " + file.filename + " should be in csv or txt format\n"
                     file.close()
-                    if error == None:
-                        error = error_1
-                    elif error_1 != None:
-                        error += error_1
+                et = time.time()
+                print(et)
+                print(et - st)
+                print("Ending insertLoggerTemp")
             else:
-                error = "Please choose a file first"
-    if result is not None:
-        if result.get('total') == 0:
-            result = None
-    return render_template('upload.html', result=result, error=error)
+                error = "Please choose a file first\n"
+    if all_results is not None:
+        if all_results.get('total') == 0:
+            all_results = None
+    return render_template('upload.html', result=all_results, error=error)
 
 def AddLoggerType(reader):
     '''Insert logger type in file'''
@@ -198,38 +204,32 @@ def AddLoggerType(reader):
     db.close()   
     return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
 
-def AddLoggerTemp(reader,filename):
+def AddLoggerTemp(reader, filename):
     '''Insert logger temperatures in uploaded file'''
     db = DbConnect(app.config)
-    properRecords = list();
-    corruptRecords = '';
-    insertCorruptRecords = '';
-    properCounter = 0;
-    corruptCounter = 0;
-    insertCorruptCounter = 0;
-    errorMessage = ''
-    error = ''
-    microsite_id = filename.rsplit('_', 5)[0].upper()
-    logger_id = db.FindMicrositeId(microsite_id)
-    if logger_id == None:
-        errorMessage = filename + ": The microsite_id dose not exist. Please upload logger data file first"+'\n'
-        return None, None, errorMessage
-    count = 0
+    parsedRecords = list();    
+    totalCounter = 0;
+    successCounter = 0;
+    failureCounter = 0;
+    errorMessage = None
+    isParseError = False
+    microsite_id = filename.rsplit('_', 5)[0].upper()    
+    logger_id = db.FindMicrositeId(microsite_id)    
+    if logger_id is None:
+        errorMessage = filename + ": The microsite_id does not exist. Please upload logger data type file first\n"
+        return None, errorMessage
     for record in reader:
-        parsedRecordDict,error = db.parseLoggerTemp(record, count)
-        if (error == ''):
-            properRecords.append(parsedRecordDict)
-            properCounter += 1
+        parsedRecordDict, isParseError = db.parseLoggerTemp(record)        
+        if not isParseError:
+            parsedRecords.append(parsedRecordDict)
         else:
-            corruptRecords = corruptRecords + str(count) + ',' + error + ';'
-            corruptCounter += 1
-        count+=1
-    if len(properRecords) > 0:
-        properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerTemp(properRecords,logger_id)
-    corruptCounter += insertCorruptCounter
-    corruptRecords += insertCorruptRecords
+            failureCounter += 1
+    totalCounter = len(parsedRecords) + failureCounter
+    if len(parsedRecords) > 0:
+        successCounter = db.insertLoggerTemp(parsedRecords,logger_id)
+    failureCounter += totalCounter - successCounter
     db.close()
-    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords, None
+    return {"total": totalCounter, "success": successCounter, "failure": failureCounter}, errorMessage
 
 ################### Login ######################
 @app.route('/login', methods=['GET', 'POST'])

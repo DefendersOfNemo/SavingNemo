@@ -26,7 +26,7 @@ class BasicConnectionTestCase(unittest.TestCase):
                 res = cursor.execute('SELECT * from cnx_logger_properties')
                 res = cursor.execute('SELECT * from cnx_logger_geographics')
                 res = cursor.execute('SELECT * from cnx_logger')
-                res = cursor.execute('SELECT * from cnx_logger_temperature')                
+                res = cursor.execute('SELECT * from cnx_logger_temperature LIMIT 2')
         except (MySQLdb.OperationalError, MySQLdb.ProgrammingError) as e:
             data = None       
         finally:
@@ -49,7 +49,7 @@ class BasicConnectionTestCase(unittest.TestCase):
                 c.execute('SELECT * from cnx_logger_properties')
                 c.execute('SELECT * from cnx_logger_geographics')
                 c.execute('SELECT * from cnx_logger')
-                c.execute('SELECT * from cnx_logger_temperature')                
+                c.execute('SELECT * from cnx_logger_temperature  LIMIT 2')
                 data = c.fetchone()
                 c.close()
         except MySQLdb.OperationalError as e:
@@ -71,7 +71,7 @@ class BasicConnectionTestCase(unittest.TestCase):
                 c.execute('SELECT * from cnx_logger_properties')
                 c.execute('SELECT * from cnx_logger_geographics')
                 c.execute('SELECT * from cnx_logger')
-                c.execute('SELECT * from cnx_logger_temperature')                
+                #c.execute('SELECT * from cnx_logger_temperature')                
                 data = c.fetchone()
                 c.close()
         except MySQLdb.OperationalError as e:
@@ -93,7 +93,7 @@ class BasicConnectionTestCase(unittest.TestCase):
                 c.execute('SELECT * from cnx_logger_properties')
                 c.execute('SELECT * from cnx_logger_geographics')
                 c.execute('SELECT * from cnx_logger')
-                c.execute('SELECT * from cnx_logger_temperature')                
+                c.execute('SELECT * from cnx_logger_temperature  LIMIT 2')                
                 data = c.fetchone()
                 c.close()
         except MySQLdb.OperationalError as e:
@@ -115,7 +115,7 @@ class BasicConnectionTestCase(unittest.TestCase):
                 c.execute('SELECT * from cnx_logger_properties')
                 c.execute('SELECT * from cnx_logger_geographics')
                 c.execute('SELECT * from cnx_logger')
-                c.execute('SELECT * from cnx_logger_temperature')                
+                c.execute('SELECT * from cnx_logger_temperature  LIMIT 2')                
                 data = c.fetchone()
                 c.close()
         except MySQLdb.OperationalError as e:

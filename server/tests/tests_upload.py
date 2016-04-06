@@ -40,7 +40,7 @@ class UploadTestCase(unittest.TestCase):
         geo_id = self.db.fetchExistingGeoId(cursor, rec)
         prop_id = self.db.fetchExistingPropId(cursor, rec)
         logger_id = self.db.FindMicrositeId(rec.get('microsite_id'))
-        res = cursor.execute("DELETE FROM `cnx_logger` WHERE logger_id=%s", logger_id)
+        res = cursor.execute("DELETE FROM `cnx_logger` WHERE logger_id=%s" % (logger_id))
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_biomimic_type` WHERE biomimic_id=%s", biomimic_id)
         self.db.connection.commit()

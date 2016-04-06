@@ -7,6 +7,10 @@ $(function() {
         $('#dropdown_menu_zone_name').empty();
         $('#dropdown_menu_sub_zone_name').empty();
         $('#dropdown_menu_wave_exp_name').empty();
+        $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_to").datepicker('setDate', null);
+        $("#frequency-select").empty()
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
         $.getJSON('/_parse_data', {
             select_type: "biomimic_type",
             select_value: biomimic_type
@@ -44,7 +48,11 @@ $(function() {
     $('#dropdown_menu_country_name').change( function () {
         country = $("#dropdown_menu_country_name option:selected").val();
         $('#dropdown_menu_state_name').empty();
-        $('#dropdown_menu_location_name').empty();        
+        $('#dropdown_menu_location_name').empty();
+        $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_to").datepicker('setDate', null);
+        $("#frequency-select").empty()
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
         $.getJSON('/_parse_data', {
             select_type: "country",
             select_value: country
@@ -72,7 +80,11 @@ $(function() {
     
     $('#dropdown_menu_state_name').change( function () {
         state_province = $("#dropdown_menu_state_name option:selected").text();
-        $('#dropdown_menu_location_name').empty();        
+        $('#dropdown_menu_location_name').empty();
+        $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_to").datepicker('setDate', null);
+        $("#frequency-select").empty()
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
         $.getJSON('/_parse_data', {
             select_type: "state_province",
             select_value: state_province
@@ -101,6 +113,10 @@ $(function() {
     
     $('#dropdown_menu_location_name').change( function () {
         state_province = $("#dropdown_menu_state_name option:selected").text();
+        $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_to").datepicker('setDate', null);
+        $("#frequency-select").empty()
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
         loc = $("#dropdown_menu_location_name option:selected").text();
         $.getJSON('/_parse_data', {
             select_type: "location",
@@ -124,7 +140,11 @@ $(function() {
     
     $('#dropdown_menu_zone_name').change( function () {
         zone_type = $("#dropdown_menu_zone_name option:selected").text();
+        $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_to").datepicker('setDate', null);
         $('#dropdown_menu_sub_zone_name').empty()
+        $("#frequency-select").empty()
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
         $.getJSON('/_parse_data', {
             select_type: "zone",
             select_value: zone_type
@@ -154,7 +174,11 @@ $(function() {
         
     $('#dropdown_menu_sub_zone_name').change( function () {
         sub_zone_type = $("#dropdown_menu_sub_zone_name option:selected").text();
+        $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_to").datepicker('setDate', null);
         $('#dropdown_menu_wave_exp_name').empty()
+        $("#frequency-select").empty()
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
         $.getJSON('/_parse_data', {
             select_type: "sub_zone",
             select_value: sub_zone_type

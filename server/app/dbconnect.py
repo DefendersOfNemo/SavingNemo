@@ -434,64 +434,51 @@ class DbConnect(object):
         results = list(results)
         return len(results) > 0
 
-    def parseLoggerTemp(self, dataList, count):
+    def parseLoggerTemp(self, dataList):
         """Parse new Logger Temperature Data"""
         parsedRecord = dict()
+        error = False
         cursor = self.connection.cursor()
-        if (len(dataList) != 2):
-            return None, 'L'
+        if (len(dataList) != 2) or (self.isNotFloat(dataList[1])) or (dataList[0] == "None") or (dataList[0] == ""):
+            error = True
         else:
-            if (self.isNotFloat(dataList[1])):
-                return None, 'F'
-            else:
-                if (dataList[0] == "None" or dataList[0] == ""):
-                    return None, 'B'
-                else:
-                    #handle datetime error
-                    try:
-                        parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%Y %H:%M')
-                    except ValueError:
-                        try:
-                            parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%y %H:%M')
-                        except ValueError:
-                            return None, 'FT'
-                    parsedRecord['Temp_C'] = dataList[1] 
-                    parsedRecord['count'] = count            
-        return parsedRecord, ''
-
-
-    def insertLoggerTemp(self, records,logger_id):
-        """Inserts new Logger Type in DB"""
-        cursor = self.connection.cursor()
-        corruptRecords = ''
-        properCounter = 0
-        corruptCounter = 0
-        corruptIndicator = False        
-        query = ("INSERT INTO `cnx_logger_temperature` (`logger_id`, `Time_GMT`, `Temp_C`) VALUES (%s, %s, %s)")
-        for record in records:
-            #handle duplicate entry problem while inserting data
+            # handle datetime error
             try:
-                res = cursor.execute(query,(logger_id, record.get("Time_GMT"),record.get("Temp_C")))
-            except MySQLdb.DatabaseError as err:
-                res = 0
-            if res == 1:
-                self.connection.commit()
-                properCounter+=1
-            else:
-                self.connection.rollback()
-                corruptCounter+=1
-                corruptRecords = corruptRecords + str(record.get("count")) + ',' + 'D' + ';'
+                parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%Y %H:%M')
+            except ValueError:
+                try:
+                    parsedRecord['Time_GMT'] = datetime.datetime.strptime(dataList[0],'%m/%d/%y %H:%M')
+                except ValueError:
+                    error = True
+        if not error:
+            parsedRecord['Temp_C'] = dataList[1] 
+        return parsedRecord, error
+
+    def insertLoggerTemp(self, records, logger_id):
+        """Inserts new Logger Type in DB"""
+        # records is a list of dict
+        cursor = self.connection.cursor()
+        properCounter = 0
+        totalCounter = len(records)
+        query = ("""INSERT IGNORE INTO `cnx_logger_temperature` (`logger_id`, `Time_GMT`, `Temp_C`) values (%s, %s, %s)""")
+        values = [(logger_id, record.get("Time_GMT"),record.get("Temp_C")) for record in records]
+        try:
+            # duplicate entries are ignored while inserting data            
+            res = cursor.executemany(query, values)
+            self.connection.commit()
+            properCounter = cursor.rowcount
+        except MySQLdb.DatabaseError as err:
+            self.connection.rollback()
         cursor.close()
-        return properCounter, corruptCounter, corruptRecords
+        return properCounter
 
     def FindMicrositeId(self, id):
         '''Fecth logger_id according to microsite_id'''
         cursor = self.connection.cursor()
         query = '''SELECT `logger_id` as 'logger_id' FROM `cnx_logger` WHERE microsite_id=''' + "\'"+ id +"\'"
         cursor.execute(query)
-        results = cursor.fetchall()
-        results = list(results)
-        if len(results) == 0:
+        results = cursor.fetchone()        
+        if results is None:
             return None
         else:
             return results[0]
