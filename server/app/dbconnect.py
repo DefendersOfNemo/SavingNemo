@@ -58,8 +58,8 @@ class DbConnect(object):
         zone_list = [row[0] for row in result]        
         cursor.close()
         final_result = {"country": country_list, "zone": zone_list}
-        countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
-        return final_result, countRecords, minDate, maxDate 
+        #countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
+        return final_result, None, None, None
 
     def fetch_distinct_states(self, queryDict):
         """Fetches Distinct states for selected biomimic type and country""" 
@@ -227,38 +227,32 @@ class DbConnect(object):
         if analysis_type == "Daily":
             where += " GROUP BY cast(temp.Time_GMT as date)"
         elif analysis_type == "Monthly":
-            where += " GROUP BY YEAR(temp.Time_GMT), MONTHNAME(temp.Time_GMT)"
+            where += " GROUP BY YEAR(temp.Time_GMT), MONTHNAME(temp.Time_GMT) ORDER BY YEAR(temp.Time_GMT), MONTH(temp.Time_GMT) ASC"
         elif analysis_type == "Yearly":
             where += " GROUP BY YEAR(temp.Time_GMT)"
         else:
             pass
         return where
 
-    def parseLoggerType(self, dataList, count):
+    def parseLoggerType(self, dataList):
         """Parse new Logger Type"""
         parsedRecord = dict()
-        if (len(dataList) != 11):
-            return None, 'L'
+        error = False
+        if (len(dataList) != 11) or (self.isNotFloat(dataList[2])) or (self.isNotFloat(dataList[3])) or (dataList[0] == "None") or (dataList[0] == ""):
+            error = True
         else:
-            if (self.isNotFloat(dataList[2]) or self.isNotFloat(dataList[3])):
-                return None, 'F'
-            else:
-                if (dataList[0] == "None" or dataList[0] == ""):
-                    return None, 'B'
-                else:
-                    parsedRecord['microsite_id'] = str(dataList[0]).upper()
-                    parsedRecord['site'] = (dataList[1]).upper()
-                    parsedRecord['field_lat'] = dataList[2]
-                    parsedRecord['field_lon'] = dataList[3]
-                    parsedRecord['location'] = dataList[4]
-                    parsedRecord['state_province'] = dataList[5]
-                    parsedRecord['country'] = dataList[6]
-                    parsedRecord['biomimic_type'] = dataList[7]
-                    parsedRecord['zone'] = dataList[8].capitalize()
-                    parsedRecord['sub_zone'] = None if (dataList[9] == "N/A") else dataList[9].capitalize()
-                    parsedRecord['wave_exp'] = None if (dataList[10] == "N/A") else dataList[10].capitalize()
-                    parsedRecord['count'] = count
-        return parsedRecord, ''        
+            parsedRecord['microsite_id'] = str(dataList[0]).upper()
+            parsedRecord['site'] = (dataList[1]).upper()
+            parsedRecord['field_lat'] = dataList[2]
+            parsedRecord['field_lon'] = dataList[3]
+            parsedRecord['location'] = dataList[4]
+            parsedRecord['state_province'] = dataList[5]
+            parsedRecord['country'] = dataList[6]
+            parsedRecord['biomimic_type'] = dataList[7]
+            parsedRecord['zone'] = dataList[8].capitalize()
+            parsedRecord['sub_zone'] = None if (dataList[9] == "N/A") else dataList[9].capitalize()
+            parsedRecord['wave_exp'] = None if (dataList[10] == "N/A") else dataList[10].capitalize()            
+        return parsedRecord, error
 
     def isNotFloat(self, value):
         '''check whether value is float'''
@@ -271,60 +265,47 @@ class DbConnect(object):
     def insertLoggerType(self, records):
         """Inserts new Logger Type in DB"""
         cursor = self.connection.cursor()
-        corruptRecords = ''
-        properCounter = 0
-        corruptCounter = 0
+        properCounter = 0  
         corruptIndicator = False
         for record in records:
             isDuplicateMicrositeId = self.checkForDuplicate(cursor, record.get("microsite_id"))
             if not isDuplicateMicrositeId:
                 geo_id = self.fetchExistingGeoId(cursor, record)                
-                if (geo_id == None):
+                if (geo_id is None):
                     geo_id, corruptIndicator = self.insertGeoData(cursor, record)
                 else:
                     geo_id = geo_id[0]
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
-                    corruptCounter += 1
                     continue
                 
                 prop_id = self.fetchExistingPropId(cursor, record)                
-                if (prop_id == None):
+                if (prop_id is None):
                     prop_id, corruptIndicator = self.insertPropertiesData(cursor, record)
                 else:
                     prop_id = prop_id[0]
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
-                    corruptCounter += 1
                     continue
 
                 biomimic_id = self.fetchExistingBioId(cursor, record.get('biomimic_type'))
-                if (biomimic_id == None):
+                if (biomimic_id is None):
                     biomimic_id, corruptIndicator = self.insertBiomimicTypeData(cursor, record.get('biomimic_type'))
                 else:
                     biomimic_id = biomimic_id[0]
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
-                    corruptCounter += 1
                     continue
 
                 logger_id, corruptIndicator = self.insertMicrositeData(cursor, record.get('microsite_id'), biomimic_id, geo_id, prop_id)
                 if corruptIndicator:
                     self.connection.rollback()
-                    corruptRecords += str(record.get('count')) + ',' + 'C' + ';'
-                    corruptCounter += 1
                     continue
                 else:
                     self.connection.commit() 
                     properCounter += 1
-            else:
-                corruptRecords += str(record.get('count')) + ',' + 'D' + ';'
-                corruptCounter += 1 
         cursor.close()
-        return properCounter, corruptCounter, corruptRecords
+        return properCounter
     
     def fetchExistingBioId(self, cursor, biomimic_type):
         """Check for Existing Biomimic Type Data"""
@@ -459,7 +440,6 @@ class DbConnect(object):
         # records is a list of dict
         cursor = self.connection.cursor()
         properCounter = 0
-        totalCounter = len(records)
         query = ("""INSERT IGNORE INTO `cnx_logger_temperature` (`logger_id`, `Time_GMT`, `Temp_C`) values (%s, %s, %s)""")
         values = [(logger_id, record.get("Time_GMT"),record.get("Temp_C")) for record in records]
         try:
@@ -473,7 +453,7 @@ class DbConnect(object):
         return properCounter
 
     def FindMicrositeId(self, id):
-        '''Fecth logger_id according to microsite_id'''
+        '''Fetch logger_id according to microsite_id'''
         cursor = self.connection.cursor()
         query = '''SELECT `logger_id` as 'logger_id' FROM `cnx_logger` WHERE microsite_id=''' + "\'"+ id +"\'"
         cursor.execute(query)

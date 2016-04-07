@@ -5,7 +5,7 @@ from flask import Flask, json, request, Response, session, jsonify
 from werkzeug.datastructures import (ImmutableMultiDict, FileStorage)
 from flask.ext.uploads import TestingFileStorage
 import MySQLdb
-from app import app
+from app.views import app
 from app.dbconnect import DbConnect
 import datetime
 
@@ -47,15 +47,13 @@ class UploadTestEdgeCase(unittest.TestCase):
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
-    
-    def stringToBytes(self, stringValue):
-        """Convert Strings to their Bytes representation"""
-        return bytes(stringValue, 'UTF-8')
 
     def test_logger_type_upload_MicrositeId_None(self):
         """Test that upload Logger Type file without microsite_id will not be inserted to database"""
         test_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_MicrositeId_None.csv'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_filename, 'rb'), 'Test_New_Logger_Type_MicrositeId_None.csv')
@@ -72,6 +70,8 @@ class UploadTestEdgeCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql_Duplicate.txt'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')

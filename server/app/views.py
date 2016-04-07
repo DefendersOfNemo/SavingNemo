@@ -1,8 +1,8 @@
+#coding:utf8
 # imports
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
-from .forms import QueryForm
-from app import app
+from app.forms import QueryForm
 from app.dbconnect import DbConnect
 from flask.ext import excel
 from werkzeug import secure_filename
@@ -10,9 +10,8 @@ from werkzeug.datastructures import FileStorage
 import io, csv, datetime, sys
 import time
 
-# def index():
-#     """Searches the database for entries, then displays them."""
-#     return render_template('index.html')
+app = Flask(__name__, template_folder="../../client/templates", static_folder="../../client/static")
+app.config.from_object('app.config')
 
 ################### Query ######################
 @app.route('/')
@@ -125,8 +124,13 @@ def allowed_file(filetype, filename):
 @app.route('/upload', methods=['GET','POST'])
 def upload():   
     '''Handle user upload functions, including logger type and logger temperature file'''
+    # Interceptor for Upload
+    print("session: ", session.get('logged_in'))
+    if session.get('logged_in') is None:
+        return redirect(url_for('query'))
+
     all_results = None;
-    error = "";    
+    error = "";
     if request.method == 'POST':
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']
@@ -182,27 +186,24 @@ def upload():
 def AddLoggerType(reader):
     '''Insert logger type in file'''
     db = DbConnect(app.config)
-    properRecords = list();
-    corruptRecords = '';
-    insertCorruptRecords = '';
-    properCounter = 0;
-    corruptCounter = 0;
-    insertCorruptCounter = 0;
-    count = 0
+    parsedRecords = list();
+    totalCounter = 0;
+    successCounter = 0;
+    failureCounter = 0;
+    errorMessage = None
+    isParseError = False
     for record in reader:
-        parsedRecordDict, error = db.parseLoggerType(record, count)
-        if (error == ''):
-            properRecords.append(parsedRecordDict)
+        parsedRecordDict, isParseError = db.parseLoggerType(record)
+        if not isParseError:
+            parsedRecords.append(parsedRecordDict)
         else:
-            corruptRecords += str(count) + ',' + error + ';'
-            corruptCounter += 1
-        count += 1
-    if len(properRecords) > 0:
-        properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerType(properRecords)
-    corruptCounter += insertCorruptCounter
-    corruptRecords += insertCorruptRecords
+            failureCounter += 1
+    totalCounter = len(parsedRecords) + failureCounter
+    if len(parsedRecords) > 0:
+        successCounter = db.insertLoggerType(parsedRecords)
+    failureCounter += len(parsedRecords) - successCounter
     db.close()   
-    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
+    return  {"total": totalCounter, "success": successCounter, "failure": failureCounter}, errorMessage
 
 def AddLoggerTemp(reader, filename):
     '''Insert logger temperatures in uploaded file'''
@@ -227,7 +228,7 @@ def AddLoggerTemp(reader, filename):
     totalCounter = len(parsedRecords) + failureCounter
     if len(parsedRecords) > 0:
         successCounter = db.insertLoggerTemp(parsedRecords,logger_id)
-    failureCounter += totalCounter - successCounter
+    failureCounter += len(parsedRecords) - successCounter
     db.close()
     return {"total": totalCounter, "success": successCounter, "failure": failureCounter}, errorMessage
 

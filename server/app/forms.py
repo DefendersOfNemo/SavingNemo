@@ -11,8 +11,8 @@ class QueryForm(Form):
     zone_name = SelectField(u'zone_name', choices=[])
     sub_zone_name = SelectField(u'sub_zone', choices=[])
     wave_exp_name = SelectField(u'wave_exp', choices=[])
-    date_pick_from = DateField('date_pick_from', format='%m/%d/%Y')
-    date_pick_to = DateField('date_pick_to', format='%m/%d/%Y')
+    #date_pick_from = DateField('date_pick_from', format='%m/%d/%Y')
+    #date_pick_to = DateField('date_pick_to', format='%m/%d/%Y')
     # Static Choices. These wouldn't change.
     output_type_choices = [('Raw', 'Raw'), ('Min', 'Min'), ('Max', 'Max'), ('Average', 'Average')]
     output_type = SelectField(u'output_type', choices=output_type_choices)

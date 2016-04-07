@@ -1,7 +1,7 @@
 import unittest, os, datetime
 from flask import Flask, json, request, Response, session
 import MySQLdb
-from app import app
+from app.views import app
 from app.dbconnect import DbConnect
 from flask.ext import excel
 
@@ -16,6 +16,8 @@ class QueryFormTestEdgeCase(unittest.TestCase):
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_WaveExp_None.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYIDWAVENA_2000_pgsql.txt'
         with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
             response = client.post('/upload', 
                 data={
                     'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_WaveExp_None.csv')
@@ -46,7 +48,7 @@ class QueryFormTestEdgeCase(unittest.TestCase):
 
     def stringToBytes(self, stringValue):
         """Convert Strings to their Bytes representation"""
-        return bytes(stringValue, 'UTF-8')
+        return bytes(stringValue, 'utf-8')
 
     def cleanUpLoggerTemp(self, cursor):
         cursor.execute("SELECT logger_temp_id FROM `cnx_logger_temperature`")
