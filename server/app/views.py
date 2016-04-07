@@ -186,27 +186,24 @@ def upload():
 def AddLoggerType(reader):
     '''Insert logger type in file'''
     db = DbConnect(app.config)
-    properRecords = list();
-    corruptRecords = '';
-    insertCorruptRecords = '';
-    properCounter = 0;
-    corruptCounter = 0;
-    insertCorruptCounter = 0;
-    count = 0
+    parsedRecords = list();
+    totalCounter = 0;
+    successCounter = 0;
+    failureCounter = 0;
+    errorMessage = None
+    isParseError = False
     for record in reader:
-        parsedRecordDict, error = db.parseLoggerType(record, count)
-        if (error == ''):
-            properRecords.append(parsedRecordDict)
+        parsedRecordDict, isParseError = db.parseLoggerType(record)
+        if not isParseError:
+            parsedRecords.append(parsedRecordDict)
         else:
-            corruptRecords += str(count) + ',' + error + ';'
-            corruptCounter += 1
-        count += 1
-    if len(properRecords) > 0:
-        properCounter, insertCorruptCounter, insertCorruptRecords = db.insertLoggerType(properRecords)
-    corruptCounter += insertCorruptCounter
-    corruptRecords += insertCorruptRecords
+            failureCounter += 1
+    totalCounter = len(parsedRecords) + failureCounter
+    if len(parsedRecords) > 0:
+        successCounter = db.insertLoggerType(parsedRecords)
+    failureCounter += len(parsedRecords) - successCounter
     db.close()   
-    return {"total": properCounter + corruptCounter, "success": properCounter, "failure": corruptCounter}, corruptRecords
+    return  {"total": totalCounter, "success": successCounter, "failure": failureCounter}, errorMessage
 
 def AddLoggerTemp(reader, filename):
     '''Insert logger temperatures in uploaded file'''
@@ -231,7 +228,7 @@ def AddLoggerTemp(reader, filename):
     totalCounter = len(parsedRecords) + failureCounter
     if len(parsedRecords) > 0:
         successCounter = db.insertLoggerTemp(parsedRecords,logger_id)
-    failureCounter += totalCounter - successCounter
+    failureCounter += len(parsedRecords) - successCounter
     db.close()
     return {"total": totalCounter, "success": successCounter, "failure": failureCounter}, errorMessage
 
