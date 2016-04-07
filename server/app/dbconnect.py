@@ -227,7 +227,7 @@ class DbConnect(object):
         if analysis_type == "Daily":
             where += " GROUP BY cast(temp.Time_GMT as date)"
         elif analysis_type == "Monthly":
-            where += " GROUP BY YEAR(temp.Time_GMT), MONTHNAME(temp.Time_GMT)"
+            where += " GROUP BY YEAR(temp.Time_GMT), MONTHNAME(temp.Time_GMT) ORDER BY YEAR(temp.Time_GMT), MONTH(temp.Time_GMT) ASC"
         elif analysis_type == "Yearly":
             where += " GROUP BY YEAR(temp.Time_GMT)"
         else:
