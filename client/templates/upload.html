@@ -97,7 +97,7 @@
             <br><br>
 
         <h2>Upload new Logger Temperature</h2>
-        <form action="/upload" method="post" enctype= "multipart/form-data">
+        <form method="post" enctype= "multipart/form-data" id="upload-form">
             <div class= "input-group col-md-6 ">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
@@ -109,7 +109,7 @@
             <br>
             <strong>Accepted file formats are CSV, TXT<a href = "#">  See Example</a><strong>
             <br><br>
-            <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
+            <button type="submit" value="Upload" class="btn-default btn-lg" id="logger-upload-button"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
 
         </form>
         <br>

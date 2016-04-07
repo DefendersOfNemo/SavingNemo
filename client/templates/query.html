@@ -53,9 +53,11 @@
                 </div>
             </div>
         </nav>
+        {% if session.logged_in %}
         <p class="alert alert-info text-right" id="alert">
             <strong>log in successful, please click upload data to access upload page</strong>
         </p>
+        {% endif %}
         <div class="container text-danger">
             <h1>DATABASE<h1>
         </div>
