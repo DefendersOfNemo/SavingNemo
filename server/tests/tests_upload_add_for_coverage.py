@@ -47,10 +47,6 @@ class UploadTestEdgeCase(unittest.TestCase):
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
-    
-    def stringToBytes(self, stringValue):
-        """Convert Strings to their Bytes representation"""
-        return bytes(stringValue, 'UTF-8')
 
     def test_logger_type_upload_MicrositeId_None(self):
         """Test that upload Logger Type file without microsite_id will not be inserted to database"""

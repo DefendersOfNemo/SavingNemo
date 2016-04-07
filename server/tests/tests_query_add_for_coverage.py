@@ -48,7 +48,7 @@ class QueryFormTestEdgeCase(unittest.TestCase):
 
     def stringToBytes(self, stringValue):
         """Convert Strings to their Bytes representation"""
-        return bytes(stringValue, 'UTF-8')
+        return bytes(stringValue, 'utf-8')
 
     def cleanUpLoggerTemp(self, cursor):
         cursor.execute("SELECT logger_temp_id FROM `cnx_logger_temperature`")
