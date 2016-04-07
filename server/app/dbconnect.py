@@ -473,7 +473,7 @@ class DbConnect(object):
         return properCounter
 
     def FindMicrositeId(self, id):
-        '''Fecth logger_id according to microsite_id'''
+        '''Fetch logger_id according to microsite_id'''
         cursor = self.connection.cursor()
         query = '''SELECT `logger_id` as 'logger_id' FROM `cnx_logger` WHERE microsite_id=''' + "\'"+ id +"\'"
         cursor.execute(query)
