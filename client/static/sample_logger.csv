@@ -1,0 +1,3 @@
+microsite_id,site,field_lat,field_lon,location,state_province,country,biomimic,zone,sub_zone,wave_exp
+BMRBUSCAHS1002,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robobarnacle,Mid,N/A,exposed
+BMRBUSCALL66,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robobarnacle,Mid,N/A,N/A

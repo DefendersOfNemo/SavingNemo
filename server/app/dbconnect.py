@@ -187,6 +187,7 @@ class DbConnect(object):
         results = cursor.fetchall()
         results = list(results)
         final_result = [[result[0], round(result[1], 4)] for result in results]
+        print("final: ", final_result)
         cursor.close()
         return final_result, query + where_condition
 

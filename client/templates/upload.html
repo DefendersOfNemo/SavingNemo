@@ -89,6 +89,8 @@
                     </span>
                 <input type="text" class="form-control" readonly>
                 </div>
+                <br>
+                <strong>Accepted file format is CSV<a href = "../static/sample_logger.csv">  See Example</a><strong>
                 <br><br>
                 <button type="submit" value="Upload" class="btn-default btn-lg">Upload <span class="glyphicon glyphicon-upload"></span></button> 
             </form>
@@ -104,7 +106,9 @@
                 </span>
             <input type="text" class="form-control" readonly>
             </div>
-             <br><br>
+            <br>
+            <strong>Accepted file formats are CSV, TXT<a href = "../static/sample_temp.txt">  See Example</a><strong>
+            <br><br>
             <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
 
         </form>
@@ -115,7 +119,7 @@
         {% if result %}
           <div class="container" id="query-results-table" >
             <table class="table table-bordered" id="statistics-table">
-              <thead><h2>Upload Statistics </h2></thead>
+              <thead><h2>Upload Statistics </h2> <h3>(complete in {{ result.time_taken }} secs) </h3></thead>
               <tbody>
                 <tr>
                   <td># Total Records</td>
