@@ -38,37 +38,37 @@ class DbConnect(object):
         """Fetches all countries for selected biomimic type"""
         
         cursor = self.connection.cursor()        
-        query = ("SELECT DISTINCT geo.country FROM `cnx_logger` logger "
+        query = ("SELECT DISTINCT geo.country FROM `cnx_logger` log "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON biotype.`biomimic_id`=logger.`biomimic_id` "
+                    "ON biotype.`biomimic_id`=log.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo "
-                    "ON geo.`geo_id`=logger.`geo_id` "
+                    "ON geo.`geo_id`=log.`geo_id` "
                     "WHERE biotype.`biomimic_type`=\'%s\'") % queryDict['biomimic_type']
         cursor.execute(query + " ORDER BY 1 ASC")
         result = cursor.fetchall()
         country_list = [row[0] for row in result]        
-        query = ("SELECT DISTINCT prop.zone FROM `cnx_logger` logger "
+        query = ("SELECT DISTINCT prop.zone FROM `cnx_logger` log "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON biotype.`biomimic_id`=logger.`biomimic_id` "
+                    "ON biotype.`biomimic_id`=log.`biomimic_id` "
                     "INNER JOIN `cnx_logger_properties` prop "
-                    "ON prop.`prop_id`=logger.`prop_id` "
+                    "ON prop.`prop_id`=log.`prop_id` "
                     "WHERE biotype.biomimic_type=\'%s\'") % queryDict['biomimic_type']
         cursor.execute(query + " ORDER BY 1 ASC")
         result = cursor.fetchall()
         zone_list = [row[0] for row in result]        
         cursor.close()
         final_result = {"country": country_list, "zone": zone_list}
-        #countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
-        return final_result, None, None, None
+        countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
+        return final_result, countRecords, minDate, maxDate
 
     def fetch_distinct_states(self, queryDict):
         """Fetches Distinct states for selected biomimic type and country""" 
         cursor = self.connection.cursor()
-        query = ("SELECT DISTINCT geo.state_province FROM `cnx_logger` logger "
+        query = ("SELECT DISTINCT geo.state_province FROM `cnx_logger` log "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON biotype.`biomimic_id`=logger.`biomimic_id` "
+                    "ON biotype.`biomimic_id`=log.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo "
-                    "ON geo.`geo_id`=logger.`geo_id` ")
+                    "ON geo.`geo_id`=log.`geo_id` ")
         where_condition = self.buildWhereCondition(queryDict)
         cursor.execute(query + where_condition + " ORDER BY 1 ASC")
         result = cursor.fetchall()
@@ -81,11 +81,11 @@ class DbConnect(object):
         """ Fetches Distinct locations for selected biomimic type, country 
             and state_province"""
         cursor = self.connection.cursor()
-        query = ("SELECT DISTINCT geo.location FROM `cnx_logger` logger "
+        query = ("SELECT DISTINCT geo.location FROM `cnx_logger` log "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON  biotype.`biomimic_id`=logger.`biomimic_id` "
+                    "ON  biotype.`biomimic_id`=log.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo "
-                    "ON geo.`geo_id`=logger.`geo_id` ")
+                    "ON geo.`geo_id`=log.`geo_id` ")
         where_condition = self.buildWhereCondition(queryDict)
         cursor.execute(query + where_condition + " ORDER BY 1 ASC")
         result = cursor.fetchall()
@@ -98,13 +98,13 @@ class DbConnect(object):
         """ Fetches Distinct Subzones for selected biomimic type, country, 
             state_province, location and zones"""        
         cursor = self.connection.cursor()
-        query = ("SELECT DISTINCT prop.sub_zone FROM `cnx_logger` logger "
+        query = ("SELECT DISTINCT prop.sub_zone FROM `cnx_logger` log "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON biotype.`biomimic_id`=logger.`biomimic_id` "
+                    "ON biotype.`biomimic_id`=log.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo "
-                    "ON geo.`geo_id`=logger.`geo_id` "
+                    "ON geo.`geo_id`=log.`geo_id` "
                     "INNER JOIN `cnx_logger_properties` prop "
-                    "ON prop.`prop_id`=logger.`prop_id` ")
+                    "ON prop.`prop_id`=log.`prop_id` ")
         where_condition = self.buildWhereCondition(queryDict)
         cursor.execute(query + where_condition + " ORDER BY 1 ASC")
         result = cursor.fetchall()
@@ -117,13 +117,13 @@ class DbConnect(object):
         """Fetches Distinct Wave Exp for selected biomimic type, country, 
             state_province, location, zones and sub_zones"""
         cursor = self.connection.cursor()
-        query = ("SELECT DISTINCT prop.wave_exp FROM `cnx_logger` logger "
+        query = ("SELECT DISTINCT prop.wave_exp FROM `cnx_logger` log "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON biotype.`biomimic_id`=logger.`biomimic_id` "
+                    "ON biotype.`biomimic_id`=log.`biomimic_id` "
                     "INNER JOIN `cnx_logger_geographics` geo "
-                    "ON geo.`geo_id`=logger.`geo_id` "
+                    "ON geo.`geo_id`=log.`geo_id` "
                     "INNER JOIN `cnx_logger_properties` prop "
-                    "ON prop.`prop_id`=logger.`prop_id`")
+                    "ON prop.`prop_id`=log.`prop_id`")
         where_condition = self.buildWhereCondition(queryDict)
         cursor.execute(query + where_condition + " ORDER BY 1 ASC")
         result = cursor.fetchall()
@@ -131,25 +131,30 @@ class DbConnect(object):
         cursor.close()
         countRecords, minDate, maxDate = self.fetchMetadata(queryDict);
         return final_result, countRecords, minDate, maxDate 
-    
+
     def fetchMetadata(self, queryDict):
         """Fetches metadata from tables based on user query"""
         cursor = self.connection.cursor()
-        query = ("SELECT COUNT(*), MIN(temp.Time_GMT), MAX(temp.Time_GMT) "
-                    "FROM `cnx_logger` logger "
-                    "INNER JOIN `cnx_logger_biomimic_type` biotype "
-                    "ON biotype.`biomimic_id` = logger.`biomimic_id` "
-                    "INNER JOIN `cnx_logger_geographics` geo "
-                    "ON geo.`geo_id` = logger.`geo_id` "
-                    "INNER JOIN `cnx_logger_properties` prop "
-                    "ON prop.`prop_id` = logger.`prop_id` "
-                    "INNER JOIN `cnx_logger_temperature` temp "
-                    "ON temp.`logger_id` = logger.`logger_id` ")
+        query = ("SELECT SUM(meta.logger_count), MIN(meta.logger_min_date), MAX(meta.logger_max_date) "
+                    "FROM `cnx_logger_metadata` meta "
+                    "WHERE meta.`logger_id` IN ( "
+                        "SELECT log.`logger_id` "
+                           "FROM `cnx_logger` log "
+                           "INNER JOIN `cnx_logger_biomimic_type` biotype "
+                           "ON biotype.`biomimic_id` = log.`biomimic_id` "
+                           "INNER JOIN `cnx_logger_geographics` geo "
+                           "ON geo.`geo_id` = log.`geo_id` "
+                           "INNER JOIN `cnx_logger_properties` prop "
+                           "ON prop.`prop_id` = log.`prop_id` ")
         where_condition = self.buildWhereCondition(queryDict)
-        cursor.execute(query + where_condition)
+        cursor.execute(query + where_condition + ")")
         results = cursor.fetchone()
         cursor.close()
+        results = list(results);
+        if results[0] is not None:
+            results[0] = "{:,}".format(results[0])        
         return results
+
 
     def getQueryResultsPreview(self, queryDict):
         """Fetches records from tables based on user query"""
@@ -176,18 +181,16 @@ class DbConnect(object):
         else:                                               # Raw, no change
             date_field = "temp.Time_GMT"
         query = ("SELECT %s, %s "
-                    "FROM `cnx_logger` logger "
-                    "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
-                    "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
-                    "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` "
-                    "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = logger.`logger_id` ") % (date_field, temp_field)
+                    "FROM `cnx_logger` log "
+                    "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = log.`biomimic_id` "
+                    "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = log.`geo_id` "
+                    "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = log.`prop_id` "
+                    "INNER JOIN `cnx_logger_temperature` temp ON temp.`logger_id` = log.`logger_id` ") % (date_field, temp_field)
         where_condition = self.buildWhereCondition(queryDict)
-        print("PreviewQuery: ", query + where_condition)
         cursor.execute(query + where_condition + " LIMIT 10 ")
         results = cursor.fetchall()
         results = list(results)
         final_result = [[result[0], round(result[1], 4)] for result in results]
-        print("final: ", final_result)
         cursor.close()
         return final_result, query + where_condition
 
@@ -339,16 +342,22 @@ class DbConnect(object):
                     "AND `location`=%s "
                     "AND `state_province`=%s "
                     "AND `country`=%s")        
-        cursor.execute(query, (record.get("site"), record.get("field_lat"), record.get("field_lon"), record.get("location"), record.get("state_province"), record.get("country")))
+        cursor.execute(query, (record.get("site"), record.get("field_lat"), \
+            record.get("field_lon"), record.get("location"), record.get("state_province"), \
+            record.get("country")))
         result = cursor.fetchone()
         return result
 
     def insertGeoData(self, cursor, record):
         """Insert new Geolocation Data in DB"""
         corrupt = False
-        query = ("INSERT INTO `cnx_logger_geographics` (`site`, `field_lat`, `field_long`, `location`, `state_province`, `country`) VALUES (%s, %s, %s, %s, %s, %s)")
+        query = ("""INSERT INTO `cnx_logger_geographics` (`site`, `field_lat`, 
+            `field_long`, `location`, `state_province`, `country`) 
+        VALUES (%s, %s, %s, %s, %s, %s)""")
         try:
-            res = cursor.execute(query, (record.get("site"), record.get("field_lat"), record.get("field_lon"), record.get("location"), record.get("state_province"), record.get("country")))
+            res = cursor.execute(query, (record.get("site"), record.get("field_lat"), \
+                record.get("field_lon"), record.get("location"), record.get("state_province"), \
+                record.get("country")))
         except mysql.connector.Error:
             res = 0
         if res == 1:
@@ -397,7 +406,8 @@ class DbConnect(object):
     def insertMicrositeData(self, cursor, microsite_id, biomimic_id, geo_id, prop_id):
         """Insert new Microsite Id Data in DB"""
         corrupt = False
-        query = ("INSERT INTO `cnx_logger` (`microsite_id`, `biomimic_id`, `geo_id`, `prop_id`) VALUES (%s, %s, %s, %s)")
+        query = ("""INSERT INTO `cnx_logger` (`microsite_id`, `biomimic_id`, `geo_id`, `prop_id`) 
+            VALUES (%s, %s, %s, %s)""")
         try:
             res = cursor.execute(query, (microsite_id, biomimic_id, geo_id, prop_id))
         except mysql.connector.Error:
@@ -437,7 +447,8 @@ class DbConnect(object):
         return parsedRecord, error
 
     def insertLoggerTemp(self, records, logger_id):
-        """Inserts new Logger Type in DB"""
+        """Inserts new Logger Temperature in DB"""
+        corrupt = False
         # records is a list of dict
         cursor = self.connection.cursor()
         properCounter = 0
@@ -451,6 +462,7 @@ class DbConnect(object):
         except MySQLdb.DatabaseError as err:
             self.connection.rollback()
         cursor.close()
+        corrupt = self.update_summary_table(logger_id);
         return properCounter
 
     def FindMicrositeId(self, id):
@@ -459,14 +471,37 @@ class DbConnect(object):
         query = '''SELECT `logger_id` as 'logger_id' FROM `cnx_logger` WHERE microsite_id=''' + "\'"+ id +"\'"
         cursor.execute(query)
         results = cursor.fetchone()        
+        cursor.close()
         if results is None:
             return None
         else:
             return results[0]
 
+    def update_summary_table(self, logger_id):
+        summary_corrupt = False
+        cursor = self.connection.cursor()
+        select_query = ("""SELECT COUNT(*), MIN(Time_GMT), MAX(Time_GMT)
+                            FROM cnx_logger_temperature WHERE logger_id=%s""")
+        cursor.execute(select_query, (logger_id,))
+        select_results = cursor.fetchone()
+        cursor.close()
+        if select_results is not None:
+            cursor = self.connection.cursor()
+            try:
+                update_query = ("""INSERT INTO `cnx_logger_metadata`
+                                    (logger_id, logger_count, logger_min_date, logger_max_date) 
+                                    VALUES (%s, %s, %s, %s)
+                                    ON DUPLICATE KEY UPDATE
+                                        logger_count = VALUES(logger_count),
+                                        logger_min_date = VALUES(logger_min_date),
+                                        logger_max_date = VALUES(logger_max_date)""")
+                cursor.execute(update_query, (logger_id, select_results[0], select_results[1], select_results[2]))
+                self.connection.commit()
+                update_results = cursor.fetchone()
+                cursor.close()
+            except MySQLdb.DatabaseError as err:
+                self.connection.rollback()
+        return summary_corrupt
+
     def close(self):
         self.connection.close()
-
-
-
-

@@ -83,7 +83,6 @@ def submit_query():
         query["start_date"] = str(datetime.datetime.strptime(form['start_date'][0],'%m/%d/%Y').date())
         query["end_date"] = str(datetime.datetime.strptime(form['end_date'][0],'%m/%d/%Y').date())
     session['query'] = query
-    print("query: ", query)
     db = DbConnect(app.config)
     preview_results, db_query = db.getQueryResultsPreview(query)
     session['db_query'] = db_query

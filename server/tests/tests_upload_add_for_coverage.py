@@ -32,6 +32,7 @@ class UploadTestEdgeCase(unittest.TestCase):
         for logger_temp_id in logger_temp_ids:
             res = cursor.execute("DELETE FROM `cnx_logger_temperature` WHERE logger_temp_id=\'%s\'" % (logger_temp_id))
             self.db.connection.commit()
+        self.cleanUpMetadataTable(cursor)
 
     def cleanUpLoggerType(self, cursor, rec):
         ''' clean up logger type tables'''
@@ -47,6 +48,17 @@ class UploadTestEdgeCase(unittest.TestCase):
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
+    
+    def cleanUpMetadataTable(self, cursor):
+        ''' clean up table cnx_logger_metadata'''
+        cursor.execute("SELECT logger_id FROM `cnx_logger_metadata`")
+        results = cursor.fetchall()
+        if results is not None:
+            results = list(results)        
+        logger_ids = [result[0] for result in results]        
+        for logger_id in logger_ids:
+            res = cursor.execute("DELETE FROM `cnx_logger_metadata` WHERE logger_id=\'%s\'", (logger_id,))
+            self.db.connection.commit()
 
     def test_logger_type_upload_MicrositeId_None(self):
         """Test that upload Logger Type file without microsite_id will not be inserted to database"""

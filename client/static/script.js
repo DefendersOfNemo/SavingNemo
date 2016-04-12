@@ -25,8 +25,16 @@ $(function() {
             $("#spinner-biomimic").hide();
             // update metadata field
             $('#selected-metadata').empty();
-            $('#selected-metadata').removeClass('alert-danger');
-            $('#selected-metadata').removeClass('alert-success');
+            if (data["countRecords"] != null){                
+                $('#selected-metadata').removeClass('alert-danger');
+                $('#selected-metadata').addClass('alert-success');
+                $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
+            }
+            else{
+                $('#selected-metadata').removeClass('alert-success');
+                $('#selected-metadata').addClass('alert-danger');
+                $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
             // update country field
             $("#dropdown_menu_country_name").append('<option value="">Please select Country Name</option>')
             $.each(country_list, function(index, country){
@@ -59,7 +67,7 @@ $(function() {
             $("#spinner-country").hide();            
             // update metadata field
             $('#selected-metadata').empty();
-            if (data["countRecords"] != 0){                
+            if (data["countRecords"] != null){                
                 $('#selected-metadata').removeClass('alert-danger');
                 $('#selected-metadata').addClass('alert-success');
                 $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
@@ -82,7 +90,7 @@ $(function() {
         state_province = $("#dropdown_menu_state_name option:selected").text();
         $('#dropdown_menu_location_name').empty();
         $('#dropdown_menu_sub_zone_name').empty()
-        $('#dropdown_menu_wave_name').empty()
+        $('#dropdown_menu_wave_exp_name').empty()
         $("#date_pick_from").datepicker('setDate', null);
         $("#date_pick_to").datepicker('setDate', null);
         $("#frequency-select").empty()
@@ -96,7 +104,7 @@ $(function() {
             $("#spinner-state").hide();            
             // update metadata field
             $('#selected-metadata').empty();
-            if (data["countRecords"] != 0){                
+            if (data["countRecords"] != null){                
                 $('#selected-metadata').removeClass('alert-danger');
                 $('#selected-metadata').addClass('alert-success');
                 $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
@@ -132,7 +140,7 @@ $(function() {
             $("#spinner-location").hide();            
             // update metadata
             $('#selected-metadata').empty();
-            if (data["countRecords"] != 0){                
+            if (data["countRecords"] != null){                
                 $('#selected-metadata').removeClass('alert-danger');
                 $('#selected-metadata').addClass('alert-success');
                 $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
@@ -162,7 +170,7 @@ $(function() {
             $("#spinner-zone").hide();            
             // update metadata field
             $('#selected-metadata').empty();
-            if (data["countRecords"] != 0){                
+            if (data["countRecords"] != null){                
                 $('#selected-metadata').removeClass('alert-danger');
                 $('#selected-metadata').addClass('alert-success');
                 $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
@@ -198,7 +206,7 @@ $(function() {
             $("#spinner-sub-zone").hide();            
             // update metadata field
             $('#selected-metadata').empty();
-            if (data["countRecords"] != 0){                
+            if (data["countRecords"] != null){                
                 $('#selected-metadata').removeClass('alert-danger');
                 $('#selected-metadata').addClass('alert-success');
                 $('#selected-metadata').append('<strong>' + data["countRecords"] + ' Records Found</strong>' + '<br>Min. Date Range: ' + data["minDate"] + '<br>Max. Date Range: ' + data["maxDate"]);
@@ -323,7 +331,7 @@ $(function() {
                     $('html,body').animate({scrollTop:targetOffset}, 750);                    
                     title.empty()
                     title.append("<h4>Data preview</h4>")
-                    options.append("<thead><tr><th>" + tableheader() + "</th><th>Temperature</th></tr></thead><tbody>")
+                    options.append("<thead><tr><th>" + tableheader() + "</th><th>Temperature (in Celsius)</th></tr></thead><tbody>")
                     $.each(data.list_of_results, function(key, value) {
                         options.append("<tr><td>" + value[0] + "</td><td>" + value[1] + "</td></tr>")
                     });

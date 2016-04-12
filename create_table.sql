@@ -52,9 +52,9 @@ CREATE TABLE `cnx_logger_temperature` (
                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 CREATE TABLE `cnx_logger_metadata` (
-				 `microsite_id` varchar(30) NOT NULL,
-				 `logger_count` int(11) NOT NULL,
-				 `logger_MinDate` datetime NOT NULL,
-				 `logger_MaxDate` datetime NOT NULL,
-				 PRIMARY KEY (`microsite_id`)
+				 `logger_id` int(6) NOT NULL,               
+				 `logger_count` INT(11) NOT NULL,
+				 `logger_min_date` datetime NOT NULL,
+				 `logger_max_date` datetime NOT NULL,
+				 PRIMARY KEY (`logger_id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
