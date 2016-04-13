@@ -245,6 +245,9 @@ $(function() {
         if (isChecked){
             var query_field8 = $("#date_pick_from").val()
             var query_field9 = $("#date_pick_to").val()
+            var date_format = new RegExp (/\d{2}\/\d{2}\/\d{4}/)
+            var date1 = date_format.test(query_field8)
+            var date2 = date_format.test(query_field9)
         }
         var query_field10 = $("#dropdown_menu_output_type_name option:selected").text()
         var query_field11 = $("#dropdown_menu_analysis_type_name option:selected").val()
@@ -257,7 +260,7 @@ $(function() {
             (query_field6 != "Please select Sub zone") && 
             (query_field7 != "Please select Wave Exposure")){
                 if (isChecked){
-                    valid = (query_field8 != '') && (query_field9 != '')
+                    valid = (query_field8 != '') && (query_field9 != '') && (date1 == true) && (date2 == true)
                 }
                 else{
                     valid = true
@@ -347,17 +350,16 @@ $(function() {
 
     $(document).ready(function(){
         // When the document is ready
+        $("#alert").fadeTo(5000, 0).slideUp(500, function(){
+        $(this).alert();
+        $("#alert").addClass('hidden');
+        });
         $('[data-toggle="popover"]').popover();
-
         $('.input-daterange').datepicker({
             format: 'mm/dd/yyyy',
             todayHighlight: true,
             todayBtn: "linked",
             autoclose: true
-        });
-
-        $("#alert").fadeTo(5000, 0).slideUp(500, function(){
-        $(this).alert();
         });
     });
 
