@@ -83,7 +83,6 @@ def submit_query():
         query["start_date"] = str(datetime.datetime.strptime(form['start_date'][0],'%m/%d/%Y').date())
         query["end_date"] = str(datetime.datetime.strptime(form['end_date'][0],'%m/%d/%Y').date())
     session['query'] = query
-    print("query: ", query)
     db = DbConnect(app.config)
     preview_results, db_query = db.getQueryResultsPreview(query)
     session['db_query'] = db_query
@@ -125,13 +124,12 @@ def allowed_file(filetype, filename):
 def upload():   
     '''Handle user upload functions, including logger type and logger temperature file'''
     # Interceptor for Upload
-    print("session: ", session.get('logged_in'))
     if session.get('logged_in') is None:
         return redirect(url_for('query'))
-
-    all_results = None;
+    all_results = {'total': 0, 'success': 0, 'failure': 0, 'time_taken': 0}
     error = "";
     if request.method == 'POST':
+        start_time = time.time()
         if 'loggerTypeFile' in request.files:
             file = request.files['loggerTypeFile']
             if file:
@@ -149,10 +147,8 @@ def upload():
         elif 'loggerTempFile' in request.files:
             files = request.files.getlist('loggerTempFile')
             if files[0]:
-                all_results = {'total': 0, 'success': 0, 'failure': 0}
-                print("Starting insertLoggerTemp")
-                st = time.time()
-                print(st)
+                all_results = {'total': 0, 'success': 0, 'failure': 0, 'time_taken': 0}
+                
                 for file in files:
                     individual_result = None;
                     if allowed_file("loggerTempFile", file.filename):
@@ -171,13 +167,11 @@ def upload():
                             error += errorMessage
                     else:
                         error += "File " + file.filename + " should be in csv or txt format\n"
-                    file.close()
-                et = time.time()
-                print(et)
-                print(et - st)
-                print("Ending insertLoggerTemp")
+                    file.close()                
             else:
                 error = "Please choose a file first\n"
+        end_time = time.time()
+        all_results['time_taken'] = round(end_time - start_time, 2)
     if all_results is not None:
         if all_results.get('total') == 0:
             all_results = None

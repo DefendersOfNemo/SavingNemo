@@ -59,15 +59,15 @@
                </div>
                <div class="collapse navbar-collapse" id="myNavbar">
                    <ul class="nav navbar-nav">
-                       <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Back to Helmuth lab Home</a></li>
+                       <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"> </span> <strong>Back to Helmuth lab Home</strong></a></li>
                    </ul>
                    <ul class="nav navbar-nav navbar-right">
-                          <li role="presentation"><a href="query">Query</a></li>
+                          <li role="presentation"><a href="query"><strong>Query</strong></a></li>
                        {% if not session.logged_in %}
-                           <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                           <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> <strong>Log in</strong></a>
                            </li>
                        {% else %}
-                           <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                           <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Log out</strong></a>
                            </li>
                        {% endif %}
                    </ul>
@@ -109,8 +109,7 @@
             <br>
             <strong>Accepted file formats are CSV, TXT<a href = "../static/sample_temp.txt">  See Example</a><strong>
             <br><br>
-            <button type="submit" value="Upload" class="btn-default btn-lg" id="logger-upload-button"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
-
+            <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
         </form>
         <br>
         {% if error %}
@@ -119,7 +118,7 @@
         {% if result %}
           <div class="container" id="query-results-table" >
             <table class="table table-bordered" id="statistics-table">
-              <thead><h2>Upload Statistics </h2></thead>
+              <thead><h2>Upload Statistics </h2> <h3>(complete in {{ result.time_taken }} secs) </h3></thead>
               <tbody>
                 <tr>
                   <td># Total Records</td>
@@ -163,4 +162,3 @@ $(document).ready( function() {
     });
 });
 </script>
-<script src="../static/script.js"></script>

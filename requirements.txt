@@ -14,6 +14,7 @@ nosexcover==1.0.10
 pyexcel==0.2.0
 pyexcel-io==0.1.0
 pyexcel-webio==0.0.6
+simplejson==3.8.2
 texttable==0.8.4
 Werkzeug==0.11.4
 WTForms==2.1

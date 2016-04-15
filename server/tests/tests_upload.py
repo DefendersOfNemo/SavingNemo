@@ -32,10 +32,10 @@ class UploadTestCase(unittest.TestCase):
         for logger_temp_id in logger_temp_ids:
             res = cursor.execute("DELETE FROM `cnx_logger_temperature` WHERE logger_temp_id=\'%s\'" % (logger_temp_id))
             self.db.connection.commit()
+        self.cleanUpMetadataTable(cursor)
 
     def cleanUpLoggerType(self, cursor, rec):
         ''' clean up logger type tables'''
-        print("Inside Cleanup: ", rec)
         biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
         geo_id = self.db.fetchExistingGeoId(cursor, rec)
         prop_id = self.db.fetchExistingPropId(cursor, rec)
@@ -49,6 +49,17 @@ class UploadTestCase(unittest.TestCase):
         res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
         self.db.connection.commit()
     
+    def cleanUpMetadataTable(self, cursor):
+        ''' clean up table cnx_logger_metadata'''
+        cursor.execute("SELECT logger_id FROM `cnx_logger_metadata`")
+        results = cursor.fetchall()
+        if results is not None:
+            results = list(results)        
+        logger_ids = [result[0] for result in results]        
+        for logger_id in logger_ids:
+            res = cursor.execute("DELETE FROM `cnx_logger_metadata` WHERE logger_id=\'%s\'", (logger_id,))
+            self.db.connection.commit()
+
     def buildTypeWhereCondition(self, queryDict):
         """Builds the where_condition for the Select Query"""
         where = (" WHERE biotype.`biomimic_type`=\'%s\' AND geo.`country`=\'%s\' AND geo.`state_province`= \'%s\' AND geo.`location`=\'%s\'") % \
@@ -158,19 +169,19 @@ class UploadTestCase(unittest.TestCase):
                     "sub_zone" : "DummySubZone",
                     "wave_exp" : "DummyWave"}
             where_condition = self.buildTypeWhereCondition(record)
-            query = ("SELECT logger.microsite_id "
-                    "FROM `cnx_logger` logger "
-                    "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "
-                    "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = logger.`geo_id` "
-                    "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = logger.`prop_id` ")
+            query = ("SELECT log.microsite_id "
+                    "FROM `cnx_logger` log "
+                    "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = log.`biomimic_id` "
+                    "INNER JOIN `cnx_logger_geographics` geo ON geo.`geo_id` = log.`geo_id` "
+                    "INNER JOIN `cnx_logger_properties` prop ON prop.`prop_id` = log.`prop_id` ")
             cursor = self.db.connection.cursor()
             cursor.execute(query + where_condition)
             results = cursor.fetchone()
-            if results is not None:
-                results = results[0]     
             self.cleanUpLoggerType(cursor, record)
             cursor.close()
-            self.assertEqual(record['microsite_id'], results)
+            if results is not None:
+                microsite_id = results[0]     
+            self.assertEqual(record['microsite_id'], microsite_id)
             self.assertIn(b"<td># Proper Records</td>\n                  <td>1</td>", response.data)
             self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
 
@@ -317,8 +328,6 @@ class UploadTestCase(unittest.TestCase):
             results = cursor.fetchall()
             if results is not None:
                 results = list(results)           
-            self.cleanUpLoggerTemp(cursor)
-            self.cleanUpLoggerType(cursor, record_type)            
             cursor.close()
             self.assertEqual(datetime.datetime.strptime(record_temp[0]['Time_GMT'],'%m/%d/%Y %H:%M'), datetime.datetime.strptime(results[0][0], '%m/%d/%Y %H:%M'))
             self.assertEqual(record_temp[0]['Temp_C'], results[0][1])
@@ -326,6 +335,24 @@ class UploadTestCase(unittest.TestCase):
             self.assertEqual(record_temp[1]['Temp_C'], results[1][1])
             self.assertIn(b"<td># Proper Records</td>\n                  <td>6</td>", response.data)
             self.assertIn(b"<td># Corrupt Records</td>\n                  <td>0</td>", response.data)
+
+            query = ("""SELECT SUM(meta.logger_count), MIN(meta.logger_min_date), MAX(meta.logger_max_date)
+                        FROM `cnx_logger_metadata` meta
+                        INNER JOIN `cnx_logger` log ON log.`logger_id`=meta.`logger_id`
+                        WHERE log.`microsite_id`=%s""")
+            cursor = self.db.connection.cursor()
+            cursor.execute(query, (record_type["microsite_id"],))
+            results = cursor.fetchone()
+            if results is not None:
+                count = results[0]
+                min_date = results[1]
+                max_date = results[2]
+            self.cleanUpLoggerTemp(cursor)
+            self.cleanUpLoggerType(cursor, record_type)
+            cursor.close()
+            self.assertEqual(count, 6)
+            self.assertEqual(min_date, datetime.datetime(2000, 7, 1, 2, 1))
+            self.assertEqual(max_date, datetime.datetime(2002, 8, 16, 9, 41))
 
     def test_logger_temperature_upload_corrupt(self):
         """Test that Logger Temperature file with corrupt records cannot be uploaded"""
@@ -414,6 +441,60 @@ class UploadTestCase(unittest.TestCase):
             self.cleanUpLoggerType(cursor, record_type)            
             cursor.close()
             self.assertEqual(len(results), 0)
+
+    def test_logger_metadata_update(self):
+        """Test that metadata table gets updated with subsequent inserts in DB."""
+        test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
+        test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql.txt'
+        test_temp_filename2 = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2001_pgsql.txt'
+        with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['logged_in'] = True
+            response = client.post('/upload', 
+                data={
+                    'loggerTypeFile':  (open(test_type_filename, 'rb'), 'Test_New_Logger_Type_Positive.csv')
+                    }, follow_redirects=True)
+            response = client.post('/upload', 
+                data={
+                    'loggerTempFile':  (open(test_temp_filename, 'rb'), 'DUMMYID_2000_pgsql.txt')
+                    }, follow_redirects=True)
+            response = client.post('/upload', 
+                data={
+                    'loggerTempFile':  (open(test_temp_filename2, 'rb'), 'DUMMYID_2001_pgsql.txt')
+                    }, follow_redirects=True)
+            
+            record_type = {
+                    "microsite_id" : "DUMMYID",
+                    "site" : "DUMMYSITE",
+                    "biomimic_type" : "Dummybiomimictype",
+                    "country" : "Dummycountry",
+                    "state_province" : "Dummystate",
+                    "location" : "Dummylocation",
+                    "field_lat" : "36.621933330000",
+                    "field_lon" : "-121.905316700000",
+                    "zone" : "DummyZone",
+                    "sub_zone" : "DummySubZone",
+                    "wave_exp" : "DummyWave",
+                    "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
+                    "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}
+
+            query = ("""SELECT SUM(meta.logger_count), MIN(meta.logger_min_date), MAX(meta.logger_max_date)
+                        FROM `cnx_logger_metadata` meta
+                        INNER JOIN `cnx_logger` log ON log.`logger_id`=meta.`logger_id`
+                        WHERE log.`microsite_id`=%s""")
+            cursor = self.db.connection.cursor()
+            cursor.execute(query, (record_type["microsite_id"],))
+            results = cursor.fetchone()
+            if results is not None:
+                count = results[0]
+                min_date = results[1]
+                max_date = results[2]
+            self.cleanUpLoggerTemp(cursor)
+            self.cleanUpLoggerType(cursor, record_type)
+            cursor.close()
+            self.assertEqual(count, 12)
+            self.assertEqual(min_date, datetime.datetime(2000, 7, 1, 2, 1))
+            self.assertEqual(max_date, datetime.datetime(2006, 8, 16, 9, 41))
 
 if __name__ == '__main__':
     unittest.main()
