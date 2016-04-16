@@ -1,6 +1,13 @@
-""" This script creates fields for the Query Form in Query.html.
-    Since most of the fields are dynamic, they are not created here. """
+"""
+    forms.py
+    ~~~~~~~~~~~~~~
 
+    This script creates fields for the Query Form in Query.html.
+    Since most of the fields are dynamic, they are not created here.
+
+    :copyright: (c) 2016 by Abhijeet Sharma.
+    :license: The MIT License (MIT), see LICENSE for more details.
+"""
 from flask.ext.wtf import Form
 from wtforms.fields import SelectField
 

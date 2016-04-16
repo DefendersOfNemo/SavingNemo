@@ -5,18 +5,17 @@ from flask import Flask, json, request, Response, session, jsonify
 from werkzeug.datastructures import (ImmutableMultiDict, FileStorage)
 from flask.ext.uploads import TestingFileStorage
 import MySQLdb
-from app.views import app
+from app.views import create_app
 from app.dbconnect import DbConnect
-import datetime
+from datetime import datetime
 
 class UploadTestEdgeCase(unittest.TestCase):
     """Upload Feature specific Test Cases will go here"""
     
     def setUp(self):
         """Setup test app"""
-        app.config['TESTING'] = True     
-        app.config['MYSQL_DB'] = 'test'   
-        self.db = DbConnect(app.config)
+        self.app = create_app('tests.config')
+        self.db = DbConnect(self.app.config)
 
     def tearDown(self):
         """Close test database"""        
@@ -36,10 +35,10 @@ class UploadTestEdgeCase(unittest.TestCase):
 
     def cleanUpLoggerType(self, cursor, rec):
         ''' clean up logger type tables'''
-        biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
-        geo_id = self.db.fetchExistingGeoId(cursor, rec)
-        prop_id = self.db.fetchExistingPropId(cursor, rec)
-        logger_id = self.db.FindMicrositeId(rec.get('microsite_id'))
+        biomimic_id = self.db.fetch_existing_bio_id(cursor, rec.get('biomimic_type'))
+        geo_id = self.db.fetch_existing_geo_id(cursor, rec)
+        prop_id = self.db.fetch_existing_prop_id(cursor, rec)
+        logger_id = self.db.find_microsite_id(rec.get('microsite_id'))
         res = cursor.execute("DELETE FROM `cnx_logger` WHERE logger_id=%s" % (logger_id))
         self.db.connection.commit()
         res = cursor.execute("DELETE FROM `cnx_logger_biomimic_type` WHERE biomimic_id=%s", biomimic_id)
@@ -63,7 +62,7 @@ class UploadTestEdgeCase(unittest.TestCase):
     def test_logger_type_upload_MicrositeId_None(self):
         """Test that upload Logger Type file without microsite_id will not be inserted to database"""
         test_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_MicrositeId_None.csv'
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             with client.session_transaction() as sess:
                 sess['logged_in'] = True
             response = client.post('/upload', 
@@ -81,7 +80,7 @@ class UploadTestEdgeCase(unittest.TestCase):
         """Test that Logger Temperature file with duplicate entry cannot be uploaded"""
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql_Duplicate.txt'
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             with client.session_transaction() as sess:
                 sess['logged_in'] = True
             response = client.post('/upload', 
@@ -104,9 +103,9 @@ class UploadTestEdgeCase(unittest.TestCase):
                     "zone" : "DummyZone",
                     "sub_zone" : "DummySubZone",
                     "wave_exp" : "DummyWave",
-                    "start_date": str(datetime.datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
-                    "end_date": str(datetime.datetime.strptime("7/2/2000",'%m/%d/%Y').date())}     
-            where_condition = self.db.buildWhereCondition(record_type)
+                    "start_date": str(datetime.strptime("7/1/2000",'%m/%d/%Y').date()),
+                    "end_date": str(datetime.strptime("7/2/2000",'%m/%d/%Y').date())}     
+            where_condition = self.db.build_where_condition(record_type)
             query = ("SELECT temp.Time_GMT, temp.Temp_C  "
                     "FROM `cnx_logger` logger "
                     "INNER JOIN `cnx_logger_biomimic_type` biotype ON biotype.`biomimic_id` = logger.`biomimic_id` "

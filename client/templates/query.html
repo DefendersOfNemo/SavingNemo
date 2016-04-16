@@ -36,12 +36,12 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if not session.logged_in %}
-                            <li><a href="{{ url_for('login') }}" data-toggle="popover" data-placement="top" data-trigger="hover"data-content="Please log in to upload data"><span class="glyphicon glyphicon-log-in" ></span> Log in</a>
+                            <li><a href="{{ url_for('login_page.login') }}" data-toggle="popover" data-placement="top" data-trigger="hover"data-content="Please log in to upload data"><span class="glyphicon glyphicon-log-in" ></span> Log in</a>
                             </li>
                         {% else %}
-                            <li><a href="{{ url_for('upload') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
+                            <li><a href="{{ url_for('upload_page.upload') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
                             </li>
-                            <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                            <li><a href="{{ url_for('login_page.logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
                             </li>
                         {% endif %}
                     </ul>
