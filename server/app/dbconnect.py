@@ -264,7 +264,7 @@ class DbConnect(object):
             parsed_record['location'] = data_list[4]
             parsed_record['state_province'] = data_list[5]
             parsed_record['country'] = data_list[6]
-            parsed_record['biomimic_type'] = data_list[7]
+            parsed_record['biomimic_type'] = data_list[7].capitalize()
             parsed_record['zone'] = data_list[8].capitalize()
             parsed_record['sub_zone'] = None if (data_list[9] == "N/A") \
                                             else data_list[9].capitalize()
