@@ -32,28 +32,27 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Back to Helmuth lab Home</a></li>
+                        <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> <strong>Back to Helmuth lab Home</strong></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if not session.logged_in %}
-                            <li><a href="{{ url_for('login_page.login') }}" data-toggle="popover" data-placement="top" data-trigger="hover"data-content="Please log in to upload data"><span class="glyphicon glyphicon-log-in" ></span> Log in</a>
+                            <li><a href="{{ url_for('login_page.login') }}" data-toggle="popover" data-placement="top" data-trigger="hover"data-content="Please log in to upload data"><span class="glyphicon glyphicon-log-in" ></span> <strong>Log in</strong></a>
                             </li>
                         {% else %}
                             <li><a href="{{ url_for('upload_page.upload') }}"><span class="glyphicon glyphicon-upload"></span> Upload data</a>
                             </li>
-                            <li><a href="{{ url_for('login_page.logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                            <li><a href="{{ url_for('login_page.logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Log out</strong></a>
                             </li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-
         {% if session.logged_in %}
             <p class="alert alert-info text-right" id="alert">
-            <strong>log in successful, please click upload data to access upload page</strong>
+                <strong>log in successful, please click upload data to access upload page</strong>
             </p>
-       {% endif %}
+        {% endif %}
         <div class="container text-danger">
             <h1>DATABASE<h1>
         </div>
@@ -80,31 +79,31 @@
                             {% endfor %}
                         </select>
                     </div>   
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-3 form-group" id="dropdown_menu_country_name_div">
                         <!-- dropdown menu of Countries related to selected logger type -->
                         <div class="input-group">
                             <label for="dropdown_menu_country_name">Country Name:<w class = "text-danger"> * <w> </label>
                             <img src="../static/spinner.gif" alt="Loading.." id="spinner-country" hidden>
                         </div>
-                        <select id ="dropdown_menu_country_name" class="form-control" required>
+                        <select id ="dropdown_menu_country_name" class="form-control" required disabled>
                             <option value="">Please select Country Name</option>
                         </select>                        
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-3 form-group" id="dropdown_menu_state_name_div" >
                         <div class="input-group">
                             <label for="dropdown_menu_state_name">State Name:<w class = "text-danger"> * <w> </label>
                             <img src="../static/spinner.gif" alt="Loading.." id="spinner-state" hidden>
                         </div>
-                        <select id ="dropdown_menu_state_name" class="form-control" required >
+                        <select id ="dropdown_menu_state_name" class="form-control" required disabled>
                             <option value="">Please select State Name</option>
                         </select>                                                   
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-3 form-group" id="dropdown_menu_location_name_div">
                         <div class="input-group">
                             <label for="dropdown_menu_location_name">Location Name:<w class = "text-danger"><strong> *</strong> <w> </label>
                             <img src="../static/spinner.gif" alt="Loading.." id="spinner-location" hidden>
                         </div>                        
-                        <select id ="dropdown_menu_location_name" class="form-control" required>
+                        <select id ="dropdown_menu_location_name" class="form-control" required disabled>
                             <option value="">Please select Location Name</option>
                         </select>
                     </div>
@@ -112,30 +111,30 @@
                 <br><br>
                 <!-- Second row in query form -->
                 <div class="row">                    
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group" id="dropdown_menu_zone_name_div">
                         <div class="input-group">
                             <label for="dropdown_menu_zone_name">Zone Name:<w class = "text-danger"> * <w> </label>
                             <img src="../static/spinner.gif" alt="Loading.." id="spinner-zone" hidden>
                         </div>                                                                        
-                        <select id ="dropdown_menu_zone_name" class="form-control" required>
+                        <select id ="dropdown_menu_zone_name" class="form-control" required disabled>
                             <option value="">Please select Zone Name</option>
                         </select>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group" id="dropdown_menu_sub_zone_name_div">
                         <div class="input-group">
                             <label for="dropdown_menu_sub_zone_name">Sub Zone:<w class = "text-danger"> * <w> </label>
                             <img src="../static/spinner.gif" alt="Loading.." id="spinner-sub-zone" hidden>
                         </div>                                                                        
-                        <select id ="dropdown_menu_sub_zone_name" class="form-control" required>
+                        <select id ="dropdown_menu_sub_zone_name" class="form-control" required disabled>
                             <option value="">Please select Sub Zone</option>
                         </select>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group" id="dropdown_menu_wave_exp_name_div">
                         <div class="input-group">
                             <label for="dropdown_menu_wave_exp_name">Wave Exposure:<w class = "text-danger"> * <w> </label>
                             <img src="../static/spinner.gif" alt="Loading.." id="spinner-wave-exp" hidden>
                         </div>                        
-                        <select id ="dropdown_menu_wave_exp_name" class="form-control" required>
+                        <select id ="dropdown_menu_wave_exp_name" class="form-control" required disabled>
                             <option value="">Please select Wave Exposure</option>
                         </select>
                     </div>                    
@@ -143,9 +142,9 @@
                 <br>
                 <!-- Third row in query form -->
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group" id="dropdown_menu_output_type_name_div">
                         <label for="dropdown_menu_output_type_name">Statistic:</label>
-                        <select id ="dropdown_menu_output_type_name" class="form-control">                            
+                        <select id ="dropdown_menu_output_type_name" class="form-control" disabled>                            
                             {% for type in form.output_type %}
                                 {{ type }}
                             {% endfor%}

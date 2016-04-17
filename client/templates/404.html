@@ -1,16 +1,62 @@
-<!-- extend base layout -->
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <!-- IE Edge Meta Tag -->
+        <meta charset="UTF-8">
+        <!-- Viewport : enables combatibility with display on smaller devices -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- links to style sheet -->
+        <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet" />
+        <title>Database</title> 
+    </head>
+    <body>
+        <!-- Links to header images-->
+        <div>
+            <a href="http://www.northeastern.edu/"><img class="img-responsive" src="../static/university.jpg" width="400" height="49"></a>
+            <img class="img-responsive" src="../static/Lab-banner.jpg" width="960" height="46">
+        </div>
+        <!-- The scrollable area -->
+        <body data-spy="scroll" data-target="#hidden-table" data-offset="50">
+        <!--  Nav-bar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> <strong>Back to Helmuth lab Home</strong></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                          <li role="presentation"><a href="query"><strong>Query</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+        <!-- extend base layout -->
+        {% extends "base.html" %}
 
-{% block content %}
-	<h1>Page Not Found</h1>
-  	<p><a href="{{ url_for('index') }}">Back</a></p>
-  	{% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages%}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-   {% endwith %}
-{% endblock %}
+        {% block content %}
+        	<h1 class"text-danger">Page Not Found</h1>
+          	<p><a href="query">Back</a></p>
+          	{% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages%}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+           {% endwith %}
+        {% endblock %}
+        </div>
+    </body>
+</html>

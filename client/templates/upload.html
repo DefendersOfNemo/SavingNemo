@@ -59,15 +59,15 @@
                </div>
                <div class="collapse navbar-collapse" id="myNavbar">
                    <ul class="nav navbar-nav">
-                       <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"></span> Back to Helmuth lab Home</a></li>
+                       <li><a href="http://www.northeastern.edu/helmuthlab/index.html"><span class="glyphicon glyphicon-home"> </span> <strong>Back to Helmuth lab Home</strong></a></li>
                    </ul>
                    <ul class="nav navbar-nav navbar-right">
-                          <li role="presentation"><a href="query">Query</a></li>
+                          <li role="presentation"><a href="query"><strong>Query</strong></a></li>
                        {% if not session.logged_in %}
-                           <li><a href="{{ url_for('login_page.login') }}"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                           <li><a href="{{ url_for('login_page.login') }}"><span class="glyphicon glyphicon-log-in"></span> <strong>Log in</strong></a>
                            </li>
                        {% else %}
-                           <li><a href="{{ url_for('login_page.logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+                           <li><a href="{{ url_for('login_page.logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Log out</strong></a>
                            </li>
                        {% endif %}
                    </ul>
@@ -93,14 +93,14 @@
                 <br><br>
                 <button type="submit" value="Upload" class="btn-default btn-lg">Upload <span class="glyphicon glyphicon-upload"></span></button> 
             </form>
-            <br>
+            <br><br>
 
         <h2>Upload new Logger Temperature</h2>
-        <form action="/upload" method="post" enctype= "multipart/form-data">
+        <form method="post" enctype= "multipart/form-data" id="upload-form">
             <div class= "input-group col-md-6 ">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
-                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple>
+                    Choose file to upload<input type="file" name="loggerTempFile" value="loggerTempFile" multiple id="loggerTempFile">
                     </span>
                 </span>
             <input type="text" class="form-control" readonly>
@@ -109,7 +109,6 @@
             <strong>Accepted file formats are CSV, TXT<a href = "../static/sample_temp.txt">  See Example</a><strong>
             <br><br>
             <button type="submit" value="Upload" class="btn-default btn-lg"> Upload <span class="glyphicon glyphicon-upload"></span></button> 
-
         </form>
         <br>
         {% if error %}
@@ -140,7 +139,6 @@
 </body>
 </html>
 <script>
-
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -163,4 +161,3 @@ $(document).ready( function() {
     });
 });
 </script>
-<script src="../static/script.js"></script>

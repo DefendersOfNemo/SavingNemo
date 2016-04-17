@@ -3,14 +3,25 @@ $(function() {
         biomimic_type = $("#dropdown_menu_biomimic_type option:selected").text();
         $('#dropdown_menu_country_name').empty();
         $('#dropdown_menu_state_name').empty();
+        $("#dropdown_menu_state_name").prop('disabled' , true);
         $('#dropdown_menu_location_name').empty();
+        $('#dropdown_menu_location_name').prop('disabled' , true);
         $('#dropdown_menu_zone_name').empty();
+        $('#dropdown_menu_zone_name').prop('disabled' , true);
         $('#dropdown_menu_sub_zone_name').empty();
+        $('#dropdown_menu_sub_zone_name').prop('disabled' , true);
         $('#dropdown_menu_wave_exp_name').empty();
+        $('#dropdown_menu_wave_exp_name').prop('disabled' , true);
+        $("#dropdown_menu_output_type_name").prop('disabled' , true);
         $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_from").prop('disabled' , true);
         $("#date_pick_to").datepicker('setDate', null);
+        $("#date_pick_to").prop('disabled' , true);
+        $('#date-checkbox').prop('checked' , false);
         $("#frequency-select").empty()
+        $("#frequency-select").prop('disabled' , true);
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $('#dropdown_menu_output_type_name').prop('disabled' , true);
         // loading start
         $("#spinner-biomimic").show();
         $.getJSON('/_parse_data', {
@@ -35,6 +46,15 @@ $(function() {
                 $('#selected-metadata').addClass('alert-danger');
                 $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
             }
+            var query_field1_selected = $("#dropdown_menu_biomimic_type option:selected").text()
+            if (query_field1_selected == "Please select Biomimic Type"){
+                // $("#dropdown_menu_country_name_div").addClass('hidden');
+                $("#dropdown_menu_country_name").prop('disabled' , true);
+            }
+            else{
+                // $("#dropdown_menu_country_name_div").removeClass('hidden');
+                $("#dropdown_menu_country_name").prop('disabled' , false);
+            }
             // update country field
             $("#dropdown_menu_country_name").append('<option value="">Please select Country Name</option>')
             $.each(country_list, function(index, country){
@@ -48,17 +68,27 @@ $(function() {
             });
         });
     });
-    
+
     $('#dropdown_menu_country_name').change( function () {
         country = $("#dropdown_menu_country_name option:selected").val();
         $('#dropdown_menu_state_name').empty();
         $('#dropdown_menu_location_name').empty();
+        $('#dropdown_menu_location_name').prop('disabled' , true);
         $('#dropdown_menu_sub_zone_name').empty();
+        $('#dropdown_menu_zone_name').prop('disabled' , true);
+        $('#dropdown_menu_sub_zone_name').prop('disabled' , true);
         $('#dropdown_menu_wave_exp_name').empty();
+        $('#dropdown_menu_wave_exp_name').prop('disabled' , true);
+        $("#dropdown_menu_output_type_name").prop('disabled' , true);
         $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_from").prop('disabled' , true);
         $("#date_pick_to").datepicker('setDate', null);
+        $("#date_pick_to").prop('disabled' , true);
+        $('#date-checkbox').prop('checked' , false);
         $("#frequency-select").empty()
+        $("#frequency-select").prop('disabled' , true);
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $('#dropdown_menu_output_type_name').prop('disabled' , true);
         $("#spinner-country").show();
         $.getJSON('/_parse_data', {
             select_type: "country",
@@ -77,6 +107,13 @@ $(function() {
                 $('#selected-metadata').addClass('alert-danger');
                 $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
             }
+            var query_field2_selected = $("#dropdown_menu_country_name option:selected").text()
+            if (query_field2_selected == "Please select Country Name"){
+                $("#dropdown_menu_state_name").prop('disabled' , true);
+            }
+            else{
+                $("#dropdown_menu_state_name").prop('disabled' , false);
+            }
             // update state_province field
             var result = data["result"]
             $("#dropdown_menu_state_name").append('<option value="">Please select State Name</option>')
@@ -89,12 +126,20 @@ $(function() {
     $('#dropdown_menu_state_name').change( function () {
         state_province = $("#dropdown_menu_state_name option:selected").text();
         $('#dropdown_menu_location_name').empty();
-        $('#dropdown_menu_sub_zone_name').empty()
+        $('#dropdown_menu_sub_zone_name').empty();
+        $('#dropdown_menu_zone_name').prop('disabled' , true);
+        $('#dropdown_menu_sub_zone_name').prop('disabled' , true);
         $('#dropdown_menu_wave_exp_name').empty()
+        $('#dropdown_menu_wave_exp_name').prop('disabled' , true);
+        $("#dropdown_menu_output_type_name").prop('disabled' , true);
         $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_from").prop('disabled' , true);
         $("#date_pick_to").datepicker('setDate', null);
+        $("#date_pick_to").prop('disabled' , true);
+        $('#date-checkbox').prop('checked' , false);
         $("#frequency-select").empty()
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $('#dropdown_menu_output_type_name').prop('disabled' , true);
         $("#spinner-state").show();
         $.getJSON('/_parse_data', {
             select_type: "state_province",
@@ -114,6 +159,13 @@ $(function() {
                 $('#selected-metadata').addClass('alert-danger');
                 $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
             }
+            var query_field3_selected = $("#dropdown_menu_state_name option:selected").text()
+            if (query_field3_selected == "Please select State Name"){
+                $("#dropdown_menu_location_name").prop('disabled' , true);
+            }
+            else{
+                $("#dropdown_menu_location_name").prop('disabled' , false);
+            }
             // update location field
             var result = data["result"]
             $("#dropdown_menu_location_name").append('<option value="">Please select Location Name</option>')
@@ -125,11 +177,19 @@ $(function() {
     
     $('#dropdown_menu_location_name').change( function () {
         $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_from").prop('disabled' , true);
         $("#date_pick_to").datepicker('setDate', null);
+        $("#date_pick_to").prop('disabled' , true);
+        $('#date-checkbox').prop('checked' , false);
         $('#dropdown_menu_sub_zone_name').empty()
+        $('#dropdown_menu_sub_zone_name').prop('disabled' , true);
         $('#dropdown_menu_wave_exp_name').empty()
+        $('#dropdown_menu_wave_exp_name').prop('disabled' , true);
+        $("#dropdown_menu_output_type_name").prop('disabled' , true);
         $("#frequency-select").empty()
-        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");        
+        $("#frequency-select").prop('disabled' , true);
+        $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $('#dropdown_menu_output_type_name').prop('disabled' , true);        
         $("#spinner-location").show();
         loc = $("#dropdown_menu_location_name option:selected").text();
         $.getJSON('/_parse_data', {
@@ -150,6 +210,13 @@ $(function() {
                 $('#selected-metadata').addClass('alert-danger');
                 $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
             }
+            var query_field4_selected = $("#dropdown_menu_location_name option:selected").text()
+            if (query_field4_selected == "Please select Location Name"){
+                $("#dropdown_menu_zone_name").prop('disabled' , true);
+            }
+            else{
+                $("#dropdown_menu_zone_name").prop('disabled' , false);
+            }
         });        
     });
     
@@ -157,10 +224,16 @@ $(function() {
         zone_type = $("#dropdown_menu_zone_name option:selected").text();
         $('#dropdown_menu_sub_zone_name').empty()
         $('#dropdown_menu_wave_exp_name').empty()
+        $('#dropdown_menu_wave_exp_name').prop('disabled' , true);
         $("#date_pick_from").datepicker('setDate', null);
-        $("#date_pick_to").datepicker('setDate', null);        
+        $("#date_pick_from").prop('disabled' , true);
+        $("#date_pick_to").datepicker('setDate', null);
+        $("#date_pick_to").prop('disabled' , true);
+        $('#date-checkbox').prop('checked' , false);        
         $("#frequency-select").empty()
+        $("#frequency-select").prop('disabled' , true);
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $('#dropdown_menu_output_type_name').prop('disabled' , true);
         $("#spinner-zone").show();        
         $.getJSON('/_parse_data', {
             select_type: "zone",
@@ -180,6 +253,13 @@ $(function() {
                 $('#selected-metadata').addClass('alert-danger');
                 $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
             }
+            var query_field5_selected = $("#dropdown_menu_zone_name option:selected").text()
+            if (query_field5_selected == "Please select Zone Name"){
+                $("#dropdown_menu_sub_zone_name").prop('disabled' , true);
+            }
+            else{
+                $("#dropdown_menu_sub_zone_name").prop('disabled' , false);
+            }
             // update sub_zone field
             var result = data["result"]
             $("#dropdown_menu_sub_zone_name").append('<option value="">Please select Sub Zone</option>')
@@ -193,10 +273,14 @@ $(function() {
     $('#dropdown_menu_sub_zone_name').change( function () {
         sub_zone_type = $("#dropdown_menu_sub_zone_name option:selected").text();
         $("#date_pick_from").datepicker('setDate', null);
+        $("#date_pick_from").prop('disabled' , true);
         $("#date_pick_to").datepicker('setDate', null);
+        $("#date_pick_to").prop('disabled' , true);
+        $('#date-checkbox').prop('checked' , false);
         $('#dropdown_menu_wave_exp_name').empty()
         $("#frequency-select").empty()
         $('#dropdown_menu_output_type_name').prop('selectedIndex', "Raw");
+        $('#dropdown_menu_output_type_name').prop('disabled' , true);
         $("#spinner-sub-zone").show();        
         $.getJSON('/_parse_data', {
             select_type: "sub_zone",
@@ -215,6 +299,15 @@ $(function() {
                 $('#selected-metadata').removeClass('alert-success');
                 $('#selected-metadata').addClass('alert-danger');
                 $('#selected-metadata').append('<strong>Zero Records Found for Current Selection!</strong>');   
+            }
+            var query_field6_selected = $("#dropdown_menu_sub_zone_name option:selected").text()
+            if (query_field6_selected == "Please select Sub Zone"){
+                $("#dropdown_menu_wave_exp_name").prop('disabled' , true);
+                $("#dropdown_menu_output_type_name").prop('disabled' , true);
+            }
+            else{
+                $("#dropdown_menu_wave_exp_name").prop('disabled' , false);
+                $("#dropdown_menu_output_type_name").prop('disabled' , false);
             }
             // update wave_exp field
             var result = data["result"]
@@ -357,9 +450,10 @@ $(function() {
     $(document).ready(function(){
         // When the document is ready
         $("#alert").fadeTo(5000, 0).slideUp(500, function(){
-            $(this).alert();    
+            $(this).alert();
+            $("#alert").addClass('hidden');
         });
-        $('[data-toggle="popover"]').popover(); 
+        $('[data-toggle="popover"]').popover();
         $('.input-daterange').datepicker({
             format: 'mm/dd/yyyy',
             todayHighlight: true,
