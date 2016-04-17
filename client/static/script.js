@@ -48,11 +48,9 @@ $(function() {
             }
             var query_field1_selected = $("#dropdown_menu_biomimic_type option:selected").text()
             if (query_field1_selected == "Please select Biomimic Type"){
-                // $("#dropdown_menu_country_name_div").addClass('hidden');
                 $("#dropdown_menu_country_name").prop('disabled' , true);
             }
             else{
-                // $("#dropdown_menu_country_name_div").removeClass('hidden');
                 $("#dropdown_menu_country_name").prop('disabled' , false);
             }
             // update country field
@@ -340,7 +338,7 @@ $(function() {
         var query_field3 = $("#dropdown_menu_state_name option:selected").text()
         var query_field4 = $("#dropdown_menu_location_name option:selected").text()
         var query_field5 = $("#dropdown_menu_zone_name option:selected").text()
-        var query_field6 = $("#dropdown_menu_zone_name option:selected")
+        var query_field6 = $("#dropdown_menu_sub_zone_name option:selected").text()
         var query_field7 = $("#dropdown_menu_wave_exp_name option:selected").text()
         var isChecked = $("#date-checkbox").prop("checked")
         var query_field10 = $("#dropdown_menu_output_type_name option:selected").text()
@@ -351,7 +349,7 @@ $(function() {
             (query_field3 != "Please select State Name") && 
             (query_field4 != "Please select Location Name") && 
             (query_field5 != "Please select Zone Name") && 
-            (query_field6 != "Please select Sub zone") && 
+            (query_field6 != "Please select Sub Zone") && 
             (query_field7 != "Please select Wave Exposure")){
                 if (isChecked){
                     var query_field8 = $("#date_pick_from").val()
