@@ -2,30 +2,35 @@
 import unittest, os, datetime
 from flask import json, request, Response, session
 import MySQLdb
-from app.views import app
+from app.views import create_app
 from app.dbconnect import DbConnect
 
 class BasicConnectionTestCase(unittest.TestCase):
     """Checks for app and db connectivity"""
+
+    def setUp(self):
+        """Setup test app"""
+        self.app = create_app('app.config')
+
+    def tearDown(self):
+        """Destroy test app"""
+    
     def test_index(self):
         """inital Test. Ensure flask is setup correctly"""
-        tester = app.test_client(self)
-        response = tester.get('/', content_type='html/text')
+        response = self.app.test_client().get('/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
 
     def test_db_connection_positive(self):
         """"Test MySQL connection for connection"""        
         data = True
         try:
-            with app.app_context():
-                app.config['TESTING'] = True     
-                app.config['MYSQL_DB'] = 'logger'
-                db = DbConnect(app.config)
+            with self.app.app_context():
+                db = DbConnect(self.app.config)
                 cursor = db.connection.cursor()
-                res = cursor.execute('SELECT * from cnx_logger_biomimic_type')
-                res = cursor.execute('SELECT * from cnx_logger_properties')
-                res = cursor.execute('SELECT * from cnx_logger_geographics')
-                res = cursor.execute('SELECT * from cnx_logger')
+                res = cursor.execute('SELECT * from cnx_logger_biomimic_type LIMIT 2')
+                res = cursor.execute('SELECT * from cnx_logger_properties LIMIT 2')
+                res = cursor.execute('SELECT * from cnx_logger_geographics LIMIT 2')
+                res = cursor.execute('SELECT * from cnx_logger LIMIT 2')
                 res = cursor.execute('SELECT * from cnx_logger_temperature LIMIT 2')
         except (MySQLdb.OperationalError, MySQLdb.ProgrammingError) as e:
             data = None       
@@ -37,18 +42,18 @@ class BasicConnectionTestCase(unittest.TestCase):
     def test_db_connection_username_negative(self):
         """"Test MySQL connection given incorrect username"""
         try:
-            with app.app_context():
+            with self.app.app_context():
                 db=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
+                    host=self.app.config['MYSQL_HOST'], \
+                    port=self.app.config['MYSQL_PORT'], \
                     user='dummy', \
-                    passwd=app.config['MYSQL_PASSWORD'], \
-                    db=app.config['MYSQL_DB'])                
+                    passwd=self.app.config['MYSQL_PASSWORD'], \
+                    db=self.app.config['MYSQL_DB'])                
                 c = db.cursor()
-                c.execute('SELECT * from cnx_logger_biomimic_type')
-                c.execute('SELECT * from cnx_logger_properties')
-                c.execute('SELECT * from cnx_logger_geographics')
-                c.execute('SELECT * from cnx_logger')
+                c.execute('SELECT * from cnx_logger_biomimic_type LIMIT 2')
+                c.execute('SELECT * from cnx_logger_properties LIMIT 2')
+                c.execute('SELECT * from cnx_logger_geographics LIMIT 2')
+                c.execute('SELECT * from cnx_logger LIMIT 2')
                 c.execute('SELECT * from cnx_logger_temperature  LIMIT 2')
                 data = c.fetchone()
                 c.close()
@@ -59,19 +64,19 @@ class BasicConnectionTestCase(unittest.TestCase):
     def test_db_connection_password_negative(self):
         """"Test MySQL connection given incorrect password """
         try:
-            with app.app_context():
+            with self.app.app_context():
                 db=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
+                    host=self.app.config['MYSQL_HOST'], \
+                    port=self.app.config['MYSQL_PORT'], \
+                    user=self.app.config['MYSQL_USER'], \
                     passwd='dummy', \
-                    db=app.config['MYSQL_DB'])                
+                    db=self.app.config['MYSQL_DB'])                
                 c = db.cursor()
-                c.execute('SELECT * from cnx_logger_biomimic_type')
-                c.execute('SELECT * from cnx_logger_properties')
-                c.execute('SELECT * from cnx_logger_geographics')
-                c.execute('SELECT * from cnx_logger')
-                #c.execute('SELECT * from cnx_logger_temperature')                
+                c.execute('SELECT * from cnx_logger_biomimic_type LIMIT 2')
+                c.execute('SELECT * from cnx_logger_properties LIMIT 2')
+                c.execute('SELECT * from cnx_logger_geographics LIMIT 2')
+                c.execute('SELECT * from cnx_logger LIMIT 2')
+                c.execute('SELECT * from cnx_logger_temperature LIMIT 2')
                 data = c.fetchone()
                 c.close()
         except MySQLdb.OperationalError as e:
@@ -81,18 +86,18 @@ class BasicConnectionTestCase(unittest.TestCase):
     def test_db_connection_host_negative(self):
         """"Test MySQL connection given incorrect hostname"""
         try:
-            with app.app_context():
+            with self.app.app_context():
                 db=MySQLdb.connect(
                     host='dummy', \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'],\
-                    db=app.config['MYSQL_DB'])                
+                    port=self.app.config['MYSQL_PORT'], \
+                    user=self.app.config['MYSQL_USER'], \
+                    passwd=self.app.config['MYSQL_PASSWORD'],\
+                    db=self.app.config['MYSQL_DB'])                
                 c = db.cursor()
-                c.execute('SELECT * from cnx_logger_biomimic_type')
-                c.execute('SELECT * from cnx_logger_properties')
-                c.execute('SELECT * from cnx_logger_geographics')
-                c.execute('SELECT * from cnx_logger')
+                c.execute('SELECT * from cnx_logger_biomimic_type LIMIT 2')
+                c.execute('SELECT * from cnx_logger_properties LIMIT 2')
+                c.execute('SELECT * from cnx_logger_geographics LIMIT 2')
+                c.execute('SELECT * from cnx_logger LIMIT 2')
                 c.execute('SELECT * from cnx_logger_temperature  LIMIT 2')                
                 data = c.fetchone()
                 c.close()
@@ -103,18 +108,18 @@ class BasicConnectionTestCase(unittest.TestCase):
     def test_db_connection_dbname_negative(self):
         """"Test MySQL connection given incorrect Database"""
         try:
-            with app.app_context():
+            with self.app.app_context():
                 db=MySQLdb.connect(
-                    host=app.config['MYSQL_HOST'], \
-                    port=app.config['MYSQL_PORT'], \
-                    user=app.config['MYSQL_USER'], \
-                    passwd=app.config['MYSQL_PASSWORD'],\
+                    host=self.app.config['MYSQL_HOST'], \
+                    port=self.app.config['MYSQL_PORT'], \
+                    user=self.app.config['MYSQL_USER'], \
+                    passwd=self.app.config['MYSQL_PASSWORD'],\
                     db='dummy')
                 c = db.cursor()
-                c.execute('SELECT * from cnx_logger_biomimic_type')
-                c.execute('SELECT * from cnx_logger_properties')
-                c.execute('SELECT * from cnx_logger_geographics')
-                c.execute('SELECT * from cnx_logger')
+                c.execute('SELECT * from cnx_logger_biomimic_type LIMIT 2')
+                c.execute('SELECT * from cnx_logger_properties LIMIT 2')
+                c.execute('SELECT * from cnx_logger_geographics LIMIT 2')
+                c.execute('SELECT * from cnx_logger LIMIT 2')
                 c.execute('SELECT * from cnx_logger_temperature  LIMIT 2')                
                 data = c.fetchone()
                 c.close()

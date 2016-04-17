@@ -64,10 +64,10 @@
                    <ul class="nav navbar-nav navbar-right">
                           <li role="presentation"><a href="query"><strong>Query</strong></a></li>
                        {% if not session.logged_in %}
-                           <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> <strong>Log in</strong></a>
+                           <li><a href="{{ url_for('login_page.login') }}"><span class="glyphicon glyphicon-log-in"></span> <strong>Log in</strong></a>
                            </li>
                        {% else %}
-                           <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Log out</strong></a>
+                           <li><a href="{{ url_for('login_page.logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Log out</strong></a>
                            </li>
                        {% endif %}
                    </ul>
@@ -79,7 +79,6 @@
        </div>
     <div class= container>
         <h2>Upload new Logger Data</h2>
-
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <div class= "input-group col-md-6">
                     <span class="input-group-btn">

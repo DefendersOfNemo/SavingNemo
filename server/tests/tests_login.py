@@ -1,15 +1,16 @@
-# imports
-import unittest, os, datetime
-from flask import json, request, Response, session
-import MySQLdb
-from app.views import app
+"""This script handles test cases for the login module"""
+
+import unittest
+from flask import request, session
+from app.views import create_app
+
 
 class LoginTestCase(unittest.TestCase):
     """Login Feature specific Test Cases will go here"""
 
     def setUp(self):
         """Setup test app"""
-        app.config['TESTING'] = True
+        self.app = create_app('tests.config')
 
     def tearDown(self):
         """Destroy test app"""
@@ -27,11 +28,11 @@ class LoginTestCase(unittest.TestCase):
         return c.get('/logout', follow_redirects=True)
 
     def test_login_logout_good(self):
-        """Test Login and Logout using helper functions"""      
-        with app.test_client() as c:
+        """Test Login and Logout using helper functions"""
+        with self.app.test_client() as c:
             rv = self.login(c,
-                app.config['USERNAME'],
-                app.config['PASSWORD'])
+                            self.app.config['USERNAME'],
+                            self.app.config['PASSWORD'])
             # Check log in successful
             self.assertEqual(request.path, '/query')
             # Check logged in session variable is set to True
@@ -45,11 +46,11 @@ class LoginTestCase(unittest.TestCase):
 
     def test_login_invalid_username(self):
         """Test login with Invalid Username"""
-        with app.test_client() as c:
+        with self.app.test_client() as c:
             # Check for Invalid Username
             rv = self.login(c,
-                app.config['USERNAME'] + 'x',
-                app.config['PASSWORD'])
+                            self.app.config['USERNAME'] + 'x',
+                            self.app.config['PASSWORD'])
 
             # Check log in fails
             self.assertEqual(request.path, '/login')
@@ -60,11 +61,11 @@ class LoginTestCase(unittest.TestCase):
 
     def test_login_invalid_password(self):
         """Test login with Invalid Password"""
-        with app.test_client() as c:
+        with self.app.test_client() as c:
             # Check for Invalid Password
             rv = self.login(c,
-                app.config['USERNAME'],
-                app.config['PASSWORD'] + 'x')
+                            self.app.config['USERNAME'],
+                            self.app.config['PASSWORD'] + 'x')
             # Check log in fails
             self.assertEqual(request.path, '/login')
             # Check logged in session variable is set to None

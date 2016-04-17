@@ -1,10 +1,10 @@
-# imports
+"""This script handles test cases for the Query module"""
+
 import unittest, os, datetime
-from flask import Flask, json, request, Response, session
-import MySQLdb
-from app.views import app
+from flask import json, request, Response, session
+import MySQLdb, sys
+from app.views import create_app
 from app.dbconnect import DbConnect
-from flask.ext import excel
 
 
 class QueryFormTestCase(unittest.TestCase):
@@ -12,12 +12,11 @@ class QueryFormTestCase(unittest.TestCase):
     
     def setUp(self):
         """Setup test app"""
-        app.config['TESTING'] = True     
-        app.config['MYSQL_DB'] = 'test'
-        self.db = DbConnect(app.config)
+        self.app = create_app('tests.config')
+        self.db = DbConnect(self.app.config)      
         test_type_filename = 'server/tests/test_data_files/Test/Test_New_Logger_Type_Positive.csv'
         test_temp_filename = 'server/tests/test_data_files/Test/temp_files/DUMMYID_2000_pgsql.txt'
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             with client.session_transaction() as sess:
                 sess['logged_in'] = True
             response = client.post('/upload', 
@@ -43,8 +42,8 @@ class QueryFormTestCase(unittest.TestCase):
     def tearDown(self):
         """Close test database"""        
         cursor = self.db.connection.cursor()
-        self.cleanUpLoggerTemp(cursor)
-        self.cleanUpLoggerType(cursor, self.record_type)
+        self.clean_up_logger_temp(cursor)
+        self.clean_up_logger_type(cursor, self.record_type)
         cursor.close()
         self.db.close()
 
@@ -53,7 +52,7 @@ class QueryFormTestCase(unittest.TestCase):
         """Convert Strings to their Bytes representation"""
         return bytes(stringValue, 'UTF-8')
 
-    def cleanUpLoggerTemp(self, cursor):
+    def clean_up_logger_temp(self, cursor):
         cursor.execute("SELECT logger_temp_id FROM `cnx_logger_temperature`")
         results = cursor.fetchall()
         if results is not None:
@@ -63,23 +62,23 @@ class QueryFormTestCase(unittest.TestCase):
                 res = cursor.execute("DELETE FROM `cnx_logger_temperature` WHERE logger_temp_id=\'%s\'" % (logger_temp_id))
                 self.db.connection.commit()
 
-    def cleanUpLoggerType(self, cursor, rec):
-        biomimic_id = self.db.fetchExistingBioId(cursor, rec.get('biomimic_type'))
-        geo_id = self.db.fetchExistingGeoId(cursor, rec)
-        prop_id = self.db.fetchExistingPropId(cursor, rec)
-        logger_id = self.db.FindMicrositeId(rec.get('microsite_id'))
-        res = cursor.execute("DELETE FROM `cnx_logger` WHERE logger_id=%s" % (logger_id))
+    def clean_up_logger_type(self, cursor, rec):
+        biomimic_id = self.db.fetch_existing_bio_id(cursor, rec.get('biomimic_type'))
+        geo_id = self.db.fetch_existing_geo_id(cursor, rec)
+        prop_id = self.db.fetch_existing_prop_id(cursor, rec)
+        logger_id = self.db.find_microsite_id(rec.get('microsite_id'))
+        res = cursor.execute("DELETE FROM `cnx_logger` WHERE logger_id=%s" % (logger_id,))
         self.db.connection.commit()
-        res = cursor.execute("DELETE FROM `cnx_logger_biomimic_type` WHERE biomimic_id=%s", biomimic_id)
+        res = cursor.execute("DELETE FROM `cnx_logger_biomimic_type` WHERE biomimic_id=%s", (biomimic_id,))
         self.db.connection.commit()
-        res = cursor.execute("DELETE FROM `cnx_logger_geographics` WHERE geo_id=%s", geo_id)
+        res = cursor.execute("DELETE FROM `cnx_logger_geographics` WHERE geo_id=%s", (geo_id,))
         self.db.connection.commit()
-        res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", prop_id)
+        res = cursor.execute("DELETE FROM `cnx_logger_properties` WHERE prop_id=%s", (prop_id,))
         self.db.connection.commit()
 
     def test_form_logger_type_automatic_fill(self):
         """Test the logger_type field is filled automatically on page load"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/query')
             biomimic_type_choices = self.db.fetch_biomimic_types() 
             for biomimic_type in biomimic_type_choices:
@@ -88,7 +87,7 @@ class QueryFormTestCase(unittest.TestCase):
     def check_ajax(self, selected_type, selected_value, dbFunction):
         """Helper Function to test the ajax call functionality when
            given selected type field is selected with given value"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             with client.session_transaction() as sess:
                 sess['query'] = self.record_type
             response = client.get('/_parse_data', 
@@ -105,7 +104,7 @@ class QueryFormTestCase(unittest.TestCase):
         """Test the ajax call functionality if logger_type field is selected"""
         selected_type = "biomimic_type"
         selected_value = "DummyBiomimicType"
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             with client.session_transaction() as sess:
                 sess['query'] = self.record_type
             response = client.get('/_parse_data', 
@@ -140,7 +139,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_raw(self):
         """Test the query results functionality for Raw"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
@@ -170,7 +169,7 @@ class QueryFormTestCase(unittest.TestCase):
     
     def test_query_results_min_daily(self):
             """Test the query results functionality for Min Daily"""
-            with app.test_client() as client:
+            with self.app.test_client() as client:
                 response = client.get('/_submit_query', 
                             query_string={
                             "microsite_id" : "DUMMYID",
@@ -200,7 +199,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_max_daily(self):
         """Test the query results functionality for Max Daily"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
@@ -230,7 +229,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_average_daily(self):
         """Test the query results functionality for Average Daily"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
@@ -262,7 +261,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_min_monthly(self):
             """Test the query results functionality for Min Monthly"""
-            with app.test_client() as client:
+            with self.app.test_client() as client:
                 response = client.get('/_submit_query', 
                             query_string={
                             "microsite_id" : "DUMMYID",
@@ -300,7 +299,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_max_monthly(self):
         """Test the query results functionality for Max Monthly"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
@@ -338,7 +337,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_average_monthly(self):
         """Test the query results functionality for Average Monthly"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
@@ -378,7 +377,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_min_yearly(self):
             """Test the query results functionality for Min Yearly"""
-            with app.test_client() as client:
+            with self.app.test_client() as client:
                 response = client.get('/_submit_query', 
                             query_string={
                             "microsite_id" : "DUMMYID",
@@ -416,7 +415,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_max_yearly(self):
         """Test the query results functionality for Max Yearly"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
@@ -454,7 +453,7 @@ class QueryFormTestCase(unittest.TestCase):
 
     def test_query_results_average_yearly(self):
         """Test the query results functionality for Average Yearly"""
-        with app.test_client() as client:
+        with self.app.test_client() as client:
             response = client.get('/_submit_query', 
                         query_string={
                         "microsite_id" : "DUMMYID",
