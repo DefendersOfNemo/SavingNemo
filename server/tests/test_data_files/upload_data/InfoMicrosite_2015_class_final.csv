@@ -1,517 +1,517 @@
-"microsite_id","site","field_lat","field_lon","location","state_province","country","biomimic","zone","sub_zone","wave_exp"
-"ABWTUSCAHS11","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","Water Temperature","Mid","N/A","N/A"
-"ABWTUSCAHS17","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","Water Temperature","High","N/A","N/A"
-"ABWTUSCAHS20","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","Water Temperature","High","N/A","N/A"
-"ABWTUSCAHS3","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","Water Temperature","Terr","N/A","N/A"
-"ABWTUSCAHS8","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","Water Temperature","Terr","N/A","N/A"
-"ABWTUSCALL55","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","Water Temperature","Mid-Lower","N/A","exposed"
-"ABWTUSORBB317","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","Water Temperature","Low","N/A","intermediate"
-"BMRBUSCAHS1002","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robobarnacle","Mid","N/A","exposed"
-"BMRBUSCALL66","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robobarnacle","Mid","N/A","N/A"
-"BMRBUSCALL67","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robobarnacle","Mid","N/A","N/A"
-"BMRBUSWACP104","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robobarnacle","High","N/A","protected"
-"BMRCBZSCCB10","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","20m","Forereef","N/A"
-"BMRCBZSCCB11","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","0m","Backreef","N/A"
-"BMRCBZSCCB12","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","2m","lagoon","N/A"
-"BMRCBZSCCB13","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","14m","N/A","N/A"
-"BMRCBZSCCB2","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","30m","Forereef","N/A"
-"BMRCBZSCCB3","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","5m","Forereef","N/A"
-"BMRCBZSCCB4","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","10m","Forereef","N/A"
-"BMRCBZSCCB5","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","30m","Forereef","N/A"
-"BMRCBZSCCB6","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","20m","Forereef","N/A"
-"BMRCBZSCCB7","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","40m","Forereef","N/A"
-"BMRCBZSCCB8","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","2m","Backreef","N/A"
-"BMRCBZSCCB9","BZSCCB",16.816373,-88.085053,"Carrie Bow Cay","Carrie Bow Cay","Belize","robocoral","2m","Forereef","N/A"
-"BMRCBZSCCC1","BZSCCC",16.651323,-88.199036,"Cat Cay","Cat Cay","Belize","robocoral","2m","Backreef","N/A"
-"BMRCBZSCCC2","BZSCCC",16.651323,-88.199036,"Cat Cay","Cat Cay","Belize","robocoral","5m","Backreef","N/A"
-"BMRCBZSCCC3","BZSCCC",16.651323,-88.199036,"Cat Cay","Cat Cay","Belize","robocoral","10m","Backreef","N/A"
-"BMRCBZSCCC4","BZSCCC",16.651323,-88.199036,"Cat Cay","Cat Cay","Belize","robocoral","1m","Backreef","N/A"
-"BMRCBZSCCC5","BZSCCC",16.651323,-88.199036,"Cat Cay","Cat Cay","Belize","robocoral","0m","Lagoon","N/A"
-"BMRCBZSCCC6","BZSCCC",16.651323,-88.199036,"Cat Cay","Cat Cay","Belize","robocoral","0m","Backreef","N/A"
-"BMRCBZSCCH1","BZSCCH",16.662506,-88.135285,"Channel Cay","Channel Cay","Belize","robocoral","5m","Backreef","N/A"
-"BMRCBZSCCH2","BZSCCH",16.662506,-88.135285,"Channel Cay","Channel Cay","Belize","robocoral","10m","Backreef","N/A"
-"BMRCBZSCMC1","BZSCMC",17.453855,-88.065378,"Manatee Cay","Manatee Cay","Belize","robocoral","5m","Backreef","N/A"
-"BMRCBZSCMC2","BZSCMC",17.453855,-88.065378,"Manatee Cay","Manatee Cay","Belize","robocoral","10m","Backreef","N/A"
-"BMRCBZSCMC3","BZSCMC",17.453855,-88.065378,"Manatee Cay","Manatee Cay","Belize","robocoral","5m","Lagoon","N/A"
-"BMRCBZSCMC4","BZSCMC",17.453855,-88.065378,"Manatee Cay","Manatee Cay","Belize","robocoral","5m","Backreef","N/A"
-"BMRMCABCSI132","CABCSI",48.83906667,-125.2075833,"Seppings Island","British Columbia","Canada","robomussel","Low","N/A","exposed"
-"BMRMCABCSI148","CABCSI",48.83906667,-125.2075833,"Seppings Island","British Columbia","Canada","robomussel","Mid-Upper","N/A","exposed"
-"BMRMCABCSI150","CABCSI",48.83906667,-125.2075833,"Seppings Island","British Columbia","Canada","robomussel","Mid","N/A","exposed"
-"BMRMCABCSI27","CABCSI",48.83906667,-125.2075833,"Seppings Island","British Columbia","Canada","robomussel","High","N/A","exposed"
-"BMRMCABCSI28","CABCSI",48.83906667,-125.2075833,"Seppings Island","British Columbia","Canada","robomussel","Mid","N/A","exposed"
-"BMRMCABCSI317","CABCSI",48.83906667,-125.2075833,"Seppings Island","British Columbia","Canada","robomussel","Terr","N/A","exposed"
-"BMRMCLTEMD5","CLTEMD",-29.5,-71.32,"El Temblador","Coquimbo/La Serena","Chile","robomussel","High","N/A","exposed"
-"BMRMMXBCBE1","MXBCBE",26.23765623,-112.47857,"Baja Escorpion (San Juanico)","Baja","Mexico","robomussel","High","N/A","N/A"
-"BMRMMXBCBE4","MXBCBE",26.23765623,-112.47857,"Baja Escorpion (San Juanico)","Baja","Mexico","robomussel","Mid-Lower","N/A","N/A"
-"BMRMMXBCBM310","MXBCBM",31.980278,-116.793889,"Bajamar","Baja","Mexico","robomussel","Low","N/A","protected"
-"BMRMMXBCBM311","MXBCBM",31.980278,-116.793889,"Bajamar","Baja","Mexico","robomussel","Mid","N/A","protected"
-"BMRMMXBCBM312","MXBCBM",31.980278,-116.793889,"Bajamar","Baja","Mexico","robomussel","High","N/A","exposed"
-"BMRMMXBCBT1","MXBCBT",27.684879,-114.9365136,"Baja Tortugas (Punta Eugenia)","Baja","Mexico","robomussel","Low","N/A","N/A"
-"BMRMMXBCBT2","MXBCBT",27.684879,-114.9365136,"Baja Tortugas (Punta Eugenia)","Baja","Mexico","robomussel","Mid","N/A","N/A"
-"BMRMMXBCBT3","MXBCBT",27.684879,-114.9365136,"Baja Tortugas (Punta Eugenia)","Baja","Mexico","robomussel","High","N/A","N/A"
-"BMRMMXBCCR1","MXBCCR",23.32882355,-110.1810739,"Los Cerritos","Baja","Mexico","robomussel","Low","N/A","N/A"
-"BMRMMXBCCR2","MXBCCR",23.32882355,-110.1810739,"Los Cerritos","Baja","Mexico","robomussel","Mid","N/A","N/A"
-"BMRMMXBCCR3","MXBCCR",23.32882355,-110.1810739,"Los Cerritos","Baja","Mexico","robomussel","High","N/A","N/A"
-"BMRMMXBCER304","MXBCER",31.32033333,-116.4362333,"Erendira","Baja","Mexico","robomussel","Low","N/A","exposed"
-"BMRMMXBCER305","MXBCER",31.32033333,-116.4362333,"Erendira","Baja","Mexico","robomussel","High","N/A","exposed"
-"BMRMMXBCER313","MXBCER",31.32033333,-116.4362333,"Erendira","Baja","Mexico","robomussel","Mid","N/A","exposed"
-"BMRMMXBCES301","MXBCES",28.51683333,-114.0724,"Esmeralda","Baja","Mexico","robomussel","High","N/A","exposed"
-"BMRMMXBCES302","MXBCES",28.51683333,-114.0724,"Esmeralda","Baja","Mexico","robomussel","Mid","N/A","exposed"
-"BMRMMXBCES303","MXBCES",28.51683333,-114.0724,"Esmeralda","Baja","Mexico","robomussel","Low","N/A","exposed"
-"BMRMMXBCOJ306","MXBCOJ",28.88225,-114.4237667,"Los Ojitos","Baja","Mexico","robomussel","High","N/A","exposed"
-"BMRMMXBCOJ307","MXBCOJ",28.88225,-114.4237667,"Los Ojitos","Baja","Mexico","robomussel","Mid","N/A","exposed"
-"BMRMMXBCOJ308","MXBCOJ",28.88225,-114.4237667,"Los Ojitos","Baja","Mexico","robomussel","Low","N/A","exposed"
-"BMRMMXBCPB309","MXBCPB",29.94968333,-115.8134333,"Punta Baja","Baja","Mexico","robomussel","Low","N/A","exposed"
-"BMRMMXBCPB313","MXBCPB",29.94968333,-115.8134333,"Punta Baja","Baja","Mexico","robomussel","High","N/A","exposed"
-"BMRMMXBCPB314","MXBCPB",29.94968333,-115.8134333,"Punta Baja","Baja","Mexico","robomussel","Mid","N/A","exposed"
-"BMRMMXBCPM1","MXBCPM",31.861389,-116.667778,"Punta Morro","Baja","Mexico","robomussel","Low","N/A","exposed"
-"BMRMMXBCPM2","MXBCPM",31.861389,-116.667778,"Punta Morro","Baja","Mexico","robomussel","Mid","N/A","exposed"
-"BMRMMXBCPM3","MXBCPM",31.861389,-116.667778,"Punta Morro","Baja","Mexico","robomussel","High","N/A","exposed"
-"BMRMNZAKAW186","NZAKAW",-36.917,174.4500333,"Anawhata","Auckland","New Zealand","robomussel","Low","N/A","exposed"
-"BMRMNZAKAW187","NZAKAW",-36.917,174.4500333,"Anawhata","Auckland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZAKAW189","NZAKAW",-36.917,174.4500333,"Anawhata","Auckland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZAKAW190","NZAKAW",-36.917,174.4500333,"Anawhata","Auckland","New Zealand","robomussel","High","N/A","exposed"
-"BMRMNZAKPK307","NZAKPK",-36.2598,174.7530667,"Pakiri","Auckland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZAKPK308","NZAKPK",-36.2598,174.7530667,"Pakiri","Auckland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZAKPK309","NZAKPK",-36.2598,174.7530667,"Pakiri","Auckland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZCBBT1","NZCBBT",-43.3506,172.79015,"Box Thumb","Cantebury","New Zealand","robomussel","High","N/A","exposed"
-"BMRMNZCBBT2","NZCBBT",-43.3506,172.79015,"Box Thumb","Cantebury","New Zealand","robomussel","High","N/A","exposed"
-"BMRMNZCBBT4","NZCBBT",-43.3506,172.79015,"Box Thumb","Cantebury","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZCBBT6","NZCBBT",-43.3506,172.79015,"Box Thumb","Cantebury","New Zealand","robomussel","Low","N/A","exposed"
-"BMRMNZCMWW315","NZCMWW",-36.77893333,175.7486,"Whau Whau Beach","Coromandel","New Zealand","robomussel","High","N/A","exposed"
-"BMRMNZNLEB304","NZNLEB",-35.11476667,173.9604333,"Elliots Beach","Northland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZNLEB305","NZNLEB",-35.11476667,173.9604333,"Elliots Beach","Northland","New Zealand","robomussel","High","N/A","exposed"
-"BMRMNZNLHH199","NZNLHH",-35.29461667,173.1570833,"Herekino Harbour","Northland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZNLMB191","NZNLMB",-36.75161667,173.5695333,"Maunganui Bluff","Northland","New Zealand","robomussel","Low","N/A","exposed"
-"BMRMNZNLMB192","NZNLMB",-36.75161667,173.5695333,"Maunganui Bluff","Northland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZNLMB194","NZNLMB",-36.75161667,173.5695333,"Maunganui Bluff","Northland","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZWCWB1","NZWCWB",-42.019,171.22712,"Woodpecker Bay","West Coast","New Zealand","robomussel","High","N/A","exposed"
-"BMRMNZWCWB3","NZWCWB",-42.019,171.22712,"Woodpecker Bay","West Coast","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZWCWB4","NZWCWB",-42.019,171.22712,"Woodpecker Bay","West Coast","New Zealand","robomussel","Mid","N/A","exposed"
-"BMRMNZWCWB5","NZWCWB",-42.019,171.22712,"Woodpecker Bay","West Coast","New Zealand","robomussel","Low","N/A","exposed"
-"BMRMNZWCWB6","NZWCWB",-42.019,171.22712,"Woodpecker Bay","West Coast","New Zealand","robomussel","Low","N/A","exposed"
-"BMRMUSCAAG100","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAAG1007","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAAG2","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAAG30","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAAG31","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAAG318","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG32","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG320","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAAG322","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAAG323","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG33","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAAG34","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAAG35","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG36","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG37","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCAAG38","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAAG39","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAAG40","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG41","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAG42","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAAG43","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAAG44","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAGOMEGAS2","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAAGOMEGAS4","USCAAG",34.46716667,-120.2770333,"Alegria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD1000","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD1001","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD1003","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCABD1004","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCABD1005","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCABD178","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD179","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD180","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCABD181","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCABD182","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD183","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCABD184","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCABD185","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCABD3","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABD4","USCABD",38.3185,-123.07395,"Bodega Reserve","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABH1","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Mid","N/A","N/A"
-"BMRMUSCABH2","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCABH3","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCABH4","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCABH5","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCABH6","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCABH7","USCABH",34.7188,-120.6088,"Boat House","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA20","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA21","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA22","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA23","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA328","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA329","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA330","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCACA332","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACA333","USCACA",35.54,-121.0929167,"Cambria","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACI100","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI101","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","exposed"
-"BMRMUSCACI413","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","exposed"
-"BMRMUSCACI450","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI560","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI566","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","exposed"
-"BMRMUSCACI603","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI604","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","protected"
-"BMRMUSCACI671","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI702","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI704","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","exposed"
-"BMRMUSCACI706","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","exposed"
-"BMRMUSCACI707","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","intermediate"
-"BMRMUSCACI976","USCACI",33.45139,-118.48611,"Bird Rock","California","USA","robomussel","N/A","N/A","protected"
-"BMRMUSCACM1","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCACM2","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACM3","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCACM81","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCACM84","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACM85","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACM87","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCACM88","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCACM89","USCACM",40.34798333,-124.3650167,"Cape Mendocino","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCACP1003","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCACP341","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCACP342","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCACP343","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP344","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP345","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP346","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCACP347","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCACP348","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCACP57","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCACP58","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCACP59","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP60","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCACP61","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCACP62","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP63","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP90","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP91","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP92","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCACP93","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCACP94","USCACP",34.40673,-119.87829,"Coal Oil pt","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAFR155","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAFR156","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAFR157","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAFR158","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAFR364","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAFR365","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAFR366","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAFR367","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAFR368","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAFR369","USCAFR",34.06271667,-119.9192167,"Fraser","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAHS1000","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS1001","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCAHS1003","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS110","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCAHS111","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS120","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS122","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHS123","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS124","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS125","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCAHS126","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS127","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAHS128","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAHS175","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","protected"
-"BMRMUSCAHS177","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAHS83","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCAHS84","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCAHS85","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCAHS86","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS87","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCAHS88","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS89","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCAHS90","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAHS91","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHS92","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHS93","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSCAHS94","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHS95","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHS96","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHS97","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAHSGP1","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAHSGP4","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAJA1000","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCAJA337","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAJA338","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA339","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAJA340","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAJA38","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA39","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAJA40","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAJA41","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA42","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAJA43","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAJA44","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAJA45","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA46","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA80","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAJA81","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAJA82","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA84","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAJA85","USCAJA",34.49515,-120.4969,"Jalama","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL100","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL1013","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCALL46","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCALL48","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCALL49","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL50","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCALL51","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCALL52","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL54","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCALL56","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL57","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL58","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALL59","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCALL60","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCALL61","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCALL62","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCALL63","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCALL64","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCALLGP1","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALLGP5","USCALL",34.71911,-120.60889,"Lompoc Landing","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALS1010","USCALS",34.71431667,-120.6075,"Lompoc South","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALS1011","USCALS",34.71431667,-120.6075,"Lompoc South","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCALS55","USCALS",34.71431667,-120.6075,"Lompoc South","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCALS56","USCALS",34.71431667,-120.6075,"Lompoc South","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD1008","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD164","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAPD167","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAPD168","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAPD169","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD170","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD171","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD172","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPD173","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSCAPD321","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD326","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD327","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAPD53","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD54","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD55","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPD56","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPD57","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPD58","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD59","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPD60","USCAPD",35.66581667,-121.2867167,"Piedras","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPR317","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPR318","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAPR319","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPR320","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAPR50","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPR51","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAPR52","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPR53","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAPR54","USCAPR",34.02041667,-119.6866333,"Prisoners Harbor","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATL163","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCATL323","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCATL324","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATL325","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCATL326","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATL327","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATL328","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCATL329","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCATL330","USCATL",34.05165,-119.9032,"Trailer","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATR174","USCATR",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATR89","USCATR",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCATR91","USCATR",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATR92","USCATR",41.06205,-124.14925,"Trinidad","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCATR93","USCATR",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCATR94","USCATR",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAVD1","USCAVD",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAVD2","USCAVD",41.06205,-124.14925,"Trinidad","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAVL161","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAVL162","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAVL321","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAVL322","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAVL323","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAVL324","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Low","N/A","exposed"
-"BMRMUSCAVL367","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAVL368","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAVL369","USCAVL",33.98366667,-119.6657667,"Valley","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAWL1","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAWL152","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","High","N/A","exposed"
-"BMRMUSCAWL153","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAWL154","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSCAWL2","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAWL3","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAWL326","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSCAWL371","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAWL4","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSCAWL5","USCAWL",33.96178333,-119.75485,"Willows","California","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSMADC500","USMADC",42.423707,-70.921884,"Dorothy Cove, Nahant","Massachusetts","USA","robomussel","High","N/A","exposed"
-"BMRMUSMANP507","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","Low","N/A","protected"
-"BMRMUSMANP508","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","High","N/A","exposed"
-"BMRMUSMANP509","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","Mid","N/A","protected"
-"BMRMUSMANP510","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","High","N/A","protected"
-"BMRMUSMANP511","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","Low","N/A","exposed"
-"BMRMUSMANP512","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","Low","N/A","exposed"
-"BMRMUSMANP513","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","High","N/A","protected"
-"BMRMUSMANP514","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","High","N/A","exposed"
-"BMRMUSMANP515","USMANP",42.419968,-70.902284,"North Point","Massachusetts","USA","robomussel","High","N/A","protected"
-"BMRMUSMAPH400","USMAPH",42.41671,-70.90673,"Pumphouse","Massachusetts","USA","robomussel","High","N/A","protected"
-"BMRMUSMAPH401","USMAPH",42.41663,-70.90686,"Pumphouse","Massachusetts","USA","robomussel","Low","N/A","exposed"
-"BMRMUSMAPH402","USMAPH",42.41664,-70.90682,"Pumphouse","Massachusetts","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSMAPH525","USMAPH",42.41665,-70.90678,"Pumphouse","Massachusetts","USA","robomussel","High","N/A","protected"
-"BMRMUSMAPH526","USMAPH",42.41671,-70.9068,"Pumphouse","Massachusetts","USA","robomussel","Low","N/A","protected"
-"BMRMUSMAPH528","USMAPH",42.41675,-70.90671,"Pumphouse","Massachusetts","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSMAPH529","USMAPH",42.41673,-70.90636,"Pumphouse","Massachusetts","USA","robomussel","High","N/A","exposed"
-"BMRMUSORBB1","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","intermediate"
-"BMRMUSORBB10","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORBB11","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORBB12","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORBB13","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORBB14","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Low","N/A","protected"
-"BMRMUSORBB18","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORBB2","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","intermediate"
-"BMRMUSORBB200","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORBB3","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","intermediate"
-"BMRMUSORBB4","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","intermediate"
-"BMRMUSORBB5","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid-Lower","N/A","intermediate"
-"BMRMUSORBB50","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Low","N/A","protected"
-"BMRMUSORBB54","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Low","N/A","exposed"
-"BMRMUSORBB55","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORBB56","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","High","N/A","exposed"
-"BMRMUSORBB57","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSORBB58","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSORBB59","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSORBB6","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Low","N/A","intermediate"
-"BMRMUSORBB61","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORBB63","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSORBB65","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","High","N/A","exposed"
-"BMRMUSORBB7","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","High","N/A","intermediate"
-"BMRMUSORBB8","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid-Upper","N/A","intermediate"
-"BMRMUSORBB9","USORBB",44.83064,-124.06005,"Boiler Bay","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORCA1014","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Low","N/A","exposed"
-"BMRMUSORCA141","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORCA142","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORCA143","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","High","N/A","exposed"
-"BMRMUSORCA144","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSORCA145","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORCA146","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSORCA147","USORCA",43.30664,-124.40235,"Cape Arago","Oregon","USA","robomussel","Low","N/A","exposed"
-"BMRMUSORFC1","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORFC10","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSORFC2","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORFC2OA","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSORFC3","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORFC4","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Low","N/A","exposed"
-"BMRMUSORFC5","USORFC",44.83733333,-124.05845,"Fogarty Creek","Oregon","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSORSH100","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORSH101","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Terr","N/A","protected"
-"BMRMUSORSH102","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORSH103","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORSH104","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORSH15","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORSH16","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORSH17","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORSH18","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORSH19","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Low","N/A","protected"
-"BMRMUSORSH20","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSORSH21","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORSH22","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORSH23","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORSH24","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","High","N/A","protected"
-"BMRMUSORSH3","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSORSH30","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORSH31","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORSH32","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSORSH33","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORSH366","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid","N/A","protected"
-"BMRMUSORSH367","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Low","N/A","protected"
-"BMRMUSORSH369","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid-Upper","N/A","N/A"
-"BMRMUSORSH4","USORSH",44.24992,-124.11357,"Strawberry Hill","Oregon","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSSCOL374","USSCOL",33.349531,-79.188833,"Oyster Landing","South Carolina","USA","robomussel","Low","N/A","exposed"
-"BMRMUSSCOL375","USSCOL",33.349531,-79.188833,"Oyster Landing","South Carolina","USA","robomussel","Mid-Lower","N/A","exposed"
-"BMRMUSSCOL376","USSCOL",33.349531,-79.188833,"Oyster Landing","South Carolina","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSSCOL377","USSCOL",33.349531,-79.188833,"Oyster Landing","South Carolina","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSSCOL378","USSCOL",33.349531,-79.188833,"Oyster Landing","South Carolina","USA","robomussel","High","N/A","exposed"
-"BMRMUSWACC1","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC1000","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC103","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","High","N/A","protected"
-"BMRMUSWACC109","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid-Upper","N/A","protected"
-"BMRMUSWACC110","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC129","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid-Lower","N/A","protected"
-"BMRMUSWACC130","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Low","N/A","protected"
-"BMRMUSWACC131","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC136","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC2","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC3","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACC4","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSWACC6","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP1","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP1000","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","High","N/A","protected"
-"BMRMUSWACP1001","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid-Upper","N/A","protected"
-"BMRMUSWACP1002","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP1003","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP1004","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid-Lower","N/A","protected"
-"BMRMUSWACP105","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP106","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Low","N/A","protected"
-"BMRMUSWACP107","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","High","N/A","protected"
-"BMRMUSWACP2","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP3","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP4","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWACP5","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSWACP6","USWACP",48.45135,-122.9617833,"Cattle Point","Washington","USA","robomussel","Mid-Lower","N/A","protected"
-"BMRMUSWALB1","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Terr","N/A","protected"
-"BMRMUSWALB10","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB11","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB12","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB13","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB14","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB15","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB16","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB17","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB18","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB19","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSWALB2","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","High","N/A","protected"
-"BMRMUSWALB20","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Terr","N/A","N/A"
-"BMRMUSWALB3","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid-Upper","N/A","protected"
-"BMRMUSWALB4","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB5","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Low","N/A","protected"
-"BMRMUSWALB6","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB8","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWALB9","USWALB",48.39381667,-124.7354833,"Landing Beach","Washington","USA","robomussel","Mid","N/A","protected"
-"BMRMUSWASD1","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSWASD10","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid-Upper","N/A","exposed"
-"BMRMUSWASD12","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD13","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD14","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","High","N/A","exposed"
-"BMRMUSWASD15","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD16","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSWASD17","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","High","N/A","exposed"
-"BMRMUSWASD18","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD19","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSWASD2","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","High","N/A","exposed"
-"BMRMUSWASD20","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","High","N/A","exposed"
-"BMRMUSWASD21","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD3","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD4","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSWASD5","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","High","N/A","exposed"
-"BMRMUSWASD6","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Mid","N/A","exposed"
-"BMRMUSWASD8","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","Terr","N/A","exposed"
-"BMRMUSWASD9","USWASD",48.39136667,-124.7383667,"Strawberry Point","Washington","USA","robomussel","High","N/A","exposed"
-"BMRMZAECKB100","ZAECKB",-33.1475,27.70333,"Kidd's Beach","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKB101","ZAECKB",-33.1475,27.70333,"Kidd's Beach","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKB200","ZAECKB",-33.1475,27.70333,"Kidd's Beach","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKB201","ZAECKB",-33.1475,27.70333,"Kidd's Beach","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKB300","ZAECKB",-33.1475,27.70333,"Kidd's Beach","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKE100","ZAECKE",-33.69416,26.66777,"Kenton-on-sea","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKE101","ZAECKE",-33.69416,26.66777,"Kenton-on-sea","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKE200","ZAECKE",-33.69416,26.66777,"Kenton-on-sea","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECKE201","ZAECKE",-33.69416,26.66777,"Kenton-on-sea","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECSK100","ZAECSK",-34.04083,25.53333,"Skoenmakerskop","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAECSK101","ZAECSK",-34.04083,25.53333,"Skoenmakerskop","Eastern Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCPN100","ZAWCPN",-32.80194,17.89833,"Paternoster","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCPN201","ZAWCPN",-32.80194,17.89833,"Paternoster","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCRO100","ZAWCRO",-34.10222,23.38083,"Robberg","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCRO200","ZAWCRO",-34.10222,23.38083,"Robberg","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCRO300","ZAWCRO",-34.10222,23.38083,"Robberg","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCRO400","ZAWCRO",-34.10222,23.38083,"Robberg","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCRO500","ZAWCRO",-34.10222,23.38083,"Robberg","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCYZ100","ZAWCYZ",-33.34666,18.15305,"Yzerfontein","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCYZ200","ZAWCYZ",-33.34666,18.15305,"Yzerfontein","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRMZAWCYZ300","ZAWCYZ",-33.34666,18.15305,"Yzerfontein","Western Cape","South Africa","robomussel","Low","N/A","moderately exposed"
-"BMRTUSCAHS118","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robotidepool","N/A","N/A","N/A"
-"BMRTUSCAHS176","USCAHS",36.62193333,-121.9053167,"Hopkins","California","USA","robotidepool","N/A","N/A","N/A"
-"BMRTUSWACC95","USWACC",48.5494,-123.0059667,"Colins Cove","Washington","USA","robotidepool","N/A","N/A","N/A"
+microsite_id,site,field_lat,field_lon,location,state_province,country,biomimic,zone,sub_zone,wave_exp
+BMRBUSCAHS1002,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,ibutton,Mid,N/A,exposed
+BMRBUSCALL66,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,ibutton,Mid,N/A,N/A
+BMRBUSCALL67,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,ibutton,Mid,N/A,N/A
+BMRBUSWACP104,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,ibutton,High,N/A,protected
+BMRCBZSCCB10,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,20m,Forereef,N/A
+BMRCBZSCCB11,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,0m,Backreef,N/A
+BMRCBZSCCB12,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,2m,lagoon,N/A
+BMRCBZSCCB13,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,14m,N/A,N/A
+BMRCBZSCCB2,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,30m,Forereef,N/A
+BMRCBZSCCB3,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,5m,Forereef,N/A
+BMRCBZSCCB4,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,10m,Forereef,N/A
+BMRCBZSCCB5,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,30m,Forereef,N/A
+BMRCBZSCCB6,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,20m,Forereef,N/A
+BMRCBZSCCB7,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,40m,Forereef,N/A
+BMRCBZSCCB8,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,2m,Backreef,N/A
+BMRCBZSCCB9,BZSCCB,16.816373,-88.085053,Carrie Bow Cay,Carrie Bow Cay,Belize,robocoral,2m,Forereef,N/A
+BMRCBZSCCC1,BZSCCC,16.651323,-88.199036,Cat Cay,Cat Cay,Belize,robocoral,2m,Backreef,N/A
+BMRCBZSCCC2,BZSCCC,16.651323,-88.199036,Cat Cay,Cat Cay,Belize,robocoral,5m,Backreef,N/A
+BMRCBZSCCC3,BZSCCC,16.651323,-88.199036,Cat Cay,Cat Cay,Belize,robocoral,10m,Backreef,N/A
+BMRCBZSCCC4,BZSCCC,16.651323,-88.199036,Cat Cay,Cat Cay,Belize,robocoral,1m,Backreef,N/A
+BMRCBZSCCC5,BZSCCC,16.651323,-88.199036,Cat Cay,Cat Cay,Belize,robocoral,0m,Lagoon,N/A
+BMRCBZSCCC6,BZSCCC,16.651323,-88.199036,Cat Cay,Cat Cay,Belize,robocoral,0m,Backreef,N/A
+BMRCBZSCCH1,BZSCCH,16.662506,-88.135285,Channel Cay,Channel Cay,Belize,robocoral,5m,Backreef,N/A
+BMRCBZSCCH2,BZSCCH,16.662506,-88.135285,Channel Cay,Channel Cay,Belize,robocoral,10m,Backreef,N/A
+BMRCBZSCMC1,BZSCMC,17.453855,-88.065378,Manatee Cay,Manatee Cay,Belize,robocoral,5m,Backreef,N/A
+BMRCBZSCMC2,BZSCMC,17.453855,-88.065378,Manatee Cay,Manatee Cay,Belize,robocoral,10m,Backreef,N/A
+BMRCBZSCMC3,BZSCMC,17.453855,-88.065378,Manatee Cay,Manatee Cay,Belize,robocoral,5m,Lagoon,N/A
+BMRCBZSCMC4,BZSCMC,17.453855,-88.065378,Manatee Cay,Manatee Cay,Belize,robocoral,5m,Backreef,N/A
+BMRMCABCSI132,CABCSI,48.83906667,-125.2075833,Seppings Island,British Columbia,Canada,robomussel,Low,N/A,exposed
+BMRMCABCSI148,CABCSI,48.83906667,-125.2075833,Seppings Island,British Columbia,Canada,robomussel,Mid-upper,N/A,exposed
+BMRMCABCSI150,CABCSI,48.83906667,-125.2075833,Seppings Island,British Columbia,Canada,robomussel,Mid,N/A,exposed
+BMRMCABCSI27,CABCSI,48.83906667,-125.2075833,Seppings Island,British Columbia,Canada,robomussel,High,N/A,exposed
+BMRMCABCSI28,CABCSI,48.83906667,-125.2075833,Seppings Island,British Columbia,Canada,robomussel,Mid,N/A,exposed
+BMRMCABCSI317,CABCSI,48.83906667,-125.2075833,Seppings Island,British Columbia,Canada,robomussel,Terr,N/A,exposed
+BMRMCLTEMD5,CLTEMD,-29.5,-71.32,El Temblador,Coquimbo/La Serena,Chile,robomussel,High,N/A,exposed
+BMRMMXBCBE1,MXBCBE,26.23765623,-112.47857,Baja Escorpion (San Juanico),Baja,Mexico,robomussel,High,N/A,N/A
+BMRMMXBCBE4,MXBCBE,26.23765623,-112.47857,Baja Escorpion (San Juanico),Baja,Mexico,robomussel,Mid-lower,N/A,N/A
+BMRMMXBCBM310,MXBCBM,31.980278,-116.793889,Bajamar,Baja,Mexico,robomussel,Low,N/A,protected
+BMRMMXBCBM311,MXBCBM,31.980278,-116.793889,Bajamar,Baja,Mexico,robomussel,Mid,N/A,protected
+BMRMMXBCBM312,MXBCBM,31.980278,-116.793889,Bajamar,Baja,Mexico,robomussel,High,N/A,exposed
+BMRMMXBCBT1,MXBCBT,27.684879,-114.9365136,Baja Tortugas (Punta Eugenia),Baja,Mexico,robomussel,Low,N/A,N/A
+BMRMMXBCBT2,MXBCBT,27.684879,-114.9365136,Baja Tortugas (Punta Eugenia),Baja,Mexico,robomussel,Mid,N/A,N/A
+BMRMMXBCBT3,MXBCBT,27.684879,-114.9365136,Baja Tortugas (Punta Eugenia),Baja,Mexico,robomussel,High,N/A,N/A
+BMRMMXBCCR1,MXBCCR,23.32882355,-110.1810739,Los Cerritos,Baja,Mexico,robomussel,Low,N/A,N/A
+BMRMMXBCCR2,MXBCCR,23.32882355,-110.1810739,Los Cerritos,Baja,Mexico,robomussel,Mid,N/A,N/A
+BMRMMXBCCR3,MXBCCR,23.32882355,-110.1810739,Los Cerritos,Baja,Mexico,robomussel,High,N/A,N/A
+BMRMMXBCER304,MXBCER,31.32033333,-116.4362333,Erendira,Baja,Mexico,robomussel,Low,N/A,exposed
+BMRMMXBCER305,MXBCER,31.32033333,-116.4362333,Erendira,Baja,Mexico,robomussel,High,N/A,exposed
+BMRMMXBCER313,MXBCER,31.32033333,-116.4362333,Erendira,Baja,Mexico,robomussel,Mid,N/A,exposed
+BMRMMXBCES301,MXBCES,28.51683333,-114.0724,Esmeralda,Baja,Mexico,robomussel,High,N/A,exposed
+BMRMMXBCES302,MXBCES,28.51683333,-114.0724,Esmeralda,Baja,Mexico,robomussel,Mid,N/A,exposed
+BMRMMXBCES303,MXBCES,28.51683333,-114.0724,Esmeralda,Baja,Mexico,robomussel,Low,N/A,exposed
+BMRMMXBCOJ306,MXBCOJ,28.88225,-114.4237667,Los Ojitos,Baja,Mexico,robomussel,High,N/A,exposed
+BMRMMXBCOJ307,MXBCOJ,28.88225,-114.4237667,Los Ojitos,Baja,Mexico,robomussel,Mid,N/A,exposed
+BMRMMXBCOJ308,MXBCOJ,28.88225,-114.4237667,Los Ojitos,Baja,Mexico,robomussel,Low,N/A,exposed
+BMRMMXBCPB309,MXBCPB,29.94968333,-115.8134333,Punta Baja,Baja,Mexico,robomussel,Low,N/A,exposed
+BMRMMXBCPB313,MXBCPB,29.94968333,-115.8134333,Punta Baja,Baja,Mexico,robomussel,High,N/A,exposed
+BMRMMXBCPB314,MXBCPB,29.94968333,-115.8134333,Punta Baja,Baja,Mexico,robomussel,Mid,N/A,exposed
+BMRMMXBCPM1,MXBCPM,31.861389,-116.667778,Punta Morro,Baja,Mexico,robomussel,Low,N/A,exposed
+BMRMMXBCPM2,MXBCPM,31.861389,-116.667778,Punta Morro,Baja,Mexico,robomussel,Mid,N/A,exposed
+BMRMMXBCPM3,MXBCPM,31.861389,-116.667778,Punta Morro,Baja,Mexico,robomussel,High,N/A,exposed
+BMRMNZAKAW186,NZAKAW,-36.917,174.4500333,Anawhata,Auckland,New Zealand,robomussel,Low,N/A,exposed
+BMRMNZAKAW187,NZAKAW,-36.917,174.4500333,Anawhata,Auckland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZAKAW189,NZAKAW,-36.917,174.4500333,Anawhata,Auckland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZAKAW190,NZAKAW,-36.917,174.4500333,Anawhata,Auckland,New Zealand,robomussel,High,N/A,exposed
+BMRMNZAKPK307,NZAKPK,-36.2598,174.7530667,Pakiri,Auckland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZAKPK308,NZAKPK,-36.2598,174.7530667,Pakiri,Auckland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZAKPK309,NZAKPK,-36.2598,174.7530667,Pakiri,Auckland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZCBBT1,NZCBBT,-43.3506,172.79015,Box Thumb,Cantebury,New Zealand,robomussel,High,N/A,exposed
+BMRMNZCBBT2,NZCBBT,-43.3506,172.79015,Box Thumb,Cantebury,New Zealand,robomussel,High,N/A,exposed
+BMRMNZCBBT4,NZCBBT,-43.3506,172.79015,Box Thumb,Cantebury,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZCBBT6,NZCBBT,-43.3506,172.79015,Box Thumb,Cantebury,New Zealand,robomussel,Low,N/A,exposed
+BMRMNZCMWW315,NZCMWW,-36.77893333,175.7486,Whau Whau Beach,Coromandel,New Zealand,robomussel,High,N/A,exposed
+BMRMNZNLEB304,NZNLEB,-35.11476667,173.9604333,Elliots Beach,Northland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZNLEB305,NZNLEB,-35.11476667,173.9604333,Elliots Beach,Northland,New Zealand,robomussel,High,N/A,exposed
+BMRMNZNLHH199,NZNLHH,-35.29461667,173.1570833,Herekino Harbour,Northland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZNLMB191,NZNLMB,-36.75161667,173.5695333,Maunganui Bluff,Northland,New Zealand,robomussel,Low,N/A,exposed
+BMRMNZNLMB192,NZNLMB,-36.75161667,173.5695333,Maunganui Bluff,Northland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZNLMB194,NZNLMB,-36.75161667,173.5695333,Maunganui Bluff,Northland,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZWCWB1,NZWCWB,-42.019,171.22712,Woodpecker Bay,West Coast,New Zealand,robomussel,High,N/A,exposed
+BMRMNZWCWB3,NZWCWB,-42.019,171.22712,Woodpecker Bay,West Coast,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZWCWB4,NZWCWB,-42.019,171.22712,Woodpecker Bay,West Coast,New Zealand,robomussel,Mid,N/A,exposed
+BMRMNZWCWB5,NZWCWB,-42.019,171.22712,Woodpecker Bay,West Coast,New Zealand,robomussel,Low,N/A,exposed
+BMRMNZWCWB6,NZWCWB,-42.019,171.22712,Woodpecker Bay,West Coast,New Zealand,robomussel,Low,N/A,exposed
+BMRMUSCAAG100,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAAG1007,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAAG2,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAAG30,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAAG31,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAAG318,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG32,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG320,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAAG322,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAAG323,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG33,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAAG34,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAAG35,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG36,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG37,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCAAG38,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAAG39,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAAG40,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG41,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAG42,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAAG43,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAAG44,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAGOMEGAS2,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAAGOMEGAS4,USCAAG,34.46716667,-120.2770333,Alegria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD1000,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD1001,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD1003,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCABD1004,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCABD1005,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCABD178,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD179,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD180,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCABD181,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCABD182,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD183,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCABD184,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,High,N/A,exposed
+BMRMUSCABD185,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCABD3,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABD4,USCABD,38.3185,-123.07395,Bodega Reserve,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABH1,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Mid,N/A,N/A
+BMRMUSCABH2,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCABH3,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCABH4,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCABH5,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCABH6,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCABH7,USCABH,34.7188,-120.6088,Boat House,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA20,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA21,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA22,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA23,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA328,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA329,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA330,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCACA332,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACA333,USCACA,35.54,-121.0929167,Cambria,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACI100,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI101,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,exposed
+BMRMUSCACI413,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,exposed
+BMRMUSCACI450,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI560,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI566,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,exposed
+BMRMUSCACI603,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI604,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,protected
+BMRMUSCACI671,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI702,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI704,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,exposed
+BMRMUSCACI706,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,exposed
+BMRMUSCACI707,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,intermediate
+BMRMUSCACI976,USCACI,33.45139,-118.48611,Bird Rock,California,USA,robomussel,N/A,N/A,protected
+BMRMUSCACM1,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCACM2,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACM3,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,High,N/A,exposed
+BMRMUSCACM81,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCACM84,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACM85,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACM87,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,High,N/A,exposed
+BMRMUSCACM88,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCACM89,USCACM,40.34798333,-124.3650167,Cape Mendocino,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCACP1003,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCACP341,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCACP342,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,High,N/A,exposed
+BMRMUSCACP343,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP344,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP345,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP346,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCACP347,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCACP348,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCACP57,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,High,N/A,exposed
+BMRMUSCACP58,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCACP59,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP60,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCACP61,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCACP62,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP63,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP90,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP91,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP92,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCACP93,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,High,N/A,exposed
+BMRMUSCACP94,USCACP,34.40673,-119.87829,Coal Oil pt,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAFR155,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAFR156,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAFR157,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAFR158,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAFR364,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAFR365,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAFR366,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAFR367,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAFR368,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAFR369,USCAFR,34.06271667,-119.9192167,Fraser,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAHS1000,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS1001,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCAHS1003,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS110,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCAHS111,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS120,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS122,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHS123,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS124,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS125,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCAHS126,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS127,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAHS128,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAHS175,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,protected
+BMRMUSCAHS177,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAHS83,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCAHS84,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCAHS85,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCAHS86,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS87,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCAHS88,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS89,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCAHS90,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAHS91,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHS92,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHS93,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Terr,N/A,exposed
+BMRMUSCAHS94,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHS95,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHS96,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHS97,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAHSGP1,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAHSGP4,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAJA1000,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCAJA337,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAJA338,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA339,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAJA340,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAJA38,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA39,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAJA40,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAJA41,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA42,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAJA43,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAJA44,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAJA45,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA46,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA80,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAJA81,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAJA82,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA84,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAJA85,USCAJA,34.49515,-120.4969,Jalama,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL100,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL1013,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCALL46,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,High,N/A,exposed
+BMRMUSCALL48,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCALL49,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL50,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCALL51,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCALL52,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL54,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,High,N/A,exposed
+BMRMUSCALL56,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL57,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL58,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALL59,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,High,N/A,exposed
+BMRMUSCALL60,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,High,N/A,exposed
+BMRMUSCALL61,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCALL62,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCALL63,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCALL64,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCALLGP1,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALLGP5,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALS1010,USCALS,34.71431667,-120.6075,Lompoc South,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALS1011,USCALS,34.71431667,-120.6075,Lompoc South,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCALS55,USCALS,34.71431667,-120.6075,Lompoc South,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCALS56,USCALS,34.71431667,-120.6075,Lompoc South,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD1008,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD164,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAPD167,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAPD168,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAPD169,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD170,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD171,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD172,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPD173,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Terr,N/A,N/A
+BMRMUSCAPD321,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD326,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD327,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAPD53,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD54,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD55,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPD56,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPD57,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPD58,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD59,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPD60,USCAPD,35.66581667,-121.2867167,Piedras,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPR317,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPR318,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAPR319,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPR320,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAPR50,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPR51,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAPR52,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPR53,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAPR54,USCAPR,34.02041667,-119.6866333,Prisoners Harbor,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATL163,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,High,N/A,exposed
+BMRMUSCATL323,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCATL324,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATL325,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCATL326,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATL327,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATL328,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCATL329,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCATL330,USCATL,34.05165,-119.9032,Trailer,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATR174,USCATR,41.06205,-124.14925,Trinidad,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATR89,USCATR,41.06205,-124.14925,Trinidad,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCATR91,USCATR,41.06205,-124.14925,Trinidad,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATR92,USCATR,41.06205,-124.14925,Trinidad,California,USA,robomussel,High,N/A,exposed
+BMRMUSCATR93,USCATR,41.06205,-124.14925,Trinidad,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCATR94,USCATR,41.06205,-124.14925,Trinidad,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAVD1,USCAVD,41.06205,-124.14925,Trinidad,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAVD2,USCAVD,41.06205,-124.14925,Trinidad,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAVL161,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAVL162,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAVL321,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAVL322,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAVL323,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAVL324,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Low,N/A,exposed
+BMRMUSCAVL367,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAVL368,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAVL369,USCAVL,33.98366667,-119.6657667,Valley,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAWL1,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAWL152,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,High,N/A,exposed
+BMRMUSCAWL153,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAWL154,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSCAWL2,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAWL3,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAWL326,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSCAWL371,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAWL4,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSCAWL5,USCAWL,33.96178333,-119.75485,Willows,California,USA,robomussel,Mid,N/A,exposed
+BMRMUSMADC500,USMADC,42.423707,-70.921884,"Dorothy Cove, Nahant",Massachusetts,USA,robomussel,High,N/A,exposed
+BMRMUSMANP507,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,Low,N/A,protected
+BMRMUSMANP508,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,High,N/A,exposed
+BMRMUSMANP509,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,Mid,N/A,protected
+BMRMUSMANP510,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,High,N/A,protected
+BMRMUSMANP511,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,Low,N/A,exposed
+BMRMUSMANP512,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,Low,N/A,exposed
+BMRMUSMANP513,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,High,N/A,protected
+BMRMUSMANP514,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,High,N/A,exposed
+BMRMUSMANP515,USMANP,42.419968,-70.902284,North Point,Massachusetts,USA,robomussel,High,N/A,protected
+BMRMUSMAPH400,USMAPH,42.41671,-70.90673,Pumphouse,Massachusetts,USA,robomussel,High,N/A,protected
+BMRMUSMAPH401,USMAPH,42.41663,-70.90686,Pumphouse,Massachusetts,USA,robomussel,Low,N/A,exposed
+BMRMUSMAPH402,USMAPH,42.41664,-70.90682,Pumphouse,Massachusetts,USA,robomussel,Mid,N/A,exposed
+BMRMUSMAPH525,USMAPH,42.41665,-70.90678,Pumphouse,Massachusetts,USA,robomussel,High,N/A,protected
+BMRMUSMAPH526,USMAPH,42.41671,-70.9068,Pumphouse,Massachusetts,USA,robomussel,Low,N/A,protected
+BMRMUSMAPH528,USMAPH,42.41675,-70.90671,Pumphouse,Massachusetts,USA,robomussel,Mid,N/A,exposed
+BMRMUSMAPH529,USMAPH,42.41673,-70.90636,Pumphouse,Massachusetts,USA,robomussel,High,N/A,exposed
+BMRMUSORBB1,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,intermediate
+BMRMUSORBB10,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORBB11,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORBB12,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORBB13,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORBB14,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Low,N/A,protected
+BMRMUSORBB18,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORBB2,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,intermediate
+BMRMUSORBB200,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORBB3,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,intermediate
+BMRMUSORBB4,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,intermediate
+BMRMUSORBB5,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid-lower,N/A,intermediate
+BMRMUSORBB50,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Low,N/A,protected
+BMRMUSORBB54,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Low,N/A,exposed
+BMRMUSORBB55,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORBB56,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,High,N/A,exposed
+BMRMUSORBB57,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSORBB58,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Terr,N/A,exposed
+BMRMUSORBB59,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Terr,N/A,exposed
+BMRMUSORBB6,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Low,N/A,intermediate
+BMRMUSORBB61,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORBB63,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Terr,N/A,exposed
+BMRMUSORBB65,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,High,N/A,exposed
+BMRMUSORBB7,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,High,N/A,intermediate
+BMRMUSORBB8,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid-upper,N/A,intermediate
+BMRMUSORBB9,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORCA1014,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Low,N/A,exposed
+BMRMUSORCA141,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORCA142,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORCA143,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,High,N/A,exposed
+BMRMUSORCA144,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSORCA145,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORCA146,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSORCA147,USORCA,43.30664,-124.40235,Cape Arago,Oregon,USA,robomussel,Low,N/A,exposed
+BMRMUSORFC1,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORFC10,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Terr,N/A,N/A
+BMRMUSORFC2,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORFC2OA,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSORFC3,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORFC4,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Low,N/A,exposed
+BMRMUSORFC5,USORFC,44.83733333,-124.05845,Fogarty Creek,Oregon,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSORSH100,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORSH101,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Terr,N/A,protected
+BMRMUSORSH102,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORSH103,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORSH104,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORSH15,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORSH16,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORSH17,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORSH18,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORSH19,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Low,N/A,protected
+BMRMUSORSH20,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Terr,N/A,N/A
+BMRMUSORSH21,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORSH22,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORSH23,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORSH24,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,High,N/A,protected
+BMRMUSORSH3,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSORSH30,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORSH31,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORSH32,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,exposed
+BMRMUSORSH33,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORSH366,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid,N/A,protected
+BMRMUSORSH367,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Low,N/A,protected
+BMRMUSORSH369,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid-upper,N/A,N/A
+BMRMUSORSH4,USORSH,44.24992,-124.11357,Strawberry Hill,Oregon,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSSCOL374,USSCOL,33.349531,-79.188833,Oyster Landing,South Carolina,USA,robomussel,Low,N/A,exposed
+BMRMUSSCOL375,USSCOL,33.349531,-79.188833,Oyster Landing,South Carolina,USA,robomussel,Mid-lower,N/A,exposed
+BMRMUSSCOL376,USSCOL,33.349531,-79.188833,Oyster Landing,South Carolina,USA,robomussel,Mid,N/A,exposed
+BMRMUSSCOL377,USSCOL,33.349531,-79.188833,Oyster Landing,South Carolina,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSSCOL378,USSCOL,33.349531,-79.188833,Oyster Landing,South Carolina,USA,robomussel,High,N/A,exposed
+BMRMUSWACC1,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC1000,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC103,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,High,N/A,protected
+BMRMUSWACC109,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid-upper,N/A,protected
+BMRMUSWACC110,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC129,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid-lower,N/A,protected
+BMRMUSWACC130,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Low,N/A,protected
+BMRMUSWACC131,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC136,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC2,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC3,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACC4,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Terr,N/A,N/A
+BMRMUSWACC6,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP1,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP1000,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,High,N/A,protected
+BMRMUSWACP1001,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid-upper,N/A,protected
+BMRMUSWACP1002,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP1003,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP1004,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid-lower,N/A,protected
+BMRMUSWACP105,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP106,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Low,N/A,protected
+BMRMUSWACP107,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,High,N/A,protected
+BMRMUSWACP2,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP3,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP4,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWACP5,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Terr,N/A,N/A
+BMRMUSWACP6,USWACP,48.45135,-122.9617833,Cattle Point,Washington,USA,robomussel,Mid-lower,N/A,protected
+BMRMUSWALB1,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Terr,N/A,protected
+BMRMUSWALB10,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB11,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB12,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB13,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB14,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB15,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB16,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB17,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB18,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB19,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Terr,N/A,N/A
+BMRMUSWALB2,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,High,N/A,protected
+BMRMUSWALB20,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Terr,N/A,N/A
+BMRMUSWALB3,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid-upper,N/A,protected
+BMRMUSWALB4,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB5,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Low,N/A,protected
+BMRMUSWALB6,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB8,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWALB9,USWALB,48.39381667,-124.7354833,Landing Beach,Washington,USA,robomussel,Mid,N/A,protected
+BMRMUSWASD1,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Terr,N/A,exposed
+BMRMUSWASD10,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid-upper,N/A,exposed
+BMRMUSWASD12,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD13,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD14,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,High,N/A,exposed
+BMRMUSWASD15,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD16,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Terr,N/A,exposed
+BMRMUSWASD17,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,High,N/A,exposed
+BMRMUSWASD18,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD19,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Terr,N/A,exposed
+BMRMUSWASD2,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,High,N/A,exposed
+BMRMUSWASD20,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,High,N/A,exposed
+BMRMUSWASD21,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD3,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD4,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Terr,N/A,exposed
+BMRMUSWASD5,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,High,N/A,exposed
+BMRMUSWASD6,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Mid,N/A,exposed
+BMRMUSWASD8,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,Terr,N/A,exposed
+BMRMUSWASD9,USWASD,48.39136667,-124.7383667,Strawberry Point,Washington,USA,robomussel,High,N/A,exposed
+BMRMZAECKB100,ZAECKB,-33.1475,27.70333,Kidd's Beach,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKB101,ZAECKB,-33.1475,27.70333,Kidd's Beach,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKB200,ZAECKB,-33.1475,27.70333,Kidd's Beach,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKB201,ZAECKB,-33.1475,27.70333,Kidd's Beach,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKB300,ZAECKB,-33.1475,27.70333,Kidd's Beach,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKE100,ZAECKE,-33.69416,26.66777,Kenton-on-sea,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKE101,ZAECKE,-33.69416,26.66777,Kenton-on-sea,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKE200,ZAECKE,-33.69416,26.66777,Kenton-on-sea,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECKE201,ZAECKE,-33.69416,26.66777,Kenton-on-sea,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECSK100,ZAECSK,-34.04083,25.53333,Skoenmakerskop,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAECSK101,ZAECSK,-34.04083,25.53333,Skoenmakerskop,Eastern Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCPN100,ZAWCPN,-32.80194,17.89833,Paternoster,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCPN201,ZAWCPN,-32.80194,17.89833,Paternoster,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCRO100,ZAWCRO,-34.10222,23.38083,Robberg,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCRO200,ZAWCRO,-34.10222,23.38083,Robberg,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCRO300,ZAWCRO,-34.10222,23.38083,Robberg,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCRO400,ZAWCRO,-34.10222,23.38083,Robberg,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCRO500,ZAWCRO,-34.10222,23.38083,Robberg,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCYZ100,ZAWCYZ,-33.34666,18.15305,Yzerfontein,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCYZ200,ZAWCYZ,-33.34666,18.15305,Yzerfontein,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRMZAWCYZ300,ZAWCYZ,-33.34666,18.15305,Yzerfontein,Western Cape,South Africa,robomussel,Low,N/A,moderately exposed
+BMRTUSCAHS118,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,tidepool,N/A,N/A,N/A
+BMRTUSCAHS176,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,tidepool,N/A,N/A,N/A
+BMRTUSWACC95,USWACC,48.5494,-123.0059667,Colins Cove,Washington,USA,tidepool,N/A,N/A,N/A
+ABWTUSCAHS11,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,Water Temperature,Mid,N/A,N/A
+ABWTUSCAHS17,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,Water Temperature,High,N/A,N/A
+ABWTUSCAHS20,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,Water Temperature,High,N/A,N/A
+ABWTUSCAHS3,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,Water Temperature,Terr,N/A,N/A
+ABWTUSCAHS8,USCAHS,36.62193333,-121.9053167,Hopkins,California,USA,Water Temperature,Terr,N/A,N/A
+ABWTUSCALL55,USCALL,34.71911,-120.60889,Lompoc Landing,California,USA,Water Temperature,Mid-lower,N/A,exposed
+ABWTUSORBB317,USORBB,44.83064,-124.06005,Boiler Bay,Oregon,USA,Water Temperature,Low,N/A,intermediate
