@@ -1,8 +1,8 @@
 WTF_CSRF_ENABLED = True
 DEBUG = True
 SECRET_KEY = 'nemo'
-USERNAME = 'admin'
-PASSWORD = 'admin'
+USERNAME = 'root'
+PASSWORD = 'root'
 MYSQL_HOST = 'localhost'
 MYSQL_PORT = 3306
 MYSQL_USER = 'root'
