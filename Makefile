@@ -30,7 +30,7 @@ dev-test:
 	)
 prod-test:
 	( \
-		pyton3 -m nose server --with-xunit --traverse-namespace --with-xcoverage --cover-package=app; \
+		python3 -m nose server --with-xunit --traverse-namespace --with-xcoverage --cover-package=app; \
 	)
 freeze:
 	( \
