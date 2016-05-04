@@ -23,10 +23,14 @@ prod-install:
 		mysql -u root -p < create_table.sql; \
 		mysql -u root -p < create_test.sql; \
 	)
-test:
+dev-test:
 	( \
 		source env/bin/activate; \
 		nosetests server --with-xunit --traverse-namespace --with-xcoverage --cover-package=app; \
+	)
+prod-test:
+	( \
+		pyton3 -m nose server --with-xunit --traverse-namespace --with-xcoverage --cover-package=app; \
 	)
 freeze:
 	( \
