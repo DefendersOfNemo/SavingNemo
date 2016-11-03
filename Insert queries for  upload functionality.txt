@@ -1,0 +1,96 @@
+
+These are theinsert queries for the logger_temp table and temp table.
+
+SELECT `lid` as 'LoggerID',
+	FROM 
+	`cnx_logger` 
+	WHERE microsite_id='FROMFILENAME';
+
+
+INSERT INTO `cnx_logger_temp` 
+	(
+	`logger_id`, 
+	`date_time`, 
+	`temperature`
+	)
+	VALUES
+	(
+	'LoggerID', 
+	'date_time', 
+	'temperature'
+	);
+	
+*******************************************************************************************************************************	
+	
+	INSERT INTO `cnx_logger_geographics` 
+	( 
+	`site`, 
+	`lat`, 
+	`long`, 
+	`location`, 
+	`state`, 
+	`country`
+	)
+	VALUES
+	(
+	'site', 
+	'lat', 
+	'long', 
+	'location', 
+	'state', 
+	'country'
+	);
+	
+	the ID returned from this insert query which can be called stored in GEOID
+
+	
+INSERT INTO `cnx_logger_properties` 
+	(
+	`zone`, 
+	`subzone`, 
+	`wave_exp`
+	)
+	VALUES
+	(
+	'zone', 
+	'subzone', 
+	'wave_exp'
+	);
+	
+	the ID returned from this insert query which can be called stored in PROPID
+	
+	
+	INSERT INTO `cnx_logger_type` 
+	( 
+	`type`
+	)
+	VALUES
+	( 
+	'type'
+	);
+
+	
+	the ID returned from this insert query which can be called stored in BIOID
+	
+	
+	INSERT INTO `cnx_logger` 
+	( 
+	`microsite_id`, 
+	`biomimic_id`, 
+	`geo_id`, 
+	`prop_id`
+	)
+	VALUES
+	( 
+	'microsite_id (from file)', 
+	BIOID,
+	GEOID,
+	PROPID
+	);
+
+
+
+
+
+
+-*****************************************************************************************************************-------
